@@ -89,5 +89,7 @@ int					ft_wordcounter(char const *s, char c);
 void				ft_swap(int *a, int *b);
 int					ft_numlen(long long n);
 long long			ft_atol(const char *str);
-
+char				*ft_uitoa_base(unsigned long long value, int base, int cap);
+char				*ft_strjoin_fr(char *s1, char *s2, int i);
+char				*ft_strrev_fr(char *str);
 #endif
