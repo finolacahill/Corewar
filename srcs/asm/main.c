@@ -2,6 +2,7 @@
 #include <fcntl.h>
 #include "../../libft/libft.h"
 #include <stdio.h>
+#include "../../includes/corewar.h"
 
 void    create_file_cor(char *file_name, header_t *header)
 {
@@ -18,20 +19,37 @@ void    create_file_cor(char *file_name, header_t *header)
     ft_strdel(&new_name);
 }
 
+void    every_go(char *av, t_env *env)
+{
+    //int error;
+    int fd;
+    char *line;
+
+    (void)env;
+    fd = open(av, O_RDONLY);
+    get_next_line(fd, &line);
+    //error = label(env);
+    close(fd);
+    free(line);
+}
+
 int main(int ac, char **av)
 {
     header_t *header;
+    t_env    *env;
     int i;
 
-    i = 1;
+    i = 1; 
+    env = init_env();
     header = malloc(sizeof(header_t));
     if (ac == 1)
         return (-1);
     while (av[i])
     {
-        create_file_cor(av[i], header);
+        //create_file_cor(av[i], header);
+        every_go(av[i], env);
         i++;
     }
-    free(header);
+    //free(header);
     return (0);
 }

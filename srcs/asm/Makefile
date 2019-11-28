@@ -5,9 +5,9 @@ INC_PATH = ../../includes/
 OBJ_PATH = ./obj/
 LIB_PATH = ../../libft/
 
-SRC_NAME = main.c
+SRC_NAME = main.c init.c
 
-INC_NAME = op.h
+INC_NAME = op.h corewar.h
 LIB_NAME = libft.a
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
