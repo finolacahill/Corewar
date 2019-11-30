@@ -1,12 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+<<<<<<< HEAD
 /*   fintohead.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:16:19 by fcahill           #+#    #+#             */
 /*   Updated: 2018/11/23 16:44:34 by fcahill          ###   ########.fr       */
+=======
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/07 17:16:19 by fcahill           #+#    #+#             */
+/*   Updated: 2019/11/29 18:55:53 by flafonso         ###   ########.fr       */
+>>>>>>> origin/dasm
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +98,10 @@ int					ft_wordcounter(char const *s, char c);
 void				ft_swap(int *a, int *b);
 int					ft_numlen(long long n);
 long long			ft_atol(const char *str);
+<<<<<<< HEAD
+=======
+unsigned long long	ft_puissance(int nbr, int p);
+void				ft_reverse(char **str);
+>>>>>>> origin/dasm
 
 #endif
