@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 void	*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size)
 {

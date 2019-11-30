@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 void	dasm_free(t_all *all)
 {
 	int		i;
 
 	i = 0;
-	while (all->champs[i].path != NULL && i < 5)
+	while (all->champs[i].path != NULL && i < MAX_PLAYERS)
 	{
 		ft_strdel((char**)&(all->champs[i].path));
 		ft_strdel((char**)&(all->champs[i].name));

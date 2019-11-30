@@ -10,20 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
-void	dasm_init_champs(t_all *all)
+static void zero_champs(t_all *vm)
 {
-	int	i;
+	int i;
 
 	i = -1;
-	while (++i < 5)
-		ft_bzero(&(all->champs[i]), sizeof(t_champs));
+	while (++i < MAX_PLAYERS)
+		ft_bzero(&(vm->champs[i]), sizeof(t_champs));
 }
 
-void	dasm_init(t_all *all)
+void	dasm_init_champs(t_all *vm, int ac, char **av)
 {
-	dasm_init_champs(all);
-	all->flag_dump = -1;
-	all->flag_n = -1;
+	uint8_t		*cor_content;
+	size_t		cor_size;
+
+	cor_size = 0;
+	cor_content = NULL;	
+	dasm_input(ac, av, vm);
+	while (vm->total_champ < MAX_PLAYERS 
+		&& vm->champs[vm->total_champ].path != NULL)
+	{	
+		printf("i = %d\n", vm->total_champ);
+		if (dasm_is_it_cor(vm->champs[vm->total_champ].path) != 1)
+			print_usage(vm);
+		cor_size = dasm_get_data(vm, vm->champs[vm->total_champ].path, &cor_content);
+		dasm_get_header(vm, cor_size, &cor_content, &vm->champs[vm->total_champ]);
+		free(cor_content);
+		cor_content = NULL;
+		vm->champs[vm->total_champ].pc = 0;
+		vm->total_champ++;
+	}
+	vm_print_intro(vm);
+}
+
+void	dasm_init(t_all *vm, int ac, char **av)
+{
+	zero_champs(vm);	
+	vm->flag_dump = -1;
+	vm->flag_n = -1;
+	vm->total_champ = 0;
+	dasm_init_champs(vm, ac, av);
 }

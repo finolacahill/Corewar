@@ -6,11 +6,11 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/11/29 18:57:04 by flafonso         ###   ########.fr        #
+#    Updated: 2019/11/30 19:36:11 by fcahill          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = dasm
+NAME = corewar
 
 LIB_PATH = ./libft
 
@@ -59,7 +59,9 @@ SRCS_NAME = dasm_get_data.c		\
 			dasm_init.c			\
 			dasm_rdm.c			\
 			print_all.c			\
-			vm_print_intro.c
+			vm_print_intro.c	\
+			vm_init_arena.c		\
+			op_live.c
 
 MAIN_NAME = main.c
 
@@ -79,11 +81,11 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 OBJM = $(addprefix $(OBJM_PATH)/,$(OBJM_NAME))
 
-INCL = ./includes/point.h
+INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = -Wall -Werror -Wextra
+FLAG = -Wall -Werror -Wextra -fsanitize=address
 
 .PHONY: all clean fclean re
 

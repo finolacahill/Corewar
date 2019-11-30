@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 {
