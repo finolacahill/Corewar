@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 size_t		dasm_hexalen(uint8_t *cor_content, size_t len)
 {
