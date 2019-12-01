@@ -61,7 +61,9 @@ int op_zjmp(t_all *vm, int pc)
     printf("zjmp: dir of %d", vm->arena[pc + 1]);
     return (pc + 2);
 }
-
+//not working. Can't accurately return pc code without taking
+//into account OPC and hence the coming size of the parameters following it. 
+// so must decode ocp first. 
 int   load_process(t_all *vm, int pc)
 {
     int i = vm->arena[pc];
