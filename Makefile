@@ -61,7 +61,7 @@ SRCS_NAME = dasm_get_data.c		\
 			print_all.c			\
 			vm_print_intro.c	\
 			vm_init_arena.c		\
-			op_live.c
+			vm_load_processes.c
 
 MAIN_NAME = main.c
 

@@ -17,7 +17,12 @@ int main(int ac, char **av)
 	t_all vm;
 
 	dasm_init(&vm, ac, av);
-	init_arena(&vm);
+	if (init_arena(&vm) == -1)
+	{
+		printf("Error initialising arena.\n");
+		dasm_free(&vm);
+		return (0);
+	}
 	dasm_free(&vm);
 }
 
