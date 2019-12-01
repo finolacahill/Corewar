@@ -1,7 +1,7 @@
 
 #include "../includes/vm.h"
 
-void ft_print_arena(t_arena *a, t_all *vm)
+void ft_print_arena(t_all *vm)
 {
     int i = -1; 
     int j = -1;
@@ -13,12 +13,12 @@ void ft_print_arena(t_arena *a, t_all *vm)
         if (i >= vm->champs[x].start &&
             i < vm->champs[x].start + (int)vm->champs[x].len_exec_code)
             {
-                printf("\033[0;35m%02x ", a->arena[i]);
+                printf("\033[0;35m%02x ", vm->arena[i]);
                 if (i == vm->champs[x].start + (int)vm->champs[x].len_exec_code - 1)
                     ++x;
             }
         else
-            printf("\033[0m%02x ", a->arena[i]);
+            printf("\033[0m%02x ", vm->arena[i]);
         if (++j == 64)
         {
             printf("\n");
@@ -30,13 +30,16 @@ int basic_mem_loop(t_all *vm)
 {
     int i;
 
-    i = -1;
-    while (++i < MEM_SIZE - 1)
+    i = 0;
+    while (i < MEM_SIZE - 1)
     {
-        if (vm->a->arena[i] == 11)
+        if (vm->arena[i] > 0 && vm->arena[i] <= 16)
+            i = load_process(vm, i);
+        else
         {
-            printf("i = %d\n", i);
-            op_live(vm, i + 1);}
+        //   printf("i here = %d", vm->arena[i]);
+        	++i;
+        }
     }
     return (0);
 }
@@ -49,18 +52,16 @@ int init_arena(t_all *vm)
 
     i = 0;
     divide = 0;
-    if (!(vm->a = ft_memalloc(sizeof(t_arena))))
-        return (-1);
-    if (!(vm->a->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
+    if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
         return (-1);
     while (i < vm->total_champ)
     {
         vm->champs[i].start = divide;
-        ft_memcpy(&vm->a->arena[divide], vm->champs[i].exec_code, vm->champs[i].len_exec_code);
+        ft_memcpy(&vm->arena[divide], vm->champs[i].exec_code, vm->champs[i].len_exec_code);
         ++i;
         divide = divide + MEM_SIZE / vm->total_champ;
     }
-   ft_print_arena(vm->a, vm);
-  // basic_mem_loop(vm);
-    return (0);
+   ft_print_arena(vm);
+   basic_mem_loop(vm);
+   return (0);
 }

@@ -36,7 +36,7 @@ typedef	struct		s_champs
 
 typedef struct		s_arena
 {
-	unsigned char	*arena;
+	
 	int				live_calls;
 	
 }					t_arena;
@@ -47,7 +47,7 @@ typedef struct		s_all
 	int					flag_dump;
 	int					flag_n;
 	int					total_champ;
-	t_arena				*a;
+	unsigned char		*arena;
 	t_list				processes;
 	int					last_alive;
 }					t_all;
@@ -81,6 +81,6 @@ void			error(t_all *all, char *str);
 void			dasm_print_all(t_all *all);
 int				just_number(char *str);
 int 			init_arena(t_all *vm);
-void 			op_live(t_all *vm, int i);
+int   			load_process(t_all *vm, int pc);
 #endif
 
