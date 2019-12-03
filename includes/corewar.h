@@ -11,7 +11,7 @@ typedef struct s_label
 typedef struct s_instruc
 {
     int  opcode;
-    char *params;
+    int *params;
     int   ocp;
     int adress;
     struct s_label *label;
@@ -25,7 +25,23 @@ typedef struct s_env
     struct s_label   *label;
 }               t_env;
 
+typedef struct s_op
+{
+    char *instruc;
+    int nbr_params;
+    int param_type[3];
+    int opcode;
+    int i_dont_know;
+    char *real_name;
+    int registre;
+    int je_sais_pas;
+}               t_op;
+
 t_env   *init_env();
 t_instruc   *new_instruct();
 t_label     *new_label();
+int       get_label(char *line, t_env *env);
+void    print_instruc(t_instruc *instruc);
+void    print_label(t_label *labels);
+int get_instruc(char *line, t_env *env);
 #endif
