@@ -25,8 +25,11 @@ t_instruc   *new_instruct()
     new->ocp = 0;
     new->adress = 0;
     new->label = NULL;
+    new->is_ocp = 0;
+    new->hexa_params = NULL;
     new->hexa_instruc = NULL;
     new->next = NULL;
+    new->for_direct = 0;
     return (new);
 }
 

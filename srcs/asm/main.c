@@ -32,7 +32,8 @@ void    every_go(char *av, t_env *env)
     //{
         i = get_label(line, env);
         printf("line apres get_label ==%s\n", &line[i]);
-        get_instruc(&line[i], env);
+        i = i + get_instruc(&line[i], env);
+        get_params(&line[i], env);
        // get_instruct(line, env);
         //error = label(env);
         i = 0;

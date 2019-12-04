@@ -59,6 +59,7 @@ int		put_instruc(t_instruc *instruc_env, int j)
 	tmp->opcode = op_tab[j].opcode;
 	printf("op_code params %d\n", op_tab[j].param_type[1]);
 	put_instruc_params(tmp, j);
+	tmp->for_direct = op_tab[j].for_direct;
 	return (1);
 }
 
@@ -74,7 +75,7 @@ int	check_instruc(char *instruc, t_env *env)
 		{
 			put_instruc(env->instruc, j);
 			ft_strdel(&instruc);
-			return (0);
+			return (1);
 		}
 		j++;
 	}
