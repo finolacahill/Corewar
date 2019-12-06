@@ -20,7 +20,7 @@ void    print_instruc(t_instruc *instruc)
             printf("|| %d || ", tmp->params[i]);
             i++;
         }
-        printf("\nhexa_params == %s\n", tmp->hexa_params);
+        printf("\nhexa_instruc == %s\n", tmp->hexa_instruc);
         i = 0;
         tmp = tmp->next;
     }

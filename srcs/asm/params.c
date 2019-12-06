@@ -14,15 +14,15 @@ int     param_register(t_instruc *instruc, int index_r, int j)
         return (-1); // mauvais parametre
     instruc->params[j] = T_REG; // pour l OCP;
     instruc->is_ocp = 1;
-    hexa_r = ft_itoa_base(index_r, 16, 0);
+    hexa_r = ft_uitoa_base(index_r, 16, 0);
     if ((ft_strlen(hexa_r)) == 1)
      {
         hexa_r = ft_strjoin_fr("0", hexa_r, 2);
      }
-    if (instruc->hexa_params != NULL)
-        hexa_r = ft_strjoin_fr(instruc->hexa_params, hexa_r, 1);
+    if (instruc->hexa_instruc != NULL)
+        hexa_r = ft_strjoin_fr(instruc->hexa_instruc, hexa_r, 1);
     else
-        instruc->hexa_params = ft_strdup(hexa_r);
+        instruc->hexa_instruc = ft_strdup(hexa_r);
     ft_strdel(&hexa_r);
     return (1);
 }
@@ -47,10 +47,10 @@ int     param_direct(t_instruc *instruc, char *index_r, int j)
         hexa_d = ft_strjoin_fr("0", hexa_d, 2);
         size--;
     }
-    if (instruc->hexa_params != NULL)
-        instruc->hexa_params = ft_strjoin_fr(instruc->hexa_params, hexa_d, 1);
+    if (instruc->hexa_instruc != NULL)
+        instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_d, 1);
     else
-        instruc->hexa_params = ft_strdup(hexa_d);
+        instruc->hexa_instruc = ft_strdup(hexa_d);
     ft_strdel(&hexa_d);
     return (1);
 }
@@ -73,10 +73,10 @@ int     param_indirect(t_instruc *instruc, char *index_i, int j)
         hexa_i = ft_strjoin_fr("0", hexa_i, 2);
         size--;
     }
-    if (instruc->hexa_params != NULL)
-        instruc->hexa_params = ft_strjoin_fr(instruc->hexa_params, hexa_i, 1);
+    if (instruc->hexa_instruc != NULL)
+        instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_i, 1);
     else
-        instruc->hexa_params = ft_strdup(hexa_i);
+        instruc->hexa_instruc = ft_strdup(hexa_i);
     ft_strdel(&hexa_i);
     return (1);
 }
@@ -96,7 +96,7 @@ int     what_params(char *params, t_instruc *instruc, int j)
             param_direct(instruc, &since_space[1], j);
         else if (ft_isdigit(since_space[0]))// || since_space[0] == ':')
             param_indirect(instruc, since_space, j);
-        ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_params);
+        ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
         //else if (ft_isdigit(since_space[0]))
           //  param_direct(ins)
         j++;
@@ -117,6 +117,8 @@ int     check_params(char **params, t_env *env)
         what_params(&params[j][0], env->instruc, j);
         j++;
     }
+    if (env->instruc->is_ocp == 1)
+        get_ocp(env->instruc);
     return (0);
 }
 

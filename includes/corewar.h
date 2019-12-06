@@ -48,4 +48,6 @@ void    print_instruc(t_instruc *instruc);
 void    print_label(t_label *labels);
 int get_instruc(char *line, t_env *env);
 int     get_params(char *line, t_env *env);
+int     get_ocp(t_instruc *instruc);
+int     bi_to_dec(char *bi);
 #endif
