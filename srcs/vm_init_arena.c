@@ -26,23 +26,6 @@ void ft_print_arena(t_all *vm)
         }
     }
 }
-int basic_mem_loop(t_all *vm)
-{
-    int i;
-
-    i = 0;
-    while (i < MEM_SIZE - 1)
-    {
-        if (vm->arena[i] > 0 && vm->arena[i] <= 16)
-            i = load_process(vm, i);
-        else
-        {
-        //   printf("i here = %d", vm->arena[i]);
-        	++i;
-        }
-    }
-    return (0);
-}
 
 int init_arena(t_all *vm)
 {
@@ -52,8 +35,11 @@ int init_arena(t_all *vm)
 
     i = 0;
     divide = 0;
+    vm->cycles = 0;
+    vm->last_alive = CYCLE_TO_DIE;
     if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
         return (-1);
+    printf ("%d\n", vm->total_champ);
     while (i < vm->total_champ)
     {
         vm->champs[i].start = divide;
@@ -61,7 +47,6 @@ int init_arena(t_all *vm)
         ++i;
         divide = divide + MEM_SIZE / vm->total_champ;
     }
-   ft_print_arena(vm);
-   basic_mem_loop(vm);
+   // ft_print_arena(vm);
    return (0);
 }

@@ -31,13 +31,14 @@ typedef	struct		s_champs
 	unsigned char		*exec_code;
 	int					start;
 	int					pc;
-	int					live;
 }					t_champs;
 
 typedef struct		s_arena
 {
 	
 	int				live_calls;
+	int				cycles;
+	
 	
 }					t_arena;
 
@@ -50,19 +51,27 @@ typedef struct		s_all
 	unsigned char		*arena;
 	t_list				processes;
 	int					last_alive;
+	int					cycles;
+	
 }					t_all;
 
 typedef struct			s_process
 {
-	char				*name;
+	unsigned char				*name;
 	int					id;
 //	int					number;
 	int					r[REG_NUMBER];
 	int					pc;
 	char				carry;
 	int					live_calls;
-//	int					sleep_cycles;
+	int					duration;
+	int					start;
+	int					bytes;
+	int					*decode;
+	int					len_program;
+	unsigned char				*program;
 //	void				(*op)();
+	unsigned char 				op;
 	struct s_process	*next;
 }						t_process;
 
@@ -81,6 +90,7 @@ void			error(t_all *all, char *str);
 void			dasm_print_all(t_all *all);
 int				just_number(char *str);
 int 			init_arena(t_all *vm);
-int   			load_process(t_all *vm, int pc);
+int   			load_process(t_all *vm, t_process *head);
+int     		run_vm(t_all *vm);
 #endif
 

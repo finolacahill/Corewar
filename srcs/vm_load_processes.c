@@ -1,105 +1,123 @@
 #include "../includes/vm.h"
 
-int     op_live(t_all *vm, int pc)
+//char    decode_byte(unsigned char encoded, int pair)
+//{
+/*	if (pair == 2)
+		encoded <<= 2;
+	if (pair == 3)
+		encoded <<= 4;
+	if (pair == 4)
+		encoded <<= 6;
+	encoded >>= 6;
+	printf("%x\n", encoded);
+	return (encoded);*/
+	int		*ft_decode_byte(unsigned char c, int *tab)
 {
-    printf("live reg stored at %i.", vm->arena[pc + 1]);
-    printf("stay here for 10 cycles.\n");
-    return (pc + 2);
+	tab[0] = c >> 6;
+	c = (c << 2);
+	tab[1] = c >> 6;
+	c = (c << 2);
+	tab[2] = c >> 6;
+	c = (c << 2);
+	tab[3] = c >> 6;
+	return (tab);
 }
 
-int     op_ld(t_all *vm, int pc)
+void				calc_bytes(int *decode, int *bytes)
 {
-    printf("ld: opc code of %d", vm->arena[pc + 1]);
-    printf("reg of %d, reg of %d.", vm->arena[pc+2], vm->arena[pc +3]);
-    return (pc + 4);
+	int i;
+
+	*bytes = 0;
+	i = -1;
+
+	while (++i < 4)
+	{
+		if (decode[i] == REG_CODE)
+			bytes[0] += 1;
+		if (decode[i] == DIR_CODE)
+			bytes[0] += 4;
+		if (decode[i] == IND_CODE)
+			bytes[0] += 2;
+	}
 }
 
-int op_st(t_all *vm, int pc)
+t_process *error_process(t_process *p)
 {
-    printf("st: opc code of %d", vm->arena[pc + 1]);
-    printf("reg of %d, reg/ind of %d.", vm->arena[pc+2], vm->arena[pc +3]);
-    return (pc + 4);
+	p->start = -1;
+	return (p);
 }
 
-int op_add(t_all *vm, int pc)
+t_process *init_process(t_all *vm, t_champs *c, t_process *p)
 {
-    printf("add: opc code of %d", vm->arena[pc + 1]);
-    printf("reg of %d, reg of %d reg of %d.", vm->arena[pc+2], vm->arena[pc +3], vm->arena[pc + 4]);
-    return (pc + 5);
+	int i;
+
+	i = 0;
+	printf("id = %d exec0 - %d\n", c->id, c->exec_code[0]);
+	if (!(p = ft_memalloc(sizeof(t_process))))
+		return (error_process(p));
+	p->name = c->name;
+	p->id = c->id;
+	p->carry = 0;
+	p->r[0] = p->id;
+	p->pc = 0;
+	while (++i < REG_NUMBER)
+		p->r[i] = 0;
+	p->live_calls = -1;
+	p->op = c->exec_code[0];
+	p->program = c->exec_code;
+	p->start = c->start;
+	p->next = NULL;
+	return (p);
 }
 
-int op_sub(t_all *vm, int pc)
+t_process *load_processes(t_all *vm, t_process *head)
 {
-    printf("sub: opc code of %d", vm->arena[pc + 1]);
-    printf("reg of %d, reg of %d reg of %d.", vm->arena[pc+2], vm->arena[pc +3], vm->arena[pc + 4]);
-    return (pc + 5);
+	t_process   *new;
+	int         i;
+
+	i = 0;
+	head = malloc(sizeof(t_process));
+	new = init_process(vm, &vm->champs[0], new);
+	head->next = new;
+	while (++i < vm->total_champ)
+	{
+		if (new->start == -1)
+			return (error_process(new));
+		new->next = init_process(vm, &vm->champs[i], new->next);
+		new = new->next;
+	}
+	head = head->next;
+	return (head);
 }
 
-int op_and(t_all *vm, int pc)
+int 	run_processes(t_all *vm, t_process *head)
 {
-    printf("and: opc code of %d", vm->arena[pc + 1]);
-    printf("reg/i/dir of %d, reg/i/dir of %d reg of %d.", vm->arena[pc+2], vm->arena[pc +3], vm->arena[pc + 4]);
-    return (pc + 5);
+	t_process *tracker;
+
+	tracker = head;
+	while (tracker != NULL)
+	{
+		printf("parent id = %d first process = %d\n", tracker->id, tracker->op);
+		tracker = tracker->next;
+	}
+	vm->cycles++;
+	return(0);
 }
 
-int op_or(t_all *vm, int pc)
+int     run_vm(t_all *vm)
 {
-    printf("or: opc code of %d", vm->arena[pc + 1]);
-    printf("reg/i/dir of %d, reg/i/dir of %d reg of %d.", vm->arena[pc+2], vm->arena[pc +3], vm->arena[pc + 4]);
-    return (pc + 5);
-}
+	unsigned char c = 68;
+	int bytes = 0;
+	int *decode;
+	t_process *process;
 
-int op_xor(t_all *vm, int pc)
-{
-    printf("xor: opc code of %d", vm->arena[pc + 1]);
-    printf("reg/i/dir of %d, reg/i/dir of %d reg of %d.", vm->arena[pc+2], vm->arena[pc +3], vm->arena[pc + 4]);
-    return (pc + 5);
-}
-
-int op_zjmp(t_all *vm, int pc)
-{
-    printf("zjmp: dir of %d", vm->arena[pc + 1]);
-    return (pc + 2);
-}
-//not working. Can't accurately return pc code without taking
-//into account OPC and hence the coming size of the parameters following it. 
-// so must decode ocp first. 
-int   load_process(t_all *vm, int pc)
-{
-    int i = vm->arena[pc];
-    
-    printf("pc = %d, i = %d\n", pc, i);
-    if (i == 1)
-        pc = op_live(vm, pc);
-    if (i == 2)
-        pc = op_ld(vm, pc);
-    if (i == 3)
-        pc = op_st(vm, pc);
-    if (i == 4)
-        pc = op_add(vm, pc);
-    if (i == 5)
-        pc = op_sub(vm, pc);
-    if (i == 6)
-        pc = op_and(vm, pc);
-    if (i == 7)
-        pc = op_or(vm, pc);
-    if (i == 8)
-        pc = op_xor(vm, pc);
-    if (i == 9)
-        pc = op_zjmp(vm, pc);
-    if (i == 10)
-        pc = pc + 5; //ldi
-    if (i == 11)
-        pc = pc + 7; //sdi
-    if (i == 12)
-        pc = pc + 2; //fork
-    if (i == 13)
-        pc = pc + 4; //lld
-    if (i == 14)
-        pc = pc + 5; //lldi
-    if (i == 15)
-        pc = pc + 2; //lfork
-    if (i == 16)
-        pc = pc + 3; //aff
-    return (pc);
+	process = load_processes(vm, process);
+	if (process->start == -1)
+		return (-1);
+	run_processes(vm, process);
+	if (!(decode = malloc(sizeof(int) * 4)))
+		return (-1);
+	decode = ft_decode_byte(c, decode);
+	calc_bytes(decode, &bytes);
+	return (0);
 }
