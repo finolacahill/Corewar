@@ -29,6 +29,7 @@ t_instruc   *new_instruct()
     new->hexa_params = NULL;
     new->hexa_instruc = NULL;
     new->next = NULL;
+    new->index = 0;
     new->for_direct = 0;
     return (new);
 }

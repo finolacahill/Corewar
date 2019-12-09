@@ -11,7 +11,7 @@ void    print_instruc(t_instruc *instruc)
 
     i = 0;
     tmp = instruc;
-    while (tmp)
+    while (tmp->next)
     {
         printf("opcode == %d\n", tmp->opcode);
         printf("params == ");
@@ -33,7 +33,7 @@ void    print_label(t_label *labels)
     tmp = labels;
     while (tmp)
     {
-        printf("%s\n", tmp->label);
+        printf("%s || adress == %d\n", tmp->label, tmp->adress);
         tmp = tmp->next;
     }
 }

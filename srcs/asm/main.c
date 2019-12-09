@@ -19,6 +19,14 @@ void    create_file_cor(char *file_name, header_t *header)
     ft_strdel(&new_name);
 }
 
+void    test(t_env *env)
+{
+    t_instruc *tmp;
+
+    tmp = get_last_intruct(env->instruc);
+    ft_printf("tmp opcode dans TEST == %d\n", tmp->opcode);
+}
+
 void    every_go(char *av, t_env *env)
 {
     //int error;
@@ -28,20 +36,51 @@ void    every_go(char *av, t_env *env)
     
     i = 0;
     fd = open(av, O_RDONLY);
-    get_next_line(fd, &line);
-    //{
+   while (get_next_line(fd, &line) == 1)
+    {
         i = get_label(line, env);
         printf("line apres get_label ==%s\n", &line[i]);
         i = i + get_instruc(&line[i], env);
         get_params(&line[i], env);
+        next_instruc(env);
+       // test(env);
        // get_instruct(line, env);
         //error = label(env);
         i = 0;
         free(line);
-    //}
+    }
     print_label(env->label);
     print_instruc(env->instruc);
     close(fd);
+}
+
+void    write_to_file(t_instruc *instruc, int fd)
+{
+    char *res;
+    int i;
+    int j;
+    int len;
+    t_instruc *tmp;
+
+    tmp = instruc;
+    while (tmp->next)
+    {
+        len = (ft_strlen(tmp->hexa_instruc) / 2) + 1;
+        j = 0;
+        i = 0;
+        res = ft_strnew(len);
+        res[j] = dec_to_hexa(tmp->opcode);
+        j++;
+        while (tmp->hexa_instruc[i])
+        {
+            res[j] = ft_strtol(&tmp->hexa_instruc[i], 16, 2);
+            j++;
+            i = i + 2;
+        }
+        write(fd, res, len);
+        ft_strdel(&res);
+        tmp = tmp->next;
+    }
 }
 
 int main(int ac, char **av)
@@ -62,7 +101,9 @@ int main(int ac, char **av)
         every_go(av[i], env);
         i++;
     }
-    
+    i = 1;
+    create_file_cor(av[i], header); 
+    write_to_file(env->instruc, header->fd);
     //free(header);
     return (0);
 }

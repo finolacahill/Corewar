@@ -4,6 +4,21 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
+void    is_label_exist(char *label, t_env *env, t_instruc *instruc)
+{
+    t_label *tmp;
+
+    tmp = env->label;
+    (void)instruc;
+    while (tmp->next)
+    {
+        if (ft_strcmp(tmp->label, label) == 0)
+        {
+            // mettre adresse label: - adresse :label dans hexa_params;
+        }
+        tmp = tmp->next;
+    }
+}
 int     param_register(t_instruc *instruc, int index_r, int j)
 {
     char *hexa_r;
@@ -20,7 +35,7 @@ int     param_register(t_instruc *instruc, int index_r, int j)
         hexa_r = ft_strjoin_fr("0", hexa_r, 2);
      }
     if (instruc->hexa_instruc != NULL)
-        hexa_r = ft_strjoin_fr(instruc->hexa_instruc, hexa_r, 1);
+        instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_r, 1);
     else
         instruc->hexa_instruc = ft_strdup(hexa_r);
     ft_strdel(&hexa_r);
@@ -55,7 +70,7 @@ int     param_direct(t_instruc *instruc, char *index_r, int j)
     return (1);
 }
 
-int     param_indirect(t_instruc *instruc, char *index_i, int j)
+int     param_indirect(t_instruc *instruc, char *index_i, int j, t_env *env)
 {
     // faire la condition pour le label
     // faire la protection voir si c est bien que des chiffres
@@ -63,6 +78,10 @@ int     param_indirect(t_instruc *instruc, char *index_i, int j)
     int size;
 
     size = 4;
+    if (index_i[0] == ':')
+        is_label_exist(&index_i[1], env, instruc);
+    else
+    {
     if ((instruc->params[j] & T_IND) != T_IND)
         return (-1);
     hexa_i = ft_uitoa_base(ft_atoi(index_i), 16, 0);
@@ -78,10 +97,11 @@ int     param_indirect(t_instruc *instruc, char *index_i, int j)
     else
         instruc->hexa_instruc = ft_strdup(hexa_i);
     ft_strdel(&hexa_i);
+    }
     return (1);
 }
 
-int     what_params(char *params, t_instruc *instruc, int j)
+int     what_params(char *params, t_instruc *instruc, int j, t_env *env)
 {
     char *since_space;
     int i;
@@ -94,8 +114,8 @@ int     what_params(char *params, t_instruc *instruc, int j)
             param_register(instruc, ft_atoi(&since_space[1]), j);
         else if (since_space[0] == '%')
             param_direct(instruc, &since_space[1], j);
-        else if (ft_isdigit(since_space[0]))// || since_space[0] == ':')
-            param_indirect(instruc, since_space, j);
+        else if (ft_isdigit(since_space[0]) || since_space[0] == ':')
+            param_indirect(instruc, since_space, j, env);
         ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
         //else if (ft_isdigit(since_space[0]))
           //  param_direct(ins)
@@ -110,15 +130,17 @@ int     what_params(char *params, t_instruc *instruc, int j)
 int     check_params(char **params, t_env *env)
 {
     int j;
+    t_instruc *tmp;
 
+    tmp = get_last_intruct(env->instruc);
     j = 0;
     while (params[j])
     {
-        what_params(&params[j][0], env->instruc, j);
+        what_params(&params[j][0], tmp, j, env);
         j++;
     }
-    if (env->instruc->is_ocp == 1)
-        get_ocp(env->instruc);
+    if (tmp->is_ocp == 1)
+        get_ocp(tmp);
     return (0);
 }
 

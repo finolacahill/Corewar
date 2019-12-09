@@ -4,6 +4,21 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
+int     put_adress_label(t_instruc *instruc)
+{
+    int i;
+    t_instruc *tmp;
+
+    tmp = instruc;
+    i = 0;
+    while (tmp->next)
+    {
+        i = i + ((ft_strlen(tmp->hexa_instruc) + 2) / 2);
+        tmp = tmp->next;
+    }
+    return (i);
+}
+
 void    put_label(t_env *env, char *label)
 {
     t_label *tmp;
@@ -12,7 +27,7 @@ void    put_label(t_env *env, char *label)
     while (tmp->next)
         tmp = tmp->next;
     tmp->label = ft_strdup(label);
-    tmp->adress = 0;
+    tmp->adress = put_adress_label(env->instruc);
     tmp->next = new_label();
 }
 
@@ -50,6 +65,6 @@ int   get_label(char *line, t_env *env)
         i = 0;
     ft_strdel(&label);
     if (i == 0)
-        return (0);    
+        return (0);
     return (i + 1);
 }

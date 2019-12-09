@@ -19,6 +19,7 @@ typedef struct s_instruc
     char *hexa_instruc;
     char *hexa_params;
     int  for_direct;
+    int index;
     struct s_instruc *next;
 }           t_instruc;
 
@@ -50,4 +51,8 @@ int get_instruc(char *line, t_env *env);
 int     get_params(char *line, t_env *env);
 int     get_ocp(t_instruc *instruc);
 int     bi_to_dec(char *bi);
+int     ft_strtol(char *str, int base, int size);
+t_instruc *get_last_intruct(t_instruc *instruc);
+void    next_instruc(t_env *env);
+int     dec_to_hexa(int i);
 #endif

@@ -53,9 +53,7 @@ int		put_instruc(t_instruc *instruc_env, int j)
 {
 	t_instruc *tmp;
 
-	tmp = instruc_env;
-	while (tmp->next)
-		tmp = tmp->next;
+	tmp = get_last_intruct(instruc_env);
 	tmp->opcode = op_tab[j].opcode;
 	printf("op_code params %d\n", op_tab[j].param_type[1]);
 	put_instruc_params(tmp, j);
@@ -68,7 +66,6 @@ int	check_instruc(char *instruc, t_env *env)
 	int j;
 
 	j = 0;
-	(void)env;
 	while (op_tab[j].instruc)
 	{
 		if (ft_strcmp(instruc, (const char*)op_tab[j].instruc) == 0)
@@ -90,11 +87,8 @@ int get_instruc(char *line, t_env *env)
 	int j;
 
 	j = 0;
-	(void)instruc;
-	(void)env;
 	while (line[j] && line[j] == ' ')
 		j++;
-	printf("j == %d\n", j);
 	i = j;
     while (line[i] && ft_isalpha(line[i]))
         i++;
