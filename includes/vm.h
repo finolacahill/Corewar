@@ -38,8 +38,7 @@ typedef struct		s_arena
 	
 	int				live_calls;
 	int				cycles;
-	
-	
+		
 }					t_arena;
 
 typedef struct		s_all
@@ -57,21 +56,16 @@ typedef struct		s_all
 
 typedef struct			s_process
 {
-	unsigned char				*name;
 	int					id;
-//	int					number;
 	int					r[REG_NUMBER];
 	int					pc;
 	char				carry;
 	int					live_calls;
-	int					duration;
 	int					start;
+	int					exec_cycle;
 	int					bytes;
 	int					*decode;
-	int					len_program;
-	unsigned char				*program;
-//	void				(*op)();
-	unsigned char 				op;
+	unsigned char 		op;
 	struct s_process	*next;
 }						t_process;
 
@@ -89,8 +83,17 @@ void			error_size(t_all *all, char *path, size_t cor_size);
 void			error(t_all *all, char *str);
 void			dasm_print_all(t_all *all);
 int				just_number(char *str);
+
+//vm
 int 			init_arena(t_all *vm);
 int   			load_process(t_all *vm, t_process *head);
 int     		run_vm(t_all *vm);
+t_process		*ft_decode_byte(unsigned char c, t_process *p);
+void			calc_bytes(t_process *p, int *bytes);
+void			get_next_bytes(t_all *vm, t_process *p, int *value, int len);
+void			op_live(t_all *vm, t_process *p);
+
+//errors
+t_process *error_process(t_process *p);
 #endif
 

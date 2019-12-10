@@ -47,6 +47,6 @@ int init_arena(t_all *vm)
         ++i;
         divide = divide + MEM_SIZE / vm->total_champ;
     }
-   // ft_print_arena(vm);
+  ft_print_arena(vm);
    return (0);
 }
