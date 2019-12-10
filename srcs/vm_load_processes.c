@@ -42,6 +42,7 @@ t_process *init_process(t_all *vm, t_champs *c, t_process *p)
 	p->next = NULL;
 	p->exec_cycle = get_duration(vm, p->op);
 	p->bytes = 0;
+	c->last_live = 0;
 	return (p);
 }
 
@@ -73,7 +74,9 @@ int		exec_process(t_all *vm, t_process *process)
 		printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
 	bytes = 0;
 	if (process->op == 1)
+	{
 		op_live(vm, process);
+	}
 	if (process->pc == MEM_SIZE - 1)
 		process->pc = -1;
 	process = ft_decode_byte(vm->arena[process->pc + 1], process);
@@ -92,32 +95,46 @@ int 	run_processes(t_all *vm, t_process *head)
 	int live;
 
 	//to be changed to CYCLES TO DIE
-	live = CYCLE_TO_DIE * 1000;
+	live = vm->cycles_to_die;
 	while (live != 0)
 	{
 		tracker = head;
+		if (tracker != NULL)
+			++vm->cycles;
 		while (tracker != NULL)
 		{
 			if (vm->cycles == tracker->exec_cycle)
 				exec_process(vm, tracker);
 			tracker = tracker->next;
-		}
-		++vm->cycles;
+		}		
 		--live;
 	}
 	return (0);
+}
+
+void	declare_winner(t_all *vm)
+{
+	if (is_player_nb(vm->last_alive, vm) == 1)
+		ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n", vm->last_alive, vm->champs[vm->last_alive - 1].name);
+	else
+	{
+		ft_printf("A mystery player, number %d, has won", vm->last_alive); //or it was a draw?
+	}
+	
 }
 
 int     run_vm(t_all *vm)
 {
 	unsigned char c = 68;
 	int bytes = 0;
-
 	t_process *process;
 
+	vm->cycles_to_die = CYCLE_TO_DIE;
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (-1);
-	run_processes(vm, process);
+	while (check_alive(vm, process) == 1)
+		run_processes(vm, process);
+	declare_winner(vm);
 	return (0);
 }

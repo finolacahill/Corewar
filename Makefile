@@ -24,30 +24,7 @@ MAIN_PATH = ./main
 
 OBJM_PATH = ./main
 
-LIB_NAME =	ft_atoi.c			\
-			ft_bzero.c			\
-			ft_isdigit.c		\
-			ft_isspace.c		\
-			ft_itoa.c			\
-			ft_memalloc.c		\
-			ft_memcpy.c			\
-			ft_puissance.c		\
-			ft_putchar.c		\
-			ft_putnbr.c			\
-			ft_putstr.c			\
-			ft_reverse.c		\
-			ft_strcat.c			\
-			ft_strchr.c			\
-			ft_strcmp.c			\
-			ft_strcpy.c			\
-			ft_strdel.c			\
-			ft_strdup.c			\
-			ft_strjoin.c		\
-			ft_strlen.c			\
-			ft_strncpy.c		\
-			ft_strnew.c			\
-			ft_strsub.c			\
-			ft_memset.c
+
 
 SRCS_NAME = dasm_get_data.c		\
 			dasm_get_exec.c		\
@@ -70,8 +47,6 @@ SRCS_NAME = dasm_get_data.c		\
 
 MAIN_NAME = main.c
 
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
-
 OBJ_NAME = $(SRCS_NAME:.c=.o)
 
 OBJM_NAME = $(MAIN_NAME:.c=.o)
@@ -79,8 +54,6 @@ OBJM_NAME = $(MAIN_NAME:.c=.o)
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
-
-OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
@@ -94,10 +67,13 @@ FLAG = -Wall -Werror -Wextra -fsanitize=address
 
 .PHONY: all clean fclean re
 
-all: $(NAME)
+all: check $(NAME)
 
-$(NAME): $(OBJ) $(OBJLIB) $(OBJM) $(INCL)
-	@$(CC) $(FLAG) $(OBJ) $(OBJLIB) $(OBJM) -I $(INCL) -o $(NAME)
+check:
+	@make -C ./libft
+
+$(NAME): $(OBJ) $(OBJM) $(INCL)
+	@$(CC) $(FLAG) $(OBJ) $(OBJM) -I $(INCL) ./libft/libft.a -o $(NAME)
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
@@ -112,10 +88,12 @@ $(OBJM_PATH)/%.o: $(MAIN_PATH)/%.c
 	@$(CC) -o $@ -c $<
 
 clean:
+	make clean -C ./libft
 	rm -rf $(OBJ) $(OBJLIB) $(OBJM)
 	rm -rf $(OBJ_PATH)
 
 fclean: clean
+	make fclean -C ./libft
 	rm -f $(NAME)
 
 re: fclean all

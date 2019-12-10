@@ -14,12 +14,12 @@
 #define VM_H
 
 #include <stdio.h>
+#include "../libft/ft_printf.h"
 #include "../libft/libft.h"
 #include "op.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#define	BUFF_SIZE	256
 
 typedef	struct		s_champs
 {
@@ -30,6 +30,7 @@ typedef	struct		s_champs
 	size_t				len_exec_code;
 	unsigned char		*exec_code;
 	int					start;
+	int					last_live;
 	int					pc;
 }					t_champs;
 
@@ -50,7 +51,11 @@ typedef struct		s_all
 	unsigned char		*arena;
 	t_list				processes;
 	int					last_alive;
+	int					last_alive_cycle;
 	int					cycles;
+	int					nbr_live_since_check;
+	int					cycles_to_die;
+	int					total_checks;
 	
 }					t_all;
 
@@ -92,6 +97,8 @@ t_process		*ft_decode_byte(unsigned char c, t_process *p);
 void			calc_bytes(t_process *p, int *bytes);
 void			get_next_bytes(t_all *vm, t_process *p, int *value, int len);
 void			op_live(t_all *vm, t_process *p);
+int         	check_alive(t_all *vm, t_process *p);
+int				is_player_nb(int i, t_all *vm);
 
 //errors
 t_process *error_process(t_process *p);
