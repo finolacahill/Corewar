@@ -36,7 +36,10 @@ int init_arena(t_all *vm)
     i = 0;
     divide = 0;
     vm->cycles = 0;
-    vm->last_alive = CYCLE_TO_DIE;
+    vm->last_alive = 0;
+    vm->last_alive_cycle = 0;
+    vm->nbr_live_since_check = 0;
+    vm->total_checks = 0;
     if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
         return (-1);
     printf ("%d\n", vm->total_champ);
@@ -47,6 +50,6 @@ int init_arena(t_all *vm)
         ++i;
         divide = divide + MEM_SIZE / vm->total_champ;
     }
-  ft_print_arena(vm);
+ // ft_print_arena(vm);
    return (0);
 }
