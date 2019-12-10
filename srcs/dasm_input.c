@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 18:19:12 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 void		check_dump(int ac, char **av, t_all *all, int *i)
 {

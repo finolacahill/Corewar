@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_get_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:00:45 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 17:44:20 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 {

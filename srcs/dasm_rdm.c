@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_rdm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:18:49 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 18:19:03 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
+
+int			is_in(int i, int *value)
+{
+	int		r;
+	
+	r = -1;
+	while (++r < 9)
+		if (value[r] == i)
+			return (1);
+	return (0);
+}
 
 int			just_number(char *str)
 {
