@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_print_usage.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 18:27:47 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/10 03:19:21 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
+
+void	error_exec(t_all *all, char *champ_name, uint16_t line)
+{
+	ft_putstr("Operation invalide pour le champion \"");
+	ft_putstr(champ_name);
+	// ft_putstr("\" à la ligne ");
+	// ft_putnbr((int)line);
+	ft_putstr("\n");
+	dasm_free(all);
+	exit(EXIT_FAILURE);
+}
 
 void	dasm_free(t_all *all)
 {
@@ -37,6 +48,7 @@ void	error_size(t_all *all, char *path, size_t cor_size)
 	ft_putnbr(CHAMP_MAX_SIZE);
 	ft_putstr(" bytes)\n");
 	dasm_free(all);
+	exit(EXIT_FAILURE);
 }
 
 void	error(t_all *all, char *str)
@@ -51,5 +63,5 @@ void	print_usage(t_all *all)
 	ft_putstr("Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth");
 	ft_putstr("| -n --stealth] [-a] <champion1.cor> <...>");
 	dasm_free(all);
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }

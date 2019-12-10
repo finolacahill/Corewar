@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 15:57:29 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 17:36:09 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/point.h"
+#include "../includes/vm.h"
 
 void	dasm_print_all(t_all *all)
 {
@@ -27,7 +27,12 @@ void	dasm_print_all(t_all *all)
 		printf("	name		=	|%s|\n", all->champs[i].name);
 		printf("	comment		=	|%s|\n", all->champs[i].comment);
 		printf("	len_exec	=		%zu\n", all->champs[i].len_exec_code);
-		printf("	exec_code	=	|%s|", all->champs[i].exec_code);
+		printf("	exec_code	=		\n");
+		int r = -1;
+		while (++r < all->champs[i].len_exec_code)
+			printf("|%d| ", all->champs[i].exec_code[r]);
+			// printf("|%0.2x| ", all->champs[i].exec_code[r]);
+		// printf("	exec_code	=	|%s|", all->champs[i].exec_code);
 		printf("\n	===========================\n");
 		i++;
 	}

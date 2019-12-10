@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dasm_realloc.c                                     :+:      :+:    :+:   */
+/*   vm_check_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 18:02:02 by adietric          #+#    #+#             */
+/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
 /*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-void	*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size)
+uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
 {
-	void	*new_content;
-	size_t	size_min;
+	uint16_t	i;
 
-	if (!content)
-		return (content);
-	if (prev_size == all_size)
-		return (content);
-	if (all_size == 0)
-	{
-		ft_putstr("Trucs à Free etc..\n");
-		exit(EXIT_FAILURE);
-	}
-	size_min = (prev_size < all_size) ? prev_size : all_size;
-	if (!(new_content = ft_memalloc(all_size)))
-	{
-		ft_putstr("Trucs à Free etc..\n");
-		exit(EXIT_FAILURE);
-	}
-	ft_memcpy(new_content, content, size_min);
-	free(content);
-	return (new_content);
+	i = 0;
+	if (cont[0] > 16 || cont[0] < 1)
+		error_exec(all, (char*)champs->name, i);
+	i = op[cont[0] - 1].inst(all, op, cont);
+	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
+																						// printf(" 		I = %hu\n", i);
+	return (i);
 }
