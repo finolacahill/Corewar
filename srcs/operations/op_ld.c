@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:53:07 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/11 23:45:22 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/12 11:11:26 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				do_op_ld(t_all *all, t_op *op, uint8_t *content)
 	{
 		if (content[6] <= REG_NUMBER && content[6] > 0) // REGISTRE VALIDE
 		{
-																					printf("Reg[%d] avant = %d\n", content[6], all->processes.r[content[6]]);
+																					printf("\nReg[%d] avant = %d\n", content[6], all->processes.r[content[6]]);
 			all->processes.r[content[6]] = dasm_get_exec_code(&(content[2]), 4);	//Stocke dans le R les 4 bits du Direct
 			if (all->processes.r[content[6]] == 0)
 				all->processes.carry = 1;
@@ -35,7 +35,7 @@ int				do_op_ld(t_all *all, t_op *op, uint8_t *content)
 	{
 		if (content[4] <= REG_NUMBER && content[4] > 0) // REGISTRE VALIDE
 		{
-																					printf("Reg[%d] avant = %d\n", content[4], all->processes.r[content[4]]);
+																					printf("\nReg[%d] avant = %d\n", content[4], all->processes.r[content[4]]);
 			all->processes.r[content[4]] = dasm_get_exec_code(&(content[2]), 2);	//Stocke dans le R les 4 bits du Direct
 			if (all->processes.r[content[4]] == 0)
 				all->processes.carry = 1;

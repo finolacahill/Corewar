@@ -4,20 +4,27 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include "./includes/vm.h"
 #define BUFF_SIZE 10480
 
 int main (int ac, char **av)
 {
+	char *str;
+	int	value;
 
-	int					ocp_value = {0 | 12 | 115};
+	value = 75612;
 
-	int	r = -1;
-	while (++r < 10000)
-	{
-		if ((r ^ ocp_value) == ocp_value)
-			printf("%d est ok\n", r);
-	}
+	str = ft_strjoin("\\", ft_itoa(value));
+	printf("\n\n\n					|%s|\n\n\n\n", str);
+
+	// int					ocp_value = {0 | 12 | 115};
+
+	// int	r = -1;
+	// while (++r < 10000)
+	// {
+	// 	if ((r ^ ocp_value) == ocp_value)
+	// 		printf("%d est ok\n", r);
+	// }
 	// int			fd;
 	// uint8_t		buff[BUFF_SIZE + 1];
 	// int			ret;
