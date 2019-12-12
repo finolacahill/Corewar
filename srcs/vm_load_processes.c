@@ -74,9 +74,9 @@ int		exec_process(t_all *vm, t_process *process)
 		printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
 	bytes = 0;
 	if (process->op == 1)
-	{
 		op_live(vm, process);
-	}
+	if (process->op == 3)
+		op_st(vm, process);
 	if (process->pc == MEM_SIZE - 1)
 		process->pc = -1;
 	process = ft_decode_byte(vm->arena[process->pc + 1], process);
