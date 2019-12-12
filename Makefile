@@ -42,7 +42,9 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_errors.c 		\
 			vm_decode_bytes.c	\
 			vm_operations.c 	\
-			op_live.c			
+			op_live.c			\
+			op_st.c				\
+			vm_get_values.c
 
 
 MAIN_NAME = main.c

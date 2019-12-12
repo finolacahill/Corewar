@@ -95,10 +95,16 @@ int   			load_process(t_all *vm, t_process *head);
 int     		run_vm(t_all *vm);
 t_process		*ft_decode_byte(unsigned char c, t_process *p);
 void			calc_bytes(t_process *p, int *bytes);
-void			get_next_bytes(t_all *vm, t_process *p, int *value, int len);
-void			op_live(t_all *vm, t_process *p);
+int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);
 int         	check_alive(t_all *vm, t_process *p);
 int				is_player_nb(int i, t_all *vm);
+int     		get_reg_val(t_all *vm, t_process *p, int reg);
+int     		get_ind(t_all *vm, t_process *p, int bytes_read);
+void			load_value(t_all *vm, int address, int len, int val);
+
+// operations
+void			op_live(t_all *vm, t_process *p);
+void    		op_st(t_all *vm, t_process *p);
 
 //errors
 t_process *error_process(t_process *p);
