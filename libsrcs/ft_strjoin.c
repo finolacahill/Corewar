@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_check_exec.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:50:50 by adietric         ###   ########.fr       */
+/*   Created: 2018/11/13 08:57:58 by flafonso          #+#    #+#             */
+/*   Updated: 2019/06/14 10:36:36 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/libsrcs.h"
 
-uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	uint16_t	i;
+	char	*join;
+	size_t	len;
 
-	i = 0;
-	if (cont[0] > 16 || cont[0] < 1)
-		error_exec(all, (char*)champs->name, i);
-	i = op[cont[0] - 1].inst(all, op, cont);
-	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
-																						// printf(" 		I = %hu\n", i);
-	return (i);
+	if (!(s1) || !(s2))
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (!(join = ft_strnew(len)))
+		return (NULL);
+	join = ft_strcpy(join, s1);
+	join = ft_strcat(join, s2);
+	return (join);
 }

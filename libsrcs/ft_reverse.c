@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dasm_get_exec.c                                    :+:      :+:    :+:   */
+/*   ft_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 11:48:59 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/11 18:40:27 by adietric         ###   ########.fr       */
+/*   Created: 2019/11/09 14:06:19 by flafonso          #+#    #+#             */
+/*   Updated: 2019/11/14 16:38:39 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/libsrcs.h"
 
-int			dasm_get_exec_code(uint8_t *cor_content, int len)
+void	ft_reverse(char **str)
 {
-	int		value;
+	char	c;
+	int		l;
 	int		i;
 
-	i = -1;
-	value = 0;
-	while (++i < len)
-		value += cor_content[i] * ft_puissance(256, len - 1  - i);
-	return (value);
+	l = 0;
+	i = 0;
+	while (str[0][l] != '\0')
+		l++;
+	l--;
+	while (i < l)
+	{
+		c = str[0][i];
+		str[0][i] = str[0][l];
+		str[0][l] = c;
+		i++;
+		l--;
+	}
 }

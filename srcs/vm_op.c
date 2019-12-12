@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vm_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:44:36 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 11:32:18 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/09 18:29:36 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/point.h"
 
 uint16_t		op_add(t_all *all, t_op *op, uint8_t *content)
 {

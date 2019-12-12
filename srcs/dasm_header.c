@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_header.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:38:49 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 11:28:19 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/11 18:42:23 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ unsigned char*	recup_ex_code(size_t *len, uint8_t *cor_content)
 	unsigned char	*code;
 
 	code = NULL;
-	(*len) = (size_t)dsam_get_exec_code(&(cor_content[136]));
+	(*len) = (size_t)dasm_get_exec_code(&(cor_content[136]), 4);
 
 	if (!(code = (unsigned char *)malloc(sizeof(unsigned char) * (*len))))
 		return (NULL);

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_check_exec.c                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:50:50 by adietric         ###   ########.fr       */
+/*   Created: 2018/11/12 17:38:37 by flafonso          #+#    #+#             */
+/*   Updated: 2019/06/14 10:36:50 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/libsrcs.h"
 
-uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
+char	*ft_strnew(size_t size)
 {
-	uint16_t	i;
+	char	*tab;
 
-	i = 0;
-	if (cont[0] > 16 || cont[0] < 1)
-		error_exec(all, (char*)champs->name, i);
-	i = op[cont[0] - 1].inst(all, op, cont);
-	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
-																						// printf(" 		I = %hu\n", i);
-	return (i);
+	if (!(tab = (char*)malloc(sizeof(char) * size + 1)))
+		return (NULL);
+	ft_bzero(tab, size + 1);
+	return (tab);
 }

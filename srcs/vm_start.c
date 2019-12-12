@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_start.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:01:39 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 11:32:51 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/10 15:50:46 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void	vm_start(t_all *all)
 		id++;
 					printf("Champ |%s| est BON !! \n", all->champs[i].name);
 	}
+	all->check_mode = -1;
 }
