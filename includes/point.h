@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   point.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 02:40:33 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/11 18:40:26 by adietric         ###   ########.fr       */
+/*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
+/*   Updated: 2019/12/09 21:52:12 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_H
-#define VM_H
+#ifndef POINT_H
+#define POINT_H
 
 #include <stdio.h>
-#include "../libft/libft.h"
+#include "libsrcs.h"
 #include "op.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #define	BUFF_SIZE	256
+
 
 typedef	struct		s_champs
 {
@@ -29,46 +30,14 @@ typedef	struct		s_champs
 	unsigned char		*comment;
 	size_t				len_exec_code;
 	unsigned char		*exec_code;
-	int					start;
-	int					pc;
 }					t_champs;
-
-typedef struct		s_arena
-{
-	int				live_calls;
-	int				cycles;
-}					t_arena;
-
-typedef struct			s_process
-{
-	unsigned char				*name;
-	int					id;
-//	int					number;
-	int					r[REG_NUMBER];
-	int					pc;
-	char				carry;
-	int					live_calls;
-	int					duration;
-	int					start;
-	int					bytes;
-	int					*decode;
-	int					len_program;
-	unsigned char				*program;
-//	void				(*op)();
-	unsigned char 				op;
-	struct s_process	*next;
-}						t_process;
 
 typedef struct		s_all
 {
-	struct	s_champs	champs[MAX_PLAYERS + 1];
+	struct	s_champs	champs[5];
 	int					flag_dump;
 	int					flag_n;
-	int					total_champ;
-	unsigned char		*arena;
-	t_process			processes;
-	int					last_alive;
-	int					cycles;
+	int					nb_champ;
 	int					check_mode;
 }					t_all;
 
@@ -92,28 +61,23 @@ t_op_check   	 op_tab[17];
 
 void			dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content, t_champs *champs);
 size_t			dasm_get_data(t_all	*all, char *cor_file, uint8_t **cor_content);
-int				dasm_get_exec_code(uint8_t *cor_content, int len);
+int				dsam_get_exec_code(uint8_t *cor_content);
 void			*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size);
 void			vm_print_intro(t_all *all);
 void			dasm_input(int ac, char **av, t_all *all);
 void			print_usage(t_all *all);
-void			dasm_init(t_all *vm, int ac, char **av);
+void			dasm_init(t_all *all);
 int				dasm_is_it_cor(char *path);
 void			dasm_free(t_all	*all);
 void			error_size(t_all *all, char *path, size_t cor_size);
 void			error(t_all *all, char *str);
+void			error_exec(t_all *all, char *champ_name, uint16_t line);
 void			dasm_print_all(t_all *all);
 int				just_number(char *str);
-int 			init_arena(t_all *vm);
-int   			load_process(t_all *vm, t_process *head);
-int     		run_vm(t_all *vm);
-
-void			error_exec(t_all *all, char *champ_name, uint16_t line);
 
 int				is_in(int i, int *value);
-void			do_op(t_all *all, t_op *op, char *name_op, uint8_t *cont);
 void			vm_start(t_all *all);
-uint16_t		init_op_check(t_op *op);
+uint16_t		vm_init(t_op *op);
 uint16_t		vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op);
 uint16_t		op_add(t_all *all, t_op *op, uint8_t *content);
 uint16_t		op_aff(t_all *all, t_op *op, uint8_t *content);
@@ -132,7 +96,4 @@ uint16_t		op_sub(t_all *all, t_op *op, uint8_t *content);
 uint16_t		op_xor(t_all *all, t_op *op, uint8_t *content);
 uint16_t		op_zjmp(t_all *all, t_op *op, uint8_t *content);
 
-void			notre_truc_a_nous(t_all *all);
-
 #endif
-

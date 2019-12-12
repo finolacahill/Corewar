@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_check_exec.c                                    :+:      :+:    :+:   */
+/*   op_fork.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:50:50 by adietric         ###   ########.fr       */
+/*   Created: 2019/12/10 14:52:50 by adietric          #+#    #+#             */
+/*   Updated: 2019/12/11 18:13:13 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../../includes/vm.h"
 
-uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
+int				do_op_fork(t_all *all, t_op *op, uint8_t *content)
 {
-	uint16_t	i;
+	return(0);
 
+}
+
+uint16_t		op_fork(t_all *all, t_op *op, uint8_t *content)
+{
+	int			i;
+
+	(void)op;
+	(void)content;
 	i = 0;
-	if (cont[0] > 16 || cont[0] < 1)
-		error_exec(all, (char*)champs->name, i);
-	i = op[cont[0] - 1].inst(all, op, cont);
-	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
-																						// printf(" 		I = %hu\n", i);
+	if (all->check_mode != 1)
+		i = do_op_fork(all, op, content);
+	else if (all->check_mode == 1)
+		return (op_tab[11].dir_size + 1);
 	return (i);
 }

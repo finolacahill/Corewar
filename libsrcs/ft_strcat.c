@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_check_exec.c                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:50:50 by adietric         ###   ########.fr       */
+/*   Created: 2018/11/08 10:44:42 by flafonso          #+#    #+#             */
+/*   Updated: 2019/06/14 10:44:48 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/libsrcs.h"
 
-uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	uint16_t	i;
+	size_t		i;
+	size_t		i2;
 
-	i = 0;
-	if (cont[0] > 16 || cont[0] < 1)
-		error_exec(all, (char*)champs->name, i);
-	i = op[cont[0] - 1].inst(all, op, cont);
-	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
-																						// printf(" 		I = %hu\n", i);
-	return (i);
+	i = ft_strlen(s1);
+	i2 = 0;
+	while (s2[i2])
+	{
+		s1[i] = s2[i2];
+		i++;
+		i2++;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

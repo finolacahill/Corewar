@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/12/10 03:10:23 by flafonso         ###   ########.fr        #
+#    Updated: 2019/12/10 15:50:12 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,42 +18,62 @@ SRCS_PATH = ./srcs
 OBJ_PATH = ./obj
 MAIN_PATH = ./main
 OBJM_PATH = ./main
+OP_PATH = ./srcs/operations
 
-SRCS_NAME = dasm_get_data.c		\
-			dasm_get_exec.c		\
-			dasm_header.c		\
-			dasm_input.c		\
-			dasm_is_cor.c		\
-			dasm_print_usage.c	\
-			dasm_realloc.c		\
-			dasm_init.c			\
-			dasm_rdm.c			\
-			print_all.c			\
-			vm_print_intro.c	\
-			init_op_check.c		\
-			vm_start.c			\
-			vm_check_exec.c		\
-			vm_tab_check.c		\
-			vm_op.c				\
-			vm_load_processes.c	\
+SRCS_NAME = dasm_get_data.c			\
+			dasm_get_exec.c			\
+			dasm_header.c			\
+			dasm_input.c			\
+			dasm_is_cor.c			\
+			dasm_print_usage.c		\
+			dasm_realloc.c			\
+			dasm_init.c				\
+			dasm_rdm.c				\
+			print_all.c				\
+			vm_print_intro.c		\
+			init_op_check.c			\
+			vm_start.c				\
+			vm_check_exec.c			\
+			vm_tab_check.c			\
+			vm_load_processes.c		\
+			notre_truc_a_nous.c		\
 			vm_init_arena.c
+
+OP_NAME =	op_add.c	\
+			op_aff.c	\
+			op_and.c	\
+			op_fork.c	\
+			op_ld.c		\
+			op_ldi.c	\
+			op_lfork.c	\
+			op_live.c	\
+			op_lld.c	\
+			op_lldi.c	\
+			op_or.c		\
+			op_st.c		\
+			op_sti.c	\
+			op_sub.c	\
+			op_xor.c	\
+			op_zjmp.c
 
 MAIN_NAME = main.c
 
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 OBJ_NAME = $(SRCS_NAME:.c=.o)
 OBJM_NAME = $(MAIN_NAME:.c=.o)
+OBJ_OP_NAME = $(OP_NAME:.c=.o)
 
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 OBJM = $(addprefix $(OBJM_PATH)/,$(OBJM_NAME))
+OBJOP = $(addprefix $(OP_PATH)/,$(OP_NAME))
 
 INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = -Wall -Werror -Wextra
+FLAG = #-Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 
@@ -62,11 +82,15 @@ all: lib $(NAME)
 lib: $(LIB_PATH)
 	@make -C $(LIB_PATH)
 
-$(NAME): $(LIB) $(OBJ) $(OBJM) $(INCL)
-	@$(CC) $(FLAG) $(OBJM) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
+$(NAME): $(LIB) $(OBJ) $(OBJM) $(INCL) $(OBJOP)
+	@$(CC) $(FLAG) $(OBJOP) $(OBJM) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[$(NAME) done]$(END)"
 
 $(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@$(CC) -o $@ -c $<
+
+$(OBJ_PATH)/%.o: $(OP_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) -o $@ -c $<
 

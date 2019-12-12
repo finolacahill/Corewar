@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_check_exec.c                                    :+:      :+:    :+:   */
+/*   do_op.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 14:48:34 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:50:50 by adietric         ###   ########.fr       */
+/*   Created: 2019/12/10 15:27:26 by adietric          #+#    #+#             */
+/*   Updated: 2019/12/10 15:32:27 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-uint16_t	vm_check_exec(t_all *all, t_champs *champs, uint8_t *cont, t_op *op)
+void	do_op(t_all *all, t_op *op, char *name_op, uint8_t *cont)
 {
-	uint16_t	i;
+	int		i;
 
-	i = 0;
-	if (cont[0] > 16 || cont[0] < 1)
-		error_exec(all, (char*)champs->name, i);
-	i = op[cont[0] - 1].inst(all, op, cont);
-	i == 0 ? error_exec(all, (char*)champs->name, i) : 0;
-																						// printf(" 		I = %hu\n", i);
-	return (i);
+	i = -1;
+	while (ft_strcmp(op[i].op_name, name_op) != 0)
+		i++;
+	op[i].inst(all, op, cont);
 }

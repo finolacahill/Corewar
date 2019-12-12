@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dasm_get_exec.c                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/27 11:48:59 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/11 18:40:27 by adietric         ###   ########.fr       */
+/*   Created: 2018/11/13 18:30:12 by flafonso          #+#    #+#             */
+/*   Updated: 2019/07/11 14:50:32 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vm.h"
+#include "../includes/libsrcs.h"
 
-int			dasm_get_exec_code(uint8_t *cor_content, int len)
+void	ft_putchar(char c)
 {
-	int		value;
-	int		i;
-
-	i = -1;
-	value = 0;
-	while (++i < len)
-		value += cor_content[i] * ft_puissance(256, len - 1  - i);
-	return (value);
+	write(1, &c, 1);
 }
