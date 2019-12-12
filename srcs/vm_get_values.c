@@ -22,7 +22,7 @@ int		is_reg(int reg)
 {
     if (reg < 0 || reg > REG_NUMBER)
     {
-        ft_printf("Invalid register -> KILL THIS PROCESS");
+        ft_printf("Invalid register called -> KILLING THIS PROCESS");
         return (0);
     }
 	return (1);

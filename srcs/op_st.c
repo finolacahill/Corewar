@@ -21,7 +21,6 @@ void    op_st(t_all *vm, t_process *p)
         param2 = get_next_bytes(vm, p, 2, 2) % IDX_MOD;
         load_value(vm, param2, 4, param1);
         ft_printf("\treg = %d loaded at pc %d + %d\n", param1, p->pc, param2);    
-
     }
     check_carry(p, param1);
  //   int test = get_next_bytes(vm, p, 4, param2 - 1);
