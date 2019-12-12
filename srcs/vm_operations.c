@@ -1,22 +1,14 @@
 #include "../includes/vm.h"
 
-
-void		load_value(t_all *vm, int address, int len, int val)
+void    check_carry(t_process *p, int param)
 {
-	int i;
-	int power;
-
-	i = 0;
-	power = 2;
-	while (++i <= len)
-	{
-//		printf("val = %02x", (int)(val % (ft_puissance(16, power))));
-//		printf("then val = %02x\n", (int)(val / (ft_puissance(16, power))));
-		vm->arena[(address + len - i) % MEM_SIZE] = (val % (ft_puissance(16, power)));
-		val = val / (ft_puissance(16, power));
-		++power;		
-	}
-//	printf("%02x%02x%02x%02x\n", vm->arena[address],vm->arena[address + 1],vm->arena[address + 2],vm->arena[address + 3]);
+    if (p != NULL ) //kill flag?
+    {
+        if (param == 0)
+            p->carry = 1;
+        else
+            p->carry = 0;
+    }   
 }
 
 static void	check_cycle_decrease(t_all *vm)

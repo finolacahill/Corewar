@@ -44,7 +44,9 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_operations.c 	\
 			op_live.c			\
 			op_st.c				\
-			vm_get_values.c
+			op_ld.c 			\
+			vm_get_values.c		\
+			vm_load_values.c
 
 
 MAIN_NAME = main.c

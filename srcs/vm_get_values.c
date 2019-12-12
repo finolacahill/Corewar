@@ -18,16 +18,24 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	return (val);
 }
 
+int		is_reg(int reg)
+{
+    if (reg < 0 || reg > REG_NUMBER)
+    {
+        ft_printf("Invalid register called -> KILLING THIS PROCESS");
+        return (0);
+    }
+	return (1);
+}
+
+//can values return negative numbers?? Should we be exiting instead of sending -1??
 int     get_reg_val(t_all *vm, t_process *p, int bytes_read)
 {
     int reg;
 
     reg = get_next_bytes(vm, p, 1, bytes_read);
-    if (reg < 0 || reg > REG_NUMBER)
-    {
-        ft_printf("Invalid register -> KILL THIS PROCESS");
-        return (-1);
-    }
+	if ((is_reg(reg)) == 0)
+		return (-1);
     return (p->r[reg - 1]);
 }
 

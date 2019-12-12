@@ -1,226 +1,27 @@
 Introducing contestants...
 * Player 1, weighing 23 bytes, "zork" ("I'M ALIIIIVE") !
-* Player 2, weighing 430 bytes, "bigzork" ("I know i cant win") !
+* Player 2, weighing 23 bytes, "zork" ("I'M ALIIIIVE") !
+* Player 3, weighing 23 bytes, "zork" ("I'M ALIIIIVE") !
+id 3 do operation 11 at cycle 25
+id 2 do operation 11 at cycle 25
+id 1 do operation 11 at cycle 25
+id 3 do operation 6 at cycle 31
+id 2 do operation 6 at cycle 31
+id 1 do operation 6 at cycle 31
+id 3 do operation 1 at cycle 41
 A process shows that player number 1, zork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
+id 2 do operation 1 at cycle 41
+A process shows that player number 1, zork, is alive.
+id 1 do operation 1 at cycle 41
+A process shows that player number 1, zork, is alive.
+id 3 do operation 9 at cycle 61
+id 2 do operation 9 at cycle 61
+id 1 do operation 9 at cycle 61
+THE WINNER IS PLAYER NUMBER 1, zork!!!
 i = 0
 i = 1
-2
-id 2 do operation 2 at cycle 5
-id 2 do operation 3 at cycle 10
-	reg = 2 loaded at pc 2055 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 15
-	reg = 2 loaded at pc 2060 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 20
-	reg = 2 loaded at pc 2065 + 211
-is 2 == 2
-id 1 do operation 11 at cycle 25
-id 2 do operation 3 at cycle 25
-	reg = 2 loaded at pc 2070 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 30
-	reg = 2 loaded at pc 2075 + 211
-is 2 == 2
-id 1 do operation 6 at cycle 31
-id 2 do operation 3 at cycle 35
-	reg = 2 loaded at pc 2080 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 40
-	reg = 2 loaded at pc 2085 + 211
-is 2 == 2
-id 1 do operation 1 at cycle 41
-id 2 do operation 3 at cycle 45
-	reg = 2 loaded at pc 2090 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 50
-	reg = 2 loaded at pc 2095 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 55
-	reg = 2 loaded at pc 2100 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 60
-	reg = 2 loaded at pc 2105 + 211
-is 2 == 2
-id 1 do operation 9 at cycle 61
-id 2 do operation 3 at cycle 65
-	reg = 2 loaded at pc 2110 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 70
-	reg = 2 loaded at pc 2115 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 75
-	reg = 2 loaded at pc 2120 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 80
-	reg = 2 loaded at pc 2125 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 85
-	reg = 2 loaded at pc 2130 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 90
-	reg = 2 loaded at pc 2135 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 95
-	reg = 2 loaded at pc 2140 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 100
-	reg = 2 loaded at pc 2145 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 105
-	reg = 2 loaded at pc 2150 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 110
-	reg = 2 loaded at pc 2155 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 115
-	reg = 2 loaded at pc 2160 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 120
-	reg = 2 loaded at pc 2165 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 125
-	reg = 2 loaded at pc 2170 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 130
-	reg = 2 loaded at pc 2175 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 135
-	reg = 2 loaded at pc 2180 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 140
-	reg = 2 loaded at pc 2185 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 145
-	reg = 2 loaded at pc 2190 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 150
-	reg = 2 loaded at pc 2195 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 155
-	reg = 2 loaded at pc 2200 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 160
-	reg = 2 loaded at pc 2205 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 165
-	reg = 2 loaded at pc 2210 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 170
-	reg = 2 loaded at pc 2215 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 175
-	reg = 2 loaded at pc 2220 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 180
-	reg = 2 loaded at pc 2225 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 185
-	reg = 2 loaded at pc 2230 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 190
-	reg = 2 loaded at pc 2235 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 195
-	reg = 2 loaded at pc 2240 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 200
-	reg = 2 loaded at pc 2245 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 205
-	reg = 2 loaded at pc 2250 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 210
-	reg = 2 loaded at pc 2255 + 211
-is 2 == 2
-id 2 do operation 3 at cycle 215
-	reg = 2 loaded at pc 2260 + 211
-is 2 == 2
-id 2 do operation 1 at cycle 225
-id 2 do operation 1 at cycle 235
-id 2 do operation 1 at cycle 245
-id 2 do operation 1 at cycle 255
-id 2 do operation 1 at cycle 265
-id 2 do operation 1 at cycle 275
-id 2 do operation 1 at cycle 285
-id 2 do operation 1 at cycle 295
-id 2 do operation 1 at cycle 305
-id 2 do operation 1 at cycle 315
-id 2 do operation 1 at cycle 325
-id 2 do operation 1 at cycle 335
-id 2 do operation 1 at cycle 345
-id 2 do operation 1 at cycle 355
-id 2 do operation 1 at cycle 365
-id 2 do operation 1 at cycle 375
-id 2 do operation 1 at cycle 385
-id 2 do operation 1 at cycle 395
-id 2 do operation 1 at cycle 405
-id 2 do operation 1 at cycle 415
-id 2 do operation 1 at cycle 425
-id 2 do operation 1 at cycle 435
-id 2 do operation 1 atA process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-A process shows that player number 2, bigzork, is alive.
-THE WINNER IS PLAYER NUMBER 2, bigzork!!!
- cycle 445
-id 2 do operation 1 at cycle 455
-id 2 do operation 1 at cycle 465
-id 2 do operation 1 at cycle 475
-id 2 do operation 1 at cycle 485
-id 2 do operation 1 at cycle 495
-id 2 do operation 1 at cycle 505
-id 2 do operation 1 at cycle 515
-id 2 do operation 1 at cycle 525
-id 2 do operation 1 at cycle 535
-id 2 do operation 1 at cycle 545
-id 2 do operation 1 at cycle 555
-id 2 do operation 1 at cycle 565
-id 2 do operation 1 at cycle 575
-id 2 do operation 1 at cycle 585
-id 2 do operation 1 at cycle 595
-id 2 do operation 1 at cycle 605
-id 2 do operation 1 at cycle 615
-id 2 do operation 1 at cycle 625
-id 2 do operation 1 at cycle 635
-id 2 do operation 9 at cycle 655
+i = 2
+3
 kill process id 1
 kill process id 2
+kill process id 3
