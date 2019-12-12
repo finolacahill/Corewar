@@ -43,6 +43,7 @@ t_process *init_process(t_all *vm, t_champs *c, t_process *p)
 	p->exec_cycle = get_duration(vm, p->op);
 	p->bytes = 0;
 	c->last_live = 0;
+	p->kill = 0;
 	return (p);
 }
 
@@ -52,17 +53,17 @@ t_process *load_processes(t_all *vm, t_process *head)
 	int         i;
 
 	i = 0;
-	head = malloc(sizeof(t_process));
-	new = init_process(vm, &vm->champs[0], new);
-	head->next = new;
+//	head = malloc(sizeof(t_process));
+	head = init_process(vm, &vm->champs[0], head);
 	while (++i < vm->total_champ)
 	{
-		if (new->start == -1)
-			return (error_process(new));
-		new->next = init_process(vm, &vm->champs[i], new->next);
-		new = new->next;
+		if (head->start == -1)
+			return (error_process(head));
+		new = init_process(vm, &vm->champs[i], new);
+		new->next = head;
+		head = new;
 	}
-	head = head->next;
+//	head = head->next;
 	return (head);
 }
 
@@ -71,12 +72,15 @@ int		exec_process(t_all *vm, t_process *process)
 	int	bytes;
 
 	if (process->op != 0)
-		printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
+		ft_printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
 	bytes = 0;
 	if (process->op == 1)
 		op_live(vm, process);
+	if (process->op == 2)
+		op_ld(vm, process);
 	if (process->op == 3)
 		op_st(vm, process);
+	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);
 	if (process->pc == MEM_SIZE - 1)
 		process->pc = -1;
 	process = ft_decode_byte(vm->arena[process->pc + 1], process);
