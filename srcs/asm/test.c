@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "../../includes/op.h"
+#include <fcntl.h>
+#include "../../libft/libft.h"
+#include <stdio.h>
+#include "../../includes/corewar.h"
 int     ft_strtol(char *str, int base, int size)
 {
     int res;
@@ -25,12 +30,19 @@ int     ft_strtol(char *str, int base, int size)
     return (res);
 }
 
-int main()
+int main(int ac, char **av)
 {
     int fd;
 
+    /*fd = open(av[1], O_RDONLY);
+    while (get_next_line(fd, &line) == 1)
+    {
+        ft_printf("%s\n", line);
+        free(line);
+    }
+    while (1);*/
     fd = open("toto.s", O_WRONLY);
-    /*//char c[2] = "65";
+    /*char c[2] = "65";
     char c[3];
     //int i = 0x + 0b;
    // char hexa = 0x;
@@ -40,7 +52,7 @@ int main()
     c[1] = 1;
      //c[1] = 0x0b;
     //7801000a000106;
-    write(fd, &c, 2);*/
+    write(fd, &c, 2);
     char c = 'f';
     int hexa = 0x00;
     int i = c - ('a' - 10);
@@ -50,5 +62,14 @@ int main()
     mine = (char)ft_strtol("f1", 16);
     write(fd, &mine, 1);
     printf("i == %d\n", i);
+    */
+   char line[5] = "test";
+    char hexa = 0x00;
+    int i = 0;
+    int j = 0;
+    char c;
+    c = 't';
+
+    write(fd, &line, 5);
     return (1);
 }

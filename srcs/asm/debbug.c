@@ -13,7 +13,7 @@ void    print_instruc(t_instruc *instruc)
     tmp = instruc;
     while (tmp->next)
     {
-        printf("opcode == %d\n", tmp->opcode);
+       printf("opcode == %d\n", tmp->opcode);
         printf("params == ");
         while (tmp->params[i] != 0)
         {

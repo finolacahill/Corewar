@@ -35,7 +35,7 @@ int     get_ocp(t_instruc *instruc)
     }
     while (j < 7)
         ocp[++j] = '0';
-        ft_printf("ocp == %s\n", ocp);
+     //   ft_printf("ocp == %s\n", ocp);
     res = bi_to_dec(ocp);
     ft_strdel(&ocp);
     ocp = ft_uitoa_base(res, 16, 0);

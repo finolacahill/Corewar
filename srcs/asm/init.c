@@ -11,6 +11,7 @@ t_label     *new_label()
     new = (t_label*)malloc(sizeof(t_label));
     new->label = NULL;
     new->adress = 0;
+    new->size = 0;
     new->next = NULL;
     return (new);
 }
@@ -24,7 +25,7 @@ t_instruc   *new_instruct()
     new->params = NULL;
     new->ocp = 0;
     new->adress = 0;
-    new->label = NULL;
+    new->label = new_label();
     new->is_ocp = 0;
     new->hexa_params = NULL;
     new->hexa_instruc = NULL;
@@ -39,6 +40,7 @@ t_env   *init_env()
     t_env *new;
 
     new = (t_env*)malloc(sizeof(t_env));
+    new->header = (header_t*)malloc(sizeof(header_t));
     new->instruc = new_instruct();
     new->label = new_label();
     return (new);

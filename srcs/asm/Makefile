@@ -5,7 +5,7 @@ INC_PATH = ../../includes/
 OBJ_PATH = ./obj/
 LIB_PATH = ../../libft/
 
-SRC_NAME = utils.c ocp.c main.c init.c label.c debbug.c instruc.c params.c calc.c
+SRC_NAME = cmd.c free.c utils.c ocp.c main.c init.c label.c debbug.c instruc.c params.c calc.c
 
 INC_NAME = op.h corewar.h
 LIB_NAME = libft.a

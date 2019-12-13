@@ -33,9 +33,6 @@ t_op    op_tab[17] =
 
 int		put_instruc_params(t_instruc *instruc, int j)
 {
-	(void)j;
-	(void)instruc;
-	//return (0);
 	int i;
 
 	i = 0;
@@ -55,7 +52,7 @@ int		put_instruc(t_instruc *instruc_env, int j)
 
 	tmp = get_last_intruct(instruc_env);
 	tmp->opcode = op_tab[j].opcode;
-	printf("op_code params %d\n", op_tab[j].param_type[1]);
+	//printf("op_code params %d\n", op_tab[j].param_type[1]);
 	put_instruc_params(tmp, j);
 	tmp->for_direct = op_tab[j].for_direct;
 	return (1);
@@ -77,7 +74,7 @@ int	check_instruc(char *instruc, t_env *env)
 		j++;
 	}
 	ft_strdel(&instruc);
-	return (-1);
+	exit(0); // instruction mauvaise
 }
 
 int get_instruc(char *line, t_env *env)
@@ -87,13 +84,17 @@ int get_instruc(char *line, t_env *env)
 	int j;
 
 	j = 0;
-	while (line[j] && line[j] == ' ')
+	while (line[j] && line[j] <= ' ')
 		j++;
+	if (!line[j])
+		return (0);
 	i = j;
     while (line[i] && ft_isalpha(line[i]))
         i++;
-    instruc = ft_strsub(line, j, i - 1);
-	printf("instruct ? %s\n", instruc);
+	//ft_printf("i || j == %d | %d\n", j, i - j);
+    if (i == 0 || !(instruc = ft_strsub(line, j, i - j)))
+		exit(0); // mettre lexique error;
+	//ft_printf("instruct ? %s\n", instruc);
 	if (!check_instruc(instruc, env))
 		return (-1);
 	return (i);
