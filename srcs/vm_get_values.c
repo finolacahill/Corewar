@@ -18,11 +18,11 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	return (val);
 }
 
-int		is_reg(int reg)
+int		is_reg(int reg, t_process *p)
 {
     if (reg < 0 || reg > REG_NUMBER)
     {
-        ft_printf("Invalid register called -> KILLING THIS PROCESS");
+		p->op_fail = 1;
         return (0);
     }
 	return (1);
@@ -34,8 +34,9 @@ int     get_reg_val(t_all *vm, t_process *p, int bytes_read)
     int reg;
 
     reg = get_next_bytes(vm, p, 1, bytes_read);
-	if ((is_reg(reg)) == 0)
-		return (-1);
+	is_reg(reg, p);
+	if (p->op_fail == 1)
+		return ;
     return (p->r[reg - 1]);
 }
 
