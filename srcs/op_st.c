@@ -12,13 +12,17 @@ void    op_st(t_all *vm, t_process *p)
     int     param1;
     int     param2;
 
-    if ((param1 = get_reg_val(vm, p, 1)) == -1 && p == NULL)
+    if ((param1 = get_reg_val(vm, p, 1)) == -1 && p->op_fail == 1)
         return ;   
     if  (p->decode[1] == REG_SIZE)
+    {
         load_val_in_reg(vm, p, param1, 2);
+        if (p->op_fail == 1)
+            return ;
+    }
     else
     {
-        param2 = get_next_bytes(vm, p, 2, 2) % IDX_MOD;
+        param2 = get_next_bytes(vm, p, 2, 2) % IDX_MOD; //should idx_mod here?
         load_value(vm, param2, 4, param1);
         ft_printf("\treg = %d loaded at pc %d + %d\n", param1, p->pc, param2);    
     }
