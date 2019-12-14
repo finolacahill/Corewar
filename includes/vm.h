@@ -71,7 +71,11 @@ typedef struct			s_process
 	int					bytes;
 	int					*decode;
 	unsigned char 		op;
+<<<<<<< HEAD
 	int					op_fail;
+=======
+	int					kill;
+>>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
 	struct s_process	*next;
 }						t_process;
 
@@ -102,7 +106,11 @@ int				is_player_nb(int i, t_all *vm);
 int     		get_reg_val(t_all *vm, t_process *p, int bytes_read);
 int     		get_ind(t_all *vm, t_process *p, int bytes_read);
 void			load_value(t_all *vm, int address, int len, int val);
+<<<<<<< HEAD
 int				is_reg(int reg, t_process *p);
+=======
+int				is_reg(int reg);
+>>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
 void    		check_carry(t_process *p, int param);
 void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
@@ -111,10 +119,13 @@ void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 void			op_live(t_all *vm, t_process *p);
 void    		op_st(t_all *vm, t_process *p);
 void    		op_ld(t_all *vm, t_process *p);
+<<<<<<< HEAD
 void    		op_sub(t_all *vm, t_process *p);
 void    		op_add(t_all *vm, t_process *p);
 
 
+=======
+>>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
 
 //errors
 t_process *error_process(t_process *p);
