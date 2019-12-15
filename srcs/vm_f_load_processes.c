@@ -1,5 +1,5 @@
 #include "../includes/vm.h"
-
+/*
 int			get_duration(t_all *vm, int opc)
 {
 	if (opc == 1 || opc == 4 || opc == 5 || opc == 13)
@@ -71,27 +71,26 @@ int		exec_process(t_all *vm, t_process *process, t_op *op_table)
 {	
 	int	bytes;
 
-	if (check_op_block(vm, process) == 1)
-	{
-		process = ft_decode_byte(vm->arena[process->pc + 1], process);
-		calc_bytes(process, &bytes);
-		process->op_fail = 0;
-		if (process->op != 0)
-			ft_printf("	=> id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
-		bytes = 0;
-		op_table[process->op - 1].inst(vm, process);
-		/*
-		if (process->op == 1)
-			op_live(vm, process);
-		if (process->op == 2)
-			op_ld(vm, process);
-		if (process->op == 3)
-			op_st(vm, process);
-			*/
+	if (process->op != 0)
+		ft_printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
+	bytes = 0;
+	op_table[process->op - 1].inst(vm, process);
+	/*
+	if (process->op == 1)
+		op_live(vm, process);
+	if (process->op == 2)
+		op_ld(vm, process);
+	if (process->op == 3)
+		op_st(vm, process);
+	*/
 	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);
-		process->pc = (process->pc + bytes + 1) % MEM_SIZE;
-	}
-	//function find valid op
+	if (process->pc == MEM_SIZE - 1)
+		process->pc = -1;
+	process = ft_decode_byte(vm->arena[process->pc + 1], process);
+	calc_bytes(process, &bytes);
+	process->pc = process->pc + bytes + 1;
+	if (process->pc > MEM_SIZE - 1)
+		process->pc = process->pc - MEM_SIZE;
 	process->op = vm->arena[process->pc];
 	process->exec_cycle = get_duration(vm, process->op);
 	return (0);
@@ -135,7 +134,7 @@ int     run_vm(t_all *vm)
 {
 	unsigned char c = 68;
 	int bytes = 0;
-	t_process *process;
+	t_process	*process;
 	t_op		*op_table;
 
 	if (!(op_table = (t_op*)malloc(sizeof(t_op) * 16)))
@@ -150,3 +149,4 @@ int     run_vm(t_all *vm)
 	declare_winner(vm);
 	return (0);
 }
+*/
