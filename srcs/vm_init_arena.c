@@ -7,8 +7,12 @@ void ft_print_arena(t_all *vm)
     int j = -1;
     int colour = 0;
     int x = 0;
+    int z = -1;
  
-    while (++i < MEM_SIZE - 1)
+    while (++z < 64)
+        ft_printf("%02d ", z);
+    ft_printf("\n---------------------------------------------------------------------------------------------------------------------------------------------\n");
+    while (++i < MEM_SIZE)
     {
         if (i >= vm->champs[x].start &&
             i < vm->champs[x].start + (int)vm->champs[x].len_exec_code)
@@ -19,7 +23,7 @@ void ft_print_arena(t_all *vm)
             }
         else
             printf("\033[0m%02x ", vm->arena[i]);
-        if (++j == 64)
+        if (++j == 63)
         {
             printf("\n");
             j = -1;

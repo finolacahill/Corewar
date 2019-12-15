@@ -1,23 +1,26 @@
 #include "../includes/vm.h"
 
-t_process	*ft_decode_byte(unsigned char c, t_process *p)
-{
-	p->decode[0] = c >> 6;
-	c = (c << 2);
-	p->decode[1] = c >> 6;
-	c = (c << 2);
-	p->decode[2] = c >> 6;
-	c = (c << 2);
-	p->decode[3] = c >> 6;
- 	return (p);
-}
-
 static int		if_no_code(t_process *p)
 {
 	if (p->op == 0 || p->op == 1 ||
 		p->op == 9 || p->op == 12 || p->op == 15)
 		return (1);
 	return (0);
+}
+
+t_process	*ft_decode_byte(unsigned char c, t_process *p)
+{
+	if (if_no_code(p) == 0)
+	{
+		p->decode[0] = c >> 6;
+		c = (c << 2);
+		p->decode[1] = c >> 6;
+		c = (c << 2);
+		p->decode[2] = c >> 6;
+		c = (c << 2);
+		p->decode[3] = c >> 6;
+	}
+ 	return (p);
 }
 
 static void	get_direct_bytes(t_process *p, int *bytes)

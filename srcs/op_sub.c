@@ -11,6 +11,7 @@ void    op_sub(t_all *vm, t_process *p)
 	if (p->op_fail == 1)
 		return ;
 	load_val_in_reg(vm, p, p1 - p2, 3);
+	printf("p1 -p2 = %d\n", p1 -p2);
 	if (p->op_fail != 1)
 		check_carry(p, p1 - p2);
 }

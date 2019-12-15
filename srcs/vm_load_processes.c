@@ -71,23 +71,24 @@ int		exec_process(t_all *vm, t_process *process)
 {	
 	int	bytes;
 
+	bytes = 0;
+
+	process = ft_decode_byte(vm->arena[process->pc + 1], process);
+	calc_bytes(process, &bytes);
 	if (process->op != 0)
 		ft_printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
-	bytes = 0;
 	if (process->op == 1)
 		op_live(vm, process);
 	if (process->op == 2)
 		op_ld(vm, process);
 	if (process->op == 3)
 		op_st(vm, process);
-	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);
-	if (process->pc == MEM_SIZE - 1)
-		process->pc = -1;
-	process = ft_decode_byte(vm->arena[process->pc + 1], process);
-	calc_bytes(process, &bytes);
-	process->pc = process->pc + bytes + 1;
-	if (process->pc > MEM_SIZE - 1)
-		process->pc = process->pc - MEM_SIZE;
+	if (process->op == 4)
+		op_add(vm, process);
+	if (process->op == 5)
+		op_sub(vm, process);
+	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);	
+	process->pc = (process->pc + bytes + 1) % MEM_SIZE;
 	process->op = vm->arena[process->pc];
 	process->exec_cycle = get_duration(vm, process->op);
 	return (0);

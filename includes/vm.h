@@ -114,9 +114,9 @@ void    		op_ld(t_all *vm, t_process *p);
 void    		op_sub(t_all *vm, t_process *p);
 void    		op_add(t_all *vm, t_process *p);
 
+void ft_print_arena(t_all *vm);
 
 
 //errors
 t_process *error_process(t_process *p);
 #endif
-

@@ -22,13 +22,13 @@ void    op_st(t_all *vm, t_process *p)
     }
     else
     {
-        param2 = get_next_bytes(vm, p, 2, 2) % MEM_SIZE;//should idx_mod here?
-     //   printf("param2 without idx mod= %d\n", get_next_bytes(vm, p, 2, 2));
-     //   printf("param2 with mem siz (%d) mod= %d\n", MEM_SIZE,  get_next_bytes(vm, p, 2, 2) % MEM_SIZE);
-      //  printf("param2 = %d\n", param2);
-        load_value(vm, param2, 4, param1); //have added an id_x mod to load_value
-      //  ft_printf("\treg = %d loaded at pc %d + %d\n", param1, p->pc, param2);
-      //  ft_printf("\tin hez, %02X\n", p->pc + param2);
+
+    printf("p1 = %d\n", param1);
+      param2 = get_ind(vm, p, 2);
+      printf("param2 = %d\n", param2);
+      printf("pc = %d\n", p->pc);
+      printf("pc = %02x\n", vm->arena[p->pc]);
+      load_value(vm, p->pc + param2, 4, param1);
     }
     check_carry(p, param1);
  //   int test = get_next_bytes(vm, p, 4, param2 - 1);

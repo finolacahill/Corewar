@@ -11,14 +11,17 @@ void    op_ld(t_all *vm, t_process *p)
 	int     bytes_read;
 
 	bytes_read = 5;
+
 	if (p->decode[0] == IND_CODE)
 	{
-		pm1 = get_next_bytes(vm, p, 2, 1) % IDX_MOD;
-		pm1 = get_next_bytes(vm, p, 2, pm1 + 1); //should the len be 4??
+		pm1 = get_ind(vm, p, 1);
+		pm1 = get_next_bytes(vm, p, 4, pm1 - 1);
 		bytes_read = 3;
 	}
 	else
 		pm1 = get_next_bytes(vm, p, 4, 1);
 	load_val_in_reg(vm, p, pm1, bytes_read);
+	if (p->op_fail == 1)
+		return ;
 	check_carry(p, pm1);
 }

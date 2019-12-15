@@ -4,16 +4,17 @@ void		load_value(t_all *vm, int address, int len, int val)
 {
 	int i;
 	int power;
+	int shift;
 
 	i = 0;
 	power = 2;
-	printf("\tvalue loaded to %d\n", (((address) % MEM_SIZE)));
-	printf("but if we took into account IDX %d", (address % MEM_SIZE) % IDX_MOD);
+	shift = 0;
 	while (++i <= len)
 	{
-		vm->arena[(address + len - i) % MEM_SIZE] = (val % (ft_puissance(16, power)));
-		val = val / (ft_puissance(16, power));
-		++power;
+		vm->arena[(address + len - i) % MEM_SIZE] = (val % (ft_puissance(16, power)) >> shift);
+		val -= val % (ft_puissance(16, power));
+		power +=2;
+		shift += 8;
 	}
 }
 
