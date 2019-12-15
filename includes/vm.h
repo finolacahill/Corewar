@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   point.h                                            :+:      :+:    :+:   */
+/*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2019/11/29 18:54:14 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:05:35 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
+typedef struct			s_op_check
+{
+	char				*name;
+	int					nb_param;
+	int					ocp_value[9];
+	int					op_code;
+	int					nb_cycle;
+	int					dir_size;
+}						t_op_check;
+
+t_op_check       		op_check_tab[17];
+
 void			dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content, t_champs *champs);
 size_t			dasm_get_data(t_all	*all, char *cor_file, uint8_t **cor_content);
 void			*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size);
@@ -106,7 +118,8 @@ int				is_reg(int reg, t_process *p);
 void    		check_carry(t_process *p, int param);
 void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
-
+int				check_op_block(t_all *vm, t_process *process);
+int				is_in(int i, int value[9]);
 // operations
 void			op_live(t_all *vm, t_process *p);
 void    		op_st(t_all *vm, t_process *p);
