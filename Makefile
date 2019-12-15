@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/12/15 19:30:53 by flafonso         ###   ########.fr        #
+#    Updated: 2019/12/15 19:33:19 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,9 @@ SRCS_NAME = dasm_get_data.c		\
 			op_zjmp.c			\
 			op_or.c				\
 			vm_get_values.c		\
-			vm_f_load_values.c	\
-			init_op_check.c
+			vm_load_values.c	\
+			vm_tab_check.c		\
+			vm_check_op_block.c
 
 
 MAIN_NAME = main.c
