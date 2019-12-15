@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/12/15 19:33:19 by flafonso         ###   ########.fr        #
+#    Updated: 2019/12/15 19:41:24 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,6 @@ OBJ_PATH = ./obj
 MAIN_PATH = ./main
 
 OBJM_PATH = ./main
-
-
 
 SRCS_NAME = dasm_get_data.c		\
 			dasm_get_exec.c		\
@@ -61,7 +59,8 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_get_values.c		\
 			vm_load_values.c	\
 			vm_tab_check.c		\
-			vm_check_op_block.c
+			vm_check_op_block.c	\
+			init_op_check.c
 
 
 MAIN_NAME = main.c
