@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 15:44:49 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/15 16:08:08 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	dasm_init_champs(t_all *vm, int ac, char **av)
 		vm->champs[vm->total_champ].pc = 0;
 		vm->total_champ++;
 	}
-	vm_print_intro(vm);
+	// vm_print_intro(vm);
 	dasm_print_all(vm);
 	vm_print_intro(vm);
 }
