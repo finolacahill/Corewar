@@ -65,8 +65,8 @@ void    every_go(char *av, t_env *env)
     }
     //ft_printf("ok");
     //ft_strdel(&line);
-   // print_label(env->label);
-    //print_instruc(env->instruc);
+    print_label(env->label);
+    print_instruc(env->instruc);
     close(fd);
 }
 

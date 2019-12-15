@@ -112,7 +112,7 @@ int     param_direct(t_instruc *instruc, char *index_r, int j, t_env *env)
         is_label_exist(&index_r[1], env, instruc, size);
     else
     {
-    hexa_d = ft_uitoa_base(ft_atoi(index_r), 16, 0);
+    hexa_d = ft_uitoa_base((uint16_t)ft_atoi(index_r), 16, 0);
     size = size - ft_strlen(hexa_d);
     while (size > 0)
     {
@@ -143,7 +143,7 @@ int     param_indirect(t_instruc *instruc, char *index_i, int j, t_env *env)
         is_label_exist(&index_i[1], env, instruc, size);
     else
     {
-    hexa_i = ft_uitoa_base(ft_atoi(index_i), 16, 0);
+    hexa_i = ft_uitoa_base((uint16_t)ft_atoi(index_i), 16, 0);
     size = size - ft_strlen(hexa_i);
     while (size > 0)
     {
@@ -166,20 +166,15 @@ int     what_params(char *params, t_instruc *instruc, int j, t_env *env)
 
     i = 0;
     since_space = ft_strtrim(params);
-    //while (since_space[i])
-    {
         if (since_space[0] == 'r')
             param_register(instruc, ft_atoi(&since_space[1]), j);
         else if (since_space[0] == '%')
             param_direct(instruc, &since_space[1], j, env);
-        else if (ft_isdigit(since_space[0]) || since_space[0] == ':')
+        else if ((ft_isdigit(since_space[0]) || (ft_isdigit(since_space[1]) && since_space[0] == '-')) || since_space[0] == ':')
             param_indirect(instruc, since_space, j, env);
-     //   ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
+      ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
         //else if (ft_isdigit(since_space[0]))
           //  param_direct(ins)
-        j++;
-        i++;
-    }
     //ft_printf("since space == %s\n", since_space);
     ft_strdel(&since_space);
     return (0);
