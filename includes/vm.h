@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/15 19:34:25 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:58:37 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,17 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
-typedef	struct		s_opß
+typedef	struct		s_op
 {
 	char				*op_name;
 	void				(*inst)(t_all *vm, t_process *p);
 }					t_op;
+
+typedef	struct		s_verif_op
+{
+	uint16_t			(*inst)(t_all *all, uint8_t *content);
+}					t_verif_op;
+
 typedef struct			s_op_check
 {
 	char				*name;
@@ -126,6 +132,7 @@ void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				check_op_block(t_all *vm, t_process *process);
 int				is_in(int i, int value[9]);
+
 // operations
 t_op			*init_op_check(t_all *vm, t_op *op);
 void			op_live(t_all *vm, t_process *p);
@@ -144,6 +151,24 @@ void    		op_lld(t_all *vm, t_process *p);
 void    		op_lldi(t_all *vm, t_process *p);
 void    		op_lfork(t_all *vm, t_process *p);
 void    		op_aff(t_all *vm, t_process *p);
+
+//verif operations
+uint16_t		check_op_add(t_all *all, uint8_t *content);
+uint16_t		check_op_aff(t_all *all, uint8_t *content);
+uint16_t		check_op_and(t_all *all, uint8_t *content);
+uint16_t		check_op_fork(t_all *all, uint8_t *content);
+uint16_t		check_op_ld(t_all *all, uint8_t *content);
+uint16_t		check_op_ldi(t_all *all, uint8_t *content);
+uint16_t		check_op_lfork(t_all *all, uint8_t *content);
+uint16_t		check_op_live(t_all *all, uint8_t *content);
+uint16_t		check_op_lld(t_all *all, uint8_t *content);
+uint16_t		check_op_lldi(t_all *all, uint8_t *content);
+uint16_t		check_op_or(t_all *all, uint8_t *content);
+uint16_t		check_op_st(t_all *all, uint8_t *content);
+uint16_t		check_op_sti(t_all *all, uint8_t *content);
+uint16_t		check_op_sub(t_all *all, uint8_t *content);
+uint16_t		check_op_xor(t_all *all, uint8_t *content);
+uint16_t		check_op_zjmp(t_all *all, uint8_t *content);
 
 
 

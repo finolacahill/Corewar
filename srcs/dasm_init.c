@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 19:02:44 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:14:49 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	dasm_init_champs(t_all *vm, int ac, char **av)
 
 void	dasm_init(t_all *vm, int ac, char **av)
 {
-	zero_champs(vm);	
+	zero_champs(vm);
 	vm->flag_dump = -1;
 	vm->flag_n = -1;
 	vm->total_champ = 0;
