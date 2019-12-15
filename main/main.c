@@ -19,7 +19,7 @@ int main(int ac, char **av)
 
 	dasm_init(&vm, ac, av);
 	if (init_arena(&vm) == -1)
-		{
+	{
 		printf("Error initialising arena.\n");
 		dasm_free(&vm);
 		return (0);

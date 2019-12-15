@@ -12,9 +12,8 @@ void    op_st(t_all *vm, t_process *p)
     int     param1;
     int     param2;
 
-<<<<<<< HEAD
     if ((param1 = get_reg_val(vm, p, 1)) == -1 && p->op_fail == 1)
-        return ;   
+        return ;
     if  (p->decode[1] == REG_SIZE)
     {
         load_val_in_reg(vm, p, param1, 2);
@@ -23,21 +22,15 @@ void    op_st(t_all *vm, t_process *p)
     }
     else
     {
-        param2 = get_next_bytes(vm, p, 2, 2) % IDX_MOD; //should idx_mod here?
-=======
-    if ((param1 = get_reg_val(vm, p, 1)) == -1 && p == NULL)
-        return ;   
-    if  (p->decode[1] == REG_SIZE)
-        load_val_in_reg(vm, p, param1, 2);
-    else
-    {
-        param2 = get_next_bytes(vm, p, 2, 2) % IDX_MOD;
->>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
-        load_value(vm, param2, 4, param1);
-        ft_printf("\treg = %d loaded at pc %d + %d\n", param1, p->pc, param2);    
+        param2 = get_next_bytes(vm, p, 2, 2) % MEM_SIZE;//should idx_mod here?
+     //   printf("param2 without idx mod= %d\n", get_next_bytes(vm, p, 2, 2));
+     //   printf("param2 with mem siz (%d) mod= %d\n", MEM_SIZE,  get_next_bytes(vm, p, 2, 2) % MEM_SIZE);
+      //  printf("param2 = %d\n", param2);
+        load_value(vm, param2, 4, param1); //have added an id_x mod to load_value
+      //  ft_printf("\treg = %d loaded at pc %d + %d\n", param1, p->pc, param2);
+      //  ft_printf("\tin hez, %02X\n", p->pc + param2);
     }
     check_carry(p, param1);
  //   int test = get_next_bytes(vm, p, 4, param2 - 1);
- //   printf("is %d == %d\n", param1, test);
-    
+ //   printf("is %d == %d\n", param1, test);  
 }

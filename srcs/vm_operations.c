@@ -2,13 +2,14 @@
 
 void    check_carry(t_process *p, int param)
 {
-    if (p != NULL ) //kill flag?
-    {
-        if (param == 0)
-            p->carry = 1;
-        else
-            p->carry = 0;
-    }   
+	if (p != NULL ) //kill flag?
+	{
+		if (param == 0)
+			p->carry = 1;
+		else
+			p->carry = 0;
+	}
+	ft_printf("\tcarry is now %d\n", p->carry);
 }
 
 static void	check_cycle_decrease(t_all *vm)
