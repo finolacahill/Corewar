@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
-<<<<<<< HEAD
-=======
 
 int			is_in(int i, int *value)
 {
@@ -24,7 +22,6 @@ int			is_in(int i, int *value)
 			return (1);
 	return (0);
 }
->>>>>>> origin/dasm_clean
 
 int			just_number(char *str)
 {
