@@ -70,8 +70,10 @@ t_process *load_processes(t_all *vm, t_process *head)
 int		exec_process(t_all *vm, t_process *process, t_op *op_table)
 {	
 	int	bytes;
+	int	i;
 
 	bytes = 0;
+	i = MEM_SIZE;
 	if (check_op_block(vm, process) == 1)
 	{
 		process = ft_decode_byte(vm->arena[process->pc + 1], process);
@@ -80,14 +82,22 @@ int		exec_process(t_all *vm, t_process *process, t_op *op_table)
 		if (process->op != 0)
 			ft_printf("	=> id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
 		op_table[process->op - 1].inst(vm, process);
-	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);
-		process->pc = (process->pc + bytes + 1) % MEM_SIZE;
+		if (process->op_fail != 1)
+		{
+			process->pc = (process->pc + bytes + 1) % MEM_SIZE;
+			process->op = vm->arena[process->pc];
+		}
 	}
-	//function find valid op
-	process->op = vm->arena[process->pc];
+	while (--i > 0)
+	{
+		if (check_op_block(vm, process) == 1)
+			break;
+		process->pc = (process->pc + 1) % MEM_SIZE;
+		process->op = vm->arena[process->pc];
+	}
 	process->exec_cycle = get_duration(vm, process->op);
 	return (0);
-	}
+}
 
 int 	run_processes(t_all *vm, t_process *head, t_op *op_table)
 {
