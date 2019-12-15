@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/11/30 19:36:11 by fcahill          ###   ########.fr        #
+#    Updated: 2019/12/15 18:09:53 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,9 @@ SRCS_NAME = dasm_get_data.c		\
 			op_add.c			\
 			op_sub.c			\
 			vm_get_values.c		\
-			vm_load_values.c
+			vm_load_values.c	\
+			vm_tab_check.c		\
+			vm_check_op_block.c
 
 
 MAIN_NAME = main.c
