@@ -12,25 +12,17 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	//	printf("val b4 shift = %d\n", val);
 		val <<= 8;
 	//	printf("val after = %d\n", val);
-		val += vm->arena[((p->pc + bytes_read + i) % MEM_SIZE)];
+		val += vm->arena[((p->pc + bytes_read + i)) % MEM_SIZE];
 	//	printf("val added %d\n", val);
 	}
 	return (val);
 }
 
-<<<<<<< HEAD
 int		is_reg(int reg, t_process *p)
 {
-    if (reg < 0 || reg > REG_NUMBER)
+    if (reg < 1 || reg > REG_NUMBER)
     {
 		p->op_fail = 1;
-=======
-int		is_reg(int reg)
-{
-    if (reg < 0 || reg > REG_NUMBER)
-    {
-        ft_printf("Invalid register called -> KILLING THIS PROCESS");
->>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
         return (0);
     }
 	return (1);
@@ -42,14 +34,10 @@ int     get_reg_val(t_all *vm, t_process *p, int bytes_read)
     int reg;
 
     reg = get_next_bytes(vm, p, 1, bytes_read);
-<<<<<<< HEAD
 	is_reg(reg, p);
 	if (p->op_fail == 1)
-		return ;
-=======
-	if ((is_reg(reg)) == 0)
 		return (-1);
->>>>>>> 391e4df2ad9e5026fe5116a9d76db956a9e9a1a4
+//	printf("reg %d = %d\n", reg, p->r[reg - 1]);
     return (p->r[reg - 1]);
 }
 

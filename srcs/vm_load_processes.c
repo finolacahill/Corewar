@@ -43,7 +43,7 @@ t_process *init_process(t_all *vm, t_champs *c, t_process *p)
 	p->exec_cycle = get_duration(vm, p->op);
 	p->bytes = 0;
 	c->last_live = 0;
-	p->kill = 0;
+	p->op_fail = 0;
 	return (p);
 }
 
