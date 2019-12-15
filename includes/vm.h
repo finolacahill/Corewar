@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/15 18:05:35 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/15 19:34:25 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct		s_all
 	int					nbr_live_since_check;
 	int					cycles_to_die;
 	int					total_checks;
+	int					check_mode;
 	
 }					t_all;
 
@@ -74,6 +75,11 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
+typedef	struct		s_opß
+{
+	char				*op_name;
+	void				(*inst)(t_all *vm, t_process *p);
+}					t_op;
 typedef struct			s_op_check
 {
 	char				*name;
@@ -121,11 +127,23 @@ void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				check_op_block(t_all *vm, t_process *process);
 int				is_in(int i, int value[9]);
 // operations
+t_op			*init_op_check(t_all *vm, t_op *op);
 void			op_live(t_all *vm, t_process *p);
 void    		op_st(t_all *vm, t_process *p);
 void    		op_ld(t_all *vm, t_process *p);
 void    		op_sub(t_all *vm, t_process *p);
 void    		op_add(t_all *vm, t_process *p);
+void    		op_and(t_all *vm, t_process *p);
+void    		op_or(t_all *vm, t_process *p);
+void    		op_xor(t_all *vm, t_process *p);
+void    		op_zjmp(t_all *vm, t_process *p);
+void    		op_ldi(t_all *vm, t_process *p);
+void    		op_sti(t_all *vm, t_process *p);
+void    		op_fork(t_all *vm, t_process *p);
+void    		op_lld(t_all *vm, t_process *p);
+void    		op_lldi(t_all *vm, t_process *p);
+void    		op_lfork(t_all *vm, t_process *p);
+void    		op_aff(t_all *vm, t_process *p);
 
 
 
