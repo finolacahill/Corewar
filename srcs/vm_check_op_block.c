@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 16:50:21 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 19:24:39 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/15 19:46:14 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,21 @@ int		is_it_ocp(t_process *process)
 int		check_reg(t_all *vm, t_process *process)
 {
 	int		reg;
+	int		ocp;
 
+	ocp = get_next_bytes(vm, process, 1, 0);
 	if (process->op == 2)
+		if (is_reg(reg = get_next_bytes(vm, process, 1, ocp == 144 ? 5 : 3)
+			, process) != 1)
+			return (0);
+	else if (process->op == 3)
 	{
-		;
+		if (is_reg(reg = get_next_bytes(vm, process, 1, 1)
+			, process) != 1)
+			return (0);
+		if (is_reg(reg = get_next_bytes(vm, process, 1, ocp == 80 ? 2 : 1)
+			, process) != 1)
+			return (0);
 	}
 	return (1);
 }
