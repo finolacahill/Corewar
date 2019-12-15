@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/11/30 19:36:11 by fcahill          ###   ########.fr        #
+#    Updated: 2019/12/15 19:30:53 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,20 @@ SRCS_NAME = dasm_get_data.c		\
 			op_ld.c 			\
 			op_add.c			\
 			op_sub.c			\
+			op_aff.c			\
+			op_and.c			\
+			op_fork.c			\
+			op_ldi.c			\
+			op_lfork.c			\
+			op_lld.c			\
+			op_lldi.c			\
+			op_sti.c			\
+			op_xor.c			\
+			op_zjmp.c			\
+			op_or.c				\
 			vm_get_values.c		\
-			vm_load_values.c
+			vm_f_load_values.c	\
+			init_op_check.c
 
 
 MAIN_NAME = main.c
