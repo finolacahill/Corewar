@@ -6,11 +6,25 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:18:49 by adietric          #+#    #+#             */
-/*   Updated: 2019/11/29 18:19:03 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/12 15:19:34 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
+<<<<<<< HEAD
+=======
+
+int			is_in(int i, int *value)
+{
+	int		r;
+	
+	r = -1;
+	while (++r < 9)
+		if (value[r] == i)
+			return (1);
+	return (0);
+}
+>>>>>>> origin/dasm_clean
 
 int			just_number(char *str)
 {
