@@ -76,7 +76,6 @@ typedef struct			s_process
 
 void			dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content, t_champs *champs);
 size_t			dasm_get_data(t_all	*all, char *cor_file, uint8_t **cor_content);
-int				dsam_get_exec_code(uint8_t *cor_content);
 void			*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size);
 void			vm_print_intro(t_all *all);
 void			dasm_input(int ac, char **av, t_all *all);
@@ -87,6 +86,8 @@ void			dasm_free(t_all	*all);
 void			error_size(t_all *all, char *path, size_t cor_size);
 void			error(t_all *all, char *str);
 void			dasm_print_all(t_all *all);
+int				dasm_get_exec_code(uint8_t *cor_content, int len);
+
 int				just_number(char *str);
 
 //vm
