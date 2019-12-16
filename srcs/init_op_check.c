@@ -6,12 +6,38 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:04:38 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 19:20:25 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/16 08:46:35 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
+void		init_link_verif_op(t_verif_op *op)
+{
+	op[0].inst = check_op_live;
+	op[1].inst = check_op_ld;
+	op[2].inst = check_op_st;
+	op[3].inst = check_op_add;
+	op[4].inst = check_op_sub;
+	op[5].inst = check_op_and;
+	op[6].inst = check_op_or;
+	op[7].inst = check_op_xor;
+	op[8].inst = check_op_zjmp;
+	op[9].inst = check_op_ldi;
+	op[10].inst = check_op_sti;
+	op[11].inst = check_op_fork;
+	op[12].inst = check_op_lld;
+	op[13].inst = check_op_lldi;
+	op[14].inst = check_op_lfork;
+	op[15].inst = check_op_aff;
+}
+
+t_verif_op		*init_op_verif(t_all *vm, t_verif_op *op)
+{
+	ft_bzero(op, sizeof(t_verif_op) * 16);
+	init_link_verif_op(op);
+	return (op);
+}
 
 void		init_name_op(t_all *vm, t_op **op)
 {
