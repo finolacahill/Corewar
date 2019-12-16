@@ -108,6 +108,13 @@ int 	run_processes(t_all *vm, t_process *head, t_op *op_table)
 	live = vm->cycles_to_die;
 	while (live != 0)
 	{
+		if(vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
+		{
+									printf("_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_vm->cycles = %d\n", vm->cycles);
+			ft_print_arena(vm);
+			return (-100);
+			//KILL ALL 
+		}
 		tracker = head;
 		if (tracker != NULL)
 			++vm->cycles;
@@ -149,16 +156,8 @@ int     run_vm(t_all *vm)
 		return (-1);
 	while (check_alive(vm, process) == 1)
 	{
-		/*
-		if(vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
-		{
-											printf("vm->cycles = %d\n", vm->cycles);
-			ft_print_arena(vm);
-			return (-100);
-			//KILL ALL 
-		}
-		*/
-		run_processes(vm, process, op_table);
+		if (run_processes(vm, process, op_table) == -100)
+			return (0);
 	}
 	declare_winner(vm);
 	return (0);
