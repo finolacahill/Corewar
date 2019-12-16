@@ -149,6 +149,7 @@ int     run_vm(t_all *vm)
 		return (-1);
 	while (check_alive(vm, process) == 1)
 	{
+		/*
 		if(vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
 		{
 											printf("vm->cycles = %d\n", vm->cycles);
@@ -156,6 +157,7 @@ int     run_vm(t_all *vm)
 			return (-100);
 			//KILL ALL 
 		}
+		*/
 		run_processes(vm, process, op_table);
 	}
 	declare_winner(vm);

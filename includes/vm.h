@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/15 23:29:21 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/16 09:12:40 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void			error_size(t_all *all, char *path, size_t cor_size);
 void			error(t_all *all, char *str);
 void			dasm_print_all(t_all *all);
 int				dasm_get_exec_code(uint8_t *cor_content, int len);
-
+void			dasm_check_hex_code(t_all *vm);
+void			error_exec(t_all *all, char *champ_name, uint16_t line);
 int				just_number(char *str);
 
 //vm
@@ -136,6 +137,7 @@ void 			ft_print_arena(t_all *vm);
 
 // operations
 t_op			*init_op_check(t_all *vm, t_op *op);
+t_verif_op		*init_op_verif(t_all *vm, t_verif_op *op);
 void			op_live(t_all *vm, t_process *p);
 void    		op_st(t_all *vm, t_process *p);
 void    		op_ld(t_all *vm, t_process *p);

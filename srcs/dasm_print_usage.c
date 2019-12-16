@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 03:19:21 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/16 09:22:58 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	error_exec(t_all *all, char *champ_name, uint16_t line)
 {
 	ft_putstr("Operation invalide pour le champion \"");
 	ft_putstr(champ_name);
-	// ft_putstr("\" à la ligne ");
-	// ft_putnbr((int)line);
+	ft_putstr("\" à la ligne ");
+	ft_putnbr((int)line);
 	ft_putstr("\n");
 	dasm_free(all);
 	exit(EXIT_FAILURE);
