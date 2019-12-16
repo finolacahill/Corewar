@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:16 by flafonso          #+#    #+#             */
-/*   Updated: 2019/11/29 17:40:50 by adietric         ###   ########.fr       */
+/*   Updated: 2019/12/16 07:54:23 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int main(int ac, char **av)
 	}
 	if (run_vm(&vm) == -1)
 	{
-		//free the things;
+		// free the things;
 		return (0);
 	}
 	dasm_free(&vm);
-	//free the vm
+	// free the vm
 }
 

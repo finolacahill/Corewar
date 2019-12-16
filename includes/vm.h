@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/15 20:58:37 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/15 23:29:21 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				check_op_block(t_all *vm, t_process *process);
 int				is_in(int i, int value[9]);
+void 			ft_print_arena(t_all *vm);
 
 // operations
 t_op			*init_op_check(t_all *vm, t_op *op);
