@@ -14,8 +14,7 @@ void    op_ld(t_all *vm, t_process *p)
 
 	if (p->decode[0] == IND_CODE)
 	{
-		pm1 = get_ind(vm, p, 1);
-		pm1 = get_next_bytes(vm, p, 4, pm1 - 1);
+		pm1 = get_val_at_ind(vm, p, 1);
 		bytes_read = 3;
 	}
 	else

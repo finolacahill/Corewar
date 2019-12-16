@@ -106,6 +106,9 @@ int				is_reg(int reg, t_process *p);
 void    		check_carry(t_process *p, int param);
 void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
+int				get_val_at_ind(t_all *vm, t_process *p, int bytes_read);
+int				get_unspecified_val(t_all *vm, t_process *p, int *bytes_read, int param);
+
 
 // operations
 void			op_live(t_all *vm, t_process *p);
@@ -113,6 +116,9 @@ void    		op_st(t_all *vm, t_process *p);
 void    		op_ld(t_all *vm, t_process *p);
 void    		op_sub(t_all *vm, t_process *p);
 void    		op_add(t_all *vm, t_process *p);
+void    		op_and(t_all *vm, t_process *p);
+void    		op_or(t_all *vm, t_process *p);
+void    		op_xor(t_all *vm, t_process *p);
 
 void ft_print_arena(t_all *vm);
 

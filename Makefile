@@ -47,6 +47,9 @@ SRCS_NAME = dasm_get_data.c		\
 			op_ld.c 			\
 			op_add.c			\
 			op_sub.c			\
+			op_and.c			\
+			op_or.c				\
+			op_xor.c			\
 			vm_get_values.c		\
 			vm_load_values.c
 

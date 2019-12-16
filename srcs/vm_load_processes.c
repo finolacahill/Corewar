@@ -87,6 +87,12 @@ int		exec_process(t_all *vm, t_process *process)
 		op_add(vm, process);
 	if (process->op == 5)
 		op_sub(vm, process);
+	if (process->op == 6)
+		op_and(vm, process);
+	if (process->op == 7)
+		op_or(vm, process);
+	if (process->op == 8)
+		op_xor(vm, process);
 	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);	
 	process->pc = (process->pc + bytes + 1) % MEM_SIZE;
 	process->op = vm->arena[process->pc];

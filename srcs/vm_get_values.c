@@ -46,7 +46,32 @@ int     get_ind(t_all *vm, t_process *p, int bytes_read)
     return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
 }
 
-int     get_dir_2(t_all *vm, t_process *p, int bytes_read)
+int		get_val_at_ind(t_all *vm, t_process *p, int bytes_read)
 {
-    return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
+	int address;
+
+	address = get_next_bytes(vm, p, 2, bytes_read);
+	return (get_next_bytes(vm, p, 4, address - 1));
+}
+
+int		get_unspecified_val(t_all *vm, t_process *p, int *bytes_read, int param)
+{
+	int val; 
+
+	if (p->decode[param] == REG_CODE)
+     {
+        val = get_reg_val(vm, p, bytes_read[0]);
+        bytes_read[0] += 1;
+     }
+    if (p->decode[param] == IND_CODE)
+    {
+          val = get_val_at_ind(vm, p, bytes_read[0]);
+          bytes_read[0] += 2;
+    }
+    if (p->decode[param] == DIR_CODE)
+    {
+		val = get_next_bytes(vm, p, 4, bytes_read[0]);
+		bytes_read[0] += 4;
+	}
+	return (val);
 }

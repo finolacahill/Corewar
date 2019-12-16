@@ -22,7 +22,12 @@ void ft_print_arena(t_all *vm)
                     ++x;
             }
         else
-            printf("\033[0m%02x ", vm->arena[i]);
+        {
+            if (vm->arena[i] != 0)
+                printf("\033[0;35m%02x ", vm->arena[i]);
+            else
+                printf("\033[0m%02x ", vm->arena[i]);
+        }
         if (++j == 63)
         {
             printf("\n");
