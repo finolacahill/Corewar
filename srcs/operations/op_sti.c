@@ -1,4 +1,4 @@
-#include "../includes/vm.h"
+#include "../../includes/vm.h"
 
 uint16_t		check_op_sti(t_all *all, uint8_t *content)
 {

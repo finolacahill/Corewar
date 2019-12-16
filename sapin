@@ -1,0 +1,181 @@
+#!/bin/bash
+#
+# petit sapin de noël ascii et sa guirlande sous les flocons de neige...
+# 256 couleurs
+# Auteur : Bruno
+# (merci Bruno mais pour valider corewar on supprimera surrement ton script)
+# # # # # # # # # 
+
+
+# Variables script
+lignes="$(tput lines)"
+colonnes="$(tput cols)"
+x_centrer=$((colonnes/2))
+cpt=0
+b="o"  # Représentera les boules clignotantes
+
+declare -i x y # Coordonnées x et y flocon, fonction flocons_de_neige.
+flocons=()
+f=0
+
+# Le pourcentage peut être augmenté pour avoir plus de flocons dans le terminal...
+# mais attention, utilisation du processeur accrûe (boucle avec un sleep 0.2)
+pourcentage=2
+tt=$((lignes*colonnes))
+nombre_flocons=$(((tt/100)*pourcentage))
+
+# Variables couleurs
+# Étoile et reflet sur le sapin
+etoile=(220 208 207 199 135 69 39 81 87 159 193)
+reflet=(228 215 175 163 141 67 24 117 51 123 157)
+
+# Boules clignotantes
+bleu=(26 39)       # bleu foncé et bleu clair
+cyan=(30 87)       # cyan foncé et cyan clair
+rose=(97 219)      # rose ...
+orange=(130 202)   # orange ...
+jaune=(136 228)    # jaune ...
+magenta=(93 207)   # magenta ...
+vert=(22 46)       # vert ...
+
+# guirlande
+c_guirl="\E[38;5;153m"       # Bleu pale
+# Neige
+c_neige="\E[1m\e[38;5;244m"  # Gris
+# Branche du sapin
+c_branche="\E[38;5;34m"      # Vert
+# Tronc
+c_tronc="\E[38;5;58m"        # Marron
+# Init
+reset="\E[0;m"               # Init
+
+###### Fonctions #############
+restaure (){ # Opérations effectuées par trap.
+    bonnet_noel
+    printf "\E[0m\E[H"
+    tput cnorm
+    exit
+}
+
+flocons_de_neige (){ # fonction qui fait tomber des flocons de neige.
+
+    printf '%b' "$c_neige" # Couleur
+
+    # Envoi de flocons jusqu'au nombre voulu
+    if [[ ${i:=-1} -lt $nombre_flocons ]]; then
+        flocons[i+=1]="0:$((RANDOM%colonnes +1))"
+    fi
+    # Animation
+    for ((f=0;f<${#flocons[*]}; f++)); do
+        # Extrait les coordonnées
+        x=${flocons[f]#*:}
+        y=${flocons[f]%:*}
+
+        printf '\E[%d;%dH ' $y $x  # Efface le flocon
+        y="y+1"                    # Descend "    "
+
+     # Ici, on évite que les flocons passent devant le sapin...
+        if (( y == (lignes-14) && x > x_centrer -4 && x < x_centrer +4 )) || \
+           (( y == (lignes-7) && x > x_centrer -6 && x < x_centrer +6 )) || \
+           (( y == (lignes-4) && x > x_centrer -8 && x < x_centrer +8 )) || \
+           (( y == lignes )); then # ... et ici, on arrive au sol (bas du terminal).
+            flocons[f]="0:$((RANDOM%colonnes +1))" # nouvelle coordonnée
+        else
+            flocons[f]="$y:$x"
+            printf '\E[%d;%dH*' $y $x # Affiche le flocon
+        fi
+    done
+    printf '%b' "${reset}" # Reset couleur
+}
+
+etoile_sapin (){ # Étoile sur sapin
+
+    ct=${ct:=-1}
+    (( (ct+=1) == ${#etoile[*]} )) && ct=0
+
+    printf  '\E[0m\E[38;5;%dm\E[%d;%dH· ╵ ·' "${reflet[ct]}" $((lignes-14)) $((x_centrer-2))
+    printf  '\E[%d;%dH-  \E[1m\E[38;5;%dm@\E[0m\E[38;5;%dm  -' $((lignes-13)) $((x_centrer-3)) "${etoile[ct]}" "${reflet[ct]}"
+    printf  '\E[%d;%dH· ╷ · \E[0m' $((lignes-12)) $((x_centrer-2))
+}
+
+boules_clignotantes (){
+
+    local a="$1" # 0 ou 1 en argument, normal ou gras ( éteinte, allumée)
+
+    printf '\E[%dm' "$a"
+
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${cyan[a]}" $((lignes-10)) ${x_centrer} ${b}       # boule1
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${rose[a]}" $((lignes-8)) $((x_centrer-1)) ${b}    # boule2
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${vert[a]}" $((lignes-7)) $((x_centrer+2)) ${b}    # boule3
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${bleu[a]}" $((lignes-6)) $((x_centrer-3)) ${b}    # boule4
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${orange[a]}" $((lignes-5)) $((x_centrer+1)) ${b}  # boule5
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${jaune[a]}" $((lignes-4)) $((x_centrer-4)) ${b}   # boule6
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${magenta[a]}" $((lignes-4)) $((x_centrer+5)) ${b} # boule7
+    printf '\E[38;5;%dm\E[%d;%dH%s' "${cyan[a]}" $((lignes-3)) $((x_centrer-1)) ${b}    # boule8
+    printf '%b' "${reset}"
+}
+
+bonnet_noel (){
+    printf '%b\E[%d;%dH#####' "$reset" $((lignes-11)) $((x_centrer-2))
+    printf '\E[0;31m\E[%d;%dH *** ' $((lignes-12)) $((x_centrer-2))
+    printf '\E[%d;%dH   *   ' $((lignes-13)) $((x_centrer-3))
+    printf '\E[%d;%dH  %b@  ' $((lignes-14)) $((x_centrer-2)) "$reset"
+}
+
+
+# ------------------------------***********-------------------------------- #
+############################--- *  ENVOI  * ---##############################
+# ------------------------------***********-------------------------------- #
+
+trap 'restaure' SIGINT  # gére l' arrêt du script
+tput civis              # Curseur invisible
+clear                   # Reset terminal
+
+# Construction sapin
+printf "%b" "$c_branche"
+printf "\E[%d;%dH/ \\" $((lignes-11)) $((x_centrer-1))
+printf "\E[%d;%dH/   \\" $((lignes-10)) $((x_centrer-2))
+printf "\E[%d;%dH/   \\" $((lignes-9)) $((x_centrer-2))
+printf "\E[%d;%dH/     \\" $((lignes-8)) $((x_centrer-3))
+printf "\E[%d;%dH/       \\" $((lignes-7)) $((x_centrer-4))
+printf "\E[%d;%dH/       \\" $((lignes-6)) $((x_centrer-4))
+printf "\E[%d;%dH/         \\" $((lignes-5)) $((x_centrer-5))
+printf "\E[%d;%dH/           \\" $((lignes-4)) $((x_centrer-6))
+printf "\E[%d;%dH/             \\" $((lignes-3)) $((x_centrer-7))
+printf "\E[%d;%dH\"\"\"\"\"     \"\"\"\"\"" $((lignes-2)) $((x_centrer-7))
+printf "%b\E[%d;%dH| |" "$c_tronc" $((lignes-1)) $((x_centrer-1))
+
+# guirlande
+printf "%b\E[%d;%dH;;" "$c_guirl" $((lignes-9)) $((x_centrer-1))
+printf "\E[%d;%dH\`;;" $((lignes-8)) ${x_centrer}
+printf "\E[%d;%dH;;;" $((lignes-7)) $((x_centrer-3))
+printf "\E[%d;%dH\`\`;;;" $((lignes-6)) $((x_centrer-1))
+printf "\E[%d;%dH;;;" $((lignes-5)) $((x_centrer-4))
+printf "\E[%d;%dH\`\`;;;" $((lignes-4)) $((x_centrer-2))
+printf "\E[%d;%dH\`\`;;;" $((lignes-3)) $((x_centrer+2))
+
+# tapis de neige
+printf "%b" "$c_neige"
+for((t=0; t<=colonnes; t++)); do
+    printf "\E[%d;%dH*" "$lignes" "$t"
+done
+printf "%b" "$reset"
+
+# guirlande clignotante éteinte et étoile sur le sapin
+boules_clignotantes 0
+etoile_sapin
+
+# boucle infinie
+while true ; do
+
+    flocons_de_neige
+
+    (( (cpt+=1)%10 )) || boules_clignotantes "0"
+    (( cpt%15 )) || etoile_sapin
+    (( cpt%20 )) || { boules_clignotantes "1"; cpt=0; }
+
+    sleep 0.2
+
+done # Ctrl+c requis pour arrêter le script
+
+exit 0
