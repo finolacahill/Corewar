@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
+/*   Updated: 2019/12/15 23:15:52 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 {
 	int		i;
 	int		j;
-	int		n_id;
 
 	j = -1;
-	n_id = 0;
 	if (all->flag_n == 1)
-		n_id = flag_n(ac, av, all, &j);
+		all->flag_n = flag_n(ac, av, all, &j);
 	i = 0;
 	while (++i < ac)
 	{
@@ -71,7 +69,7 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 			i += 2;
 		if (i != j && i < ac)
 		{
-			if (id == n_id - 1)
+			if (id == all->flag_n - 1)
 				id++;
 			all->champs[id++].path = ft_strdup(av[i]);
 			all->champs[id - 1].id = id;
@@ -89,7 +87,9 @@ int			check_flag(int ac, char **av, int *flag_n, int *flag_dump)
 	while (++i < ac)
 	{
 		if (ft_strcmp(av[i], "-n") == 0)
+		{
 			(*flag_n)++;
+		}
 		if (ft_strcmp(av[i], "-dump") == 0)
 			(*flag_dump)++;
 	}

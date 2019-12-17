@@ -1,0 +1,30 @@
+	=> id 1 do operation 2 at cycle 5
+load val 7042525 in reg 1
+	carry is now 0
+	=> id 1 do operation 2 at cycle 10
+load val 2242445 in reg 2
+	carry is now 0
+	=> id 1 do operation 6 at cycle 16
+load val 2241933 in reg 3
+	carry is now 0
+	=> id 1 do operation 2 at cycle 21
+load val 0 in reg 3
+	carry is now 1
+A mystery player, number 0, has won
+
+====================================
+	===========PRINT=ALL========
+	flag_dump	=	-1
+	flag_n		=	-1
+	============================
+	champs[0].path = |test3.cor|
+	id		=		1
+	name		=	|53w5|
+	comment		=	|I'M ALIIIIVE|
+	len_exec	=		24
+	exec_code	=
+
+02 144 00 107 117 221 01 02 144 00 34 55 141 02 06 84 01 02 03 02 208 00 75 03 
+	===========================
+====================================
+1

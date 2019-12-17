@@ -21,20 +21,25 @@ int			get_duration(t_all *vm, int opc)
 	return (1);
 }
 
-t_process *init_process(t_all *vm, t_champs *c, t_process *p)
+static void	init_registers(t_process *p)
 {
 	int i;
 
 	i = 0;
+	p->r[0] = p->id;
+	while (++i < REG_NUMBER)
+		p->r[i] = 0;
+}
+
+t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
+{	
 	if (!(p = ft_memalloc(sizeof(t_process))))
 		return (error_process(p));
 	if (!(p->decode = malloc((sizeof(int)) * 4)))
 		return (error_process(p));
 	p->id = c->id;
 	p->carry = 0;
-	p->r[0] = p->id;
-	while (++i < REG_NUMBER)
-		p->r[i] = 0;
+	init_registers(p);
 	p->live_calls = -1;
 	p->start = c->start;
 	p->op = c->exec_code[0];
@@ -44,6 +49,11 @@ t_process *init_process(t_all *vm, t_champs *c, t_process *p)
 	p->bytes = 0;
 	c->last_live = 0;
 	p->op_fail = 0;
+	if ((if_no_opcode(p)) == 1)
+		p->opc = 0;
+	else
+		p->opc = c->exec_code[1];
+	p = ft_decode_byte(p->opc, p);
 	return (p);
 }
 
@@ -53,7 +63,6 @@ t_process *load_processes(t_all *vm, t_process *head)
 	int         i;
 
 	i = 0;
-//	head = malloc(sizeof(t_process));
 	head = init_process(vm, &vm->champs[0], head);
 	while (++i < vm->total_champ)
 	{
@@ -63,59 +72,73 @@ t_process *load_processes(t_all *vm, t_process *head)
 		new->next = head;
 		head = new;
 	}
-//	head = head->next;
 	return (head);
 }
 
-int		exec_process(t_all *vm, t_process *process)
+void 	load_new_process(t_all *vm, t_process *p)
+{
+	p->pc = (p->pc + 1) % MEM_SIZE;
+	p->op = vm->arena[p->pc];
+	if ((check_op_block(vm, p)) == 1)
+	{
+		if (if_no_opcode(p) == 0)
+			p->opc = vm->arena[(p->pc + 1) % MEM_SIZE];
+		else
+			p->opc = 0;
+		p->exec_cycle = get_duration(vm, p->op);
+		p = ft_decode_byte(p->op, p);		
+	}
+	else
+	{
+		p->op = 0;
+		p->exec_cycle = vm->cycles + 1;
+	}	
+}
+
+int		exec_process(t_all *vm, t_process *process, t_op *op_table)
 {	
 	int	bytes;
 
 	bytes = 0;
-
-	process = ft_decode_byte(vm->arena[process->pc + 1], process);
-	calc_bytes(process, &bytes);
-	if (process->op != 0)
-		ft_printf("id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
-	if (process->op == 1)
-		op_live(vm, process);
-	if (process->op == 2)
-		op_ld(vm, process);
-	if (process->op == 3)
-		op_st(vm, process);
-	if (process->op == 4)
-		op_add(vm, process);
-	if (process->op == 5)
-		op_sub(vm, process);
-	if (process->op == 6)
-		op_and(vm, process);
-	if (process->op == 7)
-		op_or(vm, process);
-	if (process->op == 8)
-		op_xor(vm, process);
-	//ft_printf("r2 - %d r 16 - %d\n", process->r[1], process->r[15]);	
-	process->pc = (process->pc + bytes + 1) % MEM_SIZE;
-	process->op = vm->arena[process->pc];
-	process->exec_cycle = get_duration(vm, process->op);
-	return (0);
+	if (re_check_block(vm, process) == 1)
+	{
+		process->op_fail = 0;
+		process = ft_decode_byte(vm->arena[process->pc + 1], process);
+		calc_bytes(process, &bytes);
+		if (process->op != 0)
+		{		
+			ft_printf("	=> id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
+			op_table[process->op - 1].inst(vm, process);
+		}
+		if (process->op_fail == 0)
+			process->pc = (process->pc + bytes) % MEM_SIZE;
 	}
+	load_new_process(vm, process);
+	return (0);
+}
 
-int 	run_processes(t_all *vm, t_process *head)
+int 	run_processes(t_all *vm, t_process *head, t_op *op_table)
 {
 	t_process *tracker;
 	int live;
 
-	//to be changed to CYCLES TO DIE
 	live = vm->cycles_to_die;
 	while (live != 0)
 	{
+		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
+		{
+			ft_printf("_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_vm->cycles = %d\n", vm->cycles);
+			ft_print_arena(vm);
+			return (-100);
+			//KILL ALL 
+		}
 		tracker = head;
 		if (tracker != NULL)
 			++vm->cycles;
 		while (tracker != NULL)
 		{
 			if (vm->cycles == tracker->exec_cycle)
-				exec_process(vm, tracker);
+				exec_process(vm, tracker, op_table);
 			tracker = tracker->next;
 		}		
 		--live;
@@ -136,16 +159,19 @@ void	declare_winner(t_all *vm)
 
 int     run_vm(t_all *vm)
 {
-	unsigned char c = 68;
-	int bytes = 0;
-	t_process *process;
+	t_process	*process;
+	t_op		*op_table;
 
+	if (!(op_table = (t_op*)malloc(sizeof(t_op) * 16)))
+		error(vm, "malloc error run_vm");
+	op_table = init_op_check(vm, op_table);
 	vm->cycles_to_die = CYCLE_TO_DIE;
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (-1);
 	while (check_alive(vm, process) == 1)
-		run_processes(vm, process);
+		if ((run_processes(vm, process, op_table) == -100))
+			return (0);
 	declare_winner(vm);
 	return (0);
 }

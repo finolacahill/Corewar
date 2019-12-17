@@ -1,6 +1,6 @@
 #include "../includes/vm.h"
 
-static int		if_no_code(t_process *p)
+int		if_no_opcode(t_process *p)
 {
 	if (p->op == 0 || p->op == 1 ||
 		p->op == 9 || p->op == 12 || p->op == 15)
@@ -10,7 +10,7 @@ static int		if_no_code(t_process *p)
 
 t_process	*ft_decode_byte(unsigned char c, t_process *p)
 {
-	if (if_no_code(p) == 0)
+	if (if_no_opcode(p) == 0)
 	{
 		p->decode[0] = c >> 6;
 		c = (c << 2);
@@ -47,7 +47,7 @@ void	calc_bytes(t_process *p, int *bytes)
 
 	dir = 0;
 	i = -1;
-	if (if_no_code(p) == 1)
+	if (if_no_opcode(p) == 1)
 	{
 		get_direct_bytes(p, bytes);
 		return ;
