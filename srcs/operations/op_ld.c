@@ -21,18 +21,18 @@ uint16_t		check_op_ld(t_all *all, uint8_t *content)
 void    op_ld(t_all *vm, t_process *p)
 {
 	int     pm1;
-	int     pm2;
 	int     bytes_read;
 
-	bytes_read = 5;
+	bytes_read = 1;
 
-	if (p->decode[0] == IND_CODE)
+/*	if (p->decode[0] == IND_CODE)
 	{
-		pm1 = get_val_at_ind(vm, p, 1);
+		pm1 = get_val_at_ind(vm, p, 1, 1);
 		bytes_read = 3;
 	}
 	else
-		pm1 = get_next_bytes(vm, p, 4, 1);
+		pm1 = get_next_bytes(vm, p, 4, 1);*/
+	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
 	load_val_in_reg(vm, p, pm1, bytes_read);
 	if (p->op_fail == 1)
 		return ;

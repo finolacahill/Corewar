@@ -15,7 +15,14 @@ void    op_zjmp(t_all *vm, t_process *p)
 
 	if (p->carry == 1)
 	{
-		address = get_next_bytes(vm, p, 2, 0) % IDX_MOD;
-		p->pc = (p->pc + address - 2) % MEM_SIZE;
+		address = get_next_bytes(vm, p, 2, 0) ;
+		p->pc = (p->pc + address - 1) % MEM_SIZE;
+		ft_printf("\t\t jumped to %d\n", p->pc + 1);
 	}
+	else
+	{
+		ft_printf("\t\t zjmp FAILED\n");
+		p->op_fail = 1;
+	}
+	
 }

@@ -30,7 +30,7 @@ int main(int ac, char **av)
 		return (0);
 	}
 	ft_printf("\n");
-	ft_print_arena(&vm);
+//	ft_print_arena(&vm);
 	dasm_free(&vm);
 	// free the vm
 }

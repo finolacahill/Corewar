@@ -21,5 +21,26 @@ uint16_t		check_op_lldi(t_all *all, uint8_t *content)
 
 void    op_lldi(t_all *vm, t_process *p)
 {
-	;
+	int address1;
+	int address2;
+	int val;
+	int bytes_read;
+
+	bytes_read = 1;
+	if (p->decode[0] == IND_CODE)
+	{
+		address1 = get_val_at_ind(vm, p, bytes_read, 0);
+		bytes_read += 2;
+	}
+	else
+	{
+		address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
+	}
+	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
+	ft_printf("\t\t load from %d + %d (with mod and pc %d)\n", address1, address2, address1 + address2 + p->pc);
+	address1 += address2;
+	val = get_next_bytes(vm, p, 4, address1 - 1);
+	if (p->op_fail == 1)
+		return ;
+	load_val_in_reg(vm, p, val, bytes_read);
 }

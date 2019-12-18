@@ -23,14 +23,17 @@ uint16_t		check_op_ldi(t_all *all, uint8_t *content)
 */
 void    op_ldi(t_all *vm, t_process *p)
 {
-	int address;
+	int address1;
+	int address2;
 	int val;
 	int bytes_read;
 
 	bytes_read = 1;
-	address = get_unspecified_val_2(vm, p, &bytes_read, 0);
-	address = (address + get_unspecified_val_2(vm, p, &bytes_read, 1)) % IDX_MOD;
-	val = get_next_bytes(vm, p, 4, address - 1);
+	address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
+	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
+	ft_printf("\t\t load from %d + %d (with mod and pc %d\n", address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
+	address1 = (address1 + address2) % IDX_MOD;
+	val = get_next_bytes(vm, p, 4, address1 - 1);
 	if (p->op_fail == 1)
 		return ;
 	load_val_in_reg(vm, p, val, bytes_read);

@@ -41,16 +41,18 @@ int     get_reg_val(t_all *vm, t_process *p, int bytes_read)
     return (p->r[reg - 1]);
 }
 
-int     get_ind(t_all *vm, t_process *p, int bytes_read)
+int     get_ind(t_all *vm, t_process *p, int bytes_read, int restriction)
 {
-    return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
+	if (restriction == 1)
+    	return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
+	return (get_next_bytes(vm, p, 2, bytes_read));
 }
 
-int		get_val_at_ind(t_all *vm, t_process *p, int bytes_read)
+int		get_val_at_ind(t_all *vm, t_process *p, int bytes_read, int restriction)
 {
 	int address;
 
-	address = get_next_bytes(vm, p, 2, bytes_read);
+	address = get_ind(vm, p, bytes_read, restriction);
 	return (get_next_bytes(vm, p, 4, address - 1));
 }
 
@@ -65,7 +67,7 @@ int		get_unspecified_val(t_all *vm, t_process *p, int *bytes_read, int param)
      }
     if (p->decode[param] == IND_CODE)
     {
-          val = get_val_at_ind(vm, p, bytes_read[0]);
+          val = get_val_at_ind(vm, p, bytes_read[0], 1);
           bytes_read[0] += 2;
     }
     if (p->decode[param] == DIR_CODE)
@@ -88,7 +90,7 @@ int		get_unspecified_val_2(t_all *vm, t_process *p, int *bytes_read, int param)
      }
     if (p->decode[param] == IND_CODE)
     {
-          val = get_val_at_ind(vm, p, bytes_read[0]);
+          val = get_val_at_ind(vm, p, bytes_read[0], 1);
 		  printf("\tind = %d\n", val);
           bytes_read[0] += 2;
     }

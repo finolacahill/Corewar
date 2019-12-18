@@ -110,7 +110,7 @@ int		exec_process(t_all *vm, t_process *process, t_op *op_table)
 			ft_printf("	=> id %d do operation %d at cycle %d\n", process->id, process->op, vm->cycles);
 			op_table[process->op - 1].inst(vm, process);
 		}
-		if (process->op_fail == 0)
+		if ((process->op_fail == 0 && process->op != 9) || (process->op == 9 && process->op_fail == 1))
 			process->pc = (process->pc + bytes) % MEM_SIZE;
 	}
 	load_new_process(vm, process);

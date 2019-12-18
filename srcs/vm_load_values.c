@@ -27,7 +27,7 @@ void    load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read)
     if ((is_reg(reg2, p)) == 0)
         return ;
     p->r[reg2 - 1] = val;
-	ft_printf("load val %d in reg %d\n", val, reg2);
+	ft_printf("\t \tload val %d in reg %d\n", val, reg2);
 }
 
 //Question, will the value alwya have a len of 4????
