@@ -84,7 +84,7 @@ void    remplace_empty(t_instruc *instruc, int res)
     i = 0;
     while (instruc->hexa_instruc[i] != '#')
         i++;
-    ft_printf("res == %d\n", res);
+    //ft_printf("res == %d\n", res);
     remplace = ft_uitoa_base((uint16_t)res, 16, 0);
     size = size - ft_strlen(remplace);
     while (size > 0)

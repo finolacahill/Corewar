@@ -90,7 +90,7 @@ int	check_instruc(char *instruc, t_env *env)
 	exit(0); // instruction mauvaise
 }
 
-int get_instruc(char *line, t_env *env)
+int get_instruc(char *line, t_env *env, int column)
 {
     int i;
     char *instruc;
@@ -108,13 +108,12 @@ int get_instruc(char *line, t_env *env)
     if (i == j || !(instruc = ft_strsub(line, j, i - j)))
 	{
 		if (i == j)
-			error(7, env->line, j, NULL);
+			error(7, env->line, j + column, NULL);
 		else
 			error(8, -1, -1, NULL);
-		ft_printf("coucou");
 		exit(0); // mettre lexique error;
 	}
-	ft_printf("instruct ? %s\n", instruc);
+	//ft_printf("instruct ? %s\n", instruc);
 	if (!check_instruc(instruc, env))
 		return (-1);
 	return (i);

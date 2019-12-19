@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
-t_error error_tab[12] =
+t_error error_tab[13] =
 {
     {1, "Usage: ./asm file.s", -1, -1, 0, 0},
     {2, "Error: File is not a .s", -1, -1, 0, 0},
@@ -17,6 +17,7 @@ t_error error_tab[12] =
     {9, "Error: Bad number of parameters for ", 1, -1, 1, -1},
     {10, "Error: Lexical's parameter incorrect for ", 1, -1, 1,-1},
     {11, "Error: Label does not exist for ", 1, -1, 1, -1},
+    {12, "Error: Fd error (seems the file doesnt exist or crypted)", -1, -1, -1, -1},
     {0, NULL, 0, 0, 0, 0}
 };
 

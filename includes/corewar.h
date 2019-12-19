@@ -70,7 +70,7 @@ t_label     *new_label();
 int       get_label(char *line, t_env *env);
 void    print_instruc(t_instruc *instruc);
 void    print_label(t_label *labels);
-int get_instruc(char *line, t_env *env);
+int get_instruc(char *line, t_env *env, int column);
 int     get_params(char *line, t_env *env);
 int     get_ocp(t_instruc *instruc);
 int     bi_to_dec(char *bi);
@@ -92,4 +92,6 @@ int     is_label(char *label);
 int     check_numbers(char *str);
 void    last_verif(t_env *env);
 void    error_cmd(int type, char *cmd, int line);
+void    go_instruc(char *line, t_env *env, int i);
+void    which_cmd_error(header_t *header);
 #endif

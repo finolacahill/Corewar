@@ -75,4 +75,6 @@ typedef struct		header_s
   char				comment[COMMENT_LENGTH + 1];
   char        *filename;
   int fd;
+  int c;
+  int n;
 }					header_t;

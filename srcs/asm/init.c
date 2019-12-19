@@ -42,6 +42,12 @@ t_env   *init_env()
 
     new = (t_env*)malloc(sizeof(t_env));
     new->header = (header_t*)malloc(sizeof(header_t));
+    new->header->c = 0;
+    new->header->n = 0;
+    new->header->filename = NULL;
+    new->header->fd = 0;
+    new->header->magic = 0;
+    new->header->prog_size = 0;
     new->instruc = new_instruct();
     new->line = 0;
     new->column = 0;

@@ -48,7 +48,6 @@ void    put_label(t_env *env, char *label)
     while (tmp->next)
         tmp = tmp->next;
     tmp->label = ft_strdup(label);
-      ft_printf("lol");
     tmp->adress = put_adress_label(env->instruc);
     tmp->next = new_label();
     use_label(env, tmp);
@@ -82,7 +81,7 @@ int   get_label(char *line, t_env *env)
         i++;
     if (line[i] == ':')
         label = ft_strsub(line, 0, i);
-    ft_printf("label == %s\n", label);
+    //ft_printf("label == %s\n", label);
     if (is_label(label) == 1)
         put_label(env, label);
     else

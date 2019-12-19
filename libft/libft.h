@@ -95,4 +95,5 @@ char				*ft_uitoa_base(unsigned long long value, int base, int cap);
 char				*ft_strjoin_fr(char *s1, char *s2, int i);
 char				*ft_strrev_fr(char *str);
 double				ft_power(double nbr, double power);
+void	ft_strrdel(char **arr);
 #endif

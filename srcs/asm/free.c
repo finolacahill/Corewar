@@ -28,8 +28,7 @@ void    free_instruc(t_instruc *instruc)
     tmp = instruc;
     while (tmp)
     {
-        free(tmp->params);
-        if (tmp->hexa_params)
+        free(tmp->params); 
         ft_strdel(&tmp->hexa_instruc);
         ft_strdel(&tmp->hexa_params);
         free_label(tmp->label);

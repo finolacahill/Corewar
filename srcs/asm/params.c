@@ -8,7 +8,7 @@ void    put_hexa_label(int16_t label,t_instruc *instruc, int size)
 {
     char *hexa_l;
 
-    ft_printf("res == %d\n", label);
+    //ft_printf("res == %d\n", label);
     if (label >= 0)
         hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
     else
@@ -38,7 +38,7 @@ void    put_label_instruc(t_instruc *instruc, char *label, int16_t adress, int s
         tmp = tmp->next;
     tmp->label = ft_strdup(label);
     tmp->adress = adress;
-    ft_printf("adress %d for %s\n", adress, label);
+   // ft_printf("adress %d for %s\n", adress, label);
     tmp->size = size + 1;
     tmp->next = new_label();
     while (size > 0)
@@ -134,8 +134,8 @@ int     param_direct(t_instruc *instruc, char *index_d, int j, t_env *env)
         instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_d, 1);
     else
         instruc->hexa_instruc = ft_strdup(hexa_d);
+          ft_strdel(&hexa_d);
     }
-    ft_strdel(&hexa_d);
     return (1);
 }
 
@@ -188,11 +188,12 @@ int     what_params(char *params, t_instruc *instruc, int j, t_env *env)
             param_direct(instruc, &since_space[1], j, env);
         else if ((ft_isdigit(since_space[0]) || (ft_isdigit(since_space[1]) && since_space[0] == '-')) || since_space[0] == ':')
             param_indirect(instruc, since_space, j, env);
-      ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
+     // ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
         //else if (ft_isdigit(since_space[0]))
           //  param_direct(ins)
-    ft_printf("since space == %s || size == %d\n", since_space, ft_strlen(since_space));
-   // ft_strdel(&since_space); / malloc free error
+    //ft_printf("since space == %s || size == %d\n", since_space, ft_strlen(since_space));
+   //if (since_space[0])
+    ft_strdel(&since_space); // malloc free error
     return (0);
 }
 
@@ -226,6 +227,7 @@ int     get_params(char *line, t_env *env)
     //comment = ft_strsplit(line, COMMENT_CHAR);
     params = ft_strsplit(line, ',');
     check_params(params, env);
+    ft_strrdel(params);
      //ft_printf("params == %s\n", params[0]);
     return (1);
 }

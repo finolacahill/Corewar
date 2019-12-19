@@ -3,112 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 14:11:52 by fcahill           #+#    #+#             */
-/*   Updated: 2018/12/14 14:54:57 by fcahill          ###   ########.fr       */
+/*   Created: 2018/12/05 16:12:52 by yodana            #+#    #+#             */
+/*   Updated: 2019/09/11 13:58:28 by manki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-static int		ft_splitline(char *buf, char **line, char *remain[], int fd)
+t_list			*ft_lstcheck(t_list **save, int fd)
 {
-	char *tmp;
+	t_list	*tmp;
 
-	tmp = NULL;
-	if ((remain[fd] != NULL) && (buf != remain[fd]))
+	tmp = *save;
+	if (fd < 0)
+		return (NULL);
+	while (tmp)
 	{
-		if (!(tmp = ft_strjoin(remain[fd], buf)))
-			return (-1);
+		if ((int)tmp->content_size == fd)
+			return (tmp);
+		tmp = tmp->next;
 	}
-	else if (!(tmp = ft_strdup(buf)))
-		return (-1);
-	ft_strclr(remain[fd]);
-	ft_strclr(buf);
-	free(remain[fd]);
-	if (!(remain[fd] = ft_strdup(ft_strchr(tmp, '\n') + 1)))
-		return (-1);
-	*(ft_strchr(tmp, '\n')) = '\0';
-	free(*line);
-	if (!(*line = ft_strdup(tmp)))
-		return (-1);
-	free(tmp);
-	return (1);
+	tmp = ft_lstnew("\0", 1);
+	tmp->content_size = fd;
+	ft_lstadd(save, tmp);
+	return (tmp);
 }
 
-static int		ft_makeline(char *buf, char **line, char *remain[], int fd)
+char			*ft_save(char *save, char **line)
 {
-	char *tmp;
+	int		i;
+	char	*tmp;
 
-	tmp = NULL;
-	if (ft_strchr(buf, '\n') == NULL)
+	if (!(tmp = ft_strdup(save)))
+		return (NULL);
+	i = 0;
+	while (tmp[i] != '\n' && tmp[i])
+		i++;
+	if (!(*line = ft_strsub(tmp, 0, i)))
+		return (NULL);
+	line++;
+	ft_strdel(&save);
+	if (tmp[i] == '\n')
 	{
-		if ((remain[fd]) && remain[fd] != buf)
-		{
-			if (!(tmp = ft_strjoin(remain[fd], buf)))
-				return (-1);
-			free(remain[fd]);
-			remain[fd] = tmp;
-			ft_strclr(buf);
-			free(*line);
-			if (!(*line = ft_strdup(remain[fd])))
-				return (-1);
-			return (0);
-		}
-		if (!(remain[fd] = ft_strdup(buf)))
-			return (-1);
-		ft_strclr(buf);
-		free(tmp);
-		return (0);
+		if (!(save = ft_strdup(&tmp[i + 1])))
+			return (NULL);
 	}
-	free(tmp);
-	return (ft_splitline(buf, line, remain, fd));
-}
-
-static int		ft_end(int n, char **line, char *remain[], int fd)
-{
-	char *tmp;
-
-	tmp = NULL;
-	if (n == 0 && *remain[fd])
-	{
-		if (!(tmp = ft_strdup(remain[fd])))
-			return (-1);
-		ft_strclr(*line);
-		ft_strclr(remain[fd]);
-		*line = tmp;
-		return (1);
-	}
-	if ((n == 0) && (!(*remain[fd])))
-		return (0);
-	return (-1);
+	else
+		save = "\0";
+	ft_strdel(&tmp);
+	return (save);
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	char		*buf;
-	int			n;
-	static char	*remain[MAX_FD];
+	static t_list	*save;
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	t_list			*current;
 
-	if (BUFF_SIZE < 1 || line == NULL || (!(buf = ft_strnew(BUFF_SIZE + 1))))
-		return (-1);
-	if (fd >= MAX_FD || (!(*line = ft_strnew(BUFF_SIZE))) || fd < 0)
-		return (-1);
-	if ((n = 1 || 1) && (remain[fd]))
-		if ((ft_makeline(remain[fd], line, remain, fd)) == 1)
-			return (1);
-	while (n > 0)
+	current = ft_lstcheck(&save, fd);
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0 && BUFF_SIZE > 0 && fd >= 0
+			&& line != NULL)
 	{
-		if ((n = read(fd, buf, BUFF_SIZE)) == -1)
-			return (-1);
-		buf[n] = '\0';
-		if ((ft_makeline(buf, line, remain, fd) == 1))
+		buf[ret] = '\0';
+		current->content = ft_strjoin_fr(current->content, buf, 1);
+		if (ft_strchr(buf, '\n'))
 		{
-			ft_strdel(&buf);
+			current->content = ft_save(current->content, line);
 			return (1);
 		}
 	}
-	n = ft_end(n, line, remain, fd);
-	return (n);
+	if (ret < 0 || BUFF_SIZE <= 0 || fd < 0 || line == NULL)
+		return (-1);
+	if (((char*)current->content)[0] != '\0')
+	{
+		current->content = ft_save(current->content, line);
+		return (1);
+	}
+	return (0);
 }

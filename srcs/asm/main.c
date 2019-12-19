@@ -64,16 +64,21 @@ void    go_instruc(char *line, t_env *env, int i)
     j = 0;
     commentaire = ft_strsplit(line, '#');
     point = ft_strsplit(commentaire[0], ';');
-    while (point[j])
-    {
-            i = get_label(&point[j][i], env);
-            ft_printf("line apres get_label ==%s\n", &point[j][i]);
-            i = i + get_instruc(&point[j][i], env);
-            ft_printf("line apres get_label ==%s\n", &point[j][i]);
-            get_params(&point[j][i], env);
+    ft_printf("point == %s\n", point[0]);
+    if (env->header->c != 1 || env->header->n != 1)
+        which_cmd_error(env->header);
+   // while (point[0])
+    //{
+         
+            i = get_label(&point[0][i], env);
+           // ft_printf("line apres get_label ==%s\n", &point[j][i]);
+            i = i + get_instruc(&point[0][i], env, i);
+            //ft_printf("line apres get_label ==%s\n", &point[j][i]);
+            get_params(&point[0][i], env);
             next_instruc(env);
+            i = 0;
             j++;
-    }
+    //}
     ft_strrdel(point);
     ft_strrdel(commentaire);
 }
@@ -86,6 +91,8 @@ void    every_go(char *av, t_env *env)
     
     i = 0;
     fd = open(av, O_RDONLY);
+    if (fd < 0)
+        error(12, -1, -1, NULL);
    while (get_next_line(fd, &line) == 1)
     {
         if (line_ispoint(line) == 1)
@@ -109,7 +116,7 @@ void    every_go(char *av, t_env *env)
     }
     //ft_printf("ok");
     //ft_strdel(&line);
-    print_label(env->label);
+   // print_label(env->label);
     //print_instruc(env->instruc);
     close(fd);
 }
@@ -238,6 +245,6 @@ int main(int ac, char **av)
         free_all(env, env->header);
         i++;
     }
-   // while (1);
+    //while (1);
     return (0);
 }

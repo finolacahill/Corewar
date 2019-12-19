@@ -11,8 +11,14 @@ void    put_comment(t_env *env, char *line)
 
     j = 0;
     i = 0;
+    if (env->header->c == 1)
+        error_cmd(3, "comment", env->line);
     while (line[i] && line[i] != '"')
-        i++;
+    {
+        if (line[i] > ' ')
+            error_cmd(2, "comment", env->line);
+         i++;
+    }
     if (line[i] == '\0')
         error_cmd(1, "comment", env->line);
     i++;
@@ -26,12 +32,15 @@ void    put_comment(t_env *env, char *line)
          error_cmd(1, "comment", env->line);
     i++;
     j = i;
+    env->header->c = 1;
    while (line[i])
     {
         if (line[i] != ';' && line[i] > ' ')
-            exit(0);
+            error_cmd(2, "comment", env->line);
         else if (line[i] == ';')
-            ft_printf("split ; autoriser");
+        {
+            return ;
+        }
         i++;
     }
     //ft_printf("comment == %s\n", env->header->comment);
@@ -42,9 +51,15 @@ void    put_name(t_env *env, char *line)
     int j;
 
     j = 0;
-    i = 0;
+    i = 1;
+    if (env->header->n == 1)
+        error_cmd(3, "name", env->line);
     while (line[i] && line[i] != '"')
+    {
+        if (line[i] > ' ')
+           error_cmd(2, "name", env->line);
         i++;
+    }
     if (line[i] == '\0')
         error_cmd(1, "name", env->line);
     i++;
@@ -57,10 +72,13 @@ void    put_name(t_env *env, char *line)
     if (line[i] == '\0')
         error_cmd(1, "name", env->line);
     i++;
+    env->header->n = 1;
     while (line[i])
     {
         if (line[i] != ';' && line[i] > ' ')
             error_cmd(2, "name", env->line);
+        else if (line[i] == ';')
+            return ;
         i++;
     }
    // ft_printf("name == %s\n", env->header->prog_name);
@@ -74,7 +92,7 @@ void    go_cmd(t_env *env, char *line)
     int len;
 
     i = 0;
-    while (line[i] <= ' ')
+    while (line[i] && line[i] <= ' ')
         i++;
     len = i;
     i++;
@@ -84,8 +102,10 @@ void    go_cmd(t_env *env, char *line)
     check = ft_strsub(line, i, j - len - 1);
     //ft_printf("check == %s\n", check);
     if (line[i] && ft_strcmp("name", check) == 0)
-        put_name(env, &line[i]);
+        put_name(env, &line[j]);
    else if (line[i] && ft_strcmp("comment", check) == 0)
-       put_comment(env, &line[i]);
+       put_comment(env, &line[j]);
+    else
+        error_cmd(4, check, env->line);
     ft_strdel(&check);
 }
