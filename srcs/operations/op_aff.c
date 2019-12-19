@@ -14,5 +14,11 @@ uint16_t		check_op_aff(t_all *all, uint8_t *content)
 
 void    op_aff(t_all *vm, t_process *p)
 {
-	;
+	int val;
+	unsigned char c;
+
+	val = get_reg_val(vm, p, 1);
+	c = (unsigned char)(val % 256);
+	if (p->op_fail != 1)
+		ft_printf("\t\taff [%c](val %#02x)\n", c, (val % 256));
 }

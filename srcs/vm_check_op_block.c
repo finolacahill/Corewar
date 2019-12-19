@@ -29,7 +29,7 @@ int		check_comb_op_ocp(t_all *vm, t_process *process)
 int		check_op_block(t_all *vm, t_process *process)  //Prochain bloc (op + opc + values) est bon ? 1 : 0;
 {
 	if (process->op < 1 || process->op > 16)
-		return (0);												//op fausse
+		return (0);
 	if (check_comb_op_ocp(vm ,process) == 0)
 		return (0);												//op fausse
 	return (1);

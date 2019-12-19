@@ -30,7 +30,7 @@ void	dasm_print_all(t_all *all)
 		printf("	exec_code	=\n\n");
 		int r = -1;
 		while (++r <  all->champs[i].len_exec_code)
-			printf("%0.2d ", all->champs[i].exec_code[r]);
+			printf("%02x ", all->champs[i].exec_code[r]);
 		printf("\n	===========================\n");
 		i++;
 	}

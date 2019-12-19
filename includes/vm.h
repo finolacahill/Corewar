@@ -34,14 +34,6 @@ typedef	struct		s_champs
 	int					pc;
 }					t_champs;
 
-typedef struct		s_arena
-{
-	
-	int				live_calls;
-	int				cycles;
-		
-}					t_arena;
-
 typedef struct		s_all
 {
 	struct	s_champs	champs[MAX_PLAYERS];
@@ -56,6 +48,7 @@ typedef struct		s_all
 	int					cycles_to_die;
 	int					total_checks;
 	int					check_mode;
+	int					total_process;
 	
 }					t_all;
 
@@ -73,6 +66,7 @@ typedef struct			s_process
 	int					opc;
 	unsigned char 		op;
 	int					op_fail;
+	int					all_dead;
 	struct s_process	*next;
 }						t_process;
 
@@ -117,29 +111,36 @@ void			error_exec(t_all *all, char *champ_name, uint16_t line);
 int				just_number(char *str);
 
 //vm
-int 			init_arena(t_all *vm);
-int   			load_process(t_all *vm, t_process *head);
-int     		run_vm(t_all *vm);
-t_process		*ft_decode_byte(unsigned char c, t_process *p);
 void			calc_bytes(t_process *p, int *bytes);
-int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);
 int         	check_alive(t_all *vm, t_process *p);
-int				is_player_nb(int i, t_all *vm);
-int     		get_reg_val(t_all *vm, t_process *p, int bytes_read);
-int     		get_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
-void			load_value(t_all *vm, int address, int len, int val);
-int				is_reg(int reg, t_process *p);
 void    		check_carry(t_process *p, int param);
-void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
-void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
-int				get_val_at_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
+int				check_op_block(t_all *vm, t_process *process);
+int				free_all(t_all *vm, t_process *p);
+void    		free_process(t_all *vm, t_process *p);
+t_process		*ft_decode_byte(unsigned char c, t_process *p);
+void 			ft_print_arena(t_all *vm);
+int				get_duration(t_all *vm, int opc);
+int     		get_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
+int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);
+int     		get_reg_val(t_all *vm, t_process *p, int bytes_read);
 int				get_unspecified_val(t_all *vm, t_process *p, int *bytes_read, int param);
 int				get_unspecified_val_2(t_all *vm, t_process *p, int *bytes_read, int param);
+int				get_val_at_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
 int				if_no_opcode(t_process *p);
-int				check_op_block(t_all *vm, t_process *process);
+int 			init_arena(t_all *vm);
+t_process		*init_process(t_all *vm, t_champs *c, t_process *p);
 int				is_in(int i, int value[9]);
-void 			ft_print_arena(t_all *vm);
+int				is_player_nb(int i, t_all *vm);
+//int				is_reg(int reg, t_process *p);
+void			*kill_dead_process(t_all *vm, t_process *p, t_process *prev);
+t_process 		*load_processes(t_all *vm, t_process *head);
+void			load_value(t_all *vm, int address, int len, int val);
+//void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
+void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				re_check_block(t_all *vm, t_process *process);
+int 			run_processes(t_all *vm, t_process *head, t_op *op_table);
+int     		run_vm(t_all *vm, t_process *p);
+
 // operations
 t_op			*init_op_check(t_all *vm, t_op *op);
 t_verif_op		*init_op_verif(t_all *vm, t_verif_op *op);
@@ -178,9 +179,10 @@ uint16_t		check_op_sub(t_all *all, uint8_t *content);
 uint16_t		check_op_xor(t_all *all, uint8_t *content);
 uint16_t		check_op_zjmp(t_all *all, uint8_t *content);
 
-void ft_print_arena(t_all *vm);
-
 
 //errors
-t_process *error_process(t_process *p);
+t_process		*error_process(t_process *p);
+int				error_arena(t_all *vm, t_process *p);
+int				error_run_vm(t_all *vm, t_process *p, t_op *op_table);
+void			free_op_table(t_op *op);
 #endif

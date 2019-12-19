@@ -46,4 +46,5 @@ void	dasm_check_hex_code(t_all *vm)
 					, &(vm->champs[id].exec_code[i]), verif_op);
 		}
 	}
+	free(verif_op);
 }

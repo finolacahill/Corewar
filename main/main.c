@@ -15,23 +15,18 @@
 int main(int ac, char **av)
 {
 	t_all vm;
-	t_process process;
+	t_process p;
 
+	vm.arena = NULL;
+	p.decode = NULL;
+	p.all_dead = -1;
 	dasm_init(&vm, ac, av);
 	if (init_arena(&vm) == -1)
-	{
-		printf("Error initialising arena.\n");
-		dasm_free(&vm);
-		return (0);
-	}
-	if (run_vm(&vm) == -1)
-	{
-		// free the things;
-		return (0);
-	}
-	ft_printf("\n");
+		return (error_arena(&vm, &p));
+	if (run_vm(&vm, &p) == -1)
+		return (free_all(&vm, &p));
 //	ft_print_arena(&vm);
-	dasm_free(&vm);
+	free_all(&vm, NULL);
 	// free the vm
 }
 

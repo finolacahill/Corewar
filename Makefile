@@ -35,12 +35,15 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_load_processes.c \
 			vm_errors.c 		\
 			vm_decode_bytes.c	\
-			vm_operations.c 	\
+			vm_check_alive.c 	\
 			vm_get_values.c		\
 			vm_load_values.c	\
 			vm_tab_check.c		\
 			vm_check_op_block.c	\
 			init_op_check.c		\
+			vm_free_structs.c	\
+			vm_tools.c			\
+			vm_run_vm.c			\
 			dasm_check_hex_code.c
 
 OP_NAME =	op_add.c	\
@@ -77,7 +80,7 @@ INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = #-Wall -Werror -Wextra
+FLAG = -fsanitize=address
 
 .PHONY: all clean fclean re
 

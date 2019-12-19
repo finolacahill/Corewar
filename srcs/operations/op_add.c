@@ -15,7 +15,6 @@ void    op_add(t_all *vm, t_process *p)
 {
 	int p1;
 	int p2;
-	int p3;
 
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_reg_val(vm, p, 2);
