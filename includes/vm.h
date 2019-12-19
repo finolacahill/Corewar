@@ -112,7 +112,7 @@ int				just_number(char *str);
 
 //vm
 void			calc_bytes(t_process *p, int *bytes);
-int         	check_alive(t_all *vm, t_process *p);
+int         	check_alive(t_all *vm, t_process **p);
 void    		check_carry(t_process *p, int param);
 int				check_op_block(t_all *vm, t_process *process);
 int				free_all(t_all *vm, t_process *p);
@@ -132,7 +132,7 @@ t_process		*init_process(t_all *vm, t_champs *c, t_process *p);
 int				is_in(int i, int value[9]);
 int				is_player_nb(int i, t_all *vm);
 //int				is_reg(int reg, t_process *p);
-void			*kill_dead_process(t_all *vm, t_process *p, t_process *prev);
+t_process		**kill_dead_process(t_all *vm, t_process **p, t_process *prev);
 t_process 		*load_processes(t_all *vm, t_process *head);
 void			load_value(t_all *vm, int address, int len, int val);
 //void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);

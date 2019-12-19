@@ -2,7 +2,7 @@
 
 void    free_process(t_all *vm, t_process *p)
 {
-	if (vm->total_process > 0)
+	if (p != NULL && vm->total_process > 0)
 	{	
 		if (p->decode != NULL)
 			free(p->decode);

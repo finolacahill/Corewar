@@ -60,6 +60,7 @@ void		init_name_op(t_all *vm, t_op **op)
 	(*op)[13].op_name = ft_strdup("lldi");
 	(*op)[14].op_name = ft_strdup("lfork");
 	(*op)[15].op_name = ft_strdup("aff");
+	//NEED MALLOC PROTECTION HERE
 	while (++i < 16)
 	{
 		if ((*op)[i].op_name == NULL)

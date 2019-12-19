@@ -15,14 +15,14 @@ static void	check_cycle_decrease(t_all *vm)
 	vm->nbr_live_since_check = 0; 
 }
 
-static t_process	*kill_process(t_all *vm, t_process *p, t_process *t, t_process *prev)
+static t_process	*kill_process(t_all *vm, t_process **p, t_process *t, t_process *prev)
 {
 	if (prev == NULL)
 	{
 			
-		p = t->next;
+		(*p) = t->next;
 		free_process(vm, t);
-		t = p;
+		t = (*p);
 	}
 	else
 	{
@@ -33,12 +33,12 @@ static t_process	*kill_process(t_all *vm, t_process *p, t_process *t, t_process 
 	return (t);
 }
 
-void	*kill_dead_process(t_all *vm, t_process *p, t_process *prev)
+t_process	**kill_dead_process(t_all *vm, t_process **p, t_process *prev)
 {
 	t_process	*t;
 	int			i;
 
-	t = p;
+	t = *p;
 	i = 0;
 	while (vm->total_process > 0 && t != NULL)
 	{
@@ -78,15 +78,15 @@ static int	check_champs(t_all *vm, t_process *p, int alive)
 	return (alive);
 }
 
-int         check_alive(t_all *vm, t_process *p)
+int         check_alive(t_all *vm, t_process **p)
 {	
 	int alive;
 
 	alive = 0;
 	if (vm->cycles == 0)
 		return (1);
-	alive = check_champs(vm, p, alive);
-	kill_dead_process(vm, p, NULL);
+	alive = check_champs(vm, (*p), alive);
+	p = kill_dead_process(vm, p, NULL);
 	check_cycle_decrease(vm);
 	if (alive > 0)
 		return (1);

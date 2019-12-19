@@ -22,10 +22,12 @@ int     run_vm(t_all *vm, t_process *process)
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (error_run_vm(vm, process, op_table));
-	while (check_alive(vm, process) == 1)
+	while (check_alive(vm, &process) == 1)
+	{
 		if ((run_processes(vm, process, op_table) == -100))
 			return (0);
 			//FREE ZL THINGS HErE
+	}
 	declare_winner(vm);
 	free_op_table(op_table);
 	return (0);
