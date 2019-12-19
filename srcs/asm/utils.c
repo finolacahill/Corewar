@@ -4,6 +4,18 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
+int     line_iscomment(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i] && line[i] <= 32)
+        i++;
+    if (line[i] == COMMENT_CHAR)
+        return (1);
+    return (-1);
+}
+
 int     len_instruc(t_instruc *instruc)
 {
     int i;
@@ -53,12 +65,11 @@ int     get_adress(t_instruc *instruc, t_instruc *working)
     tmp = instruc;
     while (tmp != working)
     {
-        res = res + (ft_strlen(instruc->hexa_instruc) / 2);
+        if (tmp->hexa_instruc)
+            res = res + ((ft_strlen(tmp->hexa_instruc) + 2) / 2);
         tmp = tmp->next;
     }
-    if (res == 0)
-        return (0);
-    return (res + 1);
+    return (res);
 }
 
 void    remplace_empty(t_instruc *instruc, int res)
@@ -73,7 +84,8 @@ void    remplace_empty(t_instruc *instruc, int res)
     i = 0;
     while (instruc->hexa_instruc[i] != '#')
         i++;
-    remplace = ft_uitoa_base(res, 16, 0);
+    ft_printf("res == %d\n", res);
+    remplace = ft_uitoa_base((uint16_t)res, 16, 0);
     size = size - ft_strlen(remplace);
     while (size > 0)
     {

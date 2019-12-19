@@ -4,6 +4,22 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
+int     check_file(char *file)
+{
+    int i;
+    int len;
+
+    i = 0;
+    while (file[i] && file[i] != '.')
+        i++;
+    if (!file[i])
+        return (-1);   
+    len = ft_strlen(&file[i]);
+    if (ft_strcmp(".s", &file[i]) == 0)
+        return (1);
+    return (-1);
+}
+
 void    create_file_cor(char *file_name, header_t *header)
 {
     char *new_name;
@@ -12,7 +28,8 @@ void    create_file_cor(char *file_name, header_t *header)
     int j;
     int i;
     char *res;
-    
+    if (check_file(file_name) == -1)
+        error(2, -1, -1, NULL);
     res = ft_strnew(8);
     j = 0;
     i = 0;
@@ -33,10 +50,32 @@ void    create_file_cor(char *file_name, header_t *header)
         j++;
     }
     write(header->fd, res, 4);
-    ft_printf("%s\n", header_magic);
     ft_strdel(&res);
     ft_strdel(&header_magic);
     ft_strdel(&new_name);
+}
+
+void    go_instruc(char *line, t_env *env, int i)
+{
+    char **point;
+    int j;
+    char **commentaire;
+
+    j = 0;
+    commentaire = ft_strsplit(line, '#');
+    point = ft_strsplit(commentaire[0], ';');
+    while (point[j])
+    {
+            i = get_label(&point[j][i], env);
+            ft_printf("line apres get_label ==%s\n", &point[j][i]);
+            i = i + get_instruc(&point[j][i], env);
+            ft_printf("line apres get_label ==%s\n", &point[j][i]);
+            get_params(&point[j][i], env);
+            next_instruc(env);
+            j++;
+    }
+    ft_strrdel(point);
+    ft_strrdel(commentaire);
 }
 
 void    every_go(char *av, t_env *env)
@@ -51,22 +90,27 @@ void    every_go(char *av, t_env *env)
     {
         if (line_ispoint(line) == 1)
             go_cmd(env, line);
+        else if (line_iscomment(line) == 1)
+            (void)line;
         else if (line_empty(line) == 1)
         {   
-            i = get_label(line, env);
+            go_instruc(line, env, i);
+            // faire une separation des commentaires et des points virgules;
+            /*i = get_label(line, env);
             ft_printf("line apres get_label ==%s\n", &line[i]);
             i = i + get_instruc(&line[i], env);
             ft_printf("line apres get_label ==%s\n", &line[i]);
             get_params(&line[i], env);
-            next_instruc(env);
+            next_instruc(env);*/
         }
-            free(line);
+        env->line++;
+        free(line);
         i = 0;
     }
     //ft_printf("ok");
     //ft_strdel(&line);
     print_label(env->label);
-    print_instruc(env->instruc);
+    //print_instruc(env->instruc);
     close(fd);
 }
 
@@ -155,6 +199,8 @@ void    write_to_file(t_instruc *instruc, int fd, header_t *header, t_env *env)
     write_name_comment(header, fd, env);
     while (tmp->next)
     {
+        if (tmp->hexa_instruc)
+        {
         len = (ft_strlen(tmp->hexa_instruc) / 2) + 1;
         j = 0;
         i = 0;
@@ -169,6 +215,7 @@ void    write_to_file(t_instruc *instruc, int fd, header_t *header, t_env *env)
         }
         write(fd, res, len);
         ft_strdel(&res);
+        }
         tmp = tmp->next;
     }
 }
@@ -180,16 +227,17 @@ int main(int ac, char **av)
 
     i = 1;
     if (ac == 1)
-        return (-1);
+        error(1, -1, -1, NULL);
     while (av[i])
     {
         env = init_env();
         every_go(av[i], env);
+        last_verif(env);
         create_file_cor(av[i], env->header); 
         write_to_file(env->instruc, env->header->fd, env->header, env);
         free_all(env, env->header);
         i++;
     }
-    while (1);
+   // while (1);
     return (0);
 }

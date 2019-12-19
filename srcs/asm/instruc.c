@@ -31,6 +31,16 @@ t_op    op_tab[17] =
 	{0, 0, {0}, 0, 0, 0, 0, 0}
 };
 
+char	*get_params_with_opcode(int ocp)
+{
+	int i;
+	
+	i = 0;
+	while (ocp != op_tab[i].opcode)
+		i++;
+	return (op_tab[i].instruc);
+}
+
 int		put_instruc_params(t_instruc *instruc, int j)
 {
 	int i;
@@ -46,15 +56,17 @@ int		put_instruc_params(t_instruc *instruc, int j)
 	return (1);
 }
 
-int		put_instruc(t_instruc *instruc_env, int j)
+int		put_instruc(t_instruc *instruc_env, int j, int line)
 {
 	t_instruc *tmp;
 
 	tmp = get_last_intruct(instruc_env);
 	tmp->opcode = op_tab[j].opcode;
+	tmp->nbr_params = op_tab[j].nbr_params;
 	//printf("op_code params %d\n", op_tab[j].param_type[1]);
 	put_instruc_params(tmp, j);
 	tmp->for_direct = op_tab[j].for_direct;
+	tmp->index = line;
 	return (1);
 }
 
@@ -67,13 +79,14 @@ int	check_instruc(char *instruc, t_env *env)
 	{
 		if (ft_strcmp(instruc, (const char*)op_tab[j].instruc) == 0)
 		{
-			put_instruc(env->instruc, j);
+			put_instruc(env->instruc, j, env->line);
 			ft_strdel(&instruc);
 			return (1);
 		}
 		j++;
 	}
-	ft_strdel(&instruc);
+	error(6, env->line, -1, instruc);
+	//ft_strdel(&instruc);
 	exit(0); // instruction mauvaise
 }
 
@@ -92,9 +105,16 @@ int get_instruc(char *line, t_env *env)
     while (line[i] && ft_isalpha(line[i]))
         i++;
 	//ft_printf("i || j == %d | %d\n", j, i - j);
-    if (i == 0 || !(instruc = ft_strsub(line, j, i - j)))
+    if (i == j || !(instruc = ft_strsub(line, j, i - j)))
+	{
+		if (i == j)
+			error(7, env->line, j, NULL);
+		else
+			error(8, -1, -1, NULL);
+		ft_printf("coucou");
 		exit(0); // mettre lexique error;
-	//ft_printf("instruct ? %s\n", instruc);
+	}
+	ft_printf("instruct ? %s\n", instruc);
 	if (!check_instruc(instruc, env))
 		return (-1);
 	return (i);

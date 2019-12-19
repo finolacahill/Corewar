@@ -14,7 +14,7 @@ void    put_comment(t_env *env, char *line)
     while (line[i] && line[i] != '"')
         i++;
     if (line[i] == '\0')
-        return ;
+        error_cmd(1, "comment", env->line);
     i++;
     while  (line[i] && line[i] != '"')
     {
@@ -22,6 +22,13 @@ void    put_comment(t_env *env, char *line)
         j++;
         i++;
     }
+    if (line[i] == '\0')
+         error_cmd(1, "comment", env->line);
+    i++;
+    /*while (line[i])
+    {
+        if ()
+    }*/
     //ft_printf("comment == %s\n", env->header->comment);
 }
 void    put_name(t_env *env, char *line)
@@ -34,12 +41,21 @@ void    put_name(t_env *env, char *line)
     while (line[i] && line[i] != '"')
         i++;
     if (line[i] == '\0')
-        return ;
+        error_cmd(1, "name", env->line);
     i++;
     while  (line[i] && line[i] != '"')
     {
         env->header->prog_name[j] = line[i];     
         j++;
+        i++;
+    }
+    if (line[i] == '\0')
+        error_cmd(1, "name", env->line);
+    i++;
+    while (line[i])
+    {
+        if (line[i] != ';' && line[i] > ' ')
+            error_cmd(2, "name", env->line);
         i++;
     }
    // ft_printf("name == %s\n", env->header->prog_name);

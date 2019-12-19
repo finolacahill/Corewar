@@ -8,8 +8,9 @@ void    put_hexa_label(int16_t label,t_instruc *instruc, int size)
 {
     char *hexa_l;
 
+    ft_printf("res == %d\n", label);
     if (label >= 0)
-        hexa_l = ft_uitoa_base(label, 16, 0);
+        hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
     else
         hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
     size = size - ft_strlen(hexa_l);
@@ -37,6 +38,7 @@ void    put_label_instruc(t_instruc *instruc, char *label, int16_t adress, int s
         tmp = tmp->next;
     tmp->label = ft_strdup(label);
     tmp->adress = adress;
+    ft_printf("adress %d for %s\n", adress, label);
     tmp->size = size + 1;
     tmp->next = new_label();
     while (size > 0)
@@ -69,17 +71,23 @@ void    is_label_exist(char *label, t_env *env, t_instruc *instruc, int size)
         }
         tmp = tmp->next;
     }
+    if (is_label(label) == -1)
+        error(5, env->line, -1, label);
     put_label_instruc(instruc, label, adress, size);
 }
 
-int     param_register(t_instruc *instruc, int index_r, int j)
+int     param_register(t_instruc *instruc, char *c_index_r, int j, t_env *env)
 {
     char *hexa_r;
+    int index_r;
 
-    if (index_r > 16)
-        return (-1); // index du registre trop haut
+    if (check_numbers(c_index_r) == -1)
+        error(10, env->line, j, ft_itoa(instruc->opcode));
+    index_r = ft_atoi(c_index_r);
+    if (index_r > REG_NUMBER || index_r < 0)
+        error(3, env->line, j, NULL); // index du registre trop haut
     if ((instruc->params[j] & T_REG) != T_REG)
-        return (-1); // mauvais parametre
+       error(4, env->line, j, ft_itoa(instruc->opcode)); // mauvais parametre
     instruc->params[j] = T_REG; // pour l OCP;
     instruc->is_ocp = 1;
     hexa_r = ft_uitoa_base(index_r, 16, 0);
@@ -95,10 +103,10 @@ int     param_register(t_instruc *instruc, int index_r, int j)
     return (1);
 }
 
-int     param_direct(t_instruc *instruc, char *index_r, int j, t_env *env)
+int     param_direct(t_instruc *instruc, char *index_d, int j, t_env *env)
 {
     // faire la condition pour le label
-    // faire la protection voir si c est bien que des chiffres
+    // faire la protection voir si c est bien que des chiffres + exception pour le comment
     char *hexa_d;
     int size;
  
@@ -106,13 +114,16 @@ int     param_direct(t_instruc *instruc, char *index_r, int j, t_env *env)
     if (instruc->for_direct == 0)
         size = 8;
     if ((instruc->params[j] & T_DIR) != T_DIR)
-        return (-1); // Mauvais parametre
+       error(4, env->line, j, ft_itoa(instruc->opcode));
+       // error(4, env->line, j, ft_itoa(instruc->opcode)); // Mauvais parametre
     instruc->params[j] = T_DIR;
-    if (index_r[0] == ':')
-        is_label_exist(&index_r[1], env, instruc, size);
+    if (index_d[0] == ':')
+        is_label_exist(&index_d[1], env, instruc, size);
+    else if (check_numbers(index_d) == -1)
+        error(10, env->line, j, ft_itoa(instruc->opcode));
     else
     {
-    hexa_d = ft_uitoa_base((uint16_t)ft_atoi(index_r), 16, 0);
+    hexa_d = ft_uitoa_base((uint16_t)ft_atoi(index_d), 16, 0);
     size = size - ft_strlen(hexa_d);
     while (size > 0)
     {
@@ -137,10 +148,13 @@ int     param_indirect(t_instruc *instruc, char *index_i, int j, t_env *env)
 
     size = 4;
     if ((instruc->params[j] & T_IND) != T_IND)
-        exit (0); // mauvais parametre
+       error(4, env->line, j, ft_itoa(instruc->opcode));
+        //error(4, env->line, j, ft_itoa(instruc->opcode)); // mauvais parametre
     instruc->params[j] = T_IND;
     if (index_i[0] == ':')
         is_label_exist(&index_i[1], env, instruc, size);
+    else if (check_numbers(index_i) == -1)
+        error(10, env->line, j, ft_itoa(instruc->opcode));
     else
     {
     hexa_i = ft_uitoa_base((uint16_t)ft_atoi(index_i), 16, 0);
@@ -166,8 +180,10 @@ int     what_params(char *params, t_instruc *instruc, int j, t_env *env)
 
     i = 0;
     since_space = ft_strtrim(params);
+    if (ft_strlen(since_space) == 0)
+        error(10, env->line, j, ft_itoa(instruc->opcode));
         if (since_space[0] == 'r')
-            param_register(instruc, ft_atoi(&since_space[1]), j);
+            param_register(instruc, &since_space[1], j, env);
         else if (since_space[0] == '%')
             param_direct(instruc, &since_space[1], j, env);
         else if ((ft_isdigit(since_space[0]) || (ft_isdigit(since_space[1]) && since_space[0] == '-')) || since_space[0] == ':')
@@ -175,8 +191,8 @@ int     what_params(char *params, t_instruc *instruc, int j, t_env *env)
       ft_printf("params hexa dans la boucle == %s\n", instruc->hexa_instruc);
         //else if (ft_isdigit(since_space[0]))
           //  param_direct(ins)
-    //ft_printf("since space == %s\n", since_space);
-    ft_strdel(&since_space);
+    ft_printf("since space == %s || size == %d\n", since_space, ft_strlen(since_space));
+   // ft_strdel(&since_space); / malloc free error
     return (0);
 }
 
@@ -186,6 +202,11 @@ int     check_params(char **params, t_env *env)
     t_instruc *tmp;
 
     tmp = get_last_intruct(env->instruc);
+    j = 0;
+    while (params[j])
+        j++;
+    if (j != tmp->nbr_params)
+        error(9, env->line, -1, ft_itoa(tmp->opcode));
     j = 0;
     while (params[j])
     {
@@ -199,11 +220,12 @@ int     check_params(char **params, t_env *env)
 
 int     get_params(char *line, t_env *env)
 {
+    //char **comment;
     char **params;
 
+    //comment = ft_strsplit(line, COMMENT_CHAR);
     params = ft_strsplit(line, ',');
-   // ft_printf("params == %s\n", params[0]);
     check_params(params, env);
-    ft_strrdel(params);
+     //ft_printf("params == %s\n", params[0]);
     return (1);
 }

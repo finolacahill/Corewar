@@ -32,6 +32,7 @@ t_instruc   *new_instruct()
     new->next = NULL;
     new->index = 0;
     new->for_direct = 0;
+    new->nbr_params = 0;
     return (new);
 }
 
@@ -42,6 +43,8 @@ t_env   *init_env()
     new = (t_env*)malloc(sizeof(t_env));
     new->header = (header_t*)malloc(sizeof(header_t));
     new->instruc = new_instruct();
+    new->line = 0;
+    new->column = 0;
     new->label = new_label();
     return (new);
 }

@@ -13,6 +13,7 @@ int     put_adress_label(t_instruc *instruc)
     i = 0;
     while (tmp->next)
     {
+        if (tmp->hexa_instruc)
         i = i + ((ft_strlen(tmp->hexa_instruc) + 2) / 2);
         tmp = tmp->next;
     }
@@ -47,6 +48,7 @@ void    put_label(t_env *env, char *label)
     while (tmp->next)
         tmp = tmp->next;
     tmp->label = ft_strdup(label);
+      ft_printf("lol");
     tmp->adress = put_adress_label(env->instruc);
     tmp->next = new_label();
     use_label(env, tmp);
