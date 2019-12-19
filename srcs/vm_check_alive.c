@@ -19,7 +19,7 @@ static t_process	*kill_process(t_all *vm, t_process **p, t_process *t, t_process
 {
 	if (prev == NULL)
 	{
-			
+		ft_printf("\t\tkilling a process of id %d\n", t->id);
 		(*p) = t->next;
 		free_process(vm, t);
 		t = (*p);
@@ -40,13 +40,12 @@ t_process	**kill_dead_process(t_all *vm, t_process **p, t_process *prev)
 
 	t = *p;
 	i = 0;
-	while (vm->total_process > 0 && t != NULL)
-	{
+	while (vm->total_process >= 0 && t != NULL)
+	{	
 		if (vm->champs[t->id - 1].last_live == -2
 			|| t->live_calls < vm->cycles - vm->cycles_to_die)
 		{
 			t = kill_process(vm, p, t, prev);
-			--vm->total_process;
 		}
 		else
 		{
