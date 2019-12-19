@@ -25,10 +25,15 @@ void    put_comment(t_env *env, char *line)
     if (line[i] == '\0')
          error_cmd(1, "comment", env->line);
     i++;
-    /*while (line[i])
+    j = i;
+   while (line[i])
     {
-        if ()
-    }*/
+        if (line[i] != ';' && line[i] > ' ')
+            exit(0);
+        else if (line[i] == ';')
+            ft_printf("split ; autoriser");
+        i++;
+    }
     //ft_printf("comment == %s\n", env->header->comment);
 }
 void    put_name(t_env *env, char *line)
