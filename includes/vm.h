@@ -118,7 +118,7 @@ int				check_op_block(t_all *vm, t_process *process);
 int				free_all(t_all *vm, t_process *p);
 void    		free_process(t_all *vm, t_process *p);
 t_process		*ft_decode_byte(unsigned char c, t_process *p);
-void 			ft_print_arena(t_all *vm);
+void 			ft_print_arena(t_all *vm, int len);
 int				get_duration(t_all *vm, int opc);
 int     		get_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
 int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);
@@ -135,11 +135,11 @@ int				is_player_nb(int i, t_all *vm);
 t_process		**kill_dead_process(t_all *vm, t_process **p, t_process *prev);
 t_process 		*load_processes(t_all *vm, t_process *head);
 void			load_value(t_all *vm, int address, int len, int val);
-//void    		load_val4_at_ind(t_all *vm, t_process *p, int val, int bytes_read);
+void			load_new_process(t_all *vm, t_process *p);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				re_check_block(t_all *vm, t_process *process);
-int 			run_processes(t_all *vm, t_process *head, t_op *op_table);
-int     		run_vm(t_all *vm, t_process *p);
+int 			run_processes(t_all *vm, t_process **head, t_op *op_table);
+int				run_vm(t_all *vm, t_process *p);
 
 // operations
 t_op			*init_op_check(t_all *vm, t_op *op);

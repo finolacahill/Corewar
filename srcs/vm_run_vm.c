@@ -14,6 +14,7 @@ int     run_vm(t_all *vm, t_process *process)
 {
 	t_op		*op_table;
 
+	printf("HELLO\n");
 	if (!(op_table = (t_op*)malloc(sizeof(t_op) * 16)))
 		return (error_run_vm(vm, process, op_table));
 //add malloc protections for init op_check
@@ -24,10 +25,12 @@ int     run_vm(t_all *vm, t_process *process)
 		return (error_run_vm(vm, process, op_table));
 	while (check_alive(vm, &process) == 1)
 	{
-		if ((run_processes(vm, process, op_table) == -100))
+		if ((run_processes(vm, &process, op_table) == -100))
 			return (0);
 			//FREE ZL THINGS HErE
+			printf("it's me\n");
 	}
+	printf("I wzs wondering\n");
 	declare_winner(vm);
 	free_op_table(op_table);
 	return (0);

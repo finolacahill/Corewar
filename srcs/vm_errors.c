@@ -16,7 +16,7 @@ int			error_arena(t_all *vm, t_process *p)
 int			error_run_vm(t_all *vm, t_process *p, t_op *op_table)
 {
 	if (op_table != NULL)
-		free_op_table(&op_table);
+		free_op_table(op_table);
 	ft_printf("Malloc error run_vm.\n");
 	return (-1);
 }

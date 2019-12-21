@@ -1,0 +1,285 @@
+Introducing contestants...
+* Player 1, weighing 617 bytes, "helltrain" ("choo-choo, motherf*****s !") !
+	=> id 1 do operation 11 at cycle 25
+	=> id 1 do operation 11 at cycle 50
+	=> id 1 do operation 11 at cycle 75
+	=> id 1 do operation 11 at cycle 100
+	=> id 1 do operation 11 at cycle 125
+	=> id 1 do operation 11 at cycle 150
+	=> id 1 do operation 11 at cycle 175
+	=> id 1 do operation 11 at cycle 200
+	=> id 1 do operation 11 at cycle 225
+	=> id 1 do operation 11 at cycle 250
+	=> id 1 do operation 11 at cycle 275
+	=> id 1 do operation 11 at cycle 300
+	=> id 1 do operation 2 at cycle 305
+	 	load val 0 in reg 16
+	=> id 1 do operation 12 at cycle 1105
+	=> id 1 do operation 2 at cycle 1110
+	 	load val 0 in reg 2
+	=> id 1 do operation 2 at cycle 1115
+	 	load val 0 in reg 16
+	=> id 10 do operation 1 at cycle 1116
+	=> id 10 do operation 2 at cycle 1125
+	 	load val 0 in reg 16
+	=> id 1 do operation 1 at cycle 1125
+A process shows that player number 1, helltrain, is alive.
+	=> id 1 do operation 3 at cycle 1130
+		load r2 at at 65512 + pc
+	=> id 10 do operation 1 at cycle 1135
+A process shows that player number 1, helltrain, is alive.
+	=> id 1 do operation 3 at cycle 1135
+		load r2 at at 65503 + pc
+	=> id 10 do operation 3 at cycle 1140
+		load r2 at at 65512 + pc
+	=> id 1 do operation 3 at cycle 1140
+		load r2 at at 65494 + pc
+	=> id 10 do operation 3 at cycle 1145
+		load r2 at at 65503 + pc
+	=> id 1 do operation 3 at cycle 1145
+		load r2 at at 65485 + pc
+	=> id 10 do operation 3 at cycle 1150
+		load r2 at at 65494 + pc
+	=> id 1 do operation 3 at cycle 1150
+		load r2 at at 65476 + pc
+	=> id 10 do operation 3 at cycle 1155
+		load r2 at at 65485 + pc
+	=> id 1 do operation 3 at cycle 1155
+		load r2 at at 65467 + pc
+	=> id 10 do operation 3 at cycle 1160
+		load r2 at at 65476 + pc
+	=> id 1 do operation 3 at cycle 1160
+		load r2 at at 65458 + pc
+	=> id 10 do operation 3 at cycle 1165
+		load r2 at at 65467 + pc
+	=> id 1 do operation 3 at cycle 1165
+		load r2 at at 65449 + pc
+	=> id 10 do operation 3 at cycle 1170
+		load r2 at at 65458 + pc
+	=> id 1 do operation 3 at cycle 1170
+		load r2 at at 65440 + pc
+	=> id 10 do operation 3 at cycle 1175
+		load r2 at at 65449 + pc
+	=> id 1 do operation 3 at cycle 1175
+		load r2 at at 65431 + pc
+	=> id 10 do operation 3 at cycle 1180
+		load r2 at at 65440 + pc
+	=> id 1 do operation 3 at cycle 1180
+		load r2 at at 65422 + pc
+	=> id 10 do operation 3 at cycle 1185
+		load r2 at at 65431 + pc
+	=> id 1 do operation 3 at cycle 1185
+		load r2 at at 65413 + pc
+	=> id 10 do operation 3 at cycle 1190
+		load r2 at at 65422 + pc
+	=> id 1 do operation 3 at cycle 1190
+		load r2 at at 65404 + pc
+	=> id 10 do operation 3 at cycle 1195
+		load r2 at at 65413 + pc
+	=> id 1 do operation 3 at cycle 1195
+		load r2 at at 65395 + pc
+	=> id 10 do operation 3 at cycle 1200
+		load r2 at at 65404 + pc
+	=> id 1 do operation 3 at cycle 1200
+		load r2 at at 65386 + pc
+	=> id 10 do operation 3 at cycle 1205
+		load r2 at at 65395 + pc
+	=> id 1 do operation 3 at cycle 1205
+		load r2 at at 65377 + pc
+	=> id 10 do operation 3 at cycle 1210
+		load r2 at at 65386 + pc
+	=> id 1 do operation 3 at cycle 1210
+		load r2 at at 65368 + pc
+	=> id 10 do operation 3 at cycle 1215
+		load r2 at at 65377 + pc
+	=> id 1 do operation 3 at cycle 1215
+		load r2 at at 65359 + pc
+	=> id 10 do operation 3 at cycle 1220
+		load r2 at at 65368 + pc
+	=> id 1 do operation 3 at cycle 1220
+		load r2 at at 65350 + pc
+	=> id 10 do operation 3 at cycle 1225
+		load r2 at at 65359 + pc
+	=> id 1 do operation 3 at cycle 1225
+		load r2 at at 65341 + pc
+	=> id 10 do operation 3 at cycle 1230
+		load r2 at at 65350 + pc
+	=> id 1 do operation 3 at cycle 1230
+		load r2 at at 65332 + pc
+	=> id 10 do operation 3 at cycle 1235
+		load r2 at at 65341 + pc
+	=> id 1 do operation 3 at cycle 1235
+		load r2 at at 65323 + pc
+	=> id 10 do operation 3 at cycle 1240
+		load r2 at at 65332 + pc
+	=> id 1 do operation 3 at cycle 1240
+		load r2 at at 65314 + pc
+	=> id 10 do operation 3 at cycle 1245
+		load r2 at at 65323 + pc
+	=> id 1 do operation 3 at cycle 1245
+		load r2 at at 65305 + pc
+	=> id 10 do operation 3 at cycle 1250
+		load r2 at at 65314 + pc
+	=> id 1 do operation 3 at cycle 1250
+		load r2 at at 65296 + pc
+	=> id 10 do operation 3 at cycle 1255
+		load r2 at at 65305 + pc
+	=> id 1 do operation 3 at cycle 1255
+		load r2 at at 65287 + pc
+	=> id 10 do operation 3 at cycle 1260
+		load r2 at at 65296 + pc
+	=> id 1 do operation 3 at cycle 1260
+		load r2 at at 65278 + pc
+	=> id 10 do operation 3 at cycle 1265
+		load r2 at at 65287 + pc
+	=> id 1 do operation 3 at cycle 1265
+		load r2 at at 65269 + pc
+	=> id 10 do operation 3 at cycle 1270
+		load r2 at at 65278 + pc
+	=> id 1 do operation 3 at cycle 1270
+		load r2 at at 65260 + pc
+	=> id 10 do operation 3 at cycle 1275
+		load r2 at at 65269 + pc
+	=> id 1 do operation 3 at cycle 1275
+		load r2 at at 65251 + pc
+	=> id 10 do operation 3 at cycle 1280
+		load r2 at at 65260 + pc
+	=> id 1 do operation 3 at cycle 1280
+		load r2 at at 65242 + pc
+	=> id 10 do operation 3 at cycle 1285
+		load r2 at at 65251 + pc
+	=> id 1 do operation 3 at cycle 1285
+		load r2 at at 65233 + pc
+	=> id 10 do operation 3 at cycle 1290
+		load r2 at at 65242 + pc
+	=> id 1 do operation 3 at cycle 1290
+		load r2 at at 65224 + pc
+	=> id 10 do operation 3 at cycle 1295
+		load r2 at at 65233 + pc
+	=> id 1 do operation 3 at cycle 1295
+		load r2 at at 65215 + pc
+	=> id 10 do operation 3 at cycle 1300
+		load r2 at at 65224 + pc
+	=> id 1 do operation 3 at cycle 1300
+		load r2 at at 65206 + pc
+	=> id 10 do operation 3 at cycle 1305
+		load r2 at at 65215 + pc
+	=> id 1 do operation 3 at cycle 1305
+		load r2 at at 65197 + pc
+	=> id 10 do operation 3 at cycle 1310
+		load r2 at at 65206 + pc
+	=> id 1 do operation 3 at cycle 1310
+		load r2 at at 65188 + pc
+	=> id 10 do operation 3 at cycle 1315
+		load r2 at at 65197 + pc
+	=> id 1 do operation 3 at cycle 1315
+		load r2 at at 65179 + pc
+	=> id 10 do operation 3 at cycle 1320
+		load r2 at at 65188 + pc
+	=> id 1 do operation 3 at cycle 1320
+		load r2 at at 65170 + pc
+	=> id 10 do operation 3 at cycle 1325
+		load r2 at at 65179 + pc
+	=> id 1 do operation 3 at cycle 1325
+		load r2 at at 65161 + pc
+	=> id 10 do operation 3 at cycle 1330
+		load r2 at at 65170 + pc
+	=> id 1 do operation 3 at cycle 1330
+		load r2 at at 65152 + pc
+	=> id 10 do operation 3 at cycle 1335
+		load r2 at at 65161 + pc
+	=> id 1 do operation 3 at cycle 1335
+		load r2 at at 65143 + pc
+	=> id 10 do operation 3 at cycle 1340
+		load r2 at at 65152 + pc
+	=> id 1 do operation 3 at cycle 1340
+		load r2 at at 65134 + pc
+	=> id 10 do operation 3 at cycle 1345
+		load r2 at at 65143 + pc
+	=> id 1 do operation 3 at cycle 1345
+		load r2 at at 65125 + pc
+	=> id 10 do operation 3 at cycle 1350
+		load r2 at at 65134 + pc
+	=> id 1 do operation 3 at cycle 1350
+		load r2 at at 65116 + pc
+	=> id 10 do operation 3 at cycle 1355
+		load r2 at at 65125 + pc
+	=> id 1 do operation 3 at cycle 1355
+		load r2 at at 65107 + pc
+	=> id 10 do operation 3 at cycle 1360
+		load r2 at at 65116 + pc
+	=> id 1 do operation 3 at cycle 1360
+		load r2 at at 65098 + pc
+	=> id 10 do operation 3 at cycle 1365
+		load r2 at at 65107 + pc
+	=> id 1 do operation 3 at cycle 1365
+		load r2 at at 65089 + pc
+	=> id 10 do operation 3 at cycle 1370
+		load r2 at at 65098 + pc
+	=> id 1 do operation 3 at cycle 1370
+		load r2 at at 65080 + pc
+	=> id 10 do operation 3 at cycle 1375
+		load r2 at at 65089 + pc
+	=> id 1 do operation 3 at cycle 1375
+		load r2 at at 65071 + pc
+	=> id 10 do operation 3 at cycle 1380
+		load r2 at at 65080 + pc
+	=> id 1 do operation 3 at cycle 1380
+		load r2 at at 65062 + pc
+	=> id 10 do operation 3 at cycle 1385
+		load r2 at at 65071 + pc
+	=> id 1 do operation 3 at cycle 1385
+		load r2 at at 65053 + pc
+	=> id 10 do operation 3 at cycle 1390
+		load r2 at at 65062 + pc
+	=> id 1 do operation 3 at cycle 1390
+		load r2 at at 65044 + pc
+	=> id 10 do operation 3 at cycle 1395
+		load r2 at at 65053 + pc
+	=> id 1 do operation 3 at cycle 1395
+		load r2 at at 65035 + pc
+	=> id 10 do operation 3 at cycle 1400
+		load r2 at at 65044 + pc
+	=> id 1 do operation 3 at cycle 1400
+		load r2 at at 65026 + pc
+	=> id 10 do operation 3 at cycle 1405
+		load r2 at at 65035 + pc
+	=> id 10 do operation 3 at cycle 1410
+	=> id 1 do operation 15 at cycle 2618
+	=> id 1 do operation 1 at cycle 2631
+	=> id 10 do operation 15 at cycle 2632
+	=> id 10 do operation 1 at cycle 2645
+		Champ 1 is dead.
+		killing a process of id 10
+		killing a process of id 1
+THE WINNER IS PLAYER NUMBER 1, helltrain!!!
+HELLO
+512
+store to 391 + 1 with mod 392 (with pc 0 
+512
+store to 399 + 1 with mod 400 (with pc 7 
+512
+store to 400 + 1 with mod 401 (with pc 14 
+512
+store to 87 + 1 with mod 88 (with pc 21 
+512
+store to 397 + 1 with mod 398 (with pc 28 
+512
+store to 390 + 9 with mod 399 (with pc 35 
+512
+store to 383 + 17 with mod 400 (with pc 42 
+512
+store to 421 + 1 with mod 422 (with pc 49 
+512
+store to 393 + 2 with mod 395 (with pc 56 
+512
+store to 461 + 1 with mod 462 (with pc 63 
+512
+store to 454 + 9 with mod 463 (with pc 70 
+512
+store to 408 + 1 with mod 409 (with pc 77 
+head = 10
+next head = 1
+it's me
+it's me
+I wzs wondering

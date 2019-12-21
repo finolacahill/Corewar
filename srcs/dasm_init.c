@@ -41,8 +41,8 @@ void	dasm_init_champs(t_all *vm, int ac, char **av)
 		vm->champs[vm->total_champ].pc = 0;
 		vm->total_champ++;
 	}
-	// vm_print_intro(vm);
-	dasm_print_all(vm);
+	vm_print_intro(vm);
+//	dasm_print_all(vm);
 }
 
 void	dasm_init(t_all *vm, int ac, char **av)

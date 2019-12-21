@@ -1,41 +1,5 @@
 #include "../includes/vm.h"
 
-void ft_print_arena(t_all *vm)
-{
-    int i = -1; 
-    int j = -1;
-    int colour = 0;
-    int x = 0;
-    int z = -1;
- 
-    while (++z < 64)
-        ft_printf("%02d ", z);
-    ft_printf("\n---------------------------------------------------------------------------------------------------------------------------------------------\n");
-    while (++i < MEM_SIZE)
-    {
-        if (i >= vm->champs[x].start &&
-            i < vm->champs[x].start + (int)vm->champs[x].len_exec_code)
-            {
-                ft_printf("\033[0;35m%02x ", vm->arena[i]);
-                if (i == vm->champs[x].start + (int)vm->champs[x].len_exec_code - 1)
-                    ++x;
-            }
-        else
-        {
-            if (vm->arena[i] != 0)
-                ft_printf("\033[0;35m%02x ", vm->arena[i]);
-            else
-                ft_printf("\033[0m%02x ", vm->arena[i]);
-        }
-        if (++j == 63)
-        {
-            ft_printf("\n");
-            j = -1;
-        }
-    }
-    ft_putchar('\n');
-}
-
 int			get_duration(t_all *vm, int opc)
 {
 	if (opc == 1 || opc == 4 || opc == 5 || opc == 13)
