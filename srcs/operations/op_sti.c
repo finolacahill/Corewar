@@ -28,9 +28,10 @@ void    op_sti(t_all *vm, t_process *p)
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	p3 = get_unspecified_val_2(vm,p, &bytes_read, 2);
-	printf("%d\n", IDX_MOD);
-	printf("store to %d + %d with mod %d (with pc %d \n",  p2, p3, ((p2 + p3) % IDX_MOD), p->pc);
+//	ft_printf("reg = %d, p1 = %d/%02x, p2 = %d/%02x\n", p1, p2, p2, p3, p3);
+//	ft_printf("\t\tstore to %d + %d with mod %d (with pc %d) \n",  p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % IDX_MOD);
 	if (p->op_fail == 1)
 		return ;
-	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)), 4, p1);
+	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)) , 4, p1);
+//	ft_print_arena(vm, 64, p->pc + ((p2 + p3) % IDX_MOD));
 }

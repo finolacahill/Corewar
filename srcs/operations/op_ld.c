@@ -24,16 +24,9 @@ void    op_ld(t_all *vm, t_process *p)
 	int     bytes_read;
 
 	bytes_read = 1;
-
-/*	if (p->decode[0] == IND_CODE)
-	{
-		pm1 = get_val_at_ind(vm, p, 1, 1);
-		bytes_read = 3;
-	}
-	else
-		pm1 = get_next_bytes(vm, p, 4, 1);*/
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
 	load_val_in_reg(vm, p, pm1, bytes_read);
+//	ft_printf("%d or %02x\n", p->r[0], p->r[0]);
 	if (p->op_fail == 1)
 		return ;
 	check_carry(p, pm1);

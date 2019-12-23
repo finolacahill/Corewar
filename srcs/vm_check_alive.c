@@ -19,7 +19,7 @@ static t_process	*kill_process(t_all *vm, t_process **p, t_process *t, t_process
 {
 	if (prev == NULL)
 	{
-		ft_printf("\t\tkilling a process of id %d\n", t->id);
+//		ft_printf("\t\tkilling a process of Pid %d\n", t->pid);
 		(*p) = t->next;
 		free_process(vm, t);
 		t = (*p);

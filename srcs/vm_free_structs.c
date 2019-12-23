@@ -15,8 +15,9 @@ void    free_process(t_all *vm, t_process *p)
 
 void	free_vm(t_all *vm)
 {
+	printf("\n\t\tHEREEEE\n\n");
 	if (vm->arena != NULL)
-		free(vm->arena);
+		ft_memdel((void **)&vm->arena);
 	vm->arena = NULL;
 	dasm_free(vm);
 	vm = NULL;

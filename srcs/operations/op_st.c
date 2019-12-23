@@ -40,7 +40,8 @@ void    op_st(t_all *vm, t_process *p)
     else
     {
       param2 = get_ind(vm, p, 2, 0);
-      ft_printf("\t\tload r%d at at %d + pc\n", get_next_bytes(vm, p, 1, 1), param2);
+   //   ft_printf("param 2= %d/%02x\n", param2, param2);
+ //     ft_printf("\t\tload r%d at at %d/%d + pc %d\n", get_next_bytes(vm, p, 1, 1), param2, param2 % IDX_MOD, p->pc);
       load_value(vm, p->pc + (param2 % IDX_MOD), 4, param1);
     }
     check_carry(p, param1);

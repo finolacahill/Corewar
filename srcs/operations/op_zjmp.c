@@ -10,12 +10,15 @@ uint16_t		check_op_zjmp(t_all *all, uint8_t *content)
 void    op_zjmp(t_all *vm, t_process *p)
 {
 	int address;
-
+//	ft_printf("CARRY JUMP = %d\n", p->carry);
 	if (p->carry == 1)
 	{
-		address = get_next_bytes(vm, p, 2, 0) ;
+	//	(vm, 64, p->pc);
+		address = get_next_bytes(vm, p, 2, 0);
+//		ft_printf("address = %02x ", address);
+//		ft_printf("old pc = %d\n", p->pc);
 		p->pc = (p->pc + address - 1) % MEM_SIZE;
-		ft_printf("\t\t jumped to %d\n", p->pc + 1);
+//		ft_printf("\t\t jumped to %d\n", p->pc + 1);
 	}
 	else
 	{

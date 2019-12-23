@@ -1,0 +1,1 @@
+Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth| -n --stealth] [-a] <champion1.cor> <...>

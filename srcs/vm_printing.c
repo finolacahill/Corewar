@@ -13,7 +13,7 @@ static void print_top_line(int len)
     ft_printf("------------------------------------------------------------------------\n");
 }
 
-static void print_line(t_all *vm, int len, int start)
+static void print_line(t_all *vm, int len, int start, int pc)
 {
     int i;
     int x;
@@ -22,6 +22,11 @@ static void print_line(t_all *vm, int len, int start)
     x = 0;
     while (++i < len + start)
     {
+        if (i == pc)
+        {
+               ft_printf("\033[1;31m%02x ", vm->arena[i]);
+               continue ;
+        }
         if (i >= vm->champs[x].start &&
             i < vm->champs[x].start + (int)vm->champs[x].len_exec_code)
             {
@@ -44,7 +49,7 @@ static void print_hex(start)
     ft_printf("%#05x : ", start);
 }
 
-void ft_print_arena(t_all *vm, int len)
+void ft_print_arena(t_all *vm, int len, int pc)
 {
     int start = 0;
  
@@ -52,7 +57,7 @@ void ft_print_arena(t_all *vm, int len)
     while (start < MEM_SIZE)
     {
         print_hex(start);
-        print_line(vm, len, start);
+        print_line(vm, len, start, pc);
         ft_putchar('\n');
         start += len;
     }    

@@ -21,11 +21,13 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	i = 0;
 	while (++i <= len)
 	{
-		// printf("val b4 shift = %d\n", val);
+	//	 printf("val b4 shift = %d", val);
 		val <<= 8;
-		// printf("val after = %d\n", val);
+	//	 printf("val after = %d", val);
 		val += vm->arena[((p->pc + bytes_read + i)) % MEM_SIZE];
-		// printf("val added %d\n", val);
+	//	 printf("val added %d\n", val);
 	}
+	if (val >= 32768)
+		val -= 65536;
 	return (val);
 }

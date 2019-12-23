@@ -9,19 +9,23 @@ uint16_t		check_op_fork(t_all *all, uint8_t *content)
 	return (op_check_tab[11].dir_size + 1);
 }
 
-int		copy_process(t_process *p, t_process *new)
+t_process	*copy_process(t_process *p, t_process *new)
 {
 	int i; 
 
 	i = -1;
 	if (!(new = malloc(sizeof(t_process))))
-		return (-1);
+	{
+		p->op_fail = -1;
+		return (new);
+	};
 	if (!(new->decode = malloc(sizeof(int) * 4)))
 	{
 		free(new);
-		return (-1);
+		p->op_fail = -1;
+		return (new);
 	}
-	new->id = p->id * 10;
+	new->id = p->id;
 	while (++i < REG_NUMBER)	
 		new->r[i] = p->r[i];
 	new->op = 0;
@@ -31,23 +35,30 @@ int		copy_process(t_process *p, t_process *new)
 	new->op_fail = 0;
 	new->all_dead = 0;
 	new->next = p->next;
+	new->carry = p->carry;
 	p->next = new;
-	return (0);
+//	ft_printf("new pc = %d\n", new->pc);
+	return (new);
 }
-
+//323 (414)
 void    op_fork(t_all *vm, t_process *p)
 {
 	int p1;
-	t_process new;
+	t_process *new;
 
-	if ((copy_process(p, &new)) == -1)
-	{
-		p->op_fail = 1;
+	new = copy_process(p, new);
+	if (p->op_fail == -1)
 		return ;
-	}
-	p1 = get_next_bytes(vm, p, 4, 0) % IDX_MOD;
-	new.pc += p1 - 1;
-	load_new_process(vm, &new);
+//	ft_printf("new pc = %d\n", new.pc);
+	int p2;
+//	(vm, 64, p->pc);
+	p1 = get_next_bytes(vm, p, 2, 0);	
+//	ft_printf("%04x, %04x\n", p->op, p1);
+//	ft_printf("\t\tFork to %d (+ pc %d = %d)\n", p1, new->pc, p1 + new->pc);
+	new->pc += p1 - 1;
+	load_new_process(vm, new);
+	new->pid = vm->total_process + 1;
 	++vm->total_process;
+	p->next = new;
 	p->op_fail = 2;
 }

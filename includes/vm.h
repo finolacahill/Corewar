@@ -55,6 +55,7 @@ typedef struct		s_all
 typedef struct			s_process
 {
 	int					id;
+	int					pid;
 	int					r[REG_NUMBER];
 	int					pc;
 	char				carry;
@@ -118,7 +119,7 @@ int				check_op_block(t_all *vm, t_process *process);
 int				free_all(t_all *vm, t_process *p);
 void    		free_process(t_all *vm, t_process *p);
 t_process		*ft_decode_byte(unsigned char c, t_process *p);
-void 			ft_print_arena(t_all *vm, int len);
+void 			ft_print_arena(t_all *vm, int len, int pc);
 int				get_duration(t_all *vm, int opc);
 int     		get_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
 int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);

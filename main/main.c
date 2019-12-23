@@ -25,7 +25,7 @@ int main(int ac, char **av)
 		return (error_arena(&vm, &p));
 	if (run_vm(&vm, &p) == -1)
 		return (free_all(&vm, &p));
-//	ft_print_arena(&vm);
+//	(&vm);
 	free_all(&vm, NULL);
 	// free the vm
 }
