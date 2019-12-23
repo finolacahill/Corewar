@@ -6,17 +6,19 @@
 /*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:16:19 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/23 16:44:34 by fcahill          ###   ########.fr       */
+/*   Updated: 2019/12/23 14:56:02 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
+
 typedef struct		s_list
 {
 	void			*content;
@@ -95,5 +97,5 @@ char				*ft_uitoa_base(unsigned long long value, int base, int cap);
 char				*ft_strjoin_fr(char *s1, char *s2, int i);
 char				*ft_strrev_fr(char *str);
 double				ft_power(double nbr, double power);
-void	ft_strrdel(char **arr);
+void				ft_strrdel(char **arr);
 #endif

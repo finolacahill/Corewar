@@ -1,4 +1,3 @@
 .name "test"
 .comment "ca marche"
-
-l3: sti r1, -2, %10 #ptdr
+ld      %2147483648,r3            #03 70 03 00

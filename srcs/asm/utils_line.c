@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   utils_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/22 18:36:08 by yodana            #+#    #+#             */
-/*   Updated: 2019/12/22 18:36:42 by yodana           ###   ########.fr       */
+/*   Created: 2019/12/23 04:29:29 by yodana            #+#    #+#             */
+/*   Updated: 2019/12/23 04:29:52 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,54 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
-void	free_label(t_label *label)
+int		line_iscomment(char *line)
 {
-	t_label *tmp;
-	t_label *free_tmp;
+	int i;
 
-	tmp = label;
-	while (tmp)
-	{
-		ft_strdel(&tmp->label);
-		free_tmp = tmp;
-		tmp = tmp->next;
-		free(free_tmp);
-	}
+	i = 0;
+	while (line[i] && line[i] <= 32)
+		i++;
+	if (line[i] == COMMENT_CHAR)
+		return (1);
+	return (-1);
 }
 
-void	free_instruc(t_instruc *instruc)
+int		len_instruc(t_instruc *instruc)
 {
-	t_instruc *tmp;
-	t_instruc *free_tmp;
+	int			i;
+	t_instruc	*tmp;
 
+	i = 0;
 	tmp = instruc;
 	while (tmp)
 	{
-		free(tmp->params);
-		ft_strdel(&tmp->hexa_instruc);
-		ft_strdel(&tmp->hexa_params);
-		free_label(tmp->label);
-		free_tmp = tmp;
+		if (tmp->hexa_instruc)
+			i = i + (ft_strlen(tmp->hexa_instruc) + 2);
 		tmp = tmp->next;
-		free(free_tmp);
 	}
+	return (i);
 }
 
-void	free_env(t_env *env)
+int		line_ispoint(char *line)
 {
-	free_instruc(env->instruc);
-	free_label(env->label);
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] <= 32)
+		i++;
+	if (line[i] == '.')
+		return (1);
+	return (-1);
 }
 
-void	free_all(t_env *env, t_header *header)
+int		line_empty(char *line)
 {
-	free_env(env);
-	free(env);
-	free(header);
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] <= 32)
+		i++;
+	if (line[i] == '\0')
+		return (-1);
+	return (1);
 }

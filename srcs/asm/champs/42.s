@@ -1,7 +1,7 @@
 .name           "42"
 .comment        "Just a basic Winner Program"
 
-entree:	live	%42
+entree:	live	%42		# entree
 	ld	%0,r5
 	ld	%0,r5
 	zjmp	%:bite
@@ -74,7 +74,7 @@ p32li:	live	%1
 tirvd:	zjmp	%:tirvd2
 
 bite:	sti     r1,%:copie,%2
-        ldi     %:copie,%3,r2
+        ldi     %:copie,%3,r2   # met le ld a l'entree
         sti     r2,%:entree,%-4
         ldi     %:copie,%-1,r2
         sti     r2,%:entree,%-8
@@ -83,17 +83,17 @@ bite:	sti     r1,%:copie,%2
 	sti	r1,%:b0,%1
 
 	ld	%0,r2
-	ld	%8,r3
+	ld	%8,r3		# prepare les fork
 	ld	%1,r4
 	ld	%0,r6
 
-b0:	live	%1
+b0:	live	%1		# boucle fork
 	sub	r3,r4,r3
 	zjmp	%:tart
 	fork	%:b1
 	st	r5,r2
-	xor	r10,r10,r10
-	add	r10,r10,r10
+	xor	r10,r10,r10	# pour rien
+	add	r10,r10,r10	# pour rien
 	add	r6,r6,r6
 	ld	%0,r10
 	zjmp	%:b0
@@ -141,12 +141,12 @@ l10:	live	%1
 
 p1:	zjmp	%:infi
 
-        live    %0         
+        live    %0              # pour boucher l'entree
 copie:  ld      %1,r1
 
 
 tart:	sti	r1,%:p64li,%1
-	or	r2,r2,r2
+	or	r2,r2,r2	# selection vers les modules
 	zjmp	%:p64
 	sub	r2,r4,r2
 	zjmp	%:p32
@@ -209,7 +209,7 @@ p64deb:	zjmp	%0
 
 p64:	ld	%10,r8
 	sub	r6,r8,r6
-	and	r6,%2147483648,r1 #erreur int max
+	and	r6,%2147483648,r8
 	zjmp	%:cont
 	ld	%118,r8
 	add	r6,r8,r6

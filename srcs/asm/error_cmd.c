@@ -26,7 +26,7 @@ static const	t_error_cmd g_error_cmd_tab[] =
 	{0, NULL}
 };
 
-void	which_cmd_error(header_t *header)
+void	which_cmd_error(t_header *header)
 {
 	if (header->n == 0)
 		error_cmd(5, "name", -1);
