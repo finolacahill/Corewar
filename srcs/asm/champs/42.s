@@ -209,7 +209,7 @@ p64deb:	zjmp	%0
 
 p64:	ld	%10,r8
 	sub	r6,r8,r6
-	and	r6,%2147483648,r8
+	and	r6,%2147483648,r8 
 	zjmp	%:cont
 	ld	%118,r8
 	add	r6,r8,r6

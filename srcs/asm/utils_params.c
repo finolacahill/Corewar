@@ -18,14 +18,10 @@
 
 void	put_params(char *hexa, t_instruc *instruc, int size, char *index, int j)
 {
-	//if (instruc->params[j] == T_DIR)
-	//	hexa = ft_uitoa_base(ft_atoi(index), 16, 0);
-	//else
-	(void)j;
 	if (size != 8)
 		hexa = ft_uitoa_base((uint16_t)ft_atoi(index), 16, 0);
 	else
-		hexa = ft_uitoa_base(ft_atoi(index), 16, 0);
+		hexa = ft_uitoa_base((uint32_t)ft_atoi(index), 16, 0);
 	size = size - ft_strlen(hexa);
 	while (size > 0)
 	{
