@@ -10,6 +10,18 @@ void	declare_winner(t_all *vm)
 	}	
 }
 
+void	check_pid(t_process *process)
+{
+	t_process *tracker;
+	
+	tracker = process;
+	while (tracker != NULL)
+	{
+		ft_printf("pid = %d id = %d ", tracker->pid, tracker->id);
+		tracker = tracker->next;
+	}
+	ft_putchar('\n');
+}
 int     run_vm(t_all *vm, t_process *process)
 {
 	t_op		*op_table;
@@ -23,8 +35,10 @@ int     run_vm(t_all *vm, t_process *process)
 	if (process->start == -1)
 		return (error_run_vm(vm, process, op_table));
 //	ft_print_arena(vm, 64, 0);
+	vm->flag_v = 3;
 	while (check_alive(vm, &process) == 1)
 	{
+//		check_pid(process);
 		if ((run_processes(vm, &process, op_table) == -100))
 			return (0);
 			//FREE ZL THINGS HErE

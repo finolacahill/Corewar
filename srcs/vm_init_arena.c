@@ -47,7 +47,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p->op = c->exec_code[0];
 	p->pc = p->start;
 	p->next = NULL;
-	p->exec_cycle = get_duration(vm, p->op);
+	p->exec_cycle = get_duration(vm, p->op) - 1;
 	p->bytes = 0;
 	c->last_live = 0;
 	p->op_fail = 0;
@@ -75,7 +75,7 @@ int init_arena(t_all *vm)
     vm->nbr_live_since_check = 0;
     vm->total_checks = 0;
     vm->total_process = 0;
-    if (!(vm->arena = malloc((sizeof(unsigned char)) * MEM_SIZE)))
+    if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
         return (-1);
     while (i < vm->total_champ)
     {
@@ -84,6 +84,6 @@ int init_arena(t_all *vm)
         ++i;
         divide = divide + MEM_SIZE / vm->total_champ;
     }
-  //ft_print_arena(vm, 64);
+ // 	ft_print_arena(vm, 64, 0);
    return (0);
 }

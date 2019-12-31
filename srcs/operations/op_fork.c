@@ -54,8 +54,9 @@ void    op_fork(t_all *vm, t_process *p)
 //	(vm, 64, p->pc);
 	p1 = get_next_bytes(vm, p, 2, 0);	
 //	ft_printf("%04x, %04x\n", p->op, p1);
-//	ft_printf("\t\tFork to %d (+ pc %d = %d)\n", p1, new->pc, p1 + new->pc);
-	new->pc += p1 - 1;
+	if (vm->flag_v == 3)
+		ft_printf("\t\t%d | Fork to %d (+ pc %d = %d) cycle %d\n", p->pid, p1, new->pc, p1 + new->pc, vm->cycles);
+	new->pc += (p1 % IDX_MOD) - 1;
 	load_new_process(vm, new);
 	new->pid = vm->total_process + 1;
 	++vm->total_process;

@@ -28,6 +28,9 @@ void    op_lld(t_all *vm, t_process *p)
 	else
 		pm1 = get_next_bytes(vm, p, 4, 1);
 	load_val_in_reg(vm, p, pm1, bytes_read);
+	if (vm->flag_v == 3)
+		ft_printf("\t\t%d | lld %d n", p->pid, pm1);
+
 	if (p->op_fail == 1)
 		return ;
 	check_carry(p, pm1);

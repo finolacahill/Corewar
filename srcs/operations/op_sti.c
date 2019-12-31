@@ -29,7 +29,8 @@ void    op_sti(t_all *vm, t_process *p)
 	p2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	p3 = get_unspecified_val_2(vm,p, &bytes_read, 2);
 //	ft_printf("reg = %d, p1 = %d/%02x, p2 = %d/%02x\n", p1, p2, p2, p3, p3);
-//	ft_printf("\t\tstore to %d + %d with mod %d (with pc %d) \n",  p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % IDX_MOD);
+	if (vm->flag_v == 3)
+		ft_printf("\t\t\n%d | sti reg %d val %d to %d + %d with mod %d (with pc %d) at cycle %d\n",  p->pid, get_next_bytes(vm, p, 1, 1), p1, p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
 	if (p->op_fail == 1)
 		return ;
 	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)) , 4, p1);

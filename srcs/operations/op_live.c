@@ -33,14 +33,16 @@ void	op_live(t_all *vm, t_process *p)
 //	ft_print_arena(vm, 64, p->pc);
 	if (is_player_nb(p1, vm) == 1)
 	{
+	//	if (p->id == 3)
+		//	ft_printf("turtle here %d pm = %d reg = %d\n", vm->cycles, p1, p->r[0]);
 		vm->champs[p1 - 1].last_live = vm->cycles;
 		p->live_calls = vm->cycles;
-//		ft_printf("A process shows that player number %d, %s, is alive.\n", p1, vm->champs[p1 - 1].name);
-		if (vm->last_alive_cycle <= vm->cycles)
-		{
-			vm->last_alive = p1;
-			vm->last_alive_cycle = vm->cycles;
-		}
+		if (vm->flag_v == 1)
+			ft_printf("A process shows that player number %d, %s, is alive.@ cycle%d\n", p1, vm->champs[p1 - 1].name, vm->cycles);
+		if (vm->flag_v == 3)
+			ft_printf("\t\t%d | Live %d \n", p->pid, p1);
+		vm->last_alive = p1;
+		vm->last_alive_cycle = vm->cycles;
 		++vm->nbr_live_since_check;
 	}
 }

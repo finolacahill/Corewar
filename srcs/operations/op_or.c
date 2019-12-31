@@ -29,6 +29,9 @@ void    op_or(t_all *vm, t_process *p)
     bytes_read = 1;
     pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
     pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
+	if (vm->flag_v == 3)
+		ft_printf("\t\t%d | or\n", p->pid);
+
     if (p->op_fail == 1)
         return ;
     load_val_in_reg(vm, p, pm1 | pm2, bytes_read);

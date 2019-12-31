@@ -39,6 +39,7 @@ typedef struct		s_all
 	struct	s_champs	champs[MAX_PLAYERS];
 	int					flag_dump;
 	int					flag_n;
+	int					flag_v;
 	int					total_champ;
 	unsigned char		*arena;
 	int					last_alive;

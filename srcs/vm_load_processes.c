@@ -8,8 +8,6 @@ t_process *load_processes(t_all *vm, t_process *head)
 
 	i = 0;
 	head = init_process(vm, &vm->champs[0], head);
-	ft_printf("new->hwad = %d/%02x\n", head->id, head->id);
-	ft_printf("reg  = %d/%02x\n", head->r[0], head->r[0]);
 	while (++i < vm->total_champ)
 	{
 		if (head->start == -1)
@@ -55,8 +53,6 @@ static void	re_order_process(t_process **process , t_process **head)
 		(*process)->next = (*process)->next->next;
 		(*head)->next = tmp;
 		(*process)->op_fail = 0;
-	//	printf("head = %d\n", (*head)->pid);
-	//	printf("next head = %d\n", (*head)->next->pid);
 	}	
 }
 
@@ -65,7 +61,12 @@ t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_proc
 	int	bytes;
 
 	bytes = 0;
-//	ft_printf("->%d\n", (*p)->op);
+//	if((*process)->pid == 8)
+//	{
+	//	ft_printf("\t\t CYCLE = %d\n", vm->cycles);
+	//	ft_print_arena(vm, 32, (*process)->pc);
+	//	if (vm->cycles >= 4957)
+	//		exit(1);}
 	if (re_check_block(vm, *process) == 1)
 	{
 		(*process)->op_fail = 0;
@@ -73,22 +74,22 @@ t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_proc
 		calc_bytes(*process, &bytes);
 		if ((*process)->op != 0)
 		{	
-	//		ft_printf("	=> id %d do operation %d at cycle %d\n", (*process)->id, (*process)->op, vm->cycles);
 			op_table[(*process)->op - 1].inst(vm, (*process));
-	//		printf("(*id = %dm dail %d\n", (*process)->op, (*process)->op_fail);
 			if ((*process)->op == 12 || (*process)->op == 15)
 			{
 				if((*process)->op_fail == 2)
 					re_order_process(process, head);
-		//		printf("\n\tnow head = %d, linke = %d\n", (*head)->id, (*head)->next->id);
 			}
-		//		ft_printf("bytes = %d\n", bytes);		
 		}
+	//	if (vm->arena[2289] == 1)
+	//	{
+	//		ft_printf("\t\tIT HAPPENED HERE %d\n", vm->cycles);
+	//		exit(1);
+	//	}
 		if (((*process)->op_fail == 0 && (*process)->op != 9) || ((*process)->op == 9 && (*process)->op_fail == 1))
 			(*process)->pc = ((*process)->pc + bytes) % MEM_SIZE;
 	}
 	load_new_process(vm, *process);
-//	printf("\n\tnow head = %d, linke = %d\n", (*head)->id, (*head)->next->id);		
 	return (head);
 }
 
@@ -98,15 +99,12 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 	int live;
 
 	live = vm->cycles_to_die;
-	printf("live = %d\n", live);
-//	ft_print_arena(vm, 32, 0);
 	while (live > 0)
 	{
-	//	printf("live = %d\n", live);
 		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
 		{
-			ft_printf("_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_vm->cycles = %d\n", vm->cycles);
-			ft_print_arena(vm, 32, (*head)->pc);
+			ft_printf("_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_ vm->cycles = %d\n", vm->cycles);
+			ft_print_arena(vm, 32, 2289);
 			return (-100);
 			//KILL ALL 
 		}
@@ -115,7 +113,6 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 			++vm->cycles;
 		while (tracker != NULL)
 		{
-	//		ft_printf("tracker = %d op = %d exec = %d cycle = %d\n", tracker->id, tracker->op, tracker->exec_cycle, vm->cycles);
 			if (vm->cycles == tracker->exec_cycle)
 				head = exec_process(vm, &tracker, op_table, head);
 			tracker = tracker->next;

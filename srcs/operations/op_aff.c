@@ -20,5 +20,5 @@ void    op_aff(t_all *vm, t_process *p)
 	val = get_reg_val(vm, p, 1);
 	c = (unsigned char)(val % 256);
 	if (p->op_fail != 1)
-		ft_printf("\t\taff [%c](val %#02x)\n", c, (val % 256));
+		ft_printf("\t\t%d | aff [%c](val %#02x)\n", p->pid, c, (val % 256));
 }

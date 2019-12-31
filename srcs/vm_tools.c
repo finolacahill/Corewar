@@ -9,7 +9,8 @@ void    check_carry(t_process *p, int param)
 		else
 			p->carry = 0;
 	}
-//	ft_printf("\tcarry is now %d\n", p->carry);
+	if (p->pid == 8)
+		ft_printf("\tcarry is now %d\n", p->carry);
 }
 
 int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
@@ -27,7 +28,7 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 		val += vm->arena[((p->pc + bytes_read + i)) % MEM_SIZE];
 	//	 printf("val added %d\n", val);
 	}
-	if (val >= 32768)
+	if ((val % 65536) >= 32768)
 		val -= 65536;
 	return (val);
 }
