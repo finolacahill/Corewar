@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnrequ.c                                      :+:      :+:    :+:   */
+/*   ft_strnequ.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 16:51:05 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/21 18:51:45 by fcahill          ###   ########.fr       */
+/*   Created: 2018/11/21 14:04:40 by yodana            #+#    #+#             */
+/*   Updated: 2018/12/04 08:12:09 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
-	unsigned int i;
+	size_t i;
 
 	i = 0;
-	if (s1 && s2)
+	if (n == 0)
+		return (1);
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	while (s1[i] && s2[i] && i < n - 1)
 	{
-		if (n == 0)
-			return (1);
-		while ((i < n) && (s1[i] == s2[i]) &&
-				(s1[i] != '\0') && (s2[i] != '\0'))
-			i++;
-		if ((s1[i] == '\0') && (s2[i] == '\0'))
-			return (1);
-		if ((i == n) && (s1[i - 1] == s2[i - 1]))
-			return (1);
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
 	}
-	return (0);
+	if (s1[i] - s2[i] != 0)
+		return (0);
+	else
+		return (1);
 }

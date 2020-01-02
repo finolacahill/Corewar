@@ -16,8 +16,10 @@
 #include <stdio.h>
 #include "../../includes/corewar.h"
 
-void	put_params(char *hexa, t_instruc *instruc, int size, char *index, int j)
+void	put_params(t_instruc *instruc, int size, char *index)
 {
+	char *hexa;
+
 	if (size != 8)
 		hexa = ft_uitoa_base((uint16_t)ft_atoi(index), 16, 0);
 	else
@@ -80,7 +82,7 @@ int		param_direct(t_instruc *instruc, char *index_d, int j, t_env *env)
 	else if (check_numbers(index_d) == -1)
 		error(10, env->line, j, ft_itoa(instruc->opcode));
 	else
-		put_params(hexa_d, instruc, size, index_d, j);
+		put_params(instruc, size, index_d);
 	return (1);
 }
 
@@ -99,7 +101,7 @@ int		param_indirect(t_instruc *instruc, char *index_i, int j, t_env *env)
 	else if (check_numbers(index_i) == -1)
 		error(10, env->line, j, ft_itoa(instruc->opcode));
 	else
-		put_params(hexa_i, instruc, size, index_i, j);
+		put_params(instruc, size, index_i);
 	return (1);
 }
 

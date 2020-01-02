@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_strnew2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:33:01 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/23 16:54:12 by fcahill          ###   ########.fr       */
+/*   Created: 2018/11/15 15:55:37 by yodana            #+#    #+#             */
+/*   Updated: 2019/03/27 18:21:50 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 char	*ft_strnew(size_t size)
 {
-	char *str;
+	char	*str;
+	size_t	i;
 
-	if (!(str = (char *)malloc(sizeof(char) * size + 1)))
+	i = 0;
+	if (!(str = (char*)malloc(sizeof(char) * size + 1)))
 		return (NULL);
-	ft_bzero(str, size + 1);
-	return (*&str);
+	while (i <= size)
+		str[i++] = '\0';
+	return (str);
 }

@@ -24,7 +24,7 @@ int		check_file(char *file)
 
 	i = 0;
 	j = 0;
-	while (file[i]) 
+	while (file[i])
 	{
 		if (file[i] == '.')
 			j = i;

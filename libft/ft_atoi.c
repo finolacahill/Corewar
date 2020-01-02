@@ -1,38 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/10 20:03:23 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/21 13:51:28 by fcahill          ###   ########.fr       */
+/*   Created: 2018/11/26 11:50:44 by yodana            #+#    #+#             */
+/*   Updated: 2018/12/04 16:35:26 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int		ft_check(char nptr)
 {
-	int i;
-	int result;
-	int neg;
+	if (nptr == 32 || nptr == '\f' || nptr == '\t'
+			|| nptr == '\n' || nptr == '\r' || nptr == '\v'
+				|| nptr == '\a')
+		return (1);
+	return (0);
+}
 
+int		ft_atoi(const char *nptr)
+{
+	unsigned int		res;
+	int					i;
+	int					sign;
+
+	sign = 1;
 	i = 0;
-	result = 0;
-	neg = 1;
-	while (ft_isspace(str[i]) != 0)
+	res = 0;
+	if (nptr == NULL)
+		return (0);
+	while (ft_check(nptr[i]) == 1)
 		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (nptr[i] == '+')
+		i++;
+	if (nptr[i] == '-' && nptr[i - 1] != '+')
 	{
-		if (str[i] == '-')
-			neg = -1;
-		++i;
-	}
-	while ((str[i] >= '0') && (str[i] <= '9'))
-	{
-		result = (str[i] - '0') + (result * 10);
+		sign = -1;
 		i++;
 	}
-	return (result * neg);
+	while (ft_isdigit((int)nptr[i]))
+	{
+		res = res * 10;
+		res = res + (nptr[i] - '0');
+		i++;
+	}
+	return ((int)res * sign);
 }

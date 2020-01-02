@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/20 15:28:20 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/22 13:58:11 by fcahill          ###   ########.fr       */
+/*   Created: 2018/11/24 18:09:28 by yodana            #+#    #+#             */
+/*   Updated: 2018/11/26 14:59:46 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *newlist;
-	t_list *head;
-	t_list *tmp;
+	t_list	*new;
+	t_list	*next_new;
 
-	if (!(lst) || !(f))
+	if (!(new = (t_list*)malloc(sizeof(t_list))))
 		return (NULL);
-	if (!(tmp = (t_list *)malloc(sizeof(f(lst)))))
-		return (NULL);
-	tmp = f(lst);
-	newlist = ft_lstnew(tmp->content, tmp->content_size);
-	head = newlist;
-	lst = lst->next;
+	new = f(lst);
+	next_new = new;
 	while (lst)
 	{
-		tmp = f(lst);
-		newlist->next = ft_lstnew(tmp->content, tmp->content_size);
-		newlist = newlist->next;
 		lst = lst->next;
+		if (lst)
+		{
+			next_new->next = f(lst);
+			next_new = next_new->next;
+		}
 	}
-	return (head);
+	return (new);
 }
