@@ -32,7 +32,7 @@ void	op_live(t_all *vm, t_process *p)
 	int p1;
 	
 	p1 = get_next_bytes(vm, p, 4, 0);
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Live %d \n", p->pid, p1);
 //	ft_printf("THE NUMBER IS %d\n", p1);
 //	ft_print_arena(vm, 64, p->pc);
@@ -44,7 +44,7 @@ void	op_live(t_all *vm, t_process *p)
 		if (p1 == p->id)
 			p->live_calls = vm->cycles + 1;
 		if (vm->flag_v == 1)
-			ft_printf("A process shows that player number %d, %s, is alive.@ cycle%d\n", p1, vm->champs[p1 - 1].name, vm->cycles);
+			ft_printf("A process shows that player number %d, %s, is alive at cycle %d.\n", p1, vm->champs[p1 - 1].name, vm->cycles);
 
 		vm->last_alive = p1;
 		vm->last_alive_cycle = vm->cycles + 1;

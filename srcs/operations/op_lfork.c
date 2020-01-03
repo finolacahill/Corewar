@@ -54,7 +54,7 @@ void    op_lfork(t_all *vm, t_process *p)
 	p1 = get_next_bytes(vm, p, 2, 0);	
 //	ft_printf("%04x, %04x\n", p->op, p1);
 //	ft_printf("\t\tFork to %d (+ pc %d = %d)\n", p1, new->pc, p1 + new->pc);
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d)\n", p->pid, p1, new->pc, p1 + new->pc);
 	new->pc += p1 - 1;
 	load_new_process(vm, new);

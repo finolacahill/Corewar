@@ -6,8 +6,8 @@ static void	check_cycle_decrease(t_all *vm)
 		|| vm->total_checks  + 1 >= MAX_CHECKS)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
-		if (vm->flag_v == 5)
-			ft_printf("Cycles to die is now %d at %d\n", vm->cycles_to_die, vm->cycles);
+		if (vm->flag_v == 16)
+			ft_printf("Cycles to die is now %d at %d.\n", vm->cycles_to_die, vm->cycles);
 		vm->total_checks = 0;
 	}
 	else
@@ -46,8 +46,8 @@ t_process	**kill_dead_process(t_all *vm, t_process **p, t_process *prev)
 		if (vm->champs[t->id - 1].last_live == -2
 			|| t->live_calls < vm->cycles - vm->cycles_to_die)
 		{
-			if (vm->flag_v == 2)
-				ft_printf("process pid %d id %d hasn't lived for %d (cycles to die %d, cycle %d)\n", (t)->pid, (t)->id, vm->cycles - t->live_calls, vm->cycles_to_die, vm->cycles);
+			if (vm->flag_v == 8)
+				ft_printf("Process pid %d id %d hasn't lived for %d (cycles to die %d, cycle %d)\n", (t)->pid, (t)->id, vm->cycles - t->live_calls, vm->cycles_to_die, vm->cycles);
 			t = kill_process(vm, p, t, prev);
 		}
 		else

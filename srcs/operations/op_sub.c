@@ -18,7 +18,7 @@ void    op_sub(t_all *vm, t_process *p)
 
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_reg_val(vm, p, 2);
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | sub \n", p->pid);
 
 	if (p->op_fail == 1)

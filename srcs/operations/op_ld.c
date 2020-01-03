@@ -26,7 +26,7 @@ void    op_ld(t_all *vm, t_process *p)
 	bytes_read = 1;
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
 	load_val_in_reg(vm, p, pm1, bytes_read);
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | load %d R%d at cycle %d\n", p->pid, pm1, get_next_bytes(vm, p, 1, bytes_read), vm->cycles);
 //	ft_printf("%d or %02x\n", p->r[0], p->r[0]);
 	if (p->op_fail == 1)

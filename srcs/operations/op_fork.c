@@ -54,6 +54,6 @@ void    op_fork(t_all *vm, t_process *p)
 	++vm->total_process;
 	p->next = new;
 	p->op_fail = 2;
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Fork to %d (+ pc %d = %d) cycle %d. P%d creates P%d\n", p->pid, p1, new->pc, p1 + new->pc, vm->cycles, p->pid, new->pid);
 }

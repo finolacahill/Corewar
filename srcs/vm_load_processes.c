@@ -116,6 +116,7 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 	live = vm->cycles_to_die;
 	while (live > 0)
 	{
+		
 		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
 		{
 			free_all_process(vm, (*head));
@@ -125,6 +126,8 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 		tracker = (*head);
 		if (tracker != NULL)
 			++vm->cycles;
+		if (vm->flag_v == 2)
+			ft_printf("cycle = %d\n", vm->cycles);
 		while (tracker != NULL)
 		{
 			if (vm->cycles == tracker->exec_cycle)

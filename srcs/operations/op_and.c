@@ -29,7 +29,7 @@ void    op_and(t_all *vm, t_process *p)
     bytes_read = 1;
     pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
     pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
-	if (vm->flag_v == 3)
+	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | and\n", p->pid);
     if (p->op_fail == 1)
         return ;
