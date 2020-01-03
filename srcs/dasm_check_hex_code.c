@@ -34,7 +34,7 @@ void	dasm_check_hex_code(t_all *vm)
 	uint16_t	i;
 
 	if (!(verif_op = (t_verif_op*)malloc(sizeof(t_verif_op) * 16)))
-		error(vm, "malloc error dasm_check_hex_code ");
+		error(vm, "Malloc error dasm_check_hex_code\n");
 	verif_op = init_op_verif(vm, verif_op);
 	id = -1;
 	while (++id < vm->total_champ)

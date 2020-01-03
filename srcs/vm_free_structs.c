@@ -1,5 +1,17 @@
 #include "../includes/vm.h"
 
+void	free_all_process(t_process *p)
+{
+	t_process *tmp;
+	tmp = p;
+	while (p != NULL)
+	{
+		tmp = p;
+		p = p->next;
+		free(tmp);
+	}
+}
+
 void    free_process(t_all *vm, t_process *p)
 {
 	if (p != NULL && vm->total_process > 0)
@@ -16,8 +28,8 @@ void    free_process(t_all *vm, t_process *p)
 void	free_vm(t_all *vm)
 {
 //	printf("\n\t\tHEREEEE\n\n");
-//	if (vm->arena != NULL)
-//		ft_memdel((void **)&vm->arena);
+	if (vm->arena != NULL)
+		ft_memdel((void **)&vm->arena);
 	vm->arena = NULL;
 	dasm_free(vm);
 	vm = NULL;
@@ -37,9 +49,14 @@ void	free_op_table(t_op *op)
 	i = -1;
 	while (++i < 16)
 	{
-		free(op[i].op_name);
+		ft_strdel(&(op[i].op_name));
 	//	free(op[i].inst);
 	}
 	free(op);
+}
 
+void	free_dasm_header(t_all *all,  uint8_t *cor_content, char *s)
+{
+	free(cor_content);
+	error(all, s);
 }

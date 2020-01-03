@@ -30,7 +30,7 @@ void    op_or(t_all *vm, t_process *p)
     pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
     pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 3)
-		ft_printf("\t\t%d | or\n", p->pid);
+		ft_printf("\tP%6d | or\n", p->pid);
 
     if (p->op_fail == 1)
         return ;

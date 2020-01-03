@@ -19,13 +19,13 @@ int main(int ac, char **av)
 
 	vm.arena = NULL;
 	p.decode = NULL;
-	p.all_dead = -1;
 	dasm_init(&vm, ac, av);
-	if (init_arena(&vm) == -1)
-		return (error_arena(&vm, &p));
+	init_arena(&vm);
+	//ft_print_arena(&vm, 64, 0, 0);
 	if (run_vm(&vm, &p) == -1)
 		return (free_all(&vm, &p));
 //	(&vm);
+//
 	free_all(&vm, NULL);
 	// free the vm
 }

@@ -81,7 +81,7 @@ INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = -fsanitize=address
+FLAG = #-fsanitize=address
 
 .PHONY: all clean fclean re
 

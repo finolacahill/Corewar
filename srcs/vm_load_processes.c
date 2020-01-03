@@ -56,13 +56,23 @@ static void	re_order_process(t_process **process , t_process **head)
 	}	
 }
 
+void 		end_prog(t_all *vm, t_process *head, t_op *op)
+{
+	free_all_process(head);
+	free(vm->arena);
+	free_op_table(op);
+	error(vm, "Malloc error during fork.\n");
+}
+
 t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_process **head)
 {	
 	int	bytes;
+	int i = -1;
 
 	bytes = 0;
-//	if((*process)->pid == 8)
-//	{
+//while (++i < REG_NUMBER)	
+//		ft_printf("reg %d = %d/%04x\n", i + 1, (*process)->r[i], (*process)->r[i]);
+
 	//	ft_printf("\t\t CYCLE = %d\n", vm->cycles);
 	//	ft_print_arena(vm, 32, (*process)->pc);
 	//	if (vm->cycles >= 4957)
@@ -77,13 +87,18 @@ t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_proc
 			op_table[(*process)->op - 1].inst(vm, (*process));
 			if ((*process)->op == 12 || (*process)->op == 15)
 			{
+				if ((*process)->op_fail == 3)
+					end_prog(vm, (*head), op_table);
 				if((*process)->op_fail == 2)
 					re_order_process(process, head);
+				
+
+
 			}
 		}
-	//	if (vm->arena[2289] == 1)
-	//	{
-	//		ft_printf("\t\tIT HAPPENED HERE %d\n", vm->cycles);
+//		if (vm->arena[924] == 1)
+//		{
+///			ft_printf("\t\tIT HAPPENED HERE %d\n", vm->cycles);
 	//		exit(1);
 	//	}
 		if (((*process)->op_fail == 0 && (*process)->op != 9) || ((*process)->op == 9 && (*process)->op_fail == 1))
@@ -103,10 +118,9 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 	{
 		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
 		{
-			ft_printf("_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_ vm->cycles = %d\n", vm->cycles);
-			ft_print_arena(vm, 32, 2289);
-			return (-100);
-			//KILL ALL 
+			free_all_process((*head));
+			return (-2);
+
 		}
 		tracker = (*head);
 		if (tracker != NULL)

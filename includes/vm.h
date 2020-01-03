@@ -68,7 +68,7 @@ typedef struct			s_process
 	int					opc;
 	unsigned char 		op;
 	int					op_fail;
-	int					all_dead;
+//	int					all_dead;
 	struct s_process	*next;
 }						t_process;
 
@@ -93,8 +93,8 @@ typedef struct			s_op_check
 	int					dir_size;
 }						t_op_check;
 
+#define DUMP 	-2;
 t_op_check       		op_check_tab[17];
-
 void			dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content, t_champs *champs);
 size_t			dasm_get_data(t_all	*all, char *cor_file, uint8_t **cor_content);
 void			*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size);
@@ -118,9 +118,11 @@ int         	check_alive(t_all *vm, t_process **p);
 void    		check_carry(t_process *p, int param);
 int				check_op_block(t_all *vm, t_process *process);
 int				free_all(t_all *vm, t_process *p);
+void			free_all_process(t_process *p);
 void    		free_process(t_all *vm, t_process *p);
+void			free_dasm_header(t_all *all,  uint8_t *cor_content, char *s);
 t_process		*ft_decode_byte(unsigned char c, t_process *p);
-void 			ft_print_arena(t_all *vm, int len, int pc);
+void 			ft_print_arena(t_all *vm, int len, int pc, int new);
 int				get_duration(t_all *vm, int opc);
 int     		get_ind(t_all *vm, t_process *p, int bytes_read, int restriction);
 int				get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read);
@@ -184,7 +186,7 @@ uint16_t		check_op_zjmp(t_all *all, uint8_t *content);
 
 //errors
 t_process		*error_process(t_process *p);
-int				error_arena(t_all *vm, t_process *p);
-int				error_run_vm(t_all *vm, t_process *p, t_op *op_table);
+void			error_arena(t_all *vm, t_process *p);
+int				error_run_vm(t_all *vm, t_op *op_table);
 void			free_op_table(t_op *op);
 #endif

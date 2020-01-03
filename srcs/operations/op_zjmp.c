@@ -20,13 +20,19 @@ void    op_zjmp(t_all *vm, t_process *p)
 //		ft_printf("address = %02x ", address);
 //		ft_printf("old pc = %d\n", p->pc);
 		if (vm->flag_v == 3)
-			ft_printf("\t\t%d | jumped to %d\n", p->pid, address % MEM_SIZE);
+			ft_printf("\tP%6d | jumped to %d\n", p->pid, address % MEM_SIZE);
 		p->pc = (p->pc + address - 1) % MEM_SIZE;
 	}
 	else
 	{
 		if (vm->flag_v == 3)
-			ft_printf("\t\t%d | zjmp %d FAILED\n", p->pid, address);
+			ft_printf("\tP%6d | zjmp %d FAILED at cycle%d\n", p->pid, address, vm->cycles);
+/*		if (vm->cycles == 4952)
+		{
+			ft_printf("pc = %d\n", p->pc);
+			ft_print_arena(vm, 64, 925);
+			exit(1);
+		}*/
 		p->op_fail = 1;
 	}
 	

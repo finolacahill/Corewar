@@ -61,24 +61,26 @@ unsigned char*	recup_ex_code(size_t *len, uint8_t *cor_content)
 void		dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content
 						, t_champs *champs)
 {
-	char	*exec_code;
-
 	if (cor_size < 2192)
-		error(all, "Fichier trop petit! (pas assez d'informations)\n");
+		free_dasm_header(all, (*cor_content), "Fichier trop petit! (pas assez d'informations)\n");
 	if (cor_size > CHAMP_MAX_SIZE + 2192)
+	{
+		free(cor_content);
 		error_size(all, champs->path, cor_size);
+	}
 	if (cor_content[0][0] != 0x00 || cor_content[0][1] != 0xea
 		|| cor_content[0][2] != 0x83 || cor_content[0][3] != 0xf3)
-		error(all, "Magic_Number (0xea83f3) inexistant\n");
-	champs->name = recup_name(cor_content[0]);
+		free_dasm_header(all, (*cor_content), "Magic_Number (0xea83f3) inexistant\n");
+	if (!(champs->name = recup_name(cor_content[0])))
+		free_dasm_header(all, *cor_content, "Mallo Error\n");
 	if ((cor_content[0][132] | cor_content[0][133] | cor_content[0][134]		//attention aux index !
-		| cor_content[0][135]) != 0)
-		error(all, "Invalid File\n");
-	champs->comment = recup_comment(cor_content[0]);
+		| cor_content[0][135]) != 0)	
+			free_dasm_header(all, *cor_content, "Invalid File\n");	
+	if (!(champs->comment = recup_comment(cor_content[0])))
+		free_dasm_header(all, *cor_content, "Malloc Error\n");
 	if ((cor_content[0][2188] | cor_content[0][2189] | cor_content[0][2190]		//attention aux index !
 		| cor_content[0][2191]) != 0)
-		error(all, "Invalid File\n");
-	champs->exec_code = recup_ex_code(&(champs->len_exec_code), cor_content[0]);
-	if (!(champs->name) || !(champs->comment) || !(champs->exec_code))
-		error(all, "Malloc error\n");
+			free_dasm_header(all, *cor_content, "Invalid File\n");
+	if(!(champs->exec_code = recup_ex_code(&(champs->len_exec_code), cor_content[0])))
+		free_dasm_header(all, *cor_content, "Malloc Error\n");
 }

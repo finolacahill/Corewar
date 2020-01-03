@@ -60,12 +60,14 @@ void		init_name_op(t_all *vm, t_op **op)
 	(*op)[13].op_name = ft_strdup("lldi");
 	(*op)[14].op_name = ft_strdup("lfork");
 	(*op)[15].op_name = ft_strdup("aff");
-	//NEED MALLOC PROTECTION HERE
 	while (++i < 16)
 	{
 		if ((*op)[i].op_name == NULL)
-			error(vm, "malloc error init_name_op");
-		// printf("		op[%d].op_name = |%s|\n", i, (*op)[i].op_name);
+		{
+			free_op_table(*op);
+			free(vm->arena);
+			error(vm, "Malloc error init_name_op.\n");
+		}
 	}
 }
 

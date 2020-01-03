@@ -42,8 +42,11 @@ void    op_st(t_all *vm, t_process *p)
       param2 = get_ind(vm, p, 2, 0);
    //   ft_printf("param 2= %d/%02x\n", param2, param2);
       if (vm->flag_v == 3)
-        ft_printf("\t\t%d | cycle %d st %d at at %d/%d + pc %d\n", p->pid, vm->cycles, get_next_bytes(vm, p, 1, 1), param2, param2 % IDX_MOD, p->pc);
+        ft_printf("\tP%6d | st %d at at %d/%d + pc %d at cycle %d \n", p->pid, get_next_bytes(vm, p, 1, 1), param2, param2 % IDX_MOD, p->pc, vm->cycles);
       load_value(vm, p->pc + (param2 % IDX_MOD), 4, param1);
+      int address = p->pc + (param2 % IDX_MOD);
+      int len = 4;
+      ft_printf("%d, %d, %d, %d", (address + len - 1) % MEM_SIZE, (address + len - 2) % MEM_SIZE, (address + len - 3) % MEM_SIZE, (address + len - 4) % MEM_SIZE);
     }
  //   check_carry(p, param1);
  //   int test = get_next_bytes(vm, p, 4, param2 - 1);

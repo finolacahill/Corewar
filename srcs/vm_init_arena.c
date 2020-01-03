@@ -51,7 +51,6 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p->bytes = 0;
 	c->last_live = 0;
 	p->op_fail = 0;
-	p->all_dead = 0;
 	p->pid = vm->total_process + 1;
 	++vm->total_process;
 	if ((if_no_opcode(p)) == 1)
@@ -76,7 +75,7 @@ int init_arena(t_all *vm)
     vm->total_checks = 0;
     vm->total_process = 0;
     if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
-        return (-1);
+        error(vm, "Malloc error init_arena.\n");
     while (i < vm->total_champ)
     {
         vm->champs[i].start = divide;

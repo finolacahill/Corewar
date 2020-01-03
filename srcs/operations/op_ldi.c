@@ -32,10 +32,17 @@ void    op_ldi(t_all *vm, t_process *p)
 	address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
 	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 3)
-		ft_printf("\t\t %d | ldi from %d + %d (with mod and pc %d\n\n", p->pid, address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
+		ft_printf("\tP%6d | ldi from %d + %d (with mod and pc %d\n", p->pid, address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
 	address1 = (address1 + address2) % IDX_MOD;
+//	ft_print_arena(vm, 64, p->pc, p->pc + address1);
 	val = get_next_bytes(vm, p, 4, address1 - 1);
 	if (p->op_fail == 1)
 		return ;
 	load_val_in_reg(vm, p, val, bytes_read);
+	/*if (val = -1879048192)
+	{
+		ft_printf("cycle = %d\n", vm->cycles);
+		ft_print_arena(vm, 64, address1);
+		exit(1);
+	}*/
 }

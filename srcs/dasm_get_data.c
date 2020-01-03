@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
+static void		free_and_exit(t_all *all)
+{
+	dasm_free(all);
+	exit(EXIT_FAILURE);
+}
 
 size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 {
@@ -22,9 +27,9 @@ size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 	if (!(cor_file))
 		return (0);
 	if ((fd = open(cor_file, O_RDONLY)) == -1)
-		dasm_free(all);
+		free_and_exit(all);
 	if (!(cor_content[0] = (uint8_t *)malloc(sizeof(uint8_t) * 1)))
-		dasm_free(all);
+		free_and_exit(all);
 	cor_content[0][0] = '\0';
 	cor_size = 0;
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
@@ -32,10 +37,17 @@ size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 		buff[ret] = '\0';
 		if (!(cor_content[0] = dasm_memmalloccopy(cor_content[0]
 			, cor_size, cor_size + ret)))
-			dasm_free(all);
+			{
+				free(*cor_content);
+				free_and_exit(all);
+			}
 		ft_memcpy(&(cor_content[0][cor_size]), buff, ret);
 		cor_size += ret;
 	}
-	close(fd);
+	if (close(fd) == -1)
+	{
+		free(*cor_content);
+		free_and_exit(all);
+	}
 	return (cor_size);
 }

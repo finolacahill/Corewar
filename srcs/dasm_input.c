@@ -43,7 +43,8 @@ int			flag_n(int ac, char **av, t_all *all, int *j)
 		print_usage(all);
 	if (av[(i) + 2] && dasm_is_it_cor(av[(i) + 2]) == 1)
 	{
-		all->champs[n_id - 1].path = ft_strdup(av[(i) + 2]);
+		if (!(all->champs[n_id - 1].path = ft_strdup(av[(i) + 2])))
+			error(all, "Malloc error in flag_n");
 		all->champs[n_id - 1].id = n_id;
 	}
 	else
@@ -71,7 +72,8 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 		{
 			if (id == all->flag_n - 1)
 				id++;
-			all->champs[id++].path = ft_strdup(av[i]);
+			if (!(all->champs[id++].path = ft_strdup(av[i])))
+				error(all, "Malloc error in stock good id");
 			all->champs[id - 1].id = id;
 		}
 		else

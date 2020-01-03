@@ -25,7 +25,7 @@ void		vm_print_intro(t_all *all)
 	{
 		i = -1;
 		while (all->champs[++i].id != id)
-			if (i == 4)
+			if (i == MAX_PLAYERS)
 				return ;
 		ft_putstr("* Player ");
 		ft_putnbr(id);

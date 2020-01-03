@@ -6,6 +6,8 @@ static void	check_cycle_decrease(t_all *vm)
 		|| vm->total_checks  + 1 >= MAX_CHECKS)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
+		if (vm->flag_v == 5)
+			ft_printf("Cycles to die is now %d at %d\n", vm->cycles_to_die, vm->cycles);
 		vm->total_checks = 0;
 	}
 	else
@@ -42,10 +44,10 @@ t_process	**kill_dead_process(t_all *vm, t_process **p, t_process *prev)
 	while (vm->total_process >= 0 && t != NULL)
 	{	
 		if (vm->champs[t->id - 1].last_live == -2
-			|| t->live_calls <= vm->cycles - vm->cycles_to_die)
+			|| t->live_calls < vm->cycles - vm->cycles_to_die)
 		{
 			if (vm->flag_v == 2)
-				ft_printf("process pid %d id %d hasn't lived for %d (cycles to die %d)\n", (t)->pid, (t)->id, vm->cycles - t->live_calls, vm->cycles_to_die);
+				ft_printf("process pid %d id %d hasn't lived for %d (cycles to die %d, cycle %d)\n", (t)->pid, (t)->id, vm->cycles - t->live_calls, vm->cycles_to_die, vm->cycles);
 			t = kill_process(vm, p, t, prev);
 		}
 		else
@@ -64,18 +66,10 @@ static int	check_champs(t_all *vm, t_process *p, int alive)
 	i = -1;
  	while (++i < vm->total_champ)
 	{
-		if (vm->champs[i].last_live != -2)
-		{
-			if (vm->champs[i].last_live < vm->cycles - vm->cycles_to_die)
-			{
-				ft_printf("i = %d, last live = %d cycle = %d, cycles to die - %d\n", i, vm->champs[i].last_live, vm->cycles, vm->cycles_to_die);
-				vm->champs[i].last_live = -2;
-				if (vm->flag_v == 2)
-					ft_printf("\t\tChamp %d is dead. at cycle %d \n", i + 1, vm->cycles);
-			}
-			else
+	//	if (vm->champs[i].last_live != -2)
+	//	{
+			if (vm->champs[i].last_live >= vm->cycles - vm->cycles_to_die)
 				++alive;
-		}
 	}
 	return (alive);
 }
@@ -87,7 +81,7 @@ int         check_alive(t_all *vm, t_process **p)
 	alive = 0;
 	if (vm->cycles == 0)
 		return (1);
-	ft_printf("CHECKING at %d, cycles to die is %d, nb_lives %d, nb_checks %d\n", vm->cycles, vm->cycles_to_die, vm->nbr_live_since_check, vm->total_checks);
+//	ft_printf("CHECKING at %d, cycles to die is %d, nb_lives %d, nb_checks %d\n", vm->cycles, vm->cycles_to_die, vm->nbr_live_since_check, vm->total_checks);
 	alive = check_champs(vm, (*p), alive);
 	p = kill_dead_process(vm, p, NULL);
 	check_cycle_decrease(vm);

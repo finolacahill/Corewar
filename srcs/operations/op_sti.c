@@ -30,9 +30,12 @@ void    op_sti(t_all *vm, t_process *p)
 	p3 = get_unspecified_val_2(vm,p, &bytes_read, 2);
 //	ft_printf("reg = %d, p1 = %d/%02x, p2 = %d/%02x\n", p1, p2, p2, p3, p3);
 	if (vm->flag_v == 3)
-		ft_printf("\t\t\n%d | sti reg %d val %d to %d + %d with mod %d (with pc %d) at cycle %d\n",  p->pid, get_next_bytes(vm, p, 1, 1), p1, p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
+		ft_printf("\n\tP%6d | sti reg %d val %d to %d + %d with mod %d (with pc %d) at cycle %d\n",  p->pid, get_next_bytes(vm, p, 1, 1), p1, p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
 	if (p->op_fail == 1)
 		return ;
+//	ft_print_arena(vm, 64, p->pc);
 	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)) , 4, p1);
-//	ft_print_arena(vm, 64, p->pc + ((p2 + p3) % IDX_MOD));
+//	ft_print_arena(vm, 64, p->pc, p->pc + ((p2 + p3) % IDX_MOD));
+//	ft_printf("\n_________________________________________\n");
+
 }

@@ -33,7 +33,6 @@ t_process	*l_copy_process(t_process *p, t_process *new)
 	new->live_calls = p->live_calls;
 	new->pc = p->pc;
 	new->op_fail = 0;
-	new->all_dead = 0;
 	new->next = p->next;
 	new->carry = p->carry;
 	p->next = new;
@@ -56,7 +55,7 @@ void    op_lfork(t_all *vm, t_process *p)
 //	ft_printf("%04x, %04x\n", p->op, p1);
 //	ft_printf("\t\tFork to %d (+ pc %d = %d)\n", p1, new->pc, p1 + new->pc);
 	if (vm->flag_v == 3)
-		ft_printf("\t\t%d | Lfork to %d (+ pc %d = %d)\n", p->pid, p1, new->pc, p1 + new->pc);
+		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d)\n", p->pid, p1, new->pc, p1 + new->pc);
 	new->pc += p1 - 1;
 	load_new_process(vm, new);
 	new->pid = vm->total_process + 1;
