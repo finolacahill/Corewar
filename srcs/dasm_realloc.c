@@ -22,16 +22,10 @@ void	*dasm_memmalloccopy(void *content, size_t prev_size, size_t all_size)
 	if (prev_size == all_size)
 		return (content);
 	if (all_size == 0)
-	{
-		ft_putstr("Trucs à Free etc..\n");
-		exit(EXIT_FAILURE);
-	}
+		return (NULL);
 	size_min = (prev_size < all_size) ? prev_size : all_size;
 	if (!(new_content = ft_memalloc(all_size)))
-	{
-		ft_putstr("Trucs à Free etc..\n");
-		exit(EXIT_FAILURE);
-	}
+		return (NULL);
 	ft_memcpy(new_content, content, size_min);
 	free(content);
 	return (new_content);

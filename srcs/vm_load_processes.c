@@ -58,7 +58,7 @@ static void	re_order_process(t_process **process , t_process **head)
 
 void 		end_prog(t_all *vm, t_process *head, t_op *op)
 {
-	free_all_process(head);
+	free_all_process(vm, head);
 	free(vm->arena);
 	free_op_table(op);
 	error(vm, "Malloc error during fork.\n");
@@ -118,7 +118,7 @@ int run_processes(t_all *vm, t_process **head, t_op *op_table)
 	{
 		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
 		{
-			free_all_process((*head));
+			free_all_process(vm, (*head));
 			return (-2);
 
 		}

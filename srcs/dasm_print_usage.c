@@ -14,9 +14,9 @@
 
 void	error_exec(t_all *all, char *champ_name, uint16_t line)
 {
-	ft_putstr("Operation invalide pour le champion \"");
+	ft_putstr("Invalid operation for champion \"");
 	ft_putstr(champ_name);
-	ft_putstr("\" à la ligne ");
+	ft_putstr("\" at line ");
 	ft_putnbr((int)line);
 	ft_putstr("\n");
 	dasm_free(all);

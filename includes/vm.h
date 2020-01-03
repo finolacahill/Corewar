@@ -118,7 +118,7 @@ int         	check_alive(t_all *vm, t_process **p);
 void    		check_carry(t_process *p, int param);
 int				check_op_block(t_all *vm, t_process *process);
 int				free_all(t_all *vm, t_process *p);
-void			free_all_process(t_process *p);
+void			free_all_process(t_all *vm, t_process *p);
 void    		free_process(t_all *vm, t_process *p);
 void			free_dasm_header(t_all *all,  uint8_t *cor_content, char *s);
 t_process		*ft_decode_byte(unsigned char c, t_process *p);

@@ -62,7 +62,7 @@ void		dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content
 						, t_champs *champs)
 {
 	if (cor_size < 2192)
-		free_dasm_header(all, (*cor_content), "Fichier trop petit! (pas assez d'informations)\n");
+		free_dasm_header(all, (*cor_content), "File is too small! (not enough informations)\n");
 	if (cor_size > CHAMP_MAX_SIZE + 2192)
 	{
 		free(cor_content);
@@ -70,9 +70,9 @@ void		dasm_get_header(t_all *all, size_t cor_size, uint8_t **cor_content
 	}
 	if (cor_content[0][0] != 0x00 || cor_content[0][1] != 0xea
 		|| cor_content[0][2] != 0x83 || cor_content[0][3] != 0xf3)
-		free_dasm_header(all, (*cor_content), "Magic_Number (0xea83f3) inexistant\n");
+		free_dasm_header(all, (*cor_content), "Magic_Number (0xea83f3) is not present\n");
 	if (!(champs->name = recup_name(cor_content[0])))
-		free_dasm_header(all, *cor_content, "Mallo Error\n");
+		free_dasm_header(all, *cor_content, "Malloc Error\n");
 	if ((cor_content[0][132] | cor_content[0][133] | cor_content[0][134]		//attention aux index !
 		| cor_content[0][135]) != 0)	
 			free_dasm_header(all, *cor_content, "Invalid File\n");	

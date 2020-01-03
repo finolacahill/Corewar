@@ -1,16 +1,6 @@
 #include "../includes/vm.h"
 
-void	free_all_process(t_process *p)
-{
-	t_process *tmp;
-	tmp = p;
-	while (p != NULL)
-	{
-		tmp = p;
-		p = p->next;
-		free(tmp);
-	}
-}
+
 
 void    free_process(t_all *vm, t_process *p)
 {
@@ -22,6 +12,18 @@ void    free_process(t_all *vm, t_process *p)
 		free(p);
 		--vm->total_process;
 		p = NULL;
+	}
+}
+
+void	free_all_process(t_all *vm, t_process *p)
+{
+	t_process *tmp;
+	tmp = p;
+	while (p != NULL)
+	{
+		tmp = p;
+		p = p->next;
+		free_process(vm, tmp);
 	}
 }
 
