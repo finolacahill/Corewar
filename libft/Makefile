@@ -47,6 +47,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 .PHONY: all clean fclean re
 
 all: $(NAME)
+	@:
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
