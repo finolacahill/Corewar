@@ -93,5 +93,5 @@ int					ft_numlen(long long n);
 long long			ft_atol(const char *str);
 unsigned long long	ft_puissance(int nbr, int p);
 void				ft_reverse(char **str);
-
+long				ft_long_atoi(const char *str);
 #endif			

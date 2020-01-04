@@ -17,6 +17,7 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 {
 	int		val;
 	int		i;
+	int 	address;
 
 	val = 0;
 	i = 0;
@@ -25,9 +26,10 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	//	 printf("val b4 shift = %d", val);
 		val <<= 8;
 	//	 printf("val after = %d", val);
-		val += vm->arena[((p->pc + bytes_read + i)) % MEM_SIZE];
-	//	if (val == 191365376)
-	//		ft_print_arena(vm, len, p->c)
+		address = (p->pc + bytes_read + i) % MEM_SIZE;
+		if (address < 0)
+			address = MEM_SIZE - address;
+		val += vm->arena[address];
 	//	 printf("val added %d\n", val);
 	}
 	if ((val % 65536) >= 32768)

@@ -35,9 +35,9 @@ static void	init_registers(t_process *p)
 
 t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 {	
-	if (!(p = ft_memalloc(sizeof(t_process))))
+	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		return (error_process(p));
-	if (!(p->decode = malloc((sizeof(int)) * 4)))
+	if (!(p->decode = (int *)malloc((sizeof(int)) * 4)))
 		return (error_process(p));
 	p->id = c->id;
 	p->carry = 0;
@@ -74,7 +74,7 @@ int init_arena(t_all *vm)
     vm->nbr_live_since_check = 0;
     vm->total_checks = 0;
     vm->total_process = 0;
-    if (!(vm->arena = ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
+    if (!(vm->arena = (unsigned char *)ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
         error(vm, "Malloc error init_arena.\n");
     while (i < vm->total_champ)
     {

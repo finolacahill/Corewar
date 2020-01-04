@@ -59,6 +59,7 @@ void	free_op_table(t_op *op)
 
 void	free_dasm_header(t_all *all,  uint8_t *cor_content, char *s)
 {
+	ft_printf("here\n\n");
 	free(cor_content);
 	error(all, s);
 }

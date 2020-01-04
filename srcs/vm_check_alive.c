@@ -66,8 +66,6 @@ static int	check_champs(t_all *vm, t_process *p, int alive)
 	i = -1;
  	while (++i < vm->total_champ)
 	{
-	//	if (vm->champs[i].last_live != -2)
-	//	{
 			if (vm->champs[i].last_live >= vm->cycles - vm->cycles_to_die)
 				++alive;
 	}

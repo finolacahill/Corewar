@@ -68,7 +68,6 @@ typedef struct			s_process
 	int					opc;
 	unsigned char 		op;
 	int					op_fail;
-//	int					all_dead;
 	struct s_process	*next;
 }						t_process;
 
@@ -138,7 +137,7 @@ int				is_player_nb(int i, t_all *vm);
 //int				is_reg(int reg, t_process *p);
 t_process		**kill_dead_process(t_all *vm, t_process **p, t_process *prev);
 t_process 		*load_processes(t_all *vm, t_process *head);
-void			load_value(t_all *vm, int address, int len, int val);
+void			load_value(t_all *vm, int add, int len, int val);
 void			load_new_process(t_all *vm, t_process *p);
 void    		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read);
 int				re_check_block(t_all *vm, t_process *process);

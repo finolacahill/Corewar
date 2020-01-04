@@ -1,17 +1,21 @@
 #include "../includes/vm.h"
 
-void		load_value(t_all *vm, int address, int len, int val)
+void		load_value(t_all *vm, int add, int len, int val)
 {
 	int i;
 	int power;
 	int shift;
+	int address;
 
 	i = 0;
 	power = 2;
 	shift = 0;
 	while (++i <= len)
 	{
-		vm->arena[(address + len - i) % MEM_SIZE] = (val % (ft_puissance(16, power)) >> shift);
+		address = (add + len - i) % MEM_SIZE;
+		if (address < 0)
+			address = MEM_SIZE - address;
+		vm->arena[address] = (val % (ft_puissance(16, power)) >> shift);
 		val -= val % (ft_puissance(16, power));
 		power +=2;
 		shift += 8;

@@ -29,6 +29,7 @@ void	dasm_init_champs(t_all *vm, int ac, char **av)
 	cor_size = 0;
 	cor_content = NULL;	
 	dasm_input(ac, av, vm);
+	
 	while (vm->total_champ < MAX_PLAYERS 
 		&& vm->champs[vm->total_champ].path != NULL)
 	{	

@@ -24,14 +24,19 @@ size_t			dasm_get_data(t_all *all, char *cor_file, uint8_t **cor_content)
 	int			ret;
 	size_t		cor_size;
 
+
 	if (!(cor_file))
 		return (0);
 	if ((fd = open(cor_file, O_RDONLY)) == -1)
+	{
+		ft_printf("Error: can not open given file.\n");
 		free_and_exit(all);
+	}
 	if (!(cor_content[0] = (uint8_t *)malloc(sizeof(uint8_t) * 1)))
 		free_and_exit(all);
 	cor_content[0][0] = '\0';
 	cor_size = 0;
+
 	while ((ret = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[ret] = '\0';

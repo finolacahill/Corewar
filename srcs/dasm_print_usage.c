@@ -40,13 +40,8 @@ void	dasm_free(t_all *all)
 
 void	error_size(t_all *all, char *path, size_t cor_size)
 {
-	ft_putstr("Error: File ");
-	ft_putstr(path);
-	ft_putstr(" has too large a code (");
-	ft_putnbr(cor_size - 2192);
-	ft_putstr(" bytes > ");
-	ft_putnbr(CHAMP_MAX_SIZE);
-	ft_putstr(" bytes)\n");
+	ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n", 
+	path, cor_size - 2192, CHAMP_MAX_SIZE);
 	dasm_free(all);
 	exit(EXIT_FAILURE);
 }
@@ -60,8 +55,13 @@ void	error(t_all *all, char *str)
 
 void	print_usage(t_all *all)
 {
-	ft_putstr("Usage: ./vm_champs/corewar [-d N -s N -v N | -b --stealth");
-	ft_putstr("| -n --stealth] [-a] <champion1.cor> <...>");
+	ft_printf("Usage: ./vm_champs/corewar [-dump X -v X -n X]\n#### TEXT OUTPUT");
+	ft_printf(" MODE ##########################################################\n");
+	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits\n");
+	ft_printf("\t\t-n    X\t: Set a player id to X. X is a number between 1 & number of players.\n");
+	ft_printf("\t\t-v    X\t: Verbosity levels\n\t\t\t- 0 : Show only essentials\n");
+	ft_printf("\t\t\t- 1 : Show lives\n\t\t\t- 2 : Show cycles\n\t\t\t- 4 : Show");
+	ft_printf(" operations\n\t\t\t- 8 : Show deaths\n\t\t\t- 16 : Show cycles to die\n");
 	dasm_free(all);
 	exit(EXIT_FAILURE);
 }

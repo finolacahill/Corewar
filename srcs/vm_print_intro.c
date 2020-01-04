@@ -27,15 +27,8 @@ void		vm_print_intro(t_all *all)
 		while (all->champs[++i].id != id)
 			if (i == MAX_PLAYERS)
 				return ;
-		ft_putstr("* Player ");
-		ft_putnbr(id);
-		ft_putstr(", weighing ");
-		ft_putnbr(all->champs[i].len_exec_code);
-		ft_putstr(" bytes, \"");
-		ft_putstr((const char *)all->champs[i].name);
-		ft_putstr("\" (\"");
-		ft_putstr((const char *)all->champs[i].comment);
-		ft_putstr("\") !\n");
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", 
+			id, all->champs[i].len_exec_code, all->champs[i].name, all->champs[i].comment);
 		id++;
 	}
 }

@@ -20,5 +20,13 @@ void    op_aff(t_all *vm, t_process *p)
 	val = get_reg_val(vm, p, 1);
 	c = (unsigned char)(val % 256);
 	if (p->op_fail != 1)
-		ft_printf("\tP%6d | aff [%c](val %#02x)\n", p->pid, c, (val % 256));
+	{
+		if (vm->flag_v == 4)
+			ft_printf("\tP%6d | ", p->pid);
+		ft_printf("Aff: %c", c);
+		if (vm->flag_v == 4)
+			ft_printf("(val %#02x)\n", (val % 256));
+		else
+			ft_putchar('\n');
+	}	
 }

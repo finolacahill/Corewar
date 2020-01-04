@@ -14,12 +14,12 @@ t_process	*l_copy_process(t_process *p, t_process *new)
 	int i; 
 
 	i = -1;
-	if (!(new = malloc(sizeof(t_process))))
+	if (!(new = (t_process*)malloc(sizeof(t_process))))
 	{
 		p->op_fail = -1;
 		return (new);
 	};
-	if (!(new->decode = malloc(sizeof(int) * 4)))
+	if (!(new->decode = (int *)malloc(sizeof(int) * 4)))
 	{
 		free(new);
 		p->op_fail = -1;

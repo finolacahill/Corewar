@@ -22,6 +22,8 @@ void    op_zjmp(t_all *vm, t_process *p)
 		if (vm->flag_v == 4)
 			ft_printf("\tP%6d | jumped to %d\n", p->pid, address % MEM_SIZE);
 		p->pc = (p->pc + address - 1) % MEM_SIZE;
+		if (p->pc < 0)
+			p->pc = MEM_SIZE - p->pc;
 	}
 	else
 	{

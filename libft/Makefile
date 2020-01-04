@@ -34,7 +34,7 @@ SRC_NAME =	ft_atol.c ft_lstaddend.c ft_numlen.c getchar.c get_next_line.c		\
 		ft_itoa_float.c ft_error.c ft_specifiers.c ft_buffer.c ft_returnerror.c	\
 		ft_roundstr.c ft_readu.c ft_numlen.c ft_unumlen.c ft_printfloat.c		\
 		ft_putstrb.c ft_uputnbr.c ft_pfputnbr.c ft_binary.c ft_puissance.c		\
-		ft_putnbr.c ft_reverse.c
+		ft_putnbr.c ft_reverse.c ft_long_atoi.c
 
 HEAD = libft.h get_next_line.h
 
