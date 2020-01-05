@@ -28,7 +28,7 @@ int		get_next_bytes(t_all *vm, t_process *p, int len, int bytes_read)
 	//	 printf("val after = %d", val);
 		address = (p->pc + bytes_read + i) % MEM_SIZE;
 		if (address < 0)
-			address = MEM_SIZE - address;
+			address = MEM_SIZE +address;
 		val += vm->arena[address];
 	//	 printf("val added %d\n", val);
 	}

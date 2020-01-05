@@ -14,7 +14,7 @@ void		load_value(t_all *vm, int add, int len, int val)
 	{
 		address = (add + len - i) % MEM_SIZE;
 		if (address < 0)
-			address = MEM_SIZE - address;
+			address = MEM_SIZE + address;
 		vm->arena[address] = (val % (ft_puissance(16, power)) >> shift);
 		val -= val % (ft_puissance(16, power));
 		power +=2;

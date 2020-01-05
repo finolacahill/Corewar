@@ -91,9 +91,6 @@ t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_proc
 					end_prog(vm, (*head), op_table);
 				if((*process)->op_fail == 2)
 					re_order_process(process, head);
-				
-
-
 			}
 		}
 //		if (vm->arena[924] == 1)
@@ -102,7 +99,10 @@ t_process 	**exec_process(t_all *vm, t_process **process, t_op *op_table, t_proc
 	//		exit(1);
 	//	}
 		if (((*process)->op_fail == 0 && (*process)->op != 9) || ((*process)->op == 9 && (*process)->op_fail == 1))
+		{
+		//	ft_print_arena(vm, 64, (*process)->pc, ((*process)->pc + bytes) % MEM_SIZE);
 			(*process)->pc = ((*process)->pc + bytes) % MEM_SIZE;
+		}
 	}
 	load_new_process(vm, *process);
 	return (head);

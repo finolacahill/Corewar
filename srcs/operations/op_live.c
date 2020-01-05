@@ -33,7 +33,7 @@ void	op_live(t_all *vm, t_process *p)
 	
 	p1 = get_next_bytes(vm, p, 4, 0);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | Live %d \n", p->pid, p1);
+		ft_printf("\tP%6d | Live %d at cycle %d.\n", p->pid, p1, vm->cycles);
 //	ft_printf("THE NUMBER IS %d\n", p1);
 //	ft_print_arena(vm, 64, p->pc);
 	if (is_player_nb(p1, vm) == 1)

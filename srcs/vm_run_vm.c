@@ -36,12 +36,13 @@ int     run_vm(t_all *vm, t_process *process)
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (error_run_vm(vm, op_table));
-	vm->flag_v = 0;
+	vm->flag_v = 8;
 	while (check_alive(vm, &process) == 1)
 	{
 		if ((run_processes(vm, &process, op_table)) == -2)
 			return (dump(vm, op_table));
 	}
+//	ft_print_arena(vm, 64, -1, -1);
 	declare_winner(vm);
 	free_op_table(op_table);
 	return (0);

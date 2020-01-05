@@ -68,7 +68,7 @@ int init_arena(t_all *vm)
 
     i = 0;
     divide = 0;
-    vm->cycles = 0;
+    vm->cycles = 1;
     vm->last_alive = 0;
     vm->last_alive_cycle = 0;
     vm->nbr_live_since_check = 0;

@@ -24,7 +24,7 @@ int main(int ac, char **av)
 	//ft_print_arena(&vm, 64, 0, 0);
 	if (run_vm(&vm, &p) == -1)
 		return (free_all(&vm, &p));
-	ft_print_arena(&vm, 64, 0, 0);
+//	ft_print_arena(&vm, 64, 0, 0);
 //	(&vm);
 //
 	free_all(&vm, NULL);

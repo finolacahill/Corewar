@@ -25,8 +25,8 @@ void    op_aff(t_all *vm, t_process *p)
 			ft_printf("\tP%6d | ", p->pid);
 		ft_printf("Aff: %c", c);
 		if (vm->flag_v == 4)
-			ft_printf("(val %#02x)\n", (val % 256));
+			ft_printf("(val %#02x) at cycle %d.\n", (val % 256), vm->cycles);
 		else
 			ft_putchar('\n');
-	}	
+	}
 }

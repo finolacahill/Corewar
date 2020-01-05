@@ -20,10 +20,14 @@ void    op_zjmp(t_all *vm, t_process *p)
 //		ft_printf("address = %02x ", address);
 //		ft_printf("old pc = %d\n", p->pc);
 		if (vm->flag_v == 4)
-			ft_printf("\tP%6d | jumped to %d\n", p->pid, address % MEM_SIZE);
-		p->pc = (p->pc + address - 1) % MEM_SIZE;
-		if (p->pc < 0)
-			p->pc = MEM_SIZE - p->pc;
+			ft_printf("\tP%6d | jumped to %d at cycle %d.\n", p->pid, address % MEM_SIZE, vm->cycles);
+		address = p->pc + (address % IDX_MOD) - 1;
+		if (address < 0)
+			address += MEM_SIZE;
+
+	//make
+	//	ft_print_arena(vm, 64, p->pc, address + 1);
+		p->pc = address;
 	}
 	else
 	{
