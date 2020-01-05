@@ -3,57 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 11:59:40 by yodana            #+#    #+#             */
-/*   Updated: 2018/11/26 16:42:50 by yodana           ###   ########.fr       */
+/*   Created: 2018/11/16 16:03:04 by fcahill           #+#    #+#             */
+/*   Updated: 2018/11/23 17:00:53 by fcahill          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_create(int size, long long n, int neg)
+static char		*ft_insertnum(char *str, int n, int i)
 {
-	char *new;
-
-	if (!(new = (char*)malloc(sizeof(char) * size + 1)))
-		return (NULL);
-	new[size] = '\0';
-	size--;
-	while (size >= 0)
+	if (str)
 	{
-		new[size] = (n % 10) + '0';
-		if (size == 0 && neg == 1)
-			new[size] = '-';
-		n = n / 10;
-		size--;
+		str[i + 1] = '\0';
+		while (n >= 10)
+		{
+			str[i] = (n % 10 + '0');
+			n = n / 10;
+			i--;
+		}
+		str[i] = n + '0';
 	}
-	return (new);
+	return (&*str);
 }
 
-char		*ft_itoa(long long n)
+char			*ft_itoa(int n)
 {
-	long long	i;
-	int			size;
-	int			neg;
+	int			i;
+	int			j;
+	char		*str;
 
-	neg = 0;
-	size = 0;
-	if (n == -9223372036854775807 - 1)
-		return (ft_strdup("-9223372036854775808"));
-	if (n == 0)
-		return (ft_strdup("0"));
-	if (n < 0)
+	i = 0;
+	j = n;
+	while ((j / 10 != 0) && (i++ || 1))
+		j = j / 10;
+	if (!(str = (char *)malloc(sizeof(char) * i + 2)))
+		return (NULL);
+	if ((n < 0) && (i++ || 1))
 	{
-		n = n * -1;
-		neg = 1;
-		size++;
+		if (n == -2147483648)
+		{
+			str[1] = 2 + '0';
+			n = -147483648;
+		}
+		str[0] = '-';
+		n = -n;
 	}
-	i = n;
-	while (i > 0)
-	{
-		i = i / 10;
-		size++;
-	}
-	return (ft_create(size, n, neg));
+	str = ft_insertnum(str, n, i);
+	return (str);
 }

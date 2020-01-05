@@ -10,17 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 t_label		*new_label(void)
 {
 	t_label	*new;
 
-	new = (t_label*)malloc(sizeof(t_label));
+	if (!(new = (t_label*)malloc(sizeof(t_label))))
+		error(8, -1, -1, NULL);
 	new->label = NULL;
 	new->adress = 0;
 	new->size = 0;
@@ -32,7 +29,8 @@ t_instruc	*new_instruct(void)
 {
 	t_instruc *new;
 
-	new = (t_instruc*)malloc(sizeof(t_instruc));
+	if (!(new = (t_instruc*)malloc(sizeof(t_instruc))))
+		error(8, -1, -1, NULL);
 	new->opcode = 0;
 	new->params = NULL;
 	new->ocp = 0;
@@ -52,8 +50,10 @@ t_env		*init_env(void)
 {
 	t_env *new;
 
-	new = (t_env*)malloc(sizeof(t_env));
-	new->header = (t_header*)malloc(sizeof(t_header));
+	if (!(new = (t_env*)malloc(sizeof(t_env))))
+		error(8, -1, -1, NULL);
+	if (!(new->header = (t_header*)malloc(sizeof(t_header))))
+		error(8, -1, -1, NULL);
 	new->header->c = 0;
 	new->header->n = 0;
 	new->header->filename = NULL;

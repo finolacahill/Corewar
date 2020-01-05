@@ -6,14 +6,10 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:43:44 by yodana            #+#    #+#             */
-/*   Updated: 2019/12/22 18:46:29 by yodana           ###   ########.fr       */
+/*   Updated: 2020/01/05 19:29:49 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 int		put_adress_label(t_instruc *instruc)
@@ -59,7 +55,8 @@ void	put_label(t_env *env, char *label)
 	tmp = env->label;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->label = ft_strdup(label);
+	if (!(tmp->label = ft_strdup(label)))
+		error(8, -1, -1, NULL);
 	tmp->adress = put_adress_label(env->instruc);
 	tmp->next = new_label();
 	use_label(env, tmp);
@@ -88,10 +85,13 @@ int		get_label(char *line, t_env *env)
 
 	i = 0;
 	label = NULL;
-	while (line[i] && line[i] != ':')
+	while (line[i] && line[i] != LABEL_CHAR)
 		i++;
-	if (line[i] == ':')
-		label = ft_strsub(line, 0, i);
+	if (line[i] == LABEL_CHAR)
+	{
+		if (!(label = ft_strsub(line, 0, i)))
+			error(8, -1, -1, NULL);
+	}
 	if (is_label(label) == 1)
 		put_label(env, label);
 	else

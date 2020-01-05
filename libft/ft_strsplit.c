@@ -3,67 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manki <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/12 13:47:21 by manki             #+#    #+#             */
-/*   Updated: 2017/12/27 15:40:33 by manki            ###   ########.fr       */
+/*   Created: 2018/11/16 14:44:34 by fcahill           #+#    #+#             */
+/*   Updated: 2018/11/20 19:42:02 by fcahill          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
-static int		ft_wrdlen(const char *str, char c)
+static void			ft_insert(const char *s, char *fresh, int start, int end)
 {
-	int		i;
+	int				j;
 
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
-
-static int		ft_nbwrd(const char *str, char c)
-{
-	int		i;
-	int		cut;
-
-	i = 0;
-	cut = 0;
-	while (str[i])
+	j = 0;
+	while (start != end)
 	{
-		while (str[i] == c)
-			i++;
-		if (str[i])
-			cut++;
-		while (str[i] && str[i] != c)
-			i++;
+		fresh[j] = s[start];
+		j++;
+		start++;
 	}
-	return (cut);
+	fresh[j] = '\0';
 }
 
-char			**ft_strsplit(char const *s, char c)
+static int			ft_start(const char *s, char c, int start, int end)
 {
-	char	**fresh;
-	int		i;
-	int		j;
-	int		k;
+	start = end;
+	while (s[start] == c)
+		++start;
+	return (start);
+}
 
-	if (!s || !(fresh = (char **)malloc(sizeof(char *) * (ft_nbwrd(s, c) + 1))))
+static int			ft_end(const char *s, char c, int start, int end)
+{
+	end = start;
+	while (s[end] != c && s[end] != '\0')
+		++end;
+	return (end);
+}
+
+char				**ft_strsplit(char const *s, char c)
+{
+	char			**fresh;
+	int				i;
+	int				start;
+	int				end;
+
+	end = 0;
+	i = 0;
+	if (!(s) || !(c))
 		return (NULL);
-	i = 0;
-	j = -1;
-	while (++j < ft_nbwrd(s, c))
+	if (!(fresh = (char**)malloc(sizeof(char*) * ft_wordcounter(s, c) + 1)))
+		return (NULL);
+	while (i < ft_wordcounter(s, c))
 	{
-		while (s[i] && s[i] == c)
-			i++;
-		if (!(fresh[j] = (char *)malloc(ft_wrdlen(&s[i], c) + 1)))
-			return (NULL);
-		k = 0;
-		while (s[i] && s[i] != c)
-			fresh[j][k++] = s[i++];
-		fresh[j][k] = '\0';
+		start = ft_start(s, c, start, end);
+		end = ft_end(s, c, start, end);
+		if (s[start] != '\0')
+		{
+			if (!(fresh[i] = (char*)malloc(sizeof(char) * end - start + 1)))
+				return (NULL);
+			ft_insert(s, fresh[i], start, end);
+		}
+		i++;
 	}
-	fresh[j] = 0;
-	return (fresh);
+	fresh[i] = NULL;
+	return ((char**)fresh);
 }

@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 int			get_adress(t_instruc *instruc, t_instruc *working)
@@ -44,11 +40,13 @@ void		remplace_empty(t_instruc *instruc, int res)
 	i = 0;
 	while (instruc->hexa_instruc[i] != '#')
 		i++;
-	remplace = ft_uitoa_base((uint16_t)res, 16, 0);
+	if (!(remplace = ft_uitoa_base((uint16_t)res, 16, 0)))
+		error(8, -1, -1, NULL);
 	size = size - ft_strlen(remplace);
 	while (size > 0)
 	{
-		remplace = ft_strjoin_fr("0", remplace, 2);
+		if (!(remplace = ft_strjoin_fr("0", remplace, 2)))
+			error(8, -1, -1, NULL);
 		size--;
 	}
 	while (remplace[j])

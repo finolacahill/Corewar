@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 void	last_check_cmd(t_env *env, char *line, char *cmd)
@@ -104,7 +100,8 @@ void	go_cmd(t_env *env, char *line)
 	j = i;
 	while (line[j] && line[j] > ' ')
 		j++;
-	check = ft_strsub(line, i, j - len - 1);
+	if (!(check = ft_strsub(line, i, j - len - 1)))
+		error(8, -1, -1, NULL);
 	if (line[i] && ft_strcmp("name", check) == 0)
 		put_name(env, &line[j]);
 	else if (line[i] && ft_strcmp("comment", check) == 0)

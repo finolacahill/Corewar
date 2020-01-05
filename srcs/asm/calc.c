@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 int		dec_to_hexa(int i)
@@ -21,7 +17,8 @@ int		dec_to_hexa(int i)
 	char	*itoa;
 	int		res;
 
-	itoa = ft_uitoa_base(i, 16, 0);
+	if (!(itoa = ft_uitoa_base(i, 16, 0)))
+		error(8, -1, -1, NULL);
 	res = ft_strtol(itoa, 16, 2);
 	ft_strdel(&itoa);
 	return (res);

@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 static const	t_error_cmd g_error_cmd_tab[] =
@@ -43,10 +39,10 @@ void	error_cmd(int type, char *cmd, int line)
 	{
 		if (g_error_cmd_tab[i].type == type)
 		{
-			ft_printf("%s", g_error_cmd_tab[i].message);
-			ft_printf("%s", cmd);
+			ft_fprintf(2, "%s", g_error_cmd_tab[i].message);
+			ft_fprintf(2, "%s", cmd);
 			if (line >= 0)
-				ft_printf(" in line %d", line + 1);
+				ft_fprintf(2, " in line %d", line + 1);
 			exit(0);
 		}
 		i++;

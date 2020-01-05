@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 void	res_ocp(t_instruc *instruc, char *ocp)
@@ -22,18 +18,24 @@ void	res_ocp(t_instruc *instruc, char *ocp)
 
 	res = bi_to_dec(ocp);
 	ft_strdel(&ocp);
-	ocp = ft_uitoa_base(res, 16, 0);
+	if (!(ocp = ft_uitoa_base(res, 16, 0)))
+		error(8, -1, -1, NULL);
 	if (ft_strlen(ocp) == 1)
-		ocp = ft_strjoin_fr("0", ocp, 2);
-	instruc->hexa_instruc = ft_strjoin_fr(ocp, instruc->hexa_instruc, 3);
+	{
+		if (!(ocp = ft_strjoin_fr("0", ocp, 2)))
+			error(8, -1, -1, NULL);
+	}
+	if (!(instruc->hexa_instruc = ft_strjoin_fr(ocp, instruc->hexa_instruc, 3)))
+		error(8, -1, -1, NULL);
 }
 
 void	get_ocp(t_instruc *instruc, int i, int j)
 {
 	char *ocp;
 
-	ocp = ft_strnew(8);
-	while (instruc->params[i] != 0)
+	if (!(ocp = ft_strnew(8)))
+		error(8, -1, -1, NULL);
+	while (instruc->params[++i] != 0)
 	{
 		if (instruc->params[i] == T_REG)
 		{
@@ -50,7 +52,6 @@ void	get_ocp(t_instruc *instruc, int i, int j)
 			ocp[++j] = '1';
 			ocp[++j] = '1';
 		}
-		i++;
 	}
 	while (j < 7)
 		ocp[++j] = '0';

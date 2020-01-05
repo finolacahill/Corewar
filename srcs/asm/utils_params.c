@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 void	put_params(t_instruc *instruc, int size, char *index)
@@ -24,10 +20,13 @@ void	put_params(t_instruc *instruc, int size, char *index)
 		hexa = ft_uitoa_base((uint16_t)ft_atoi(index), 16, 0);
 	else
 		hexa = ft_uitoa_base((uint32_t)ft_atoi(index), 16, 0);
+	if (hexa == NULL)
+		error(8, -1, -1, NULL);
 	size = size - ft_strlen(hexa);
 	while (size > 0)
 	{
-		hexa = ft_strjoin_fr("0", hexa, 2);
+		if (!(hexa = ft_strjoin_fr("0", hexa, 2)))
+			error(8, -1, -1, NULL);
 		size--;
 	}
 	if (instruc->hexa_instruc != NULL)
@@ -35,6 +34,8 @@ void	put_params(t_instruc *instruc, int size, char *index)
 				hexa, 1);
 	else
 		instruc->hexa_instruc = ft_strdup(hexa);
+	if (instruc->hexa_instruc == NULL)
+		error(8, -1, -1, NULL);
 	ft_strdel(&hexa);
 }
 
@@ -52,15 +53,16 @@ int		param_register(t_instruc *instruc, char *c_index_r, int j, t_env *env)
 		error(4, env->line, j, ft_itoa(instruc->opcode));
 	instruc->params[j] = T_REG;
 	instruc->is_ocp = 1;
-	hexa_r = ft_uitoa_base(index_r, 16, 0);
+	if (!(hexa_r = ft_uitoa_base(index_r, 16, 0)))
+		error(8, -1, -1, NULL);
 	if ((ft_strlen(hexa_r)) == 1)
-	{
 		hexa_r = ft_strjoin_fr("0", hexa_r, 2);
-	}
-	if (instruc->hexa_instruc != NULL)
+	if (hexa_r != NULL && instruc->hexa_instruc != NULL)
 		instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_r, 1);
-	else
+	else if (hexa_r != NULL)
 		instruc->hexa_instruc = ft_strdup(hexa_r);
+	if (hexa_r == NULL || instruc->hexa_instruc == NULL)
+		error(8, -1, -1, NULL);
 	ft_strdel(&hexa_r);
 	return (1);
 }
@@ -111,12 +113,13 @@ int		what_params(char *params, t_instruc *instruc, int j, t_env *env)
 	int		i;
 
 	i = 0;
-	since_space = ft_strtrim(params);
+	if (!(since_space = ft_strtrim(params)))
+		error(8, -1, -1, NULL);
 	if (ft_strlen(since_space) == 0)
 		error(10, env->line, j, ft_itoa(instruc->opcode));
 	if (since_space[0] == 'r')
 		param_register(instruc, &since_space[1], j, env);
-	else if (since_space[0] == '%')
+	else if (since_space[0] == DIRECT_CHAR)
 		param_direct(instruc, &since_space[1], j, env);
 	else if ((ft_isdigit(since_space[0]) || (ft_isdigit(since_space[1])
 					&& since_space[0] == '-')) || since_space[0] == ':')

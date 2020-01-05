@@ -3,27 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 12:25:35 by yodana            #+#    #+#             */
-/*   Updated: 2018/11/27 19:56:43 by yodana           ###   ########.fr       */
+/*   Created: 2018/11/14 16:36:55 by fcahill           #+#    #+#             */
+/*   Updated: 2018/11/21 14:27:35 by fcahill          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int		ft_strequ(char const *s1, char const *s2)
 {
 	int i;
 
 	i = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (0);
-	while (s1[i] || s2[i])
+	if (s1 && s2)
 	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
+		while ((s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0'))
+			++i;
+		if ((s1[i] == '\0') && (s2[i] == '\0'))
+			return (1);
 	}
-	return (1);
+	return (0);
 }

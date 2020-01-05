@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 t_op	g_op_tab[17] =
@@ -58,7 +54,9 @@ int		put_instruc_params(t_instruc *instruc, int j)
 	int i;
 
 	i = 0;
-	instruc->params = (int*)malloc(sizeof(int) * (g_op_tab[j].nbr_params + 1));
+	if (!(instruc->params = (int*)malloc(sizeof(int) *
+		(g_op_tab[j].nbr_params + 1))))
+		error(8, -1, -1, NULL);
 	while (i != g_op_tab[j].nbr_params)
 	{
 		instruc->params[i] = g_op_tab[j].param_type[i];

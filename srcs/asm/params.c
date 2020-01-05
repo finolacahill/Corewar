@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 void	put_hexa_label(int16_t label, t_instruc *instruc, int size)
@@ -24,16 +20,21 @@ void	put_hexa_label(int16_t label, t_instruc *instruc, int size)
 		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
 	else
 		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
+	if (hexa_l == NULL)
+		error(8, -1, -1, NULL);
 	size = size - ft_strlen(hexa_l);
 	while (size > 0)
 	{
-		hexa_l = ft_strjoin_fr("0", hexa_l, 2);
+		if (!(hexa_l = ft_strjoin_fr("0", hexa_l, 2)))
+			error(8, -1, -1, NULL);
 		size--;
 	}
 	if (instruc->hexa_instruc != NULL)
 		instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, hexa_l, 1);
 	else
 		instruc->hexa_instruc = ft_strdup(hexa_l);
+	if (instruc->hexa_instruc == NULL)
+		error(8, -1, -1, NULL);
 	ft_strdel(&hexa_l);
 }
 
@@ -43,24 +44,27 @@ void	put_label_instruc(t_instruc *instruc, char *label, int16_t adress,
 	t_label	*tmp;
 	char	*empty;
 
-	empty = ft_strdup("#");
-	size--;
+	if (!(empty = ft_strdup("#")))
+		error(8, -1, -1, NULL);
 	tmp = instruc->label;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->label = ft_strdup(label);
+	if (!(tmp->label = ft_strdup(label)))
+		error(8, -1, -1, NULL);
 	tmp->adress = adress;
-	tmp->size = size + 1;
+	tmp->size = size;
 	tmp->next = new_label();
-	while (size > 0)
+	while (--size > 0)
 	{
-		empty = ft_strjoin_fr(empty, "#", 1);
-		size--;
+		if (!(empty = ft_strjoin_fr(empty, "#", 1)))
+			error(8, -1, -1, NULL);
 	}
 	if (instruc->hexa_instruc != NULL)
 		instruc->hexa_instruc = ft_strjoin_fr(instruc->hexa_instruc, empty, 1);
 	else
 		instruc->hexa_instruc = ft_strdup(empty);
+	if (instruc->hexa_instruc == NULL)
+		error(8, -1, -1, NULL);
 	ft_strdel(&empty);
 }
 
@@ -113,7 +117,8 @@ int		get_params(char *line, t_env *env)
 {
 	char **params;
 
-	params = ft_strsplit(line, ',');
+	if (!(params = ft_strsplit(line, SEPARATOR_CHAR)))
+		error(8, -1, -1, NULL);
 	check_params(params, env);
 	ft_strrdel(params);
 	return (1);

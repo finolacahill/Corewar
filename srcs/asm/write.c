@@ -10,10 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 void	write_header_magic(t_header *header, char *new_name)
@@ -25,12 +21,15 @@ void	write_header_magic(t_header *header, char *new_name)
 
 	j = 0;
 	i = 0;
-	res = ft_strnew(8);
+	if (!(res = ft_strnew(8)))
+		error(8, -1, -1, NULL);
 	write(1, "Writing output program to ", 26);
 	write(1, new_name, ft_strlen(new_name));
 	header->magic = COREWAR_EXEC_MAGIC;
-	header_magic = ft_uitoa_base(header->magic, 16, 0);
-	header_magic = ft_strjoin_fr("00", header_magic, 2);
+	if (!(header_magic = ft_uitoa_base(header->magic, 16, 0)))
+		error(8, -1, -1, NULL);
+	if (!(header_magic = ft_strjoin_fr("00", header_magic, 2)))
+		error(8, -1, -1, NULL);
 	while (header_magic[i])
 	{
 		res[j] = ft_strtol(&header_magic[i], 16, 2);
@@ -50,7 +49,8 @@ void	write_comment(int len, t_header *header, char *size, char c)
 
 	i = 0;
 	j = -1;
-	hexa_size = ft_strnew(4);
+	if (!(hexa_size = ft_strnew(4)))
+		error(8, -1, -1, NULL);
 	while (size[i])
 	{
 		hexa_size[++j] = ft_strtol(&size[i], 16, 2);
@@ -68,7 +68,6 @@ void	write_comment(int len, t_header *header, char *size, char c)
 	while (--len > 0)
 		write(header->fd, &c, 1);
 	ft_strdel(&hexa_size);
-	ft_strdel(&size);
 }
 
 void	write_name(t_header *header, int fd, t_env *env)
@@ -80,10 +79,14 @@ void	write_name(t_header *header, int fd, t_env *env)
 
 	s = 4;
 	c = 0;
-	size = ft_uitoa_base(len_instruc(env->instruc) / 2, 16, 0);
+	if (!(size = ft_uitoa_base(len_instruc(env->instruc) / 2, 16, 0)))
+		error(8, -1, -1, NULL);
 	s = s - ft_strlen(size) + 1;
 	while (--s > 0)
-		size = ft_strjoin_fr("0", size, 2);
+	{
+		if (!(size = ft_strjoin_fr("0", size, 2)))
+			error(8, -1, -1, NULL);
+	}
 	len = PROG_NAME_LENGTH - ft_strlen(header->prog_name);
 	write(fd, header->prog_name, ft_strlen(header->prog_name));
 	while (--len > 0)
@@ -92,6 +95,7 @@ void	write_name(t_header *header, int fd, t_env *env)
 	while (--len > 0)
 		write(fd, &c, 1);
 	write_comment(len, header, size, c);
+	ft_strdel(&size);
 }
 
 void	go_to_write(int len, t_instruc *tmp, int fd)
@@ -103,7 +107,8 @@ void	go_to_write(int len, t_instruc *tmp, int fd)
 	len = (ft_strlen(tmp->hexa_instruc) / 2) + 1;
 	j = 0;
 	i = 0;
-	res = ft_strnew(len);
+	if (!(res = ft_strnew(len)))
+		error(8, -1, -1, NULL);
 	res[j] = dec_to_hexa(tmp->opcode);
 	j++;
 	while (tmp->hexa_instruc[i])

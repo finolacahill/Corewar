@@ -6,14 +6,10 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 18:00:09 by yodana            #+#    #+#             */
-/*   Updated: 2019/12/19 18:03:51 by yodana           ###   ########.fr       */
+/*   Updated: 2020/01/05 19:28:46 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/op.h"
-#include <fcntl.h>
-#include "../../libft/libft.h"
-#include <stdio.h>
 #include "../../includes/corewar.h"
 
 static const	t_error g_error_tab[13] =
@@ -72,6 +68,24 @@ int		check_numbers(char *str)
 	return (1);
 }
 
+void	write_error(int j, char *name, int line, int column)
+{
+	ft_fprintf(2, "%s", g_error_tab[j].message);
+	if (g_error_tab[j].params == 1 && name)
+	{
+		ft_fprintf(2, "instruct %s", get_params_with_opcode(ft_atoi(name)));
+		if (column >= 0)
+			ft_fprintf(2, " parameter %d", column);
+	}
+	if (g_error_tab[j].label == 1 && name)
+		ft_fprintf(2, "\"%s\"", name);
+	if (g_error_tab[j].line == 1)
+		ft_fprintf(2, " in line %d", line + 1);
+	if (g_error_tab[j].column == 1)
+		ft_fprintf(2, " in column %d", column + 1);
+	ft_fprintf(2, "\n");
+}
+
 void	error(int i, int line, int column, char *name)
 {
 	int j;
@@ -81,20 +95,7 @@ void	error(int i, int line, int column, char *name)
 	{
 		if (g_error_tab[j].type == i)
 		{
-			ft_printf("%s", g_error_tab[j].message);
-			if (g_error_tab[j].params == 1)
-			{
-				ft_printf("instruct %s", get_params_with_opcode(ft_atoi(name)));
-				if (column >= 0)
-					ft_printf(" parameter %d", column);
-			}
-			if (g_error_tab[j].label == 1)
-				ft_printf("\"%s\"", name);
-			if (g_error_tab[j].line == 1)
-				ft_printf(" in line %d", line + 1);
-			if (g_error_tab[j].column == 1)
-				ft_printf(" in column %d", column + 1);
-			ft_printf("\n");
+			write_error(j, name, line, column);
 			exit(0);
 		}
 		j++;

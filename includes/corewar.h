@@ -13,6 +13,9 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
+#include "../includes/op.h"
+#include "../libft/libft.h"
+
 typedef	struct			s_label
 {
 	char			*label;
