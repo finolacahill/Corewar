@@ -49,11 +49,13 @@ void    op_fork(t_all *vm, t_process *p)
 		return ;
 	p1 = get_next_bytes(vm, p, 2, 0);	
 	new->pc += (p1 % IDX_MOD) - 1;
+		if (vm->flag_v == 4)
+		ft_printf("\tP%6d | Fork to %d (+ pc %d = %d) cycle %d. P%d creates P%d\n", p->pid, p1, new->pc, p1 + new->pc, vm->cycles, p->pid, new->pid);
+	if (new->pc < 0)
+		new->pc += MEM_SIZE;
 	load_new_process(vm, new);
 	new->pid = vm->total_process + 1;
 	++vm->total_process;
 	p->next = new;
 	p->op_fail = 2;
-	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | Fork to %d (+ pc %d = %d) cycle %d. P%d creates P%d\n", p->pid, p1, new->pc, p1 + new->pc, vm->cycles, p->pid, new->pid);
 }

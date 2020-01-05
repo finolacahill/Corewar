@@ -55,8 +55,11 @@ void    op_lfork(t_all *vm, t_process *p)
 //	ft_printf("%04x, %04x\n", p->op, p1);
 //	ft_printf("\t\tFork to %d (+ pc %d = %d)\n", p1, new->pc, p1 + new->pc);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d)\n", p->pid, p1, new->pc, p1 + new->pc);
+		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d) at cycle %d\n", p->pid, p1, new->pc, p1 + new->pc, vm->cycles);
 	new->pc += p1 - 1;
+	if (new->pc < 0)
+		new->pc += MEM_SIZE;
+//	ft_print_arena(vm, 64, p->pc, new->pc);
 	load_new_process(vm, new);
 	new->pid = vm->total_process + 1;
 	++vm->total_process;

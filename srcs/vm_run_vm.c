@@ -36,7 +36,7 @@ int     run_vm(t_all *vm, t_process *process)
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (error_run_vm(vm, op_table));
-	vm->flag_v = 8;
+	vm->flag_v = 4;
 	while (check_alive(vm, &process) == 1)
 	{
 		if ((run_processes(vm, &process, op_table)) == -2)

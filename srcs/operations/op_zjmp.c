@@ -24,9 +24,6 @@ void    op_zjmp(t_all *vm, t_process *p)
 		address = p->pc + (address % IDX_MOD) - 1;
 		if (address < 0)
 			address += MEM_SIZE;
-
-	//make
-	//	ft_print_arena(vm, 64, p->pc, address + 1);
 		p->pc = address;
 	}
 	else
