@@ -13,8 +13,8 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-#include "../includes/op.h"
-#include "../libft/libft.h"
+# include "../includes/op.h"
+# include "../libft/libft.h"
 
 typedef	struct			s_label
 {
@@ -98,7 +98,7 @@ void					go_cmd(t_env *env, char *line);
 int						line_empty(char *line);
 int						len_instruc(t_instruc *instruc);
 void					free_all(t_env *env, t_header *header);
-void					remplace_empty(t_instruc *instruc, int res);
+void					remplace_empty(t_instruc *instruc, int res, int size);
 int						get_adress(t_instruc *instruc, t_instruc *working);
 int						line_iscomment(char *line);
 char					*get_params_with_opcode(int ocp);
@@ -113,4 +113,6 @@ int						what_params(char *p, t_instruc *i, int j, t_env *env);
 void					write_to_file(t_instruc *i, int f,
 	t_header *h, t_env *e);
 void					write_header_magic(t_header *header, char *new_name);
+int						check_numbers_separator(char *line);
+int						line_isascii(char *line);
 #endif

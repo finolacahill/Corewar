@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:43:44 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/05 19:29:49 by yodana           ###   ########.fr       */
+/*   Updated: 2020/01/06 05:31:02 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	use_label(t_env *env, t_label *label)
 		while (tmp_l)
 		{
 			if (tmp_l->label && ft_strcmp(tmp_l->label, label->label) == 0)
-				remplace_empty(tmp_i, label->adress - tmp_l->adress);
+				remplace_empty(tmp_i, label->adress - tmp_l->adress, tmp_l->size);
 			tmp_l = tmp_l->next;
 		}
 		tmp_i = tmp_i->next;
@@ -82,14 +82,18 @@ int		get_label(char *line, t_env *env)
 {
 	int		i;
 	char	*label;
+	int		j;
 
-	i = 0;
+	j = 0;
 	label = NULL;
+	while (line[j] && ft_isspace(line[j]))
+		j++;
+	i = j;
 	while (line[i] && line[i] != LABEL_CHAR)
 		i++;
 	if (line[i] == LABEL_CHAR)
 	{
-		if (!(label = ft_strsub(line, 0, i)))
+		if (!(label = ft_strsub(&line[j], 0, i - j)))
 			error(8, -1, -1, NULL);
 	}
 	if (is_label(label) == 1)

@@ -6,7 +6,7 @@
 /*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 01:43:50 by yodana            #+#    #+#             */
-/*   Updated: 2019/12/23 02:14:59 by yodana           ###   ########.fr       */
+/*   Updated: 2020/01/06 05:30:31 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,22 @@ int		check_params(char **params, t_env *env)
 		j++;
 	}
 	if (tmp->is_ocp == 1)
-		get_ocp(tmp, 0, -1);
+		get_ocp(tmp, -1, -1);
 	return (0);
 }
 
 int		get_params(char *line, t_env *env)
 {
-	char **params;
+	char		**params;
+	t_instruc	*tmp;
+	int			nbr_line;
 
+	nbr_line = check_numbers_separator(line);
+	tmp = get_last_intruct(env->instruc);
+	if (tmp->opcode == 0)
+		return (1);
+	if (nbr_line != tmp->nbr_params - 1 && nbr_line != 0)
+		error(9, env->line, -1, ft_itoa(tmp->opcode));
 	if (!(params = ft_strsplit(line, SEPARATOR_CHAR)))
 		error(8, -1, -1, NULL);
 	check_params(params, env);

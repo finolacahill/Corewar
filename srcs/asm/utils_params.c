@@ -124,6 +124,8 @@ int		what_params(char *params, t_instruc *instruc, int j, t_env *env)
 	else if ((ft_isdigit(since_space[0]) || (ft_isdigit(since_space[1])
 					&& since_space[0] == '-')) || since_space[0] == ':')
 		param_indirect(instruc, since_space, j, env);
+	else
+		error(10, env->line, j, ft_itoa(instruc->opcode));
 	ft_strdel(&since_space);
 	return (0);
 }

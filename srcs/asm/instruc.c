@@ -105,7 +105,7 @@ int		get_instruc(char *line, t_env *env, int column)
 	int		j;
 
 	j = 0;
-	while (line[j] && line[j] <= ' ')
+	while (line[j] && ft_isspace(line[j]))
 		j++;
 	if (!line[j])
 		return (0);

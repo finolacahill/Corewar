@@ -25,6 +25,7 @@ void	write_header_magic(t_header *header, char *new_name)
 		error(8, -1, -1, NULL);
 	write(1, "Writing output program to ", 26);
 	write(1, new_name, ft_strlen(new_name));
+	write(1, "\n", 1);
 	header->magic = COREWAR_EXEC_MAGIC;
 	if (!(header_magic = ft_uitoa_base(header->magic, 16, 0)))
 		error(8, -1, -1, NULL);

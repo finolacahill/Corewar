@@ -12,6 +12,21 @@
 
 #include "../../includes/corewar.h"
 
+int		line_isascii(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_isascii(line[i]))
+			i++;
+		else
+			return (-1);
+	}
+	return (1);
+}
+
 int		line_iscomment(char *line)
 {
 	int i;
@@ -57,9 +72,11 @@ int		line_empty(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] <= 32)
+	while (line[i] && ft_isspace(line[i]) == 1)
 		i++;
 	if (line[i] == '\0')
+	{
 		return (-1);
+	}
 	return (1);
 }

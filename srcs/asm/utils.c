@@ -12,6 +12,22 @@
 
 #include "../../includes/corewar.h"
 
+int			check_numbers_separator(char *line)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == SEPARATOR_CHAR)
+			j++;
+		i++;
+	}
+	return (j);
+}
+
 int			get_adress(t_instruc *instruc, t_instruc *working)
 {
 	int			res;
@@ -28,14 +44,12 @@ int			get_adress(t_instruc *instruc, t_instruc *working)
 	return (res);
 }
 
-void		remplace_empty(t_instruc *instruc, int res)
+void		remplace_empty(t_instruc *instruc, int res, int size)
 {
 	char	*remplace;
 	int		i;
 	int		j;
-	int		size;
 
-	size = 4;
 	j = 0;
 	i = 0;
 	while (instruc->hexa_instruc[i] != '#')

@@ -55,7 +55,7 @@ int		check_numbers(char *str)
 	int i;
 
 	i = 0;
-	if (str[i] == '-' && ft_strlen(str) == 1)
+	if ((str[i] == '-' && ft_strlen(str) == 1) || ft_strlen(str) == 0)
 		return (-1);
 	else if (str[i] == '-')
 		i++;
