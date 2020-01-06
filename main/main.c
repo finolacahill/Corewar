@@ -6,16 +6,16 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:16 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/16 07:54:23 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/06 11:06:39 by yodana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	t_all vm;
-	t_process p;
+	t_all		vm;
+	t_process	p;
 
 	vm.arena = NULL;
 	p.decode = NULL;
@@ -26,8 +26,5 @@ int main(int ac, char **av)
 		return (free_all(&vm, &p));
 //	ft_print_arena(&vm, 64, 0, 0);
 //	(&vm);
-//
 	free_all(&vm, NULL);
-	// free the vm
 }
-
