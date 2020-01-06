@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_sti.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 17:12:38 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 17:17:23 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vm.h"
 
 uint16_t		check_op_sti(t_all *all, uint8_t *content)
@@ -16,26 +28,21 @@ uint16_t		check_op_sti(t_all *all, uint8_t *content)
 	i += 2;
 	return (i);
 }
-//last param is a reg or a direct!!
-void    op_sti(t_all *vm, t_process *p)
+
+void			op_sti(t_all *vm, t_process *p)
 {
-	int p1;
-	int p2;
-	int p3;
-	int bytes_read;
+	int			p1;
+	int			p2;
+	int			p3;
+	int			bytes_read;
 
 	bytes_read = 2;
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
-	p3 = get_unspecified_val_2(vm,p, &bytes_read, 2);
-//	ft_printf("reg = %d, p1 = %d/%02x, p2 = %d/%02x\n", p1, p2, p2, p3, p3);
+	p3 = get_unspecified_val_2(vm, p, &bytes_read, 2);
 	if (vm->flag_v == 4)
-		ft_printf("\n\tP%6d | sti reg %d val %d to %d + %d with mod %d (with pc %d) at cycle %d\n",  p->pid, get_next_bytes(vm, p, 1, 1), p1, p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
+		ft_printf("\n\tP%6d | sti reg %d val %d to %d + %d with mod %d (with pc %d) at cycle %d\n", p->pid, get_next_bytes(vm, p, 1, 1), p1, p2, p3, (p2 + p3) % IDX_MOD, ((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
 	if (p->op_fail == 1)
 		return ;
-//	ft_print_arena(vm, 64, p->pc);
-	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)) , 4, p1);
-//	ft_print_arena(vm, 64, p->pc, p->pc + ((p2 + p3) % IDX_MOD));
-//	ft_printf("\n_________________________________________\n");
-
+	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)), 4, p1);
 }

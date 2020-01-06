@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_op_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:04:38 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/16 08:46:35 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/06 11:35:06 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-void		init_link_verif_op(t_verif_op *op)
+void			init_link_verif_op(t_verif_op *op)
 {
 	op[0].inst = check_op_live;
 	op[1].inst = check_op_ld;
@@ -39,11 +39,8 @@ t_verif_op		*init_op_verif(t_all *vm, t_verif_op *op)
 	return (op);
 }
 
-void		init_name_op(t_all *vm, t_op **op)
+void			init_name_op_real(t_all *vm, t_op **op)
 {
-	int		i;
-
-	i = -1;
 	(*op)[0].op_name = ft_strdup("live");
 	(*op)[1].op_name = ft_strdup("ld");
 	(*op)[2].op_name = ft_strdup("st");
@@ -60,6 +57,14 @@ void		init_name_op(t_all *vm, t_op **op)
 	(*op)[13].op_name = ft_strdup("lldi");
 	(*op)[14].op_name = ft_strdup("lfork");
 	(*op)[15].op_name = ft_strdup("aff");
+}
+
+void			init_name_op(t_all *vm, t_op **op)
+{
+	int			i;
+
+	i = -1;
+	init_name_op_real(vm, op);
 	while (++i < 16)
 	{
 		if ((*op)[i].op_name == NULL)
@@ -71,7 +76,7 @@ void		init_name_op(t_all *vm, t_op **op)
 	}
 }
 
-void		init_link_op(t_op *op)
+void			init_link_op(t_op *op)
 {
 	op[0].inst = op_live;
 	op[1].inst = op_ld;
@@ -91,7 +96,7 @@ void		init_link_op(t_op *op)
 	op[15].inst = op_aff;
 }
 
-t_op		*init_op_check(t_all *vm, t_op *op)
+t_op			*init_op_check(t_all *vm, t_op *op)
 {
 	ft_bzero(op, sizeof(t_op) * 16);
 	init_link_op(op);

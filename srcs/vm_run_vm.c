@@ -1,20 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_run_vm.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 16:40:12 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 16:41:36 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/vm.h"
 
-void	declare_winner(t_all *vm)
+void		declare_winner(t_all *vm)
 {
 	int		i;
+
 	i = -1;
-	
 	while (i++ < vm->total_champ)
 	{
 		if (vm->champs[i].id == vm->last_alive && vm->last_alive != 0)
 		{
-			ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n", vm->last_alive, vm->champs[i].name);
+			ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n",
+			vm->last_alive, vm->champs[i].name);
 			return ;
 		}
 	}
-	ft_printf("Nobody declared themselves alive, it's a draw. :(\n"); //or it was a draw?		
+	ft_printf("Nobody declared themselves alive, it's a draw. :(\n");
 }
+
 static int	dump(t_all *vm, t_op *op)
 {
 	ft_print_arena(vm, 32, -1, -1);
@@ -22,9 +36,9 @@ static int	dump(t_all *vm, t_op *op)
 	return (0);
 }
 
-int     run_vm(t_all *vm, t_process *process)
+int			run_vm(t_all *vm, t_process *process)
 {
-	t_op		*op_table;
+	t_op	*op_table;
 
 	if (!(op_table = (t_op*)malloc(sizeof(t_op) * 16)))
 	{
@@ -42,7 +56,6 @@ int     run_vm(t_all *vm, t_process *process)
 		if ((run_processes(vm, &process, op_table)) == -2)
 			return (dump(vm, op_table));
 	}
-//	ft_print_arena(vm, 64, -1, -1);
 	declare_winner(vm);
 	free_op_table(op_table);
 	return (0);

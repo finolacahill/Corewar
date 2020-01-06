@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 11:48:59 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/11 18:40:27 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/06 10:44:08 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int			dasm_get_exec_code(uint8_t *cor_content, int len)
 	i = -1;
 	value = 0;
 	while (++i < len)
-		value += cor_content[i] * ft_puissance(256, len - 1  - i);
+		value += cor_content[i] * ft_puissance(256, len - 1 - i);
 	return (value);
 }

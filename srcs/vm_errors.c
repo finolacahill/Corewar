@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_errors.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 12:36:41 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 12:36:49 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/vm.h"
 
 t_process	*error_process(t_process *p)
@@ -6,7 +18,7 @@ t_process	*error_process(t_process *p)
 	return (p);
 }
 
-void	error_arena(t_all *vm, t_process *p)
+void		error_arena(t_all *vm, t_process *p)
 {
 	ft_printf("Malloc error init_arena.\n");
 	free_all(vm, p);

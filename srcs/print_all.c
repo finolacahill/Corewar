@@ -6,20 +6,25 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 15:57:29 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 18:54:33 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/06 11:36:46 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
+																					//A SUPPRIMER !!!!!!!
 void	dasm_print_all(t_all *all)
 {
+	int i;
+	int r;
+
+	r = -1;
+	i = 0;
 	printf("\n====================================\n");
 	printf("	===========PRINT=ALL========\n");
 	printf("	flag_dump	=	%d\n", all->flag_dump);
 	printf("	flag_n		=	%d\n", all->flag_n);
 	printf("	============================\n");
-	int i = 0;
 	while (all->champs[i].path != NULL && i < 5)
 	{
 		printf("	champs[%d].path = |%s|\n", i, all->champs[i].path);
@@ -28,12 +33,10 @@ void	dasm_print_all(t_all *all)
 		printf("	comment		=	|%s|\n", all->champs[i].comment);
 		printf("	len_exec	=		%zu\n", all->champs[i].len_exec_code);
 		printf("	exec_code	=\n\n");
-		int r = -1;
 		while (++r <  all->champs[i].len_exec_code)
 			printf("%02x ", all->champs[i].exec_code[r]);
 		printf("\n	===========================\n");
 		i++;
 	}
 	printf("====================================\n");
-
 }

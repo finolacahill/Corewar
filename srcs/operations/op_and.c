@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_and.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 16:53:15 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 16:54:10 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vm.h"
 
 uint16_t		check_op_and(t_all *all, uint8_t *content)
@@ -20,20 +32,20 @@ uint16_t		check_op_and(t_all *all, uint8_t *content)
 	return (i);
 }
 
-void    op_and(t_all *vm, t_process *p)
+void			op_and(t_all *vm, t_process *p)
 {
-    int pm1;
-    int pm2;
-    int bytes_read;
+	int			pm1;
+	int			pm2;
+	int			bytes_read;
 
-    bytes_read = 1;
-    pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
-    pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
+	bytes_read = 1;
+	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
+	pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | and\n", p->pid);
-    if (p->op_fail == 1)
-        return ;
-    load_val_in_reg(vm, p, pm1 & pm2, bytes_read);
-    if (p->op_fail != 1)
-        check_carry(p, pm1 & pm2);    
+	if (p->op_fail == 1)
+		return ;
+	load_val_in_reg(vm, p, pm1 & pm2, bytes_read);
+	if (p->op_fail != 1)
+		check_carry(p, pm1 & pm2);
 }

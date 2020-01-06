@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vm_init_arena.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 12:44:21 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 12:46:36 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/vm.h"
 
 int			get_duration(t_all *vm, int opc)
@@ -16,16 +28,16 @@ int			get_duration(t_all *vm, int opc)
 		return (vm->cycles + 800);
 	if (opc == 14)
 		return (vm->cycles + 50);
-	if (opc == 15)	
+	if (opc == 15)
 		return (vm->cycles + 1000);
-	if (opc == 16)	
+	if (opc == 16)
 		return (vm->cycles + 2);
 	return (1);
 }
 
 static void	init_registers(t_process *p)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	p->r[0] = p->id;
@@ -34,7 +46,7 @@ static void	init_registers(t_process *p)
 }
 
 t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
-{	
+{
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
 		return (error_process(p));
 	if (!(p->decode = (int *)malloc((sizeof(int)) * 4)))
@@ -61,28 +73,29 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	return (p);
 }
 
-int init_arena(t_all *vm)
+int			init_arena(t_all *vm)
 {
-    int     i;
-    int     divide;
+	int		i;
+	int		divide;
 
-    i = 0;
-    divide = 0;
-    vm->cycles = 1;
-    vm->last_alive = 0;
-    vm->last_alive_cycle = 0;
-    vm->nbr_live_since_check = 0;
-    vm->total_checks = 0;
-    vm->total_process = 0;
-    if (!(vm->arena = (unsigned char *)ft_memalloc((sizeof(unsigned char)) * MEM_SIZE)))
-        error(vm, "Malloc error init_arena.\n");
-    while (i < vm->total_champ)
-    {
-        vm->champs[i].start = divide;
-        ft_memcpy(&vm->arena[divide], vm->champs[i].exec_code, vm->champs[i].len_exec_code);
-        ++i;
-        divide = divide + MEM_SIZE / vm->total_champ;
-    }
- // 	ft_print_arena(vm, 64, 0);
-   return (0);
+	i = 0;
+	divide = 0;
+	vm->cycles = 1;
+	vm->last_alive = 0;
+	vm->last_alive_cycle = 0;
+	vm->nbr_live_since_check = 0;
+	vm->total_checks = 0;
+	vm->total_process = 0;
+	if (!(vm->arena = (unsigned char *)ft_memalloc((sizeof(unsigned char))
+		* MEM_SIZE)))
+		error(vm, "Malloc error init_arena.\n");
+	while (i < vm->total_champ)
+	{
+		vm->champs[i].start = divide;
+		ft_memcpy(&vm->arena[divide], vm->champs[i].exec_code,
+		vm->champs[i].len_exec_code);
+		++i;
+		divide = divide + MEM_SIZE / vm->total_champ;
+	}
+	return (0);
 }

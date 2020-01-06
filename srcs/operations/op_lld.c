@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_lld.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 17:05:59 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 17:06:46 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vm.h"
 
 uint16_t		check_op_lld(t_all *all, uint8_t *content)
@@ -13,11 +25,10 @@ uint16_t		check_op_lld(t_all *all, uint8_t *content)
 	return (i);
 }
 
-
-void    op_lld(t_all *vm, t_process *p)
+void			op_lld(t_all *vm, t_process *p)
 {
-	int pm1;
-	int bytes_read;
+	int			pm1;
+	int			bytes_read;
 
 	bytes_read = 5;
 	if (p->decode[0] == IND_CODE)
@@ -30,7 +41,6 @@ void    op_lld(t_all *vm, t_process *p)
 	load_val_in_reg(vm, p, pm1, bytes_read);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | lld %d n", p->pid, pm1);
-
 	if (p->op_fail == 1)
 		return ;
 	check_carry(p, pm1);

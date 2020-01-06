@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_lldi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 17:06:55 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/06 17:07:41 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vm.h"
 
 uint16_t		check_op_lldi(t_all *all, uint8_t *content)
@@ -18,13 +30,12 @@ uint16_t		check_op_lldi(t_all *all, uint8_t *content)
 	return (i);
 }
 
-
-void    op_lldi(t_all *vm, t_process *p)
+void			op_lldi(t_all *vm, t_process *p)
 {
-	int address1;
-	int address2;
-	int val;
-	int bytes_read;
+	int			address1;
+	int			address2;
+	int			val;
+	int			bytes_read;
 
 	bytes_read = 1;
 	if (p->decode[0] == IND_CODE)
@@ -38,7 +49,8 @@ void    op_lldi(t_all *vm, t_process *p)
 	}
 	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | lldi from %d + %d (with mod and pc %d)\n", p->pid, address1, address2, address1 + address2 + p->pc);
+		ft_printf("\tP%6d | lldi from %d + %d (with mod and pc %d)\n",
+		p->pid, address1, address2, address1 + address2 + p->pc);
 	address1 += address2;
 	val = get_next_bytes(vm, p, 4, p->pc + address1 - 1);
 	if (p->op_fail == 1)

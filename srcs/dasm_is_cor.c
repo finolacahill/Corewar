@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_is_cor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:13:09 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/10 02:40:09 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/06 10:51:46 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-static int free_content(char *content, int ret)
+static int	free_content(char *content, int ret)
 {
 	free(content);
 	return (ret);

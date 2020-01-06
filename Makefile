@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/12/16 10:29:57 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/06 12:21:12 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,12 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_get_values.c		\
 			vm_load_values.c	\
 			vm_tab_check.c		\
-			vm_check_op_block.c	\
 			init_op_check.c		\
 			vm_free_structs.c	\
 			vm_tools.c			\
 			vm_run_vm.c			\
 			vm_printing.c		\
+			vm_check_op_block.c		\
 			dasm_check_hex_code.c
 
 OP_NAME =	op_add.c	\
@@ -118,8 +118,6 @@ fclean: clean
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[fclean]$(END)"
 
 re: fclean all
-	@sleep 1
-	@./sapin
 
 ####____________####
 ##// Pimp List  \\##
