@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_xor.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/07 09:26:40 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/07 09:27:59 by adietric         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/vm.h"
 
 uint16_t		check_op_xor(t_all *all, uint8_t *content)
@@ -20,20 +32,23 @@ uint16_t		check_op_xor(t_all *all, uint8_t *content)
 	return (i);
 }
 
-void    op_xor(t_all *vm, t_process *p)
+void			op_xor(t_all *vm, t_process *p)
 {
-    int pm1;
-    int pm2;
-    int bytes_read;
+	int			pm1;
+	int			pm2;
+	int			bytes_read;
 
-    bytes_read = 1;
-    pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
-    pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
+	bytes_read = 1;
+	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
+	pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | xor R%d/pm1 %d R%d/pm2 %d R%d at cycles %d\n", p->pid,  get_next_bytes(vm,p, 1, 1), pm1,  get_next_bytes(vm,p, 1, 2), pm2, get_next_bytes(vm,p, 1, bytes_read), vm->cycles);
-    if (p->op_fail == 1)
-        return ;
-    load_val_in_reg(vm, p, pm1 ^ pm2, bytes_read);
-    if (p->op_fail != 1)
-        check_carry(p, pm1 ^ pm2);    
+		ft_printf("\tP%6d | xor R%d/pm1 %d R%d/pm2 %d R%d at cycles %d\n",
+		p->pid, get_next_bytes(vm, p, 1, 1), pm1,
+		get_next_bytes(vm, p, 1, 2), pm2,
+		get_next_bytes(vm, p, 1, bytes_read), vm->cycles);
+	if (p->op_fail == 1)
+		return ;
+	load_val_in_reg(vm, p, pm1 ^ pm2, bytes_read);
+	if (p->op_fail != 1)
+		check_carry(p, pm1 ^ pm2);
 }

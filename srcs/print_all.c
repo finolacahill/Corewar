@@ -6,13 +6,12 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 15:57:29 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 11:36:46 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 09:08:19 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-																					//A SUPPRIMER !!!!!!!
 void	dasm_print_all(t_all *all)
 {
 	int i;
@@ -33,7 +32,7 @@ void	dasm_print_all(t_all *all)
 		printf("	comment		=	|%s|\n", all->champs[i].comment);
 		printf("	len_exec	=		%zu\n", all->champs[i].len_exec_code);
 		printf("	exec_code	=\n\n");
-		while (++r <  all->champs[i].len_exec_code)
+		while (++r   <  all->champs[i].len_exec_code)
 			printf("%02x ", all->champs[i].exec_code[r]);
 		printf("\n	===========================\n");
 		i++;

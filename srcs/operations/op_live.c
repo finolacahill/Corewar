@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:03:57 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 17:05:33 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 09:14:23 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int			is_player_nb(int id, t_all *vm)
 	return (0);
 }
 
-void	op_live(t_all *vm, t_process *p)
+void		op_live(t_all *vm, t_process *p)
 {
-	int p1;
+	int		p1;
 
 	p1 = get_next_bytes(vm, p, 4, 0);
 	if (vm->flag_v == 4)
