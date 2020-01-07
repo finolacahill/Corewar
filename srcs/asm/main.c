@@ -60,8 +60,6 @@ void	go_instruc(char *line, t_env *env, int i)
 	char	**commentaire;
 
 	j = 0;
-	//if (line_isascii(line) == -1)
-	//	error(7, env->line, -1, NULL);
 	if (!(commentaire = ft_strsplit(line, '#')))
 		error(8, -1, -1, NULL);
 	if (!(point = ft_strsplit(commentaire[0], ';')))
@@ -86,6 +84,7 @@ void	every_go(char *av, t_env *env)
 
 	i = 0;
 	fd = open(av, O_RDONLY);
+	env->header->fd = fd;
 	if (fd < 0)
 		error(12, -1, -1, NULL);
 	while (get_next_line(fd, &line) == 1)

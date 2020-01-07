@@ -52,7 +52,7 @@ void		remplace_empty(t_instruc *instruc, int res, int size)
 
 	j = 0;
 	i = 0;
-	while (instruc->hexa_instruc[i] != '#')
+	while (instruc->hexa_instruc[i] && instruc->hexa_instruc[i] != '#')
 		i++;
 	if (!(remplace = ft_uitoa_base((uint16_t)res, 16, 0)))
 		error(8, -1, -1, NULL);
@@ -63,7 +63,7 @@ void		remplace_empty(t_instruc *instruc, int res, int size)
 			error(8, -1, -1, NULL);
 		size--;
 	}
-	while (remplace[j])
+	while (instruc->hexa_instruc[i] && remplace[j])
 	{
 		instruc->hexa_instruc[i] = remplace[j];
 		j++;

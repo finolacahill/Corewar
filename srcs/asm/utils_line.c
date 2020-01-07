@@ -34,7 +34,7 @@ int		line_iscomment(char *line)
 	i = 0;
 	while (line[i] && line[i] <= 32)
 		i++;
-	if (line[i] == COMMENT_CHAR)
+	if (line[i] == COMMENT_CHAR || line[i] == ';')
 		return (1);
 	return (-1);
 }
@@ -60,7 +60,7 @@ int		line_ispoint(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] <= 32)
+	while (line[i] && ft_isspace(line[i]))
 		i++;
 	if (line[i] == '.')
 		return (1);

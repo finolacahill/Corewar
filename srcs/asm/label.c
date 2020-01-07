@@ -41,7 +41,10 @@ void	use_label(t_env *env, t_label *label)
 		while (tmp_l)
 		{
 			if (tmp_l->label && ft_strcmp(tmp_l->label, label->label) == 0)
+			{
 				remplace_empty(tmp_i, label->adress - tmp_l->adress, tmp_l->size);
+		
+			}
 			tmp_l = tmp_l->next;
 		}
 		tmp_i = tmp_i->next;
@@ -96,6 +99,7 @@ int		get_label(char *line, t_env *env)
 		if (!(label = ft_strsub(&line[j], 0, i - j)))
 			error(8, -1, -1, NULL);
 	}
+	//ft_printf("instruc == %s\n", label);
 	if (is_label(label) == 1)
 		put_label(env, label);
 	else

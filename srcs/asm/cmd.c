@@ -19,19 +19,23 @@ void	last_check_cmd(t_env *env, char *line, char *cmd)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ';' && line[i] > ' ')
+		if ((line[i] != ';' && line[i] != COMMENT_CHAR) && line[i] > ' ')
 			error_cmd(2, cmd, env->line);
-		else if (line[i] == ';')
+		else if (line[i] == ';' || line[i] == COMMENT_CHAR)
 			return ;
 		i++;
 	}
 }
 
-void	put_comment(t_env *env, char *line)
+void	put_comment(t_env *env, char *l)
 {
 	int i;
 	int j;
+	int ret;
+	char *line;
 
+	line = ft_strdup(l);
+	ret = 0;
 	j = -1;
 	i = -1;
 	if (env->header->c == 1)
@@ -44,23 +48,37 @@ void	put_comment(t_env *env, char *line)
 	if (line[i] == '\0')
 		error_cmd(1, "comment", env->line);
 	i++;
-	while (line[i] && line[i] != '"')
+	while ((line[i] || i == 0) && line[i] != '"')
 	{
-		env->header->comment[++j] = line[i];
+		if (line[i] != '\0')
+			env->header->comment[++j] = line[i];
 		i++;
+		if (line[i] == '\0')
+		{
+			i = 0;
+			env->header->comment[++j] = '\n';
+			free(line);
+			ret = get_next_line(env->header->fd, &line);
+			if (ret <= 0)
+				error_cmd(1, "comment", env->line);
+			env->line++;
+		}
 	}
-	if (line[i] == '\0')
-		error_cmd(1, "comment", env->line);
 	i++;
 	env->header->c = 1;
 	last_check_cmd(env, &line[i], "comment");
+	ft_strdel(&line);
 }
 
-void	put_name(t_env *env, char *line)
+void	put_name(t_env *env, char *l)
 {
 	int i;
 	int j;
+	int ret;
+	char *line;
 
+	line = ft_strdup(l);
+	ret = 0;
 	j = -1;
 	i = -1;
 	if (env->header->n == 1)
@@ -73,16 +91,26 @@ void	put_name(t_env *env, char *line)
 	if (line[i] == '\0')
 		error_cmd(1, "name", env->line);
 	i++;
-	while (line[i] && line[i] != '"')
+	while ((line[i] || i == 0) && line[i] != '"')
 	{
-		env->header->prog_name[++j] = line[i];
+		if (line[i] != '\0')
+			env->header->prog_name[++j] = line[i];
 		i++;
+		if (line[i] == '\0')
+		{
+			i = 0;
+			env->header->prog_name[++j] = '\n';
+			ft_strdel(&line);
+			ret = get_next_line(env->header->fd, &line);
+			if (ret <= 0)
+				error_cmd(1, "name", env->line);
+			env->line++;
+		}
 	}
-	if (line[i] == '\0')
-		error_cmd(1, "name", env->line);
 	i++;
 	env->header->n = 1;
 	last_check_cmd(env, &line[i], "name");
+	ft_strdel(&line);
 }
 
 void	go_cmd(t_env *env, char *line)
@@ -93,7 +121,7 @@ void	go_cmd(t_env *env, char *line)
 	int		len;
 
 	i = 0;
-	while (line[i] && line[i] <= ' ')
+	while (line[i] && ft_isspace(line[i]))
 		i++;
 	len = i;
 	i++;
