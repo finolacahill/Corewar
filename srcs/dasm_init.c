@@ -3,40 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/16 08:03:31 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/06 10:50:45 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-static void zero_champs(t_all *vm)
+static void		zero_champs(t_all *vm)
 {
-	int i;
+	int			i;
 
 	i = -1;
 	while (++i < MAX_PLAYERS)
 		ft_bzero(&(vm->champs[i]), sizeof(t_champs));
 }
 
-void	dasm_init_champs(t_all *vm, int ac, char **av)
+void			dasm_init_champs(t_all *vm, int ac, char **av)
 {
 	uint8_t		*cor_content;
 	size_t		cor_size;
 
 	cor_size = 0;
-	cor_content = NULL;	
+	cor_content = NULL;
 	dasm_input(ac, av, vm);
-	
-	while (vm->total_champ < MAX_PLAYERS 
+	while (vm->total_champ < MAX_PLAYERS
 		&& vm->champs[vm->total_champ].path != NULL)
-	{	
+	{
 		if (dasm_is_it_cor(vm->champs[vm->total_champ].path) != 1)
 			print_usage(vm);
-		cor_size = dasm_get_data(vm, vm->champs[vm->total_champ].path, &cor_content);
-		dasm_get_header(vm, cor_size, &cor_content, &vm->champs[vm->total_champ]);
+		cor_size = dasm_get_data(vm, vm->champs[vm->total_champ].path,
+		&cor_content);
+		dasm_get_header(vm, cor_size, &cor_content,
+		&vm->champs[vm->total_champ]);
 		free(cor_content);
 		cor_content = NULL;
 		vm->champs[vm->total_champ].pc = 0;
@@ -45,10 +46,10 @@ void	dasm_init_champs(t_all *vm, int ac, char **av)
 	vm_print_intro(vm);
 }
 
-void	dasm_init(t_all *vm, int ac, char **av)
+void			dasm_init(t_all *vm, int ac, char **av)
 {
-	int		i;
-	int		nb;
+	int			i;
+	int			nb;
 
 	i = -1;
 	nb = 0;

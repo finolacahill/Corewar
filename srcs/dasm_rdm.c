@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:18:49 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 18:11:17 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/06 11:26:56 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int			is_in(int i, int value[9])
 {
 	int		r;
+
 	r = -1;
 	while (++r < 9)
 		if (value[r] == i)
