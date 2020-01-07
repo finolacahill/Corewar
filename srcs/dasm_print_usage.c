@@ -36,6 +36,8 @@ void	dasm_free(t_all *all)
 		ft_strdel((char**)&(all->champs[i].exec_code));
 		i++;
 	}
+	free(all);
+	all = NULL;
 }
 
 void	error_size(t_all *all, char *path, size_t cor_size)

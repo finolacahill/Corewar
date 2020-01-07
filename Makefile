@@ -80,7 +80,7 @@ INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = #-fsanitize=address
+FLAG = -Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 
@@ -118,7 +118,6 @@ fclean: clean
 
 re: fclean all
 	@sleep 1
-	@./sapin
 
 ####____________####
 ##// Pimp List  \\##

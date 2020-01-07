@@ -72,7 +72,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p = ft_decode_byte(p->opc, p);
 	return (p);
 }
-static int	get_order(t_all *vm)
+static void	get_order(t_all *vm)
 {
 	int i;
 	int x;
@@ -95,9 +95,9 @@ static int	get_order(t_all *vm)
 		}
 		++x;
 	}
-
 }
-int			init_arena(t_all *vm)
+
+t_all		*init_arena(t_all *vm)
 {
 	int		i;
 	int		divide;
@@ -121,5 +121,5 @@ int			init_arena(t_all *vm)
 		vm->champs[vm->order[i]].len_exec_code);
 		divide = divide + MEM_SIZE / vm->total_champ;
 	}
-	return (0);
+	return (vm);
 }

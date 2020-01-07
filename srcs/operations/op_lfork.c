@@ -12,7 +12,7 @@
 
 #include "../../includes/vm.h"
 
-uint16_t		check_op_lfork(t_all *all, uint8_t *content)
+uint16_t		check_op_lfork(uint8_t *content)
 {
 	int			i;
 
@@ -32,11 +32,6 @@ static void		copy_registers(t_process *p, t_process *new)
 
 t_process		*l_copy_process(t_process *p, t_process *new)
 {
-	if (!(new = (t_process*)malloc(sizeof(t_process))))
-	{
-		p->op_fail = -1;
-		return (new);
-	}
 	if (!(new->decode = (int *)malloc(sizeof(int) * 4)))
 	{
 		free(new);
@@ -61,8 +56,13 @@ void			op_lfork(t_all *vm, t_process *p)
 	int			p1;
 	t_process	*new;
 
+	if (!(new = (t_process*)malloc(sizeof(t_process))))
+	{
+		p->op_fail = 3;
+		return ;
+	}
 	new = l_copy_process(p, new);
-	if (p->op_fail == -1)
+	if (p->op_fail == 3)
 		return ;
 	p1 = get_next_bytes(vm, p, 2, 0);
 	if (vm->flag_v == 4)

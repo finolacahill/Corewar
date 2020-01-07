@@ -12,7 +12,7 @@
 
 #include "../../includes/vm.h"
 
-uint16_t		check_op_zjmp(t_all *all, uint8_t *content)
+uint16_t		check_op_zjmp(uint8_t *content)
 {
 	(void)content;
 	return (g_op_check_tab[8].dir_size + 1);

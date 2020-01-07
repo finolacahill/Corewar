@@ -45,7 +45,7 @@ void			dasm_init_champs(t_all *vm, int ac, char **av)
 	}
 }
 
-void			dasm_init(t_all *vm, int ac, char **av)
+t_all		*dasm_init(t_all *vm, int ac, char **av)
 {
 	int			i;
 	int			nb;
@@ -63,4 +63,5 @@ void			dasm_init(t_all *vm, int ac, char **av)
 	if (vm->flag_n != -1 && nb < vm->flag_n)
 		print_usage(vm);
 	dasm_check_hex_code(vm);
+	return (vm);
 }

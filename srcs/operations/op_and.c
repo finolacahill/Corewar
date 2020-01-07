@@ -12,7 +12,7 @@
 
 #include "../../includes/vm.h"
 
-uint16_t		check_op_and(t_all *all, uint8_t *content)
+uint16_t		check_op_and(uint8_t *content)
 {
 	int			i;
 

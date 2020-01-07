@@ -79,7 +79,7 @@ typedef	struct			s_op
 
 typedef	struct			s_verif_op
 {
-	uint16_t			(*inst)(t_all *all, uint8_t *content);
+	uint16_t			(*inst)(uint8_t *content);
 }						t_verif_op;
 
 typedef struct			s_op_check
@@ -104,7 +104,7 @@ void					*dasm_memmalloccopy(void *content, size_t prev_size,
 void					vm_print_intro(t_all *all);
 void					dasm_input(int ac, char **av, t_all *all);
 void					print_usage(t_all *all);
-void					dasm_init(t_all *vm, int ac, char **av);
+t_all					*dasm_init(t_all *vm, int ac, char **av);
 int						dasm_is_it_cor(char *path);
 void					dasm_free(t_all	*all);
 void					error_size(t_all *all, char *path, size_t cor_size);
@@ -140,7 +140,7 @@ int						get_unspecified_val_2(t_all *vm, t_process *p,
 int						get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
 							int restriction);
 int						if_no_opcode(t_process *p);
-int						init_arena(t_all *vm);
+t_all					*init_arena(t_all *vm);
 t_process				*init_process(t_all *vm, t_champs *c, t_process *p);
 int						is_in(int i, int value[9]);
 int						is_player_nb(int i, t_all *vm);
@@ -175,22 +175,22 @@ void					op_lldi(t_all *vm, t_process *p);
 void					op_lfork(t_all *vm, t_process *p);
 void					op_aff(t_all *vm, t_process *p);
 
-uint16_t				check_op_add(t_all *all, uint8_t *content);
-uint16_t				check_op_aff(t_all *all, uint8_t *content);
-uint16_t				check_op_and(t_all *all, uint8_t *content);
-uint16_t				check_op_fork(t_all *all, uint8_t *content);
-uint16_t				check_op_ld(t_all *all, uint8_t *content);
-uint16_t				check_op_ldi(t_all *all, uint8_t *content);
-uint16_t				check_op_lfork(t_all *all, uint8_t *content);
-uint16_t				check_op_live(t_all *all, uint8_t *content);
-uint16_t				check_op_lld(t_all *all, uint8_t *content);
-uint16_t				check_op_lldi(t_all *all, uint8_t *content);
-uint16_t				check_op_or(t_all *all, uint8_t *content);
-uint16_t				check_op_st(t_all *all, uint8_t *content);
-uint16_t				check_op_sti(t_all *all, uint8_t *content);
-uint16_t				check_op_sub(t_all *all, uint8_t *content);
-uint16_t				check_op_xor(t_all *all, uint8_t *content);
-uint16_t				check_op_zjmp(t_all *all, uint8_t *content);
+uint16_t				check_op_add(uint8_t *content);
+uint16_t				check_op_aff(uint8_t *content);
+uint16_t				check_op_and(uint8_t *content);
+uint16_t				check_op_fork(uint8_t *content);
+uint16_t				check_op_ld(uint8_t *content);
+uint16_t				check_op_ldi(uint8_t *content);
+uint16_t				check_op_lfork(uint8_t *content);
+uint16_t				check_op_live(uint8_t *content);
+uint16_t				check_op_lld(uint8_t *content);
+uint16_t				check_op_lldi(uint8_t *content);
+uint16_t				check_op_or(uint8_t *content);
+uint16_t				check_op_st(uint8_t *content);
+uint16_t				check_op_sti(uint8_t *content);
+uint16_t				check_op_sub(uint8_t *content);
+uint16_t				check_op_xor(uint8_t *content);
+uint16_t				check_op_zjmp(uint8_t *content);
 
 t_process				*error_process(t_process *p);
 void					error_arena(t_all *vm, t_process *p);

@@ -20,7 +20,7 @@ uint16_t		check_code(t_all *vm, char *name, uint8_t *cont
 	i = 0;
 	if (cont[0] > 16 || cont[0] < 1)
 		error_exec(vm, name, i);
-	i = verif_op[cont[0] - 1].inst(vm, cont);
+	i = verif_op[cont[0] - 1].inst(cont);
 	i == 0 ? error_exec(vm, name, i) : 0;
 	return (i);
 }

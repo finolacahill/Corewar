@@ -12,7 +12,7 @@
 
 #include "../../includes/vm.h"
 
-uint16_t		check_op_lld(t_all *all, uint8_t *content)
+uint16_t		check_op_lld(uint8_t *content)
 {
 	int			i;
 
