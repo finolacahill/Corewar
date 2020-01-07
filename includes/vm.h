@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/06 17:27:35 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:51:31 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct			s_all
 	int					total_checks;
 	int					check_mode;
 	int					total_process;
+	int					ac;
 
 }						t_all;
 

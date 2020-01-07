@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 18:52:01 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:53:45 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void			dasm_init(t_all *vm, int ac, char **av)
 	zero_champs(vm);
 	vm->flag_dump = -1;
 	vm->flag_n = -1;
+	vm->flag_v = 0;
 	vm->total_champ = 0;
 	dasm_init_champs(vm, ac, av);
 	while (++i < MAX_PLAYERS)

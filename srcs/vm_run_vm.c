@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:40:12 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 16:41:36 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 21:26:00 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int			run_vm(t_all *vm, t_process *process)
 	process = load_processes(vm, process);
 	if (process->start == -1)
 		return (error_run_vm(vm, op_table));
-	vm->flag_v = 0;
 	while (check_alive(vm, &process) == 1)
 	{
 		if ((run_processes(vm, &process, op_table)) == -2)
