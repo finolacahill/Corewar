@@ -72,14 +72,37 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p = ft_decode_byte(p->opc, p);
 	return (p);
 }
+static int	load_players(t_all *vm)
+{
+	int i;
+	int	x;
+	int order[vm->total_champ];
+	int divide;
 
+	i = -1;
+	x = 1;
+	while (++i < vm->total_champ)
+		order[i] = i;
+	while (x < vm->total_champ)
+	{
+		if (vm->champs[order[x]].id < vm->champs[order[x - 1]].id)
+		{
+			ft_swap(&order[x], &order[x - 1]);
+			x = 0;
+		}
+		++x;
+	}
+	i = -1;
+	while (++i < vm->total_champ)
+		ft_printf("order %d\n", order[i]);
+}
 int			init_arena(t_all *vm)
 {
 	int		i;
 	int		divide;
 
 	i = 0;
-	divide = 0;
+	
 	vm->cycles = 1;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
@@ -97,5 +120,6 @@ int			init_arena(t_all *vm)
 		++i;
 		divide = divide + MEM_SIZE / vm->total_champ;
 	}
+	load_players(vm);
 	return (0);
 }
