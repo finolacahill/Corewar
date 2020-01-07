@@ -50,7 +50,8 @@ typedef struct			s_all
 	int					total_checks;
 	int					check_mode;
 	int					total_process;
-
+	int					ac;
+	int					*order;
 }						t_all;
 
 typedef struct			s_process
