@@ -72,37 +72,37 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p = ft_decode_byte(p->opc, p);
 	return (p);
 }
-static int	load_players(t_all *vm)
+static int	get_order(t_all *vm)
 {
 	int i;
-	int	x;
-	int order[vm->total_champ];
-	int divide;
+	int x;
 
 	i = -1;
 	x = 1;
+	if (!(vm->order = malloc(sizeof(int) * MAX_PLAYERS)))
+	{
+		free(vm->arena);
+		error(vm, "Malloc error inget_order\n");
+	}
 	while (++i < vm->total_champ)
-		order[i] = i;
+		vm->order[i] = i;
 	while (x < vm->total_champ)
 	{
-		if (vm->champs[order[x]].id < vm->champs[order[x - 1]].id)
+		if (vm->champs[vm->order[x]].id < vm->champs[vm->order[x - 1]].id)
 		{
-			ft_swap(&order[x], &order[x - 1]);
+			ft_swap(&vm->order[x], &vm->order[x - 1]);
 			x = 0;
 		}
 		++x;
 	}
-	i = -1;
-	while (++i < vm->total_champ)
-		ft_printf("order %d\n", order[i]);
+
 }
 int			init_arena(t_all *vm)
 {
 	int		i;
 	int		divide;
 
-	i = 0;
-	
+	i = -1;
 	vm->cycles = 1;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
@@ -112,14 +112,14 @@ int			init_arena(t_all *vm)
 	if (!(vm->arena = (unsigned char *)ft_memalloc((sizeof(unsigned char))
 		* MEM_SIZE)))
 		error(vm, "Malloc error init_arena.\n");
-	while (i < vm->total_champ)
+	get_order(vm);
+	while (++i < vm->total_champ)
 	{
-		vm->champs[i].start = divide;
-		ft_memcpy(&vm->arena[divide], vm->champs[i].exec_code,
-		vm->champs[i].len_exec_code);
-		++i;
+		ft_printf("order = %d\n", vm->order[i]);
+		vm->champs[vm->order[i]].start = divide;
+		ft_memcpy(&vm->arena[divide], vm->champs[vm->order[i]].exec_code,
+		vm->champs[vm->order[i]].len_exec_code);
 		divide = divide + MEM_SIZE / vm->total_champ;
 	}
-	load_players(vm);
 	return (0);
 }

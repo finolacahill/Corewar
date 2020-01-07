@@ -21,6 +21,7 @@ int main(int ac, char **av)
 	p.decode = NULL;
 	dasm_init(&vm, ac, av);
 	init_arena(&vm);
+	vm_print_intro(&vm);
 	//ft_print_arena(&vm, 64, 0, 0);
 	if (run_vm(&vm, &p) == -1)
 		return (free_all(&vm, &p));

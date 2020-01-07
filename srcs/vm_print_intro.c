@@ -12,16 +12,16 @@
 
 #include "../includes/vm.h"
 
-void		vm_print_intro(t_all *all)
+void		vm_print_intro(t_all *vm)
 {
 	int		i;
 
 	i = -1;
 	ft_putstr("Introducing contestants...\n");
-	while (++i < all->total_champ)
+	while (++i < vm->total_champ)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-			all->champs[i].id, all->champs[i].len_exec_code,
-			all->champs[i].name, all->champs[i].comment);
+			vm->champs[vm->order[i]].id, vm->champs[vm->order[i]].len_exec_code,
+			vm->champs[vm->order[i]].name, vm->champs[vm->order[i]].comment);
 	}
 }
