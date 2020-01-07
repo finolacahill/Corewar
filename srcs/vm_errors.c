@@ -37,6 +37,7 @@ void		end_prog(t_all *vm, t_process *head, t_op *op)
 {
 	free_all_process(vm, head);
 	free(vm->arena);
+	free(vm->order);
 	free_op_table(op);
 	error(vm, "Malloc error during fork.\n");
 }

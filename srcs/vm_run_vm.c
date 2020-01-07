@@ -42,6 +42,7 @@ int			run_vm(t_all *vm, t_process *process)
 
 	if (!(op_table = (t_op*)malloc(sizeof(t_op) * 16)))
 	{
+		free(vm->order);
 		free(vm->arena);
 		error(vm, "Malloc error run_vm.\n");
 	}

@@ -30,6 +30,9 @@ void			free_vm(t_all *vm)
 	if (vm->arena != NULL)
 		ft_memdel((void **)&vm->arena);
 	vm->arena = NULL;
+	if (vm->order != NULL)
+		free(vm->order);
+	vm->order = NULL;
 	dasm_free(vm);
 	vm = NULL;
 }
