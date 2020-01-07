@@ -59,7 +59,7 @@ void	print_usage(t_all *all)
 	ft_printf("#### TEXT OUTPUT MODE ");
 	ft_printf("##########################################################\n");
 	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits\n");
-	ft_printf("\t\t-n    X\t: Set a player id to X. X is a number between 1");
+	ft_printf("\t\t-n    X\t: Set a player id to X. X is an integer.");
 	ft_printf(" & number of players.\n");
 	ft_printf("\t\t-v    X\t: Verbosity levels\n\t\t\t- 0 : Show");
 	ft_printf(" only essentials\n");

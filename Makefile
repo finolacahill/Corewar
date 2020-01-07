@@ -29,7 +29,6 @@ SRCS_NAME = dasm_get_data.c		\
 			dasm_realloc.c		\
 			dasm_init.c			\
 			dasm_rdm.c			\
-			print_all.c			\
 			vm_print_intro.c	\
 			vm_init_arena.c		\
 			vm_load_processes.c \
