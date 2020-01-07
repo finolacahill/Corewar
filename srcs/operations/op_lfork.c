@@ -21,11 +21,17 @@ uint16_t		check_op_lfork(t_all *all, uint8_t *content)
 	return (g_op_check_tab[14].dir_size + 1);
 }
 
-t_process		*l_copy_process(t_process *p, t_process *new)
+static void		copy_registers(t_process *p, t_process *new)
 {
-	int			i;
+	int i;
 
 	i = -1;
+	while (++i < REG_NUMBER)
+		new->r[i] = p->r[i];
+}
+
+t_process		*l_copy_process(t_process *p, t_process *new)
+{
 	if (!(new = (t_process*)malloc(sizeof(t_process))))
 	{
 		p->op_fail = -1;
@@ -38,8 +44,7 @@ t_process		*l_copy_process(t_process *p, t_process *new)
 		return (new);
 	}
 	new->id = p->id;
-	while (++i < REG_NUMBER)
-		new->r[i] = p->r[i];
+	copy_registers(p, new);
 	new->op = 0;
 	new->exec_cycle = p->exec_cycle + 1;
 	new->live_calls = p->live_calls;
