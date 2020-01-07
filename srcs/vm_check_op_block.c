@@ -22,7 +22,7 @@ int			check_comb_op_ocp(t_all *vm, t_process *process)
 	if (if_no_opcode(process) == 1)
 		return (1);
 	if (val_ocp == 0
-		|| is_in(val_ocp, op_check_tab[process->op - 1].ocp_value) != 1)
+		|| is_in(val_ocp, g_op_check_tab[process->op - 1].ocp_value) != 1)
 		return (0);
 	return (1);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-t_op_check	op_check_tab[17] =
+t_op_check	g_op_check_tab[17] =
 {
 	{"live", 1, {0, 0, 0, 0, 0, 0, 0, 0, 0}, 1, 10, 4},
 	{"ld", 2, {144, 208, 0, 0, 0, 0, 0, 0, 0}, 2, 5, 4},

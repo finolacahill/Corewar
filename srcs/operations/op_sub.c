@@ -17,7 +17,7 @@ uint16_t		check_op_sub(t_all *all, uint8_t *content)
 	int			i;
 
 	i = 0;
-	if (!(content[1]) || is_in(content[1], op_check_tab[4].ocp_value) != 1)
+	if (!(content[1]) || is_in(content[1], g_op_check_tab[4].ocp_value) != 1)
 		return (0);
 	i = content[1] == 84 ? 3 * 1 + 2 : 0;
 	return (i);

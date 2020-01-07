@@ -94,7 +94,7 @@ typedef struct			s_op_check
 
 # define DUMP -2;
 
-t_op_check				op_check_tab[17];
+t_op_check				g_op_check_tab[17];
 void					dasm_get_header(t_all *all, size_t cor_size, uint8_t
 							**cor_content, t_champs *champs);
 size_t					dasm_get_data(t_all	*all, char *cor_file, uint8_t

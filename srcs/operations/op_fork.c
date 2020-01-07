@@ -18,7 +18,7 @@ uint16_t		check_op_fork(t_all *all, uint8_t *content)
 
 	(void)content;
 	i = 0;
-	return (op_check_tab[11].dir_size + 1);
+	return (g_op_check_tab[11].dir_size + 1);
 }
 
 t_process		*copy_process(t_process *p, t_process *new)

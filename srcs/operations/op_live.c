@@ -18,7 +18,7 @@ uint16_t	check_op_live(t_all *all, uint8_t *content)
 
 	(void)content;
 	i = 0;
-	return (op_check_tab[0].dir_size + 1);
+	return (g_op_check_tab[0].dir_size + 1);
 }
 
 int			is_player_nb(int id, t_all *vm)
