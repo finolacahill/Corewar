@@ -25,19 +25,6 @@ void			free_process(t_all *vm, t_process *p)
 	}
 }
 
-void			free_all_process(t_all *vm, t_process *p)
-{
-	t_process	*tmp;
-
-	tmp = p;
-	while (p != NULL)
-	{
-		tmp = p;
-		p = p->next;
-		free_process(vm, tmp);
-	}
-}
-
 void			free_vm(t_all *vm)
 {
 	if (vm->arena != NULL)
@@ -56,11 +43,6 @@ int				free_all(t_all *vm, t_process *p)
 
 void			free_op_table(t_op *op)
 {
-	int			i;
-
-	i = -1;
-	while (++i < 16)
-		ft_strdel(&(op[i].op_name));
 	free(op);
 }
 

@@ -61,11 +61,8 @@ void				dasm_get_header(t_all *all, size_t cor_size,
 					uint8_t **cor_content, t_champs *champs)
 {
 	if (cor_size < 2192)
-	{
-		ft_printf("here?");
 		free_dasm_header(all, (*cor_content),
 		"File is too small! (not enough informations)\n");
-	}
 	if (cor_size > CHAMP_MAX_SIZE + 2192)
 	{
 		free(cor_content);

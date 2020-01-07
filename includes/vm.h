@@ -73,7 +73,6 @@ typedef struct			s_process
 
 typedef	struct			s_op
 {
-	char				*op_name;
 	void				(*inst)(t_all *vm, t_process *p);
 }						t_op;
 
@@ -197,4 +196,5 @@ t_process				*error_process(t_process *p);
 void					error_arena(t_all *vm, t_process *p);
 int						error_run_vm(t_all *vm, t_op *op_table);
 void					free_op_table(t_op *op);
+void					free_all_process(t_all *vm, t_process *p);
 #endif

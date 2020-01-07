@@ -39,43 +39,6 @@ t_verif_op		*init_op_verif(t_all *vm, t_verif_op *op)
 	return (op);
 }
 
-void			init_name_op_real(t_all *vm, t_op **op)
-{
-	(*op)[0].op_name = ft_strdup("live");
-	(*op)[1].op_name = ft_strdup("ld");
-	(*op)[2].op_name = ft_strdup("st");
-	(*op)[3].op_name = ft_strdup("add");
-	(*op)[4].op_name = ft_strdup("sub");
-	(*op)[5].op_name = ft_strdup("and");
-	(*op)[6].op_name = ft_strdup("or");
-	(*op)[7].op_name = ft_strdup("xor");
-	(*op)[8].op_name = ft_strdup("zjmp");
-	(*op)[9].op_name = ft_strdup("ldi");
-	(*op)[10].op_name = ft_strdup("sti");
-	(*op)[11].op_name = ft_strdup("fork");
-	(*op)[12].op_name = ft_strdup("lld");
-	(*op)[13].op_name = ft_strdup("lldi");
-	(*op)[14].op_name = ft_strdup("lfork");
-	(*op)[15].op_name = ft_strdup("aff");
-}
-
-void			init_name_op(t_all *vm, t_op **op)
-{
-	int			i;
-
-	i = -1;
-	init_name_op_real(vm, op);
-	while (++i < 16)
-	{
-		if ((*op)[i].op_name == NULL)
-		{
-			free_op_table(*op);
-			free(vm->arena);
-			error(vm, "Malloc error init_name_op.\n");
-		}
-	}
-}
-
 void			init_link_op(t_op *op)
 {
 	op[0].inst = op_live;
@@ -100,6 +63,5 @@ t_op			*init_op_check(t_all *vm, t_op *op)
 {
 	ft_bzero(op, sizeof(t_op) * 16);
 	init_link_op(op);
-	init_name_op(vm, &op);
 	return (op);
 }

@@ -31,6 +31,13 @@ static void			check_cycle_decrease(t_all *vm)
 static t_process	*kill_process(t_all *vm, t_process **p, t_process *t,
 					t_process *prev)
 {
+	if (vm->flag_v == 8)
+	{
+		ft_printf("Process pid %d, id %d", (t)->pid, (t)->id);
+		ft_printf(" hasn't lived for %d", vm->cycles - t->live_calls);
+		ft_printf("(cycles to die %d, cycle ", vm->cycles_to_die);
+		ft_printf("%d).\n", vm->cycles);
+	}
 	if (prev == NULL)
 	{
 		(*p) = t->next;
@@ -59,8 +66,6 @@ t_process			**kill_dead_process(t_all *vm,
 		if (vm->champs[t->id - 1].last_live == -2
 			|| t->live_calls < vm->cycles - vm->cycles_to_die)
 		{
-			if (vm->flag_v == 8)
-				ft_printf("Process pid %d id %d hasn't lived for %d (cycles to die %d, cycle %d)\n", (t)->pid, (t)->id, vm->cycles - t->live_calls, vm->cycles_to_die, vm->cycles);
 			t = kill_process(vm, p, t, prev);
 		}
 		else
