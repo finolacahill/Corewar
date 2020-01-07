@@ -28,28 +28,33 @@ int			is_player_nb(int id, t_all *vm)
 	i = -1;
 	while (++i < vm->total_champ)
 	{
-		if (vm->champs[i].id == id)	//THIS MUST BE CHANGED, IS JUST FOR TESTING
+		if (vm->champs[i].id == id)
 		{
 			vm->champs[i].last_live = vm->cycles;
-			return (1);
+			return (i);
 		}
 	}
-	return (0);
+	return (-1);
 }
 
 void		op_live(t_all *vm, t_process *p)
 {
 	int		p1;
+	int		i;
 
 	p1 = get_next_bytes(vm, p, 4, 0);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Live %d at cycle %d.\n", p->pid, p1, vm->cycles);
-	if (is_player_nb(p1, vm) == 1)
+	if ((i = is_player_nb(p1, vm)) != -1)
 	{
 		if (p1 == p->id)
 			p->live_calls = vm->cycles + 1;
 		if (vm->flag_v == 1)
-			ft_printf("A process shows that player number %d, %s, is alive at cycle %d.\n", p1, vm->champs[p1 - 1].name, vm->cycles);
+		{
+			ft_printf("A process shows that player number %d, ", p1);
+			ft_printf("%s, is alive at cycle %d.\n",
+			vm->champs[i].name, vm->cycles);
+		}
 		vm->last_alive = p1;
 		vm->last_alive_cycle = vm->cycles + 1;
 		++vm->nbr_live_since_check;

@@ -18,10 +18,10 @@ void		vm_print_intro(t_all *all)
 
 	i = -1;
 	ft_putstr("Introducing contestants...\n");
-	while(++i < all->total_champ)
+	while (++i < all->total_champ)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-			all->champs[i].id, all->champs[i].len_exec_code, all->champs[i].name,
-			all->champs[i].comment);
+			all->champs[i].id, all->champs[i].len_exec_code,
+			all->champs[i].name, all->champs[i].comment);
 	}
 }
