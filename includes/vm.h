@@ -125,7 +125,7 @@ void					free_process(t_all *vm, t_process *p);
 void					free_dasm_header(t_all *all, uint8_t *cor_content,
 							char *s);
 t_process				*ft_decode_byte(unsigned char c, t_process *p);
-void					ft_print_arena(t_all *vm, int len, int pc, int new);
+void					ft_print_arena(t_all *vm, int len);
 int						get_duration(t_all *vm, int opc);
 int						get_ind(t_all *vm, t_process *p, int bytes_read,
 							int restriction);

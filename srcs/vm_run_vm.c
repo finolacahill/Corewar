@@ -31,7 +31,7 @@ void		declare_winner(t_all *vm)
 
 static int	dump(t_all *vm, t_op *op)
 {
-	ft_print_arena(vm, 32, -1, -1);
+	ft_print_arena(vm, 32);
 	free_op_table(op);
 	return (0);
 }
