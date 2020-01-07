@@ -32,3 +32,11 @@ int			error_run_vm(t_all *vm, t_op *op_table)
 	ft_printf("Malloc error run_vm.\n");
 	return (-1);
 }
+
+void			end_prog(t_all *vm, t_process *head, t_op *op)
+{
+	free_all_process(vm, head);
+	free(vm->arena);
+	free_op_table(op);
+	error(vm, "Malloc error during fork.\n");
+}

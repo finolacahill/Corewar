@@ -109,6 +109,7 @@ int						dasm_is_it_cor(char *path);
 void					dasm_free(t_all	*all);
 void					error_size(t_all *all, char *path, size_t cor_size);
 void					error(t_all *all, char *str);
+void					end_prog(t_all *vm, t_process *head, t_op *op);
 void					dasm_print_all(t_all *all);
 int						dasm_get_exec_code(uint8_t *cor_content, int len);
 void					dasm_check_hex_code(t_all *vm);

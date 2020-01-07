@@ -67,20 +67,11 @@ static void		re_order_process(t_process **process, t_process **head)
 	}
 }
 
-void			end_prog(t_all *vm, t_process *head, t_op *op)
-{
-	free_all_process(vm, head);
-	free(vm->arena);
-	free_op_table(op);
-	error(vm, "Malloc error during fork.\n");
-}
-
 t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 				t_process **head)
 {
 	int			bytes;
 
-	bytes = 0;
 	if (re_check_block(vm, *process) == 1)
 	{
 		(*process)->op_fail = 0;

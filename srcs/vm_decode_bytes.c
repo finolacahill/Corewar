@@ -59,6 +59,7 @@ void		calc_bytes(t_process *p, int *bytes)
 
 	dir = 0;
 	i = -1;
+	bytes[0] = 0;
 	if (if_no_opcode(p) == 1)
 		return (get_direct_bytes(p, bytes));
 	if (is_direct_two(p) == 1)

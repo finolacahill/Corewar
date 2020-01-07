@@ -14,22 +14,14 @@
 
 void		vm_print_intro(t_all *all)
 {
-	int		id;
-	int		true;
 	int		i;
 
-	id = 1;
-	true = 1;
+	i = -1;
 	ft_putstr("Introducing contestants...\n");
-	while (true)
+	while(++i < all->total_champ)
 	{
-		i = -1;
-		while (all->champs[++i].id != id)
-			if (i == MAX_PLAYERS)
-				return ;
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-			id, all->champs[i].len_exec_code, all->champs[i].name,
+			all->champs[i].id, all->champs[i].len_exec_code, all->champs[i].name,
 			all->champs[i].comment);
-		id++;
 	}
 }
