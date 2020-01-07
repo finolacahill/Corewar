@@ -6,11 +6,42 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2019/12/15 23:15:52 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 19:54:40 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
+
+int			just_nb_atoi(const char *str, t_all *all)
+{
+	int             i;
+	int             result;
+	int             neg;
+	long long       check;
+
+	i = 0;
+	result = 0;
+	check = 0;
+	neg = 1;
+	while (ft_isspace(str[i]) != 0)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			neg = -1;
+		++i;
+	}
+	while ((str[i] >= '0') && (str[i] <= '9'))
+	{
+		check = (str[i] - '0') + (check * 10);
+		result = (str[i] - '0') + (result * 10);
+		i++;
+	}
+	check = check * neg;
+	if (check < -2147483648 || check > 2147483647)
+		print_usage(all);
+	return (result * neg);
+}
 
 void		check_dump(int ac, char **av, t_all *all, int *i)
 {
@@ -37,15 +68,14 @@ int			flag_n(int ac, char **av, t_all *all, int *j)
 	while ((i) < ac && (ft_strcmp(av[(i)], "-n") != 0))
 		(i)++;
 	if (av[(i) + 1])
-		n_id = ft_atoi(av[(i) + 1]);
-	if (n_id < 1 || n_id > 4 || (av[(i) + 1]
-		&& just_number(av[(i) + 1]) != 1))
+		n_id = just_nb_atoi(av[(i) + 1], all);
+	if (!(av[(i) + 1]) || just_number(av[(i) + 1]) != 1)
 		print_usage(all);
 	if (av[(i) + 2] && dasm_is_it_cor(av[(i) + 2]) == 1)
 	{
-		if (!(all->champs[n_id - 1].path = ft_strdup(av[(i) + 2])))
+		if (!(all->champs[0].path = ft_strdup(av[(i) + 2])))
 			error(all, "Malloc error in flag_n");
-		all->champs[n_id - 1].id = n_id;
+		all->champs[0].id = n_id;
 	}
 	else
 		print_usage(all);
@@ -57,10 +87,16 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 {
 	int		i;
 	int		j;
+	int		r;
+	int		ban;
 
 	j = -1;
+	r = 0;
 	if (all->flag_n == 1)
-		all->flag_n = flag_n(ac, av, all, &j);
+	{
+		ban = flag_n(ac, av, all, &j);
+		id++;
+	}
 	i = 0;
 	while (++i < ac)
 	{
@@ -70,11 +106,10 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 			i += 2;
 		if (i != j && i < ac)
 		{
-			if (id == all->flag_n - 1)
-				id++;
 			if (!(all->champs[id++].path = ft_strdup(av[i])))
 				error(all, "Malloc error in stock good id");
-			all->champs[id - 1].id = id;
+			r = id - 1 == ban ? r + 1 : r;
+			all->champs[id - 1].id = id - 1 + r;
 		}
 		else
 			i += 2;
@@ -89,9 +124,7 @@ int			check_flag(int ac, char **av, int *flag_n, int *flag_dump)
 	while (++i < ac)
 	{
 		if (ft_strcmp(av[i], "-n") == 0)
-		{
 			(*flag_n)++;
-		}
 		if (ft_strcmp(av[i], "-dump") == 0)
 			(*flag_dump)++;
 	}
@@ -109,7 +142,7 @@ void		dasm_input(int ac, char **av, t_all *all)
 
 	flag_n = 0;
 	flag_dump = 0;
-	if (ac < 2 || ac > 9)
+	if (ac < 2 || ac > 11)
 		print_usage(all);
 	if (check_flag(ac, av, &flag_n, &flag_dump))
 		print_usage(all);
