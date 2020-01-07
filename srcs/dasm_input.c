@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 19:54:40 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:28:40 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int			just_nb_atoi(const char *str, t_all *all)
 	{
 		check = (str[i] - '0') + (check * 10);
 		result = (str[i] - '0') + (result * 10);
+		if (check < -2147483648 || check > 2147483647)
+			print_usage(all);
 		i++;
 	}
 	check = check * neg;
