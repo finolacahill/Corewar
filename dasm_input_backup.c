@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 19:54:40 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 19:50:06 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ int			just_nb_atoi(const char *str, t_all *all)
 	if (check < -2147483648 || check > 2147483647)
 		print_usage(all);
 	return (result * neg);
+}
+
+void		check_dump(int ac, char **av, t_all *all, int *i)
+{
+	int		l;
+
+	l = i[0];
+	if (l + 1 >= ac)
+		print_usage(all);
+	if (just_number(av[l + 1]) != 1)
+		print_usage(all);
+	all->flag_dump = ft_atoi(av[l + 1]);
+	if (all->flag_dump <= 0)
+		print_usage(all);
+	i[0] += 2;
 }
 
 void		check_dump(int ac, char **av, t_all *all, int *i)
