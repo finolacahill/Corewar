@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_or.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:07:50 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 17:09:09 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 19:05:41 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void			op_or(t_all *vm, t_process *p)
 		p->pid, pm1, pm2, get_next_bytes(vm, p, 1, bytes_read));
 	if (p->op_fail == 1)
 		return ;
-	
 	load_val_in_reg(vm, p, pm1 | pm2, bytes_read);
 	if (p->op_fail != 1)
 		check_carry(p, pm1 | pm2);

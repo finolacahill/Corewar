@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:59:11 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 17:53:03 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/08 19:05:05 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ uint16_t	check_op_ldi(uint8_t *content)
 	i += 2;
 	return (i);
 }
+
 /*
 static long	adjust_val(long val, t_process *p, int i)
 {
@@ -40,7 +41,7 @@ void		op_ldi(t_all *vm, t_process *p)
 	long	address1;
 	long	address2;
 	long	val;
-	long		bytes_read;
+	long	bytes_read;
 
 	bytes_read = 1;
 	address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);

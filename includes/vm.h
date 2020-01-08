@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/08 17:19:18 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/08 19:02:29 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int						is_player_nb(int i, t_all *vm);
 t_process				**kill_dead_process(t_all *vm, t_process **p,
 							t_process *prev);
 t_process				*load_processes(t_all *vm, t_process *head);
-void		load_value(t_all *vm, int add, int len, long val);
+void					load_value(t_all *vm, int add, int len, long val);
 void					load_new_process(t_all *vm, t_process *p);
 void					load_val_in_reg(t_all *vm, t_process *p, int val, int
 							bytes_read);
@@ -154,6 +154,10 @@ int						is_operation(int op);
 int						run_processes(t_all *vm, t_process **head,
 							t_op *op_table);
 int						run_vm(t_all *vm, t_process *p);
+int						just_nb_atoi(const char *str, t_all *all);
+int						just_nb_init(const char *str, int i, int *neg);
+int						ft_jump_flags(int ac, char **av, int *i, t_all *all);
+void					check_dump(int ac, char **av, t_all *all, int *i);
 
 t_op					*init_op_check(t_all *vm, t_op *op);
 t_verif_op				*init_op_verif(t_all *vm, t_verif_op *op);
