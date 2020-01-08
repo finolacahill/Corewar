@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_check_alive.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 11:37:22 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 12:30:42 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:30:06 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ static void			check_cycle_decrease(t_all *vm)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
 		if (vm->flag_v == 16)
+		{
+																								printf("	COUCOUCOUCOCUCOUCOU\n");
+																								sleep(2);
 			ft_printf("Cycles to die is now %d at %d.\n",
 			vm->cycles_to_die, vm->cycles);
+		}
 		vm->total_checks = 0;
 	}
 	else

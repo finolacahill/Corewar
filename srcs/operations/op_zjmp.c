@@ -20,7 +20,7 @@ uint16_t		check_op_zjmp(uint8_t *content)
 
 void			op_zjmp(t_all *vm, t_process *p)
 {
-	int			address;
+	long		address;
 
 	address = get_next_bytes(vm, p, 2, 0);
 	if (p->carry == 1)

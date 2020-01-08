@@ -25,6 +25,7 @@ int		ft_printf(char *fmt, ...)
 	flag.x = 0;
 	while (p[flag.i] != '\0')
 	{
+		flag.fd = 1;
 		flag = ft_readflags(flag, p, ap);
 		flag = ft_specifiers(flag, p);
 		if (p[flag.i] != '\0')

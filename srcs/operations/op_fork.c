@@ -53,7 +53,7 @@ t_process		*copy_process(t_process *p, t_process *new)
 
 void			op_fork(t_all *vm, t_process *p)
 {
-	int			p1;
+	long		p1;
 	t_process	*new;
 
 	if (!(new = (t_process*)malloc(sizeof(t_process))))
@@ -67,7 +67,7 @@ void			op_fork(t_all *vm, t_process *p)
 	p1 = get_next_bytes(vm, p, 2, 0);
 	new->pc += (p1 % IDX_MOD) - 1;
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | Fork to %d (+ pc %d = %d) cycle %d.\n",
+		ft_printf("\tP%6d | Fork to %ld (+ pc %d = %d) cycle %d.\n",
 		p->pid, p1, new->pc, p1 + new->pc, vm->cycles);
 	if (new->pc < 0)
 		new->pc += MEM_SIZE;

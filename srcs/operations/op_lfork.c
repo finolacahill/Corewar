@@ -53,7 +53,7 @@ t_process		*l_copy_process(t_process *p, t_process *new)
 
 void			op_lfork(t_all *vm, t_process *p)
 {
-	int			p1;
+	long		p1;
 	t_process	*new;
 
 	if (!(new = (t_process*)malloc(sizeof(t_process))))

@@ -6,11 +6,12 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2019/12/16 10:29:57 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/08 15:31:08 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
+NAME_TWO = asm
 
 LIB_NAME = libft.a
 LIB_PATH = ./libft
@@ -19,6 +20,7 @@ OBJ_PATH = ./obj
 MAIN_PATH = ./main
 OBJM_PATH = ./main
 OP_PATH = ./srcs/operations
+SRC_ASM_PATH = ./src_asm
 
 SRCS_NAME = dasm_get_data.c		\
 			dasm_get_exec.c		\
@@ -64,20 +66,41 @@ OP_NAME =	op_add.c	\
 			op_xor.c	\
 			op_zjmp.c
 
+SRC_ASM_NAME =	write.c			\
+				utils_line.c	\
+				utils_params.c	\
+				error_cmd.c		\
+				error.c			\
+				cmd.c			\
+				free.c			\
+				utils.c			\
+				ocp.c			\
+				main.c			\
+				init.c			\
+				label.c			\
+				instruc.c		\
+				params.c		\
+				calc.c
+
 MAIN_NAME = main.c
 
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 OBJ_NAME = $(SRCS_NAME:.c=.o)
 OBJM_NAME = $(MAIN_NAME:.c=.o)
 OBJ_OP_NAME = $(OP_NAME:.c=.o)
+OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o)
 
 LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
+SRCS_ASM = $(addprefix $(SRC_ASM_PATH)/, $(SRC_ASM_NAME))
+OBJ_ASM = $(addprefix $(OBJ_PATH)/,$(OBJ_ASM_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 OBJM = $(addprefix $(OBJM_PATH)/,$(OBJM_NAME))
 OBJOP = $(addprefix $(OP_PATH)/,$(OP_NAME))
 
-INCL = ./includes/vm.h
+INCL =	./includes/vm.h
+INCL_ASM =	./includes/corewar.h
+
 
 CC = gcc -g3
 
@@ -85,7 +108,7 @@ FLAG = -Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 
-all: lib $(NAME)
+all: lib $(NAME) $(NAME_TWO)
 
 lib: $(LIB_PATH)
 	@make -C $(LIB_PATH)
@@ -93,6 +116,10 @@ lib: $(LIB_PATH)
 $(NAME): $(LIB) $(OBJ) $(OBJM) $(INCL) $(OBJOP)
 	@$(CC) $(FLAG) $(OBJOP) $(OBJM) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[$(NAME) done]$(END)"
+
+$(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM)
+	@$(CC) $(LIB) $(OBJ_ASM) -I $(INCL_ASM) -o $(NAME_TWO)
+	@echo "$(BOLD)$(GREY)*asm-$(GREEN)[$(NAME_TWO) done]$(END)"
 
 $(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -106,15 +133,20 @@ $(OBJM_PATH)/%.o: $(MAIN_PATH)/%.c
 	@mkdir $(OBJM_PATH) 2> /dev/null || true
 	@$(CC) -o $@ -c $<
 
+$(OBJ_PATH)/%.o: $(SRC_ASM_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@$(CC) -o $@ -c $<
+
 clean:
 	@make clean -C ./libft
-	@rm -rf $(OBJ) $(OBJM)
+	@rm -rf $(OBJ) $(OBJM) $(OBJ_ASM)
 	@rm -rf $(OBJ_PATH)
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[clean]$(END)"
 
 fclean: clean
 	@make just_f -C ./libft
 	@rm -f $(NAME)
+	@rm -f $(NAME_TWO)
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[fclean]$(END)"
 
 re: fclean all

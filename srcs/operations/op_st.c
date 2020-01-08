@@ -28,8 +28,8 @@ uint16_t		check_op_st(uint8_t *content)
 
 void			op_st(t_all *vm, t_process *p)
 {
-	int			param1;
-	int			param2;
+	long		param1;
+	long		param2;
 
 	param2 = -1;
 	if ((param1 = get_reg_val(vm, p, 1)) == -1 && p->op_fail == 1)

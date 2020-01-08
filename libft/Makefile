@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/30 14:41:01 by flafonso          #+#    #+#              #
-#    Updated: 2019/12/16 10:01:20 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/08 15:30:39 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ SRC_NAME =	ft_atol.c ft_lstaddend.c ft_numlen.c getchar.c get_next_line.c		\
 		ft_itoa_float.c ft_error.c ft_specifiers.c ft_buffer.c ft_returnerror.c	\
 		ft_roundstr.c ft_readu.c ft_numlen.c ft_unumlen.c ft_printfloat.c		\
 		ft_putstrb.c ft_uputnbr.c ft_pfputnbr.c ft_binary.c ft_puissance.c		\
-		ft_putnbr.c ft_reverse.c ft_long_atoi.c
+		ft_putnbr.c ft_reverse.c ft_long_atoi.c ft_itoa_base.c ft_long_atoi.c	\
+		ft_puissance.c ft_reverse.c ft_uitoa_base.c ft_fprintf.c ft_power.c		\
+		ft_strjoin_fr.c ft_strrdel.c
 
 HEAD = libft.h get_next_line.h
 
@@ -47,7 +49,6 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 .PHONY: all clean fclean re
 
 all: $(NAME)
-	@:
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)

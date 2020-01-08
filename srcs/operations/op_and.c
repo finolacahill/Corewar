@@ -34,9 +34,9 @@ uint16_t		check_op_and(uint8_t *content)
 
 void			op_and(t_all *vm, t_process *p)
 {
-	int			pm1;
-	int			pm2;
-	int			bytes_read;
+	long			pm1;
+	long			pm2;
+	long			bytes_read;
 
 	bytes_read = 1;
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);

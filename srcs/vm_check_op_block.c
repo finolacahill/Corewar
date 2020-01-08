@@ -18,7 +18,7 @@ int			check_comb_op_ocp(t_all *vm, t_process *process)
 	int		op;
 
 	op = process->op;
-	val_ocp = get_next_bytes(vm, process, 1, 0);
+	val_ocp = (int)get_next_bytes(vm, process, 1, 0);
 	if (if_no_opcode(process) == 1)
 		return (1);
 	if (val_ocp == 0

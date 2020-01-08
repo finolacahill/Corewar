@@ -26,7 +26,7 @@ t_flag	ft_buffer(t_flag flag, char c)
 		}
 		if (flag.x == 1000 || c == '\0')
 		{
-			write(1, flag.str, flag.x);
+			write(flag.fd, flag.str, flag.x);
 			flag.ret = flag.ret + flag.x;
 			flag.x = 0;
 			free(flag.str);

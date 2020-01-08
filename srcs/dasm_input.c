@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 21:42:47 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:29:04 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,16 +104,16 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 	{
 		if (ft_strcmp(av[i], "-dump") == 0)
 			check_dump(ac, av, all, &i);
-		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1)
-			i += 2;
-		if (ft_strcmp(av[i], "-v") == 0)
-			i += 2;
+		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1 && i++)
+			continue ;
+		if (ft_strcmp(av[i], "-v") == 0 && i++)
+			continue ;
 		if (i != j && i < ac)
 		{
 			if (!(all->champs[id++].path = ft_strdup(av[i])))
 				error(all, "Malloc error in stock good id");
 			r = id - 1 == ban ? r + 1 : r;
-			all->champs[id - 1].id = id + r;
+			all->champs[id - 1].id = all->flag_n == 1 ? id + r - 1: id + r;
 		}
 		else
 			i += 2;
@@ -183,4 +183,6 @@ void		dasm_input(int ac, char **av, t_all *all)
 	if (flag_n == 1)
 		all->flag_n = 1;
 	stock_good_id(all, ac, av, 0);
+																					printf("	===>  Falg_v = %d   |  Flag_n = %d   |  Flag_dump = %d\n", all->flag_v, all->flag_n, all->flag_dump);
+																					sleep(2);
 }

@@ -32,10 +32,10 @@ uint16_t		check_op_lldi(uint8_t *content)
 
 void			op_lldi(t_all *vm, t_process *p)
 {
-	int			address1;
-	int			address2;
-	int			val;
-	int			bytes_read;
+	long		address1;
+	long		address2;
+	long		val;
+	long		bytes_read;
 
 	bytes_read = 1;
 	if (p->decode[0] == IND_CODE)
