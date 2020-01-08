@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fintohead.h                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:16:19 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/23 16:44:34 by fcahill          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:55:53 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
-# include "get_next_line.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
+
 typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -91,8 +91,7 @@ int					ft_wordcounter(char const *s, char c);
 void				ft_swap(int *a, int *b);
 int					ft_numlen(long long n);
 long long			ft_atol(const char *str);
-char				*ft_uitoa_base(unsigned long long value, int base, int cap);
-char				*ft_strjoin_fr(char *s1, char *s2, int i);
-char				*ft_strrev_fr(char *str);
-double				ft_power(double nbr, double power);
+unsigned long long	ft_puissance(int nbr, int p);
+void				ft_reverse(char **str);
+long				ft_long_atoi(const char *str);
 #endif
