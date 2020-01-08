@@ -83,7 +83,7 @@ static void	get_order(t_all *vm)
 	if (!(vm->order = malloc(sizeof(int) * MAX_PLAYERS)))
 	{
 		free(vm->arena);
-		error(vm, "Malloc error inget_order\n");
+		error(vm, "Malloc error in get_order\n");
 	}
 	while (++i < vm->total_champ)
 		vm->order[i] = i;
@@ -104,6 +104,7 @@ t_all		*init_arena(t_all *vm)
 	int		divide;
 
 	i = -1;
+	divide = 0;
 	vm->cycles = 1;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
@@ -116,7 +117,6 @@ t_all		*init_arena(t_all *vm)
 	get_order(vm);
 	while (++i < vm->total_champ)
 	{
-		ft_printf("order = %d\n", vm->order[i]);
 		vm->champs[vm->order[i]].start = divide;
 		ft_memcpy(&vm->arena[divide], vm->champs[vm->order[i]].exec_code,
 		vm->champs[vm->order[i]].len_exec_code);

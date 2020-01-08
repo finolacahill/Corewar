@@ -40,7 +40,7 @@ void		op_ldi(t_all *vm, t_process *p)
 	address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
 	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | ldi from %d + %d (with mod and pc %d\n", p->pid,
+		ft_printf("\tP%6d | ldi from %d + %d (with mod and pc %d)\n", p->pid,
 		address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
 	address1 = (address1 + address2) % IDX_MOD;
 	val = get_next_bytes(vm, p, 4, address1 - 1);

@@ -34,8 +34,9 @@ void			load_new_process(t_all *vm, t_process *p)
 {
 	p->pc = (p->pc + 1) % MEM_SIZE;
 	p->op = vm->arena[p->pc];
-	if ((check_op_block(vm, p)) == 1)
+	if ((is_operation(p->op)) == 1)
 	{
+
 		if (if_no_opcode(p) == 0)
 			p->opc = vm->arena[(p->pc + 1) % MEM_SIZE];
 		else
@@ -72,7 +73,7 @@ t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 {
 	int			bytes;
 
-	if (re_check_block(vm, *process) == 1)
+	if (check_op_block(vm, *process) == 1)
 	{
 		(*process)->op_fail = 0;
 		(*process) = ft_decode_byte(vm->arena[((*process)->pc + 1) % MEM_SIZE],

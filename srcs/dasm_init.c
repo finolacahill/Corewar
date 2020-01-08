@@ -55,7 +55,9 @@ t_all			*dasm_init(t_all *vm, int ac, char **av)
 	zero_champs(vm);
 	vm->flag_dump = -1;
 	vm->flag_n = -1;
+	vm->flag_v = 0;
 	vm->total_champ = 0;
+	vm->ac = ac;
 	dasm_init_champs(vm, ac, av);
 	while (++i < MAX_PLAYERS)
 		if (vm->champs[i].name != NULL)

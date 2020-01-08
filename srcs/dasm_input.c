@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 19:54:40 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/07 21:42:47 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int			just_nb_atoi(const char *str, t_all *all)
 	{
 		check = (str[i] - '0') + (check * 10);
 		result = (str[i] - '0') + (result * 10);
-		i++;
 		if (check < -2147483648 || check > 2147483647)
 			print_usage(all);
+		i++;
 	}
 	check = check * neg;
 	if (check < -2147483648 || check > 2147483647)
@@ -106,35 +106,65 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 			check_dump(ac, av, all, &i);
 		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1)
 			i += 2;
+		if (ft_strcmp(av[i], "-v") == 0)
+			i += 2;
 		if (i != j && i < ac)
 		{
 			if (!(all->champs[id++].path = ft_strdup(av[i])))
 				error(all, "Malloc error in stock good id");
 			r = id - 1 == ban ? r + 1 : r;
-			all->champs[id - 1].id = id - 1 + r;
+			all->champs[id - 1].id = id + r;
 		}
 		else
 			i += 2;
 	}
 }
 
-int			check_flag(int ac, char **av, int *flag_n, int *flag_dump)
+int			check_flag(t_all *all, char **av, int *flag_n, int *flag_dump)
+{
+	int		i;
+	int		ac;
+
+	ac = all->ac;
+	i = 0;
+	while (++i < ac)
+	{
+		if (ft_strcmp(av[i], "-n") == 0)
+			(*flag_n)++;
+		if (ft_strcmp(av[i], "-v") == 0)
+			all->flag_v++;	
+		if (ft_strcmp(av[i], "-dump") == 0)
+			(*flag_dump)++;
+	}
+	if ((*flag_n) > 1 || (*flag_dump) > 1 || all->flag_v > 1)
+		return (1);
+	if (ac > 5 + ((*flag_n) * 2) + ((*flag_dump) * 2) + (all->flag_v * 2))
+		return (1);
+	return (0);
+}
+
+void		flag_v(int ac, char **av, t_all *all)
 {
 	int		i;
 
 	i = 0;
 	while (++i < ac)
 	{
-		if (ft_strcmp(av[i], "-n") == 0)
-			(*flag_n)++;
-		if (ft_strcmp(av[i], "-dump") == 0)
-			(*flag_dump)++;
+		if (ft_strcmp(av[i], "-v") == 0)
+		{
+			if (av[i + 1] && just_number(av[i + 1]) == 1)
+			{
+				all->flag_v = just_nb_atoi(av[i + 1], all);
+				if (all->flag_v != 0 && all->flag_v != 1 && all->flag_v != 2
+				&& all->flag_v != 4 && all->flag_v != 8 && all->flag_v != 16)
+					print_usage(all);				
+				else
+					return ;
+			}
+			
+		}
 	}
-	if ((*flag_n) > 1 || (*flag_dump) > 1)
-		return (1);
-	if (ac > 5 + ((*flag_n) * 2) + ((*flag_dump) * 2))
-		return (1);
-	return (0);
+	print_usage(all);
 }
 
 void		dasm_input(int ac, char **av, t_all *all)
@@ -146,8 +176,10 @@ void		dasm_input(int ac, char **av, t_all *all)
 	flag_dump = 0;
 	if (ac < 2 || ac > 11)
 		print_usage(all);
-	if (check_flag(ac, av, &flag_n, &flag_dump))
+	if (check_flag(all, av, &flag_n, &flag_dump))
 		print_usage(all);
+	if (all->flag_v == 1)
+		flag_v(ac, av, all);
 	if (flag_n == 1)
 		all->flag_n = 1;
 	stock_good_id(all, ac, av, 0);

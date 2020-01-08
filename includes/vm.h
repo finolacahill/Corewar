@@ -51,6 +51,7 @@ typedef struct			s_all
 	int					check_mode;
 	int					total_process;
 	int					*order;
+	int					ac;
 
 }						t_all;
 
@@ -93,6 +94,7 @@ typedef struct			s_op_check
 }						t_op_check;
 
 t_op_check				g_op_check_tab[17];
+void					print_debug(t_all *vm, int len, int pc, int new);
 void					dasm_get_header(t_all *all, size_t cor_size, uint8_t
 							**cor_content, t_champs *champs);
 size_t					dasm_get_data(t_all	*all, char *cor_file, uint8_t
@@ -149,7 +151,7 @@ void					load_value(t_all *vm, int add, int len, int val);
 void					load_new_process(t_all *vm, t_process *p);
 void					load_val_in_reg(t_all *vm, t_process *p, int val, int
 							bytes_read);
-int						re_check_block(t_all *vm, t_process *process);
+int						is_operation(int op);
 int						run_processes(t_all *vm, t_process **head,
 							t_op *op_table);
 int						run_vm(t_all *vm, t_process *p);

@@ -1,0 +1,11 @@
+Usage: ./vm_champs/corewar [-dump X -v X -n X]
+#### TEXT OUTPUT MODE ##########################################################
+		-dump X	: Dumps memory after X cycles then exits. X is an integer.
+		-n    X	: Set a player's id to X. X is an integer. & number of players.
+		-v    X	: Verbosity levels
+			- 0 : Show only essentials
+			- 1 : Show lives
+			- 2 : Show cycles
+			- 4 : Show operations
+			- 8 : Show deaths
+			- 16 : Show cycles to die

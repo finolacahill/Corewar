@@ -35,7 +35,7 @@ static t_process	*kill_process(t_all *vm, t_process **p, t_process *t,
 	{
 		ft_printf("Process pid %d, id %d", (t)->pid, (t)->id);
 		ft_printf(" hasn't lived for %d", vm->cycles - t->live_calls);
-		ft_printf("(cycles to die %d, cycle ", vm->cycles_to_die);
+		ft_printf(" (cycles to die %d, cycle ", vm->cycles_to_die);
 		ft_printf("%d).\n", vm->cycles);
 	}
 	if (prev == NULL)

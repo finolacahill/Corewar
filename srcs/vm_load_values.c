@@ -45,6 +45,6 @@ void		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read)
 		return ;
 	}
 	p->r[reg2 - 1] = val;
-	if (p->op == 10 && vm->flag_v == 3)
+	if (p->op == 10 && vm->flag_v == 4)
 		ft_printf("\t \tload val %d in reg %d\n", val, reg2);
 }

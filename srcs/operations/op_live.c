@@ -43,12 +43,11 @@ void		op_live(t_all *vm, t_process *p)
 	int		i;
 
 	p1 = get_next_bytes(vm, p, 4, 0);
+	p->live_calls = vm->cycles + 1;
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Live %d at cycle %d.\n", p->pid, p1, vm->cycles);
 	if ((i = is_player_nb(p1, vm)) != -1)
 	{
-		if (p1 == p->id)
-			p->live_calls = vm->cycles + 1;
 		if (vm->flag_v == 1)
 		{
 			ft_printf("A process shows that player number %d, ", p1);

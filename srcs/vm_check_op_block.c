@@ -36,18 +36,10 @@ int			check_op_block(t_all *vm, t_process *process)
 	return (1);
 }
 
-int			re_check_block(t_all *vm, t_process *process)
+int			is_operation(int op)
 {
-	int		new_opc;
-
-	if ((if_no_opcode(process)) == 0)
-	{
-		new_opc = vm->arena[process->pc + 1];
-		if (new_opc != process->opc)
-		{
-			if (check_comb_op_ocp(vm, process) == 0)
-				return (0);
-		}
-	}
+	if (op < 1 || op > 16)
+		return (0);
 	return (1);
 }
+
