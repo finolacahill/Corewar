@@ -60,9 +60,9 @@ void	print_usage(t_all *all)
 	ft_printf("Usage: ./vm_champs/corewar [-dump X -v X -n X]\n");
 	ft_printf("#### TEXT OUTPUT MODE ");
 	ft_printf("##########################################################\n");
-	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits. X is an integer\n");
-	ft_printf("\t\t-n    X\t: Set a player's id to X. X is an integer.");
-	ft_printf(" & number of players.\n");
+	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits. ");
+	ft_printf("X is an integer.\n\t\t-n    X\t: Set a player's id to X. ");
+	ft_printf("X is an integer. & number of players.\n");
 	ft_printf("\t\t-v    X\t: Verbosity levels\n\t\t\t- 0 : Show");
 	ft_printf(" only essentials\n");
 	ft_printf("\t\t\t- 1 : Show lives\n\t\t\t- 2 : Show cycles\n\t\t\t- 4");

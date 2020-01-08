@@ -72,6 +72,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p = ft_decode_byte(p->opc, p);
 	return (p);
 }
+
 static void	get_order(t_all *vm)
 {
 	int i;

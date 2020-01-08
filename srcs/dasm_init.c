@@ -45,7 +45,7 @@ void			dasm_init_champs(t_all *vm, int ac, char **av)
 	}
 }
 
-t_all		*dasm_init(t_all *vm, int ac, char **av)
+t_all			*dasm_init(t_all *vm, int ac, char **av)
 {
 	int			i;
 	int			nb;

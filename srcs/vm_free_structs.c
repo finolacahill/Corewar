@@ -34,7 +34,6 @@ void			free_vm(t_all *vm)
 		free(vm->order);
 	vm->order = NULL;
 	dasm_free(vm);
-
 }
 
 int				free_all(t_all *vm, t_process *p)
