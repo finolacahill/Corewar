@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:48:30 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 16:49:21 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:51:42 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read)
 	{
 		val <<= 8;
 		address = (p->pc + bytes_read + i) % MEM_SIZE;
-		ft_printf("address = %d\n", address);
+		// ft_printf("address = %d\n", address);
 		if (address < 0)
 			address = MEM_SIZE + address;
 		val += vm->arena[address];
@@ -46,6 +46,6 @@ long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read)
 	//	if (val >= 0)
 	//		val += 65546;
 //	}
-	ft_printf("val = %ld\n", val);
+	// ft_printf("val = %ld\n", val);
 	return (val);
 }

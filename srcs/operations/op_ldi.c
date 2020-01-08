@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_ldi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:59:11 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 17:00:12 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:53:03 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void		op_ldi(t_all *vm, t_process *p)
 		ft_printf("\tP%6d | ldi from %d + %d (with mod and pc %d)\n", p->pid,
 		address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
 	address1 = (address1 + address2) % IDX_MOD;
-	ft_printf("address1 = %d\n", address1);
+	// ft_printf("address1 = %d\n", address1);
 	val = get_next_bytes(vm, p, 4, address1 - 1);
 	if (p->op_fail == 1)
 		return ;

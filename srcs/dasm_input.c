@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 17:29:04 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/08 18:02:05 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,12 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 	i = 0;
 	while (++i < ac)
 	{
-		if (ft_strcmp(av[i], "-dump") == 0)
+		if (av[i] && ft_strcmp(av[i], "-dump") == 0)
 			check_dump(ac, av, all, &i);
-		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1 && i++)
+		if (av[i] && ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1
+			&& i++)
 			continue ;
-		if (ft_strcmp(av[i], "-v") == 0 && i++)
+		if (av[i] && ft_strcmp(av[i], "-v") == 0 && i++)
 			continue ;
 		if (i != j && i < ac)
 		{
@@ -183,6 +184,4 @@ void		dasm_input(int ac, char **av, t_all *all)
 	if (flag_n == 1)
 		all->flag_n = 1;
 	stock_good_id(all, ac, av, 0);
-																					printf("	===>  Falg_v = %d   |  Flag_n = %d   |  Flag_dump = %d\n", all->flag_v, all->flag_n, all->flag_dump);
-																					sleep(2);
 }

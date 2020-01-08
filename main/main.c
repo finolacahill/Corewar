@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:16 by flafonso          #+#    #+#             */
-/*   Updated: 2019/12/16 07:54:23 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:40:35 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		main(int ac, char **av)
 	dasm_init(vm, ac, av);
 	init_arena(vm);
 	vm_print_intro(vm);
+	// ft_printf("\n\nTest de ft_printf ahahaha = %d !\n\n", 2);
+	// sleep(2);
 	if (run_vm(vm, &p) == -1)
 		return (free_all(vm, &p));
 	free_all(vm, NULL);
