@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-unsigned long long	ft_puissance(int nbr, int p)
+long	ft_puissance(int nbr, int p)
 {
-	int						i;
-	unsigned long long		nb;
+	int			i;
+	long 		nb;
 
 	i = 1;
 	nb = nbr;

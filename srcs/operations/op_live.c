@@ -28,7 +28,7 @@ int			is_player_nb(int id, t_all *vm)
 	i = -1;
 	while (++i < vm->total_champ)
 	{
-		if (vm->champs[i].id == id)
+		if (vm->champs[i].id == -id)
 		{
 			vm->champs[i].last_live = vm->cycles;
 			return (i);
@@ -39,7 +39,7 @@ int			is_player_nb(int id, t_all *vm)
 
 void		op_live(t_all *vm, t_process *p)
 {
-	int		p1;
+	long	p1;
 	int		i;
 
 	p1 = get_next_bytes(vm, p, 4, 0);

@@ -64,6 +64,6 @@ t_all			*dasm_init(t_all *vm, int ac, char **av)
 			nb++;
 	if (vm->flag_n != -1 && nb < vm->flag_n)
 		print_usage(vm);
-	dasm_check_hex_code(vm);
+//	dasm_check_hex_code(vm);
 	return (vm);
 }

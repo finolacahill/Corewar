@@ -19,7 +19,7 @@ void		declare_winner(t_all *vm)
 	i = -1;
 	while (i++ < vm->total_champ)
 	{
-		if (vm->champs[i].id == vm->last_alive && vm->last_alive != 0)
+		if (vm->champs[i].id == -vm->last_alive && vm->last_alive != 0)
 		{
 			ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n",
 			vm->last_alive, vm->champs[i].name);

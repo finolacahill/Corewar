@@ -27,11 +27,13 @@ uint16_t	check_op_ld(uint8_t *content)
 
 void		op_ld(t_all *vm, t_process *p)
 {
-	int		pm1;
-	int		bytes_read;
+	long	pm1;
+	long	bytes_read;
 
 	bytes_read = 1;
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
+//	if ((pm1 % 65536) >= 32768)
+//		pm1 += 65536;
 	load_val_in_reg(vm, p, pm1, bytes_read);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | load %d R%d at cycle %d\n", p->pid, pm1,

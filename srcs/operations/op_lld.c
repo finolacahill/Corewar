@@ -27,7 +27,7 @@ uint16_t		check_op_lld(uint8_t *content)
 
 void			op_lld(t_all *vm, t_process *p)
 {
-	int			pm1;
+	long		pm1;
 	int			bytes_read;
 
 	bytes_read = 5;

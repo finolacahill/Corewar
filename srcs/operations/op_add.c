@@ -25,13 +25,13 @@ uint16_t	check_op_add(uint8_t *content)
 
 void		op_add(t_all *vm, t_process *p)
 {
-	int		p1;
-	int		p2;
+	long	p1;
+	long	p2;
 
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_reg_val(vm, p, 2);
 	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | add R%d R%d R%d at cycles %d\n", p->pid,
+		ft_printf("\tP%6d | add R%ld R%ld R%ld at cycles %d\n", p->pid,
 		get_next_bytes(vm, p, 1, 1), get_next_bytes(vm, p, 1, 2),
 		get_next_bytes(vm, p, 1, 3), vm->cycles);
 	if (p->op_fail == 1)

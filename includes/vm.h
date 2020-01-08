@@ -128,16 +128,16 @@ void					free_dasm_header(t_all *all, uint8_t *cor_content,
 t_process				*ft_decode_byte(unsigned char c, t_process *p);
 void					ft_print_arena(t_all *vm, int len);
 int						get_duration(t_all *vm, int opc);
-int						get_ind(t_all *vm, t_process *p, int bytes_read,
+long					get_ind(t_all *vm, t_process *p, int bytes_read,
 							int restriction);
-int						get_next_bytes(t_all *vm, t_process *p, int len, int
+long					get_next_bytes(t_all *vm, t_process *p, int len, long
 							bytes_read);
-int						get_reg_val(t_all *vm, t_process *p, int bytes_read);
-int						get_unspecified_val(t_all *vm, t_process *p,
-							int *bytes_read, int param);
-int						get_unspecified_val_2(t_all *vm, t_process *p,
-							int *bytes_read, int param);
-int						get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
+long					get_reg_val(t_all *vm, t_process *p, int bytes_read);
+long					get_unspecified_val(t_all *vm, t_process *p,
+							long *bytes_read, int param);
+long					get_unspecified_val_2(t_all *vm, t_process *p,
+							long *bytes_read, int param);
+long					get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
 							int restriction);
 int						if_no_opcode(t_process *p);
 t_all					*init_arena(t_all *vm);
@@ -147,7 +147,7 @@ int						is_player_nb(int i, t_all *vm);
 t_process				**kill_dead_process(t_all *vm, t_process **p,
 							t_process *prev);
 t_process				*load_processes(t_all *vm, t_process *head);
-void					load_value(t_all *vm, int add, int len, int val);
+void					load_value(t_all *vm, int add, int len, long val);
 void					load_new_process(t_all *vm, t_process *p);
 void					load_val_in_reg(t_all *vm, t_process *p, int val, int
 							bytes_read);

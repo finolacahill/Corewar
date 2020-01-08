@@ -104,16 +104,16 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 	{
 		if (ft_strcmp(av[i], "-dump") == 0)
 			check_dump(ac, av, all, &i);
-		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1)
-			i += 2;
-		if (ft_strcmp(av[i], "-v") == 0)
-			i += 2;
+		if (ft_strcmp(av[i], "-dump") == 0 && all->flag_dump != -1 && i++)
+			continue ;
+		if (ft_strcmp(av[i], "-v") == 0 && i++)
+			continue ;
 		if (i != j && i < ac)
 		{
 			if (!(all->champs[id++].path = ft_strdup(av[i])))
 				error(all, "Malloc error in stock good id");
 			r = id - 1 == ban ? r + 1 : r;
-			all->champs[id - 1].id = id + r;
+			all->champs[id - 1].id = all->flag_n == 1 ? id + r - 1: id + r;
 		}
 		else
 			i += 2;

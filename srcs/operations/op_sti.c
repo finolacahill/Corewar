@@ -31,10 +31,10 @@ uint16_t		check_op_sti(uint8_t *content)
 
 void			op_sti(t_all *vm, t_process *p)
 {
-	int			p1;
-	int			p2;
-	int			p3;
-	int			bytes_read;
+	long		p1;
+	long		p2;
+	long		p3;
+	long		bytes_read;
 
 	bytes_read = 2;
 	p1 = get_reg_val(vm, p, 1);
