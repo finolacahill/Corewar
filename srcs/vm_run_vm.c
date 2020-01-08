@@ -19,7 +19,7 @@ void		declare_winner(t_all *vm)
 	i = -1;
 	while (i++ < vm->total_champ)
 	{
-		if (vm->champs[i].id == -vm->last_alive && vm->last_alive != 0)
+		if (vm->champs[i].id == vm->last_alive && vm->last_alive != 0)
 		{
 			ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n",
 			vm->last_alive, vm->champs[i].name);
@@ -29,9 +29,10 @@ void		declare_winner(t_all *vm)
 	ft_printf("Nobody declared themselves alive, it's a draw. :(\n");
 }
 
-static int	dump(t_all *vm, t_op *op)
+static int	dump(t_all *vm, t_process *p, t_op *op)
 {
 	ft_print_arena(vm, 32);
+	//print_debug(vm, 64, p->pc, -1);
 	free_op_table(op);
 	return (0);
 }
@@ -54,7 +55,7 @@ int			run_vm(t_all *vm, t_process *process)
 	while (check_alive(vm, &process) == 1)
 	{
 		if ((run_processes(vm, &process, op_table)) == -2)
-			return (dump(vm, op_table));
+			return (dump(vm, process, op_table));
 	}
 	declare_winner(vm);
 	free_op_table(op_table);

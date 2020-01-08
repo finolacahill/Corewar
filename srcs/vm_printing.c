@@ -54,7 +54,7 @@ static void			print_line(t_all *vm, int len, int start)
 
 static void			print_hex(int start)
 {
-	ft_printf("#05x : ", start);
+	ft_printf("%#05x : ", start);
 }
 
 void				ft_print_arena(t_all *vm, int len)

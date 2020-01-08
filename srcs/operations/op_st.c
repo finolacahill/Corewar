@@ -53,4 +53,5 @@ void			op_st(t_all *vm, t_process *p)
 			p->pc, vm->cycles);
 		load_value(vm, p->pc + (param2 % IDX_MOD), 4, param1);
 	}
+//	print_debug(vm, 64, p->pc, p->pc + (param2 % IDX_MOD));
 }

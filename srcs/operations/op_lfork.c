@@ -65,6 +65,7 @@ void			op_lfork(t_all *vm, t_process *p)
 	if (p->op_fail == 3)
 		return ;
 	p1 = get_next_bytes(vm, p, 2, 0);
+//	p1 = check_neg_address(p1);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d) at cycle %d\n",
 		p->pid, p1, new->pc, p1 + new->pc, vm->cycles);

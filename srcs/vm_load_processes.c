@@ -94,11 +94,6 @@ t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 			|| ((*process)->op == 9 && (*process)->op_fail == 1))
 			(*process)->pc = ((*process)->pc + bytes) % MEM_SIZE;
 	}
-///	if (vm->arena[9] == 3)
-//	{
-//		ft_printf("HERE\n");
-//		exit(1);
-//	}
 	load_new_process(vm, *process);
 	return (head);
 }

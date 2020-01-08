@@ -62,6 +62,8 @@ void print_debug(t_all *vm, int len, int pc, int new)
     int start = 0;
  
     print_top_line(len);
+    if (new < 0)
+        new += MEM_SIZE;
     while (start < MEM_SIZE)
     {
         print_hex(start);

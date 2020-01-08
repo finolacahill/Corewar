@@ -115,7 +115,7 @@ int						dasm_get_exec_code(uint8_t *cor_content, int len);
 void					dasm_check_hex_code(t_all *vm);
 void					error_exec(t_all *all, char *champ_name, uint16_t line);
 int						just_number(char *str);
-
+long					check_neg_address(long val);
 void					calc_bytes(t_process *p, int *bytes);
 int						check_alive(t_all *vm, t_process **p);
 void					check_carry(t_process *p, int param);
@@ -128,7 +128,7 @@ void					free_dasm_header(t_all *all, uint8_t *cor_content,
 t_process				*ft_decode_byte(unsigned char c, t_process *p);
 void					ft_print_arena(t_all *vm, int len);
 int						get_duration(t_all *vm, int opc);
-long					get_ind(t_all *vm, t_process *p, int bytes_read,
+long					get_ind(t_all *vm, t_process *p, long bytes_read,
 							int restriction);
 long					get_next_bytes(t_all *vm, t_process *p, int len, long
 							bytes_read);
@@ -137,7 +137,7 @@ long					get_unspecified_val(t_all *vm, t_process *p,
 							long *bytes_read, int param);
 long					get_unspecified_val_2(t_all *vm, t_process *p,
 							long *bytes_read, int param);
-long					get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
+long					get_val_at_ind(t_all *vm, t_process *p, long bytes_read,
 							int restriction);
 int						if_no_opcode(t_process *p);
 t_all					*init_arena(t_all *vm);

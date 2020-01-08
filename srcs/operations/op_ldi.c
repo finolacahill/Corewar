@@ -51,7 +51,6 @@ void		op_ldi(t_all *vm, t_process *p)
 		ft_printf("\tP%6d | ldi from %d + %d (with mod and pc %d)\n", p->pid,
 		address1, address2, ((address1 + address2) % IDX_MOD) + p->pc);
 	address1 = (address1 + address2) % IDX_MOD;
-	ft_printf("address1 = %d\n", address1);
 	val = get_next_bytes(vm, p, 4, address1 - 1);
 	if (p->op_fail == 1)
 		return ;

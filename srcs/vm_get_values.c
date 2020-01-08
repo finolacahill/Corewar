@@ -25,19 +25,27 @@ long		get_reg_val(t_all *vm, t_process *p, int bytes_read)
 	return (p->r[reg - 1]);
 }
 
-long			get_ind(t_all *vm, t_process *p, int bytes_read, int restriction)
+long			get_ind(t_all *vm, t_process *p, long bytes_read, int restriction)
 {
+	long		address;
+
+	address = get_next_bytes(vm, p, 2, bytes_read);
+//	ft_printf("address %d\n", address);
+	address = check_neg_address(address);
+//	ft_printf("address %d\n", address);
+//	ft_printf("address %d\n", address % IDX_MOD);
 	if (restriction == 1)
-		return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
-	return (get_next_bytes(vm, p, 2, bytes_read));
+		return (address % IDX_MOD);
+	return (address);
 }
 
-long			get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
+long			get_val_at_ind(t_all *vm, t_process *p, long bytes_read,
 			int restriction)
 {
 	long	address;
 
 	address = get_ind(vm, p, bytes_read, restriction);
+//	ft_printf("address here = %d\n", address % MEM_SIZE);
 	return (get_next_bytes(vm, p, 4, address - 1));
 }
 
@@ -53,9 +61,7 @@ long		get_unspecified_val(t_all *vm, t_process *p, long *bytes_read,
 	}
 	if (p->decode[param] == IND_CODE)
 	{
-	
-		val = get_val_at_ind(vm, p, bytes_read[0], 1);
-		
+		val = get_val_at_ind(vm, p, bytes_read[0], 1);	
 		bytes_read[0] += 2;
 	}
 	if (p->decode[param] == DIR_CODE)

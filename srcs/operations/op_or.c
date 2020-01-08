@@ -50,7 +50,6 @@ void			op_or(t_all *vm, t_process *p)
 		p->pid, pm1, pm2, get_next_bytes(vm, p, 1, bytes_read));
 	if (p->op_fail == 1)
 		return ;
-	
 	load_val_in_reg(vm, p, pm1 | pm2, bytes_read);
 	if (p->op_fail != 1)
 		check_carry(p, pm1 | pm2);

@@ -40,8 +40,11 @@ void			op_lldi(t_all *vm, t_process *p)
 	bytes_read = 1;
 	if (p->decode[0] == IND_CODE)
 	{
-		address1 = get_val_at_ind(vm, p, bytes_read, 0);
-		bytes_read += 2;
+		address1 = get_ind(vm, p, 1, 1);
+	//	address1 = check_neg_address(address1);
+		address1 = get_next_bytes(vm, p, 4, (address1 - 1));
+	//	address1 = check_neg_address(address1);
+		bytes_read = 3;
 	}
 	else
 	{
@@ -52,7 +55,9 @@ void			op_lldi(t_all *vm, t_process *p)
 		ft_printf("\tP%6d | lldi from %d + %d (with mod and pc %d)\n",
 		p->pid, address1, address2, address1 + address2 + p->pc);
 	address1 += address2;
-	val = get_next_bytes(vm, p, 4, p->pc + address1 - 1);
+//	ft_printf("address = %d\n", address1);
+//	print_debug(vm, 64, p->pc, (p->pc + address1) % MEM_SIZE);
+	val = get_next_bytes(vm, p, 4, address1 - 1);
 	if (p->op_fail == 1)
 		return ;
 	load_val_in_reg(vm, p, val, bytes_read);

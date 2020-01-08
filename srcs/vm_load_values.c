@@ -22,7 +22,7 @@ void		load_value(t_all *vm, int add, int len, long val)
 	i = len + 1;
 	power = 2;
 	shift = 24;
-	while (--i >= 0)
+	while (--i > 0)
 	{
 		address = (add + len - i) % MEM_SIZE;
 		if (address < 0)
