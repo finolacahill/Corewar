@@ -19,6 +19,7 @@ static const	t_error_cmd g_error_cmd_tab[] =
 	{3, "Error: This CMD already exist -> "},
 	{4, "Error: This CMD does not exist -> "},
 	{5, "Error: CMD missing -> "},
+	{6, "Error: Champion size too big -> "},
 	{0, NULL}
 };
 
@@ -43,6 +44,7 @@ void	error_cmd(int type, char *cmd, int line)
 			ft_fprintf(2, "%s", cmd);
 			if (line >= 0)
 				ft_fprintf(2, " in line %d", line + 1);
+			ft_fprintf(2, "\n");
 			exit(0);
 		}
 		i++;

@@ -45,19 +45,19 @@ void	put_comment(t_env *env, char *l)
 		if (line[i] > ' ')
 			error_cmd(2, "comment", env->line);
 	}
-	if (line[i] == '\0')
-		error_cmd(1, "comment", env->line);
 	i++;
-	while ((line[i] || i == 0) && line[i] != '"')
+	while (line[i] != '"')
 	{
 		if (line[i] != '\0')
+		{
 			env->header->comment[++j] = line[i];
-		i++;
+			i++;
+		}
 		if (line[i] == '\0')
 		{
 			i = 0;
 			env->header->comment[++j] = '\n';
-			free(line);
+			ft_strdel(&line);
 			ret = get_next_line(env->header->fd, &line);
 			if (ret <= 0)
 				error_cmd(1, "comment", env->line);
@@ -66,6 +66,8 @@ void	put_comment(t_env *env, char *l)
 	}
 	i++;
 	env->header->c = 1;
+	if ((ft_strlen(env->header->comment)) > COMMENT_LENGTH)
+		error_cmd(6, "comment", -1);
 	last_check_cmd(env, &line[i], "comment");
 	ft_strdel(&line);
 }
@@ -88,14 +90,14 @@ void	put_name(t_env *env, char *l)
 		if (line[i] > ' ')
 			error_cmd(2, "name", env->line);
 	}
-	if (line[i] == '\0')
-		error_cmd(1, "name", env->line);
 	i++;
-	while ((line[i] || i == 0) && line[i] != '"')
+	while (line[i] != '"')
 	{
 		if (line[i] != '\0')
+		{	
 			env->header->prog_name[++j] = line[i];
-		i++;
+			i++;
+		}
 		if (line[i] == '\0')
 		{
 			i = 0;
@@ -109,6 +111,8 @@ void	put_name(t_env *env, char *l)
 	}
 	i++;
 	env->header->n = 1;
+	if ((ft_strlen(env->header->prog_name)) > PROG_NAME_LENGTH)
+		error_cmd(6, "name", -1);
 	last_check_cmd(env, &line[i], "name");
 	ft_strdel(&line);
 }
@@ -126,7 +130,7 @@ void	go_cmd(t_env *env, char *line)
 	len = i;
 	i++;
 	j = i;
-	while (line[j] && line[j] > ' ')
+	while (line[j] && (line[j] > ' ' && line[j] != '"'))
 		j++;
 	if (!(check = ft_strsub(line, i, j - len - 1)))
 		error(8, -1, -1, NULL);

@@ -52,10 +52,13 @@ void		remplace_empty(t_instruc *instruc, int res, int size)
 
 	j = 0;
 	i = 0;
+	ft_printf("ins truc -> %d\n", size);
+
 	while (instruc->hexa_instruc[i] && instruc->hexa_instruc[i] != '#')
 		i++;
 	if (!(remplace = ft_uitoa_base((uint16_t)res, 16, 0)))
 		error(8, -1, -1, NULL);
+	ft_printf("remplace == %s\n", remplace);
 	size = size - ft_strlen(remplace);
 	while (size > 0)
 	{

@@ -12,12 +12,13 @@
 
 #include "../../includes/corewar.h"
 
-void	put_hexa_label(int16_t label, t_instruc *instruc, int size)
+void	put_hexa_label(int label, t_instruc *instruc, int size)
 {
 	char *hexa_l;
 
-	if (label >= 0)
-		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
+	ft_printf("label == %d\n", label);
+	if (size == 8)
+		hexa_l = ft_uitoa_base((uint32_t)label, 16, 0);
 	else
 		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
 	if (hexa_l == NULL)
