@@ -50,7 +50,7 @@ typedef struct			s_all
 	int					total_checks;
 	int					check_mode;
 	int					total_process;
-	int					*order; 
+	int					*order;
 
 }						t_all;
 
@@ -91,8 +91,6 @@ typedef struct			s_op_check
 	int					nb_cycle;
 	int					dir_size;
 }						t_op_check;
-
-# define DUMP -2;
 
 t_op_check				g_op_check_tab[17];
 void					dasm_get_header(t_all *all, size_t cor_size, uint8_t
