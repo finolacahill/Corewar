@@ -134,7 +134,7 @@ long					get_unspecified_val_2(t_all *vm, t_process *p,
 long					check_neg_address(long val);
 t_process				**exec_process(t_all *vm, t_process **p, t_op *op,
 							t_process **head);
-long   	 				get_val_at_ind(t_all *vm, t_process *p,
+long					get_val_at_ind(t_all *vm, t_process *p,
 							long bytes_read, int idx);
 int						recalc_bytes(t_process *p, int *bytes);
 int						if_no_opcode(t_process *p);
