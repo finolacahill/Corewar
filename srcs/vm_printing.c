@@ -62,7 +62,7 @@ void				ft_print_arena(t_all *vm, int len)
 	int				start;
 
 	start = 0;
-	print_top_line(len);
+//	print_top_line(len);
 	while (start < MEM_SIZE)
 	{
 		print_hex(start);

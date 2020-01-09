@@ -34,9 +34,8 @@ void			load_new_process(t_all *vm, t_process *p)
 {
 	p->pc = (p->pc + 1) % MEM_SIZE;
 	p->op = vm->arena[p->pc];
-	if ((is_operation(p->op)) == 1)
+	if ((check_op_block(vm, p)) == 1)
 	{
-
 		if (if_no_opcode(p) == 0)
 			p->opc = vm->arena[(p->pc + 1) % MEM_SIZE];
 		else
@@ -49,6 +48,7 @@ void			load_new_process(t_all *vm, t_process *p)
 		p->op = 0;
 		p->exec_cycle = vm->cycles + 1;
 	}
+//	print_debug(vm, 32, p->pc, 0);
 }
 
 static void		re_order_process(t_process **process, t_process **head)
@@ -90,10 +90,12 @@ t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 					re_order_process(process, head);
 			}
 		}
-		if (((*process)->op_fail == 0 && (*process)->op != 9)
+		if ((((*process)->op_fail == 0 || (*process)->op_fail == 1)
+			&& (*process)->op != 9)
 			|| ((*process)->op == 9 && (*process)->op_fail == 1))
 			(*process)->pc = ((*process)->pc + bytes) % MEM_SIZE;
 	}
+	print_debug(vm, 32, (*process)->pc, (*process)->pc + bytes);
 	load_new_process(vm, *process);
 	return (head);
 }
@@ -106,16 +108,11 @@ int				run_processes(t_all *vm, t_process **head, t_op *op_table)
 	live = vm->cycles_to_die;
 	while (live > 0)
 	{
-		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
-		{
-			free_all_process(vm, (*head));
-			return (-2);
-		}
 		tracker = (*head);
-		if (tracker != NULL)
+	//	if (tracker != NULL)
 			++vm->cycles;
-		if (vm->flag_v == 2)
-			ft_printf("cycle = %d\n", vm->cycles);
+	//	if (vm->flag_v == 2 || vm->flag_v == 4)
+	//		ft_printf("cycle = %d\n", vm->cycles);
 		while (tracker != NULL)
 		{
 			if (vm->cycles == tracker->exec_cycle)
@@ -123,6 +120,11 @@ int				run_processes(t_all *vm, t_process **head, t_op *op_table)
 			tracker = tracker->next;
 		}
 		--live;
+		if (vm->flag_dump != -1 && vm->cycles >= vm->flag_dump)
+		{
+			free_all_process(vm, (*head));
+			return (-2);
+		}
 	}
 	return (0);
 }

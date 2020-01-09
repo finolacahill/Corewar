@@ -35,10 +35,10 @@ void		op_ld(t_all *vm, t_process *p)
 //	if ((pm1 % 65536) >= 32768)
 //		pm1 += 65536;
 	load_val_in_reg(vm, p, pm1, bytes_read);
+	if (p->op_fail == 1)
+		return ;
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | load %d R%d at cycle %d\n", p->pid, pm1,
 		get_next_bytes(vm, p, 1, bytes_read), vm->cycles);
-	if (p->op_fail == 1)
-		return ;
 	check_carry(p, pm1);
 }

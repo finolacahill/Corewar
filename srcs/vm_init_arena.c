@@ -51,7 +51,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 		return (error_process(p));
 	if (!(p->decode = (int *)malloc((sizeof(int)) * 4)))
 		return (error_process(p));
-	p->id = c->id;
+	p->id = -c->id;
 	p->carry = 0;
 	init_registers(p);
 	p->live_calls = -1;
@@ -59,7 +59,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p->op = c->exec_code[0];
 	p->pc = p->start;
 	p->next = NULL;
-	p->exec_cycle = get_duration(vm, p->op) - 1;
+	p->exec_cycle = get_duration(vm, p->op);
 	p->bytes = 0;
 	c->last_live = 0;
 	p->op_fail = 0;
@@ -105,7 +105,7 @@ t_all		*init_arena(t_all *vm)
 
 	i = -1;
 	divide = 0;
-	vm->cycles = 1;
+	vm->cycles = 0;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
 	vm->nbr_live_since_check = 0;

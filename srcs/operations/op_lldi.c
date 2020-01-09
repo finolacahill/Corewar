@@ -30,6 +30,16 @@ uint16_t		check_op_lldi(uint8_t *content)
 	return (i);
 }
 
+static int		check_reg(t_all *vm, t_process *p, long bytes)
+{
+	long reg;
+
+	reg = get_next_bytes(vm, p, 1, bytes);
+	if (reg < 1 || reg > 16)
+		return (0);
+	return (1);
+}
+
 void			op_lldi(t_all *vm, t_process *p)
 {
 	long		address1;
@@ -41,9 +51,7 @@ void			op_lldi(t_all *vm, t_process *p)
 	if (p->decode[0] == IND_CODE)
 	{
 		address1 = get_ind(vm, p, 1, 1);
-	//	address1 = check_neg_address(address1);
 		address1 = get_next_bytes(vm, p, 4, (address1 - 1));
-	//	address1 = check_neg_address(address1);
 		bytes_read = 3;
 	}
 	else
@@ -51,6 +59,8 @@ void			op_lldi(t_all *vm, t_process *p)
 		address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
 	}
 	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
+	if (p->op_fail == 1 || check_reg(vm, p, bytes_read) == 0)
+		return ;
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | lldi from %d + %d (with mod and pc %d)\n",
 		p->pid, address1, address2, address1 + address2 + p->pc);

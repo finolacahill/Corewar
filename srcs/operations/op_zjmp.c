@@ -23,6 +23,7 @@ void			op_zjmp(t_all *vm, t_process *p)
 	long		address;
 
 	address = get_next_bytes(vm, p, 2, 0);
+	address = check_neg_address(address);
 	if (p->carry == 1)
 	{
 		if (vm->flag_v == 4)

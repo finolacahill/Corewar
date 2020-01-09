@@ -28,7 +28,7 @@ int			is_player_nb(int id, t_all *vm)
 	i = -1;
 	while (++i < vm->total_champ)
 	{
-		if (vm->champs[i].id == id)
+		if (vm->champs[i].id == -id)
 		{
 			vm->champs[i].last_live = vm->cycles;
 			return (i);
@@ -43,7 +43,8 @@ void		op_live(t_all *vm, t_process *p)
 	int		i;
 
 	p1 = get_next_bytes(vm, p, 4, 0);
-	p->live_calls = vm->cycles + 1;
+	p->live_calls = vm->cycles;
+	++vm->nbr_live_since_check;
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Live %d at cycle %d.\n", p->pid, p1, vm->cycles);
 	if ((i = is_player_nb(p1, vm)) != -1)
@@ -55,7 +56,6 @@ void		op_live(t_all *vm, t_process *p)
 			vm->champs[i].name, vm->cycles);
 		}
 		vm->last_alive = p1;
-		vm->last_alive_cycle = vm->cycles + 1;
-		++vm->nbr_live_since_check;
+		vm->last_alive_cycle = vm->cycles + 1;	
 	}
 }

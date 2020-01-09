@@ -15,24 +15,28 @@
 void		declare_winner(t_all *vm)
 {
 	int		i;
+	int		last;
 
 	i = -1;
+	last = vm->order[vm->total_champ - 1];
 	while (i++ < vm->total_champ)
 	{
-		if (vm->champs[i].id == vm->last_alive && vm->last_alive != 0)
+		if (vm->champs[i].id == -vm->last_alive && vm->last_alive != 0)
 		{
-			ft_printf("THE WINNER IS PLAYER NUMBER %d, %s!!!\n",
-			vm->last_alive, vm->champs[i].name);
+			ft_printf("Contestant %d, \"%s\", has won !\n",
+			vm->champs[i].id, vm->champs[i].name);
 			return ;
 		}
 	}
-	ft_printf("Nobody declared themselves alive, it's a draw. :(\n");
+	ft_printf("Contestant %d, \"%s\", has won !\n",
+	vm->champs[last].id, vm->champs[last].name);
+		return ;
 }
 
 static int	dump(t_all *vm, t_process *p, t_op *op)
 {
 	ft_print_arena(vm, 32);
-	//print_debug(vm, 64, p->pc, -1);
+//	print_debug(vm, 64, p->pc, -1);
 	free_op_table(op);
 	return (0);
 }

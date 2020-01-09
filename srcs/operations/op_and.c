@@ -41,11 +41,26 @@ void			op_and(t_all *vm, t_process *p)
 	bytes_read = 1;
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
 	pm2 = get_unspecified_val(vm, p, &bytes_read, 1);
-	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | and\n", p->pid);
+	ft_printf("HEREEEEE");
 	if (p->op_fail == 1)
+	{
+		ft_printf("bytes = %d\n", bytes_read);
+		p->pc += bytes_read;
 		return ;
+	}
 	load_val_in_reg(vm, p, pm1 & pm2, bytes_read);
 	if (p->op_fail != 1)
+	{
+		ft_printf("2bytes = %d\n", bytes_read);
 		check_carry(p, pm1 & pm2);
+		if (vm->flag_v == 4)
+			ft_printf("\tP%6d | and %ld, %ld, R%d\n",
+			p->pid, pm1, pm2, get_next_bytes(vm, p, 1, bytes_read));
+	}
+	else
+	{
+		ft_printf("3bytes = %d\n", bytes_read);
+		p->pc += bytes_read;
+	}
+	
 }
