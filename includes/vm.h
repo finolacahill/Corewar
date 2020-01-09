@@ -117,6 +117,7 @@ void					error_exec(t_all *all, char *champ_name, uint16_t line);
 int						just_number(char *str);
 long					check_neg_address(long val);
 void					calc_bytes(t_process *p, int *bytes);
+int						recalc_bytes(t_process *p, int *bytes);
 int						check_alive(t_all *vm, t_process **p);
 void					check_carry(t_process *p, int param);
 int						check_op_block(t_all *vm, t_process *process);

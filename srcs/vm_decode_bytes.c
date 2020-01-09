@@ -64,7 +64,7 @@ void		calc_bytes(t_process *p, int *bytes)
 		return (get_direct_bytes(p, bytes));
 	if (is_direct_two(p) == 1)
 		dir = 2;
-	while (++i < 4)
+	while (++i < 3)
 	{
 		if (p->decode[i] == REG_CODE)
 			bytes[0] += 1;

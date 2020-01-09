@@ -44,6 +44,7 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_tools.c			\
 			vm_run_vm.c			\
 			vm_printing.c		\
+			vm_re_calc.c		\
 			print_debug.c		\
 			dasm_check_hex_code.c
 
@@ -81,7 +82,7 @@ INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = -Wall -Werror -Wextra
+FLAG = -fsanitize=address #-Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 

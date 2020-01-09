@@ -40,6 +40,10 @@ void			op_sti(t_all *vm, t_process *p)
 	p1 = get_reg_val(vm, p, 1);
 	p2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
 	p3 = get_unspecified_val_2(vm, p, &bytes_read, 2);
+	p2 = check_neg_address(p2);
+	p3 = check_neg_address(p3);
+	if (p->op_fail == 1)
+		return ;
 	if (vm->flag_v == 4)
 	{
 		ft_printf("\n\tP%6d | sti reg %d", p->pid, get_next_bytes(vm, p, 1, 1));
@@ -48,7 +52,6 @@ void			op_sti(t_all *vm, t_process *p)
 		ft_printf("%d) at cycle %d\n",
 		((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
 	}
-	if (p->op_fail == 1)
-		return ;
+
 	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)), 4, p1);
 }

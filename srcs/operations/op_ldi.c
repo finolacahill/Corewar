@@ -45,6 +45,12 @@ void		op_ldi(t_all *vm, t_process *p)
 	bytes_read = 1;
 	address1 = get_unspecified_val_2(vm, p, &bytes_read, 0);
 	address2 = get_unspecified_val_2(vm, p, &bytes_read, 1);
+	if (p->decode[0] == 2)
+		address1 = check_neg_address(address1);
+	if (p->decode[1] == 2)
+		address2 = check_neg_address(address2);
+
+		
 ///	adjust_val(address1, p, 0);
 //	adjust_val(address2, p, 1);
 	if (vm->flag_v == 4)

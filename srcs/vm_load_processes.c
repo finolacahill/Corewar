@@ -34,6 +34,8 @@ void			load_new_process(t_all *vm, t_process *p)
 {
 	p->pc = (p->pc + 1) % MEM_SIZE;
 	p->op = vm->arena[p->pc];
+	p->opc = vm->arena[(p->pc + 1) % MEM_SIZE];
+	p = ft_decode_byte(p->op, p);
 	if ((check_op_block(vm, p)) == 1)
 	{
 		if (if_no_opcode(p) == 0)
@@ -48,6 +50,7 @@ void			load_new_process(t_all *vm, t_process *p)
 		p->op = 0;
 		p->exec_cycle = vm->cycles + 1;
 	}
+//	ft_printf("PID %d exec cycle %d\n", p->pid, p->exec_cycle);
 //	print_debug(vm, 32, p->pc, 0);
 }
 
@@ -73,11 +76,12 @@ t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 {
 	int			bytes;
 
+	(*process) = ft_decode_byte(vm->arena[((*process)->pc + 1) % MEM_SIZE], *process);
 	if (check_op_block(vm, *process) == 1)
 	{
 		(*process)->op_fail = 0;
-		(*process) = ft_decode_byte(vm->arena[((*process)->pc + 1) % MEM_SIZE],
-		*process);
+	//	(*process) = ft_decode_byte(vm->arena[((*process)->pc + 1) % MEM_SIZE],
+	//	*process);
 		calc_bytes(*process, &bytes);
 		if ((*process)->op != 0)
 		{
@@ -90,16 +94,32 @@ t_process		**exec_process(t_all *vm, t_process **process, t_op *op_table,
 					re_order_process(process, head);
 			}
 		}
+	/*	if ((*process)->op_fail == 1 && (*process)->op_fail != 9)
+			{
+			//	recalc_bytes(*process, &bytes);
+			//	(*process)->op_fail = 0;
+			}*/
 		if ((((*process)->op_fail == 0 || (*process)->op_fail == 1)
 			&& (*process)->op != 9)
 			|| ((*process)->op == 9 && (*process)->op_fail == 1))
 			(*process)->pc = ((*process)->pc + bytes) % MEM_SIZE;
+	//	ft_printf("\t\t\tPid %d pc = %d op = %d bytes %d\n", (*process)->pid, (*process)->pc, (*process)->op, bytes);
+	//	print_debug(vm, 32, (*process)->pc, (*process)->pc + bytes);
 	}
-	print_debug(vm, 32, (*process)->pc, (*process)->pc + bytes);
+//	print_debug(vm, 32, (*process)->pc, (*process)->pc + bytes);
 	load_new_process(vm, *process);
 	return (head);
 }
-
+t_process		*check_is_rewritten(t_all *vm, t_process *p)
+{
+	if (vm->arena[p->pc] != p->op)
+	{
+		p->pc -= 1;
+		load_new_process(vm, p);
+		--p->exec_cycle;
+	}
+	return (p);
+}
 int				run_processes(t_all *vm, t_process **head, t_op *op_table)
 {
 	t_process	*tracker;
@@ -115,6 +135,7 @@ int				run_processes(t_all *vm, t_process **head, t_op *op_table)
 	//		ft_printf("cycle = %d\n", vm->cycles);
 		while (tracker != NULL)
 		{
+			tracker = check_is_rewritten(vm, tracker);
 			if (vm->cycles == tracker->exec_cycle)
 				head = exec_process(vm, &tracker, op_table, head);
 			tracker = tracker->next;
