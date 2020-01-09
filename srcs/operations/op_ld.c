@@ -32,8 +32,6 @@ void		op_ld(t_all *vm, t_process *p)
 
 	bytes_read = 1;
 	pm1 = get_unspecified_val(vm, p, &bytes_read, 0);
-//	if ((pm1 % 65536) >= 32768)
-//		pm1 += 65536;
 	load_val_in_reg(vm, p, pm1, bytes_read);
 	if (p->op_fail == 1)
 		return ;

@@ -33,9 +33,12 @@ void			op_sub(t_all *vm, t_process *p)
 	if (p->op_fail == 1)
 		return ;
 	load_val_in_reg(vm, p, p1 - p2, 3);
-	check_carry(p, p1 - p2);
-	if (vm->flag_v == 4)
-		ft_printf("\tP%6d | sub R%ld R%ld R%ld at cycles %d\n", p->pid,
-		get_next_bytes(vm, p, 1, 1), get_next_bytes(vm, p, 1, 2),
-		get_next_bytes(vm, p, 1, 3), vm->cycles);
+	if (p->op_fail != 1)
+	{
+		check_carry(p, p1 - p2);
+		if (vm->flag_v == 4)
+			ft_printf("\tP%6d | sub R%ld R%ld R%ld at cycles %d\n", p->pid,
+			get_next_bytes(vm, p, 1, 1), get_next_bytes(vm, p, 1, 2),
+			get_next_bytes(vm, p, 1, 3), vm->cycles);
+	}
 }

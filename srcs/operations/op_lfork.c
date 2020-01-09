@@ -65,16 +65,16 @@ void			op_lfork(t_all *vm, t_process *p)
 	if (p->op_fail == 3)
 		return ;
 	p1 = get_next_bytes(vm, p, 2, 0);
-//	p1 = check_neg_address(p1);
+	p1 = check_neg_address(p1);
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Lfork to %d (+ pc %d = %d) at cycle %d\n",
 		p->pid, p1, new->pc, p1 + new->pc, vm->cycles);
 	new->pc += p1 - 1;
 	if (new->pc < 0)
 		new->pc += MEM_SIZE;
-	load_new_process(vm, new);
 	new->pid = vm->total_process + 1;
 	++vm->total_process;
 	p->next = new;
+	load_new_process(vm, new);
 	p->op_fail = 2;
 }

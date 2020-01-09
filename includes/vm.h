@@ -155,8 +155,6 @@ void					load_new_process(t_all *vm, t_process *p);
 void					load_val_in_reg(t_all *vm, t_process *p, int val, int
 							bytes_read);
 int						is_operation(int op);
-int						run_processes(t_all *vm, t_process **head,
-							t_op *op_table);
 int						run_vm(t_all *vm, t_process *p);
 
 t_op					*init_op_check(t_all *vm, t_op *op);

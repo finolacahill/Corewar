@@ -52,6 +52,5 @@ void			op_sti(t_all *vm, t_process *p)
 		ft_printf("%d) at cycle %d\n",
 		((p2 + p3) + p->pc) % MEM_SIZE, vm->cycles);
 	}
-
 	load_value(vm, (p->pc + ((p2 + p3) % IDX_MOD)), 4, p1);
 }

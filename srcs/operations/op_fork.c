@@ -67,7 +67,6 @@ void			op_fork(t_all *vm, t_process *p)
 		return ;
 	p1 = get_next_bytes(vm, p, 2, 0);
 	p1 = check_neg_address(p1);
-	
 	if (vm->flag_v == 4)
 		ft_printf("\tP%6d | Fork to %ld (+ pc %d = %d) cycle %d.\n",
 		p->pid, p1, new->pc, p1 + new->pc, vm->cycles);
@@ -79,5 +78,4 @@ void			op_fork(t_all *vm, t_process *p)
 	p->next = new;
 	load_new_process(vm, new);
 	p->op_fail = 2;
-//	print_debug(vm, 32, p->pc, new->pc);
 }

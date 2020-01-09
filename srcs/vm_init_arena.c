@@ -51,7 +51,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 		return (error_process(p));
 	if (!(p->decode = (int *)malloc((sizeof(int)) * 4)))
 		return (error_process(p));
-	p->id = c->id;
+	p->id = -c->id;
 	p->carry = 0;
 	init_registers(p);
 	p->live_calls = -1;
