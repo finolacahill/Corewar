@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 19:01:45 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 15:45:05 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 
 	j = -1;
 	r = 0;
+	ban = 0;
 	if (all->flag_n == 1 && ++id)
 		ban = flag_n(ac, av, all, &j);
 	i = 0;
