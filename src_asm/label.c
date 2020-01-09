@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 18:43:44 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/08 15:05:26 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:10:42 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	use_label(t_env *env, t_label *label)
 		while (tmp_l)
 		{
 			if (tmp_l->label && ft_strcmp(tmp_l->label, label->label) == 0)
-			{
-				remplace_empty(tmp_i, label->adress - tmp_l->adress, tmp_l->size);
-		
-			}
+				remplace_empty(tmp_i, label->adress - tmp_l->adress,
+					tmp_l->size);
 			tmp_l = tmp_l->next;
 		}
 		tmp_i = tmp_i->next;
@@ -99,7 +97,6 @@ int		get_label(char *line, t_env *env)
 		if (!(label = ft_strsub(&line[j], 0, i - j)))
 			error(8, -1, -1, NULL);
 	}
-	//ft_printf("instruc == %s\n", label);
 	if (is_label(label) == 1)
 		put_label(env, label);
 	else

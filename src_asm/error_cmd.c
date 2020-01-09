@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:53:17 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/08 15:05:04 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:10:42 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static const	t_error_cmd g_error_cmd_tab[] =
 	{3, "Error: This CMD already exist -> "},
 	{4, "Error: This CMD does not exist -> "},
 	{5, "Error: CMD missing -> "},
+	{6, "Error: Champion size too big -> "},
 	{0, NULL}
 };
 
@@ -43,6 +44,7 @@ void	error_cmd(int type, char *cmd, int line)
 			ft_fprintf(2, "%s", cmd);
 			if (line >= 0)
 				ft_fprintf(2, " in line %d", line + 1);
+			ft_fprintf(2, "\n");
 			exit(0);
 		}
 		i++;

@@ -6,18 +6,18 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 01:43:50 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/08 15:05:38 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:10:42 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-void	put_hexa_label(int16_t label, t_instruc *instruc, int size)
+void	put_hexa_label(int label, t_instruc *instruc, int size)
 {
 	char *hexa_l;
 
-	if (label >= 0)
-		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
+	if (size == 8)
+		hexa_l = ft_uitoa_base((uint32_t)label, 16, 0);
 	else
 		hexa_l = ft_uitoa_base((uint16_t)label, 16, 0);
 	if (hexa_l == NULL)

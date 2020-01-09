@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/08 19:02:57 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/09 16:25:22 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,8 @@ SRC_ASM_NAME =	write.c			\
 				label.c			\
 				instruc.c		\
 				params.c		\
-				calc.c
+				calc.c			\
+				check.c
 
 MAIN_NAME = main.c
 
@@ -103,7 +104,7 @@ INCL =	./includes/vm.h
 INCL_ASM =	./includes/corewar.h
 
 
-CC = gcc -g3
+CC = gcc -g3 
 
 FLAG = -Wall -Werror -Wextra
 

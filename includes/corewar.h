@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 09:57:22 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/09 10:59:51 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:12:21 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ void					is_label_exist(char *l, t_env *e, t_instruc *i, int s);
 int						what_params(char *p, t_instruc *i, int j, t_env *env);
 void					write_to_file(t_instruc *i, int f,
 	t_header *h, t_env *e);
-void					write_header_magic(t_header *header, char *new_name);
+void					write_header_magic(t_header *header, char *new_name,
+						int i);
 int						check_numbers_separator(char *line);
 int						line_isascii(char *line);
+int						check_max_min(char *index, int len, t_instruc *instruc);
 #endif

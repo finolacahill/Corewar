@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 02:15:38 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/08 15:05:48 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 16:10:42 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	put_params(t_instruc *instruc, int size, char *index)
 {
 	char *hexa;
 
+	if (check_max_min(index, size, instruc) == -1)
+		return ;
 	if (size != 8)
 		hexa = ft_uitoa_base((uint16_t)ft_atoi(index), 16, 0);
 	else
@@ -44,10 +46,10 @@ int		param_register(t_instruc *instruc, char *c_index_r, int j, t_env *env)
 	char	*hexa_r;
 	int		index_r;
 
-	if (check_numbers(c_index_r) == -1)
+	if (check_numbers(c_index_r) == -1 || ft_strlen(c_index_r) > 2)
 		error(10, env->line, j, ft_itoa(instruc->opcode));
 	index_r = ft_atoi(c_index_r);
-	if (index_r > REG_NUMBER || index_r < 0)
+	if (index_r < 0)
 		error(3, env->line, j, NULL);
 	if ((instruc->params[j] & T_REG) != T_REG)
 		error(4, env->line, j, ft_itoa(instruc->opcode));
