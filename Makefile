@@ -46,7 +46,6 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_tools.c			\
 			vm_run_vm.c			\
 			vm_printing.c		\
-			print_debug.c		\
 			vm_re_calc.c		\
 			dasm_input_check.c
 
