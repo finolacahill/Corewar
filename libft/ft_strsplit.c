@@ -70,4 +70,3 @@ char				**ft_strsplit(char const *s, char c)
 	fresh[i] = NULL;
 	return ((char**)fresh);
 }
-

@@ -110,7 +110,6 @@ int						dasm_get_exec_code(uint8_t *cor_content, int len);
 void					dasm_check_hex_code(t_all *vm);
 void					error_exec(t_all *all, char *champ_name, uint16_t line);
 int						just_number(char *str);
-
 void					calc_bytes(t_process *p, int *bytes);
 int						check_alive(t_all *vm, t_process **p);
 void					check_carry(t_process *p, int param);
@@ -123,17 +122,21 @@ void					free_dasm_header(t_all *all, uint8_t *cor_content,
 t_process				*ft_decode_byte(unsigned char c, t_process *p);
 void					ft_print_arena(t_all *vm, int len);
 int						get_duration(t_all *vm, int opc);
-long	get_ind(t_all *vm, t_process *p, long bytes_read, int idx);
-long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read);
-long						get_reg_val(t_all *vm, t_process *p, int bytes_read);
+long					get_ind(t_all *vm, t_process *p, long bytes_read,
+							int idx);
+long					get_next_bytes(t_all *vm, t_process *p, int len,
+							long bytes_read);
+long					get_reg_val(t_all *vm, t_process *p, int bytes_read);
 long					get_unspecified_val(t_all *vm, t_process *p,
-		long *bytes_read, int param);
-long		get_unspecified_val_2(t_all *vm, t_process *p, long *bytes_read,
-			int param);
-long	check_neg_address(long val);
-t_process	**exec_process(t_all *vm, t_process **p, t_op *op, t_process **head);
-long   	 get_val_at_ind(t_all *vm, t_process *p, long bytes_read, int idx);
-int			recalc_bytes(t_process *p, int *bytes);
+							long *bytes_read, int param);
+long					get_unspecified_val_2(t_all *vm, t_process *p,
+							long *bytes_read, int param);
+long					check_neg_address(long val);
+t_process				**exec_process(t_all *vm, t_process **p, t_op *op,
+							t_process **head);
+long   	 				get_val_at_ind(t_all *vm, t_process *p,
+							long bytes_read, int idx);
+int						recalc_bytes(t_process *p, int *bytes);
 int						if_no_opcode(t_process *p);
 t_all					*init_arena(t_all *vm);
 t_process				*init_process(t_all *vm, t_champs *c, t_process *p);
@@ -147,8 +150,6 @@ void					load_new_process(t_all *vm, t_process *p);
 void					load_val_in_reg(t_all *vm, t_process *p, int val, int
 							bytes_read);
 int						is_operation(int op);
-int						run_processes(t_all *vm, t_process **head,
-							t_op *op_table);
 int						run_vm(t_all *vm, t_process *p);
 int						just_nb_atoi(const char *str, t_all *all);
 int						just_nb_init(const char *str, int i, int *neg);

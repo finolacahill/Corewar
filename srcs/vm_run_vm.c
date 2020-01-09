@@ -23,7 +23,7 @@ t_process	*check_is_rewritten(t_all *vm, t_process *p)
 	return (p);
 }
 
-int	run_processes(t_all *vm, t_process **head, t_op *op_table)
+static int	run_processes(t_all *vm, t_process **head, t_op *op_table)
 {
 	t_process	*tracker;
 	int			live;

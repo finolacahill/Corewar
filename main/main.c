@@ -21,13 +21,9 @@ int		main(int ac, char **av)
 		return (0);
 	dasm_init(vm, ac, av);
 	init_arena(vm);
-	// ft_print_arena(vm, 64);
 	vm_print_intro(vm);
-	// ft_printf("\n\nTest de ft_printf ahahaha = %d !\n\n", 2);
-	// sleep(2);
 	if (run_vm(vm, &p) == -1)
 		return (free_all(vm, &p));
-	// ft_print_arena(vm, 64);
 	free_all(vm, NULL);
 	return (0);
 }
