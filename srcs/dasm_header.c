@@ -46,18 +46,18 @@ unsigned char		*recup_comment(uint8_t *cor_content)
 }
 
 unsigned char		*recup_ex_code(t_champs *champ, uint8_t *cor_content,
-					 size_t cor_size, t_all *all)
+					size_t cor_size, t_all *all)
 {
 	unsigned char	*code;
 
 	code = NULL;
 	champ->len_exec_code = (size_t)dasm_get_exec_code(&(cor_content[136]), 4);
-	if (!(code = (unsigned char *)malloc(sizeof(unsigned char) * champ->len_exec_code)))
+	if (!(code = (unsigned char *)malloc(sizeof(unsigned char)
+		* champ->len_exec_code)))
 		return (NULL);
 	if (cor_size - champ->len_exec_code != 2192)
 	{
-		ft_printf("Error: File ");
-		ft_printf("%s", champ->path);
+		ft_printf("Error: File %s", champ->path);
 		ft_printf(" has a code size that differ from what its header says\n");
 		free_dasm_header(all, cor_content, "");
 	}
