@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/30 14:41:01 by flafonso          #+#    #+#              #
-#    Updated: 2020/01/08 15:30:39 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/09 20:09:36 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 .PHONY: all clean fclean re
 
 all: $(NAME)
+	@:
 
 $(NAME): $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
