@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_print_usage.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 10:56:40 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/09 15:06:19 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	dasm_free(t_all *all)
 
 void	error_size(t_all *all, char *path, size_t cor_size)
 {
-	ft_printf("Error: File %s has too large a code (%d bytes > %d bytes)\n",
+	ft_printf("Error: File %s has a too large code (%d bytes > %d bytes)\n",
 	path, cor_size - 2192, CHAMP_MAX_SIZE);
 	dasm_free(all);
 	exit(EXIT_FAILURE);

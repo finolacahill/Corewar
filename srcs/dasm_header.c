@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_header.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 17:38:49 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 10:48:38 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/09 15:20:05 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,23 @@ unsigned char		*recup_comment(uint8_t *cor_content)
 	return (com);
 }
 
-unsigned char		*recup_ex_code(size_t *len, uint8_t *cor_content)
+unsigned char		*recup_ex_code(t_champs *champ, uint8_t *cor_content,
+					 size_t cor_size, t_all *all)
 {
 	unsigned char	*code;
 
 	code = NULL;
-	(*len) = (size_t)dasm_get_exec_code(&(cor_content[136]), 4);
-	if (!(code = (unsigned char *)malloc(sizeof(unsigned char) * (*len))))
+	champ->len_exec_code = (size_t)dasm_get_exec_code(&(cor_content[136]), 4);
+	if (!(code = (unsigned char *)malloc(sizeof(unsigned char) * champ->len_exec_code)))
 		return (NULL);
-	ft_memcpy(code, &(cor_content[2192]), (*len));
+	if (cor_size - champ->len_exec_code != 2192)
+	{
+		ft_printf("Error: File ");
+		ft_printf("%s", champ->path);
+		ft_printf(" has a code size that differ from what its header says\n");
+		free_dasm_header(all, cor_content, "");
+	}
+	ft_memcpy(code, &(cor_content[2192]), champ->len_exec_code);
 	return (code);
 }
 
@@ -65,7 +73,7 @@ void				dasm_get_header(t_all *all, size_t cor_size,
 		"File is too small! (not enough informations)\n");
 	if (cor_size > CHAMP_MAX_SIZE + 2192)
 	{
-		free(cor_content);
+		free((*cor_content));
 		error_size(all, champs->path, cor_size);
 	}
 	if (cor_content[0][0] != 0x00 || cor_content[0][1] != 0xea
@@ -82,7 +90,7 @@ void				dasm_get_header(t_all *all, size_t cor_size,
 	if ((cor_content[0][2188] | cor_content[0][2189] | cor_content[0][2190]
 		| cor_content[0][2191]) != 0)
 		free_dasm_header(all, *cor_content, "Invalid File\n");
-	if (!(champs->exec_code = recup_ex_code(&(champs->len_exec_code),
-		cor_content[0])))
+	if (!(champs->exec_code = recup_ex_code(champs,
+		cor_content[0], cor_size, all)))
 		free_dasm_header(all, *cor_content, "Malloc Error\n");
 }

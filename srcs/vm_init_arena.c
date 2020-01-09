@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_init_arena.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 12:44:21 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 12:46:36 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/08 20:53:38 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 		return (error_process(p));
 	if (!(p->decode = (int *)malloc((sizeof(int)) * 4)))
 		return (error_process(p));
-	p->id = -c->id;
+	p->id = c->id;
 	p->carry = 0;
 	init_registers(p);
 	p->live_calls = -1;

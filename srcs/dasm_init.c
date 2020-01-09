@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 10:50:45 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/09 14:12:57 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ t_all			*dasm_init(t_all *vm, int ac, char **av)
 			nb++;
 	if (vm->flag_n != -1 && nb < vm->flag_n)
 		print_usage(vm);
-//	dasm_check_hex_code(vm);
+	dasm_check_hex_code(vm);
 	return (vm);
 }

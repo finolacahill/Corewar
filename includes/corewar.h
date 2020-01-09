@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 09:57:22 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/08 19:17:35 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 10:59:51 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "../includes/op.h"
 # include "../libft/libft.h"
+
+# define INT_MAX_64 "9223372036854775807"
+# define INT_MIN_64 "9223372036854775808"
 
 typedef	struct			s_label
 {
