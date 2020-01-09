@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/09 18:55:01 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/09 20:11:49 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ LIB_NAME = libft.a
 LIB_PATH = ./libft
 SRCS_PATH = ./srcs
 OBJ_PATH = ./obj
-MAIN_PATH = ./main
 OBJM_PATH = ./main
 OP_PATH = ./srcs/operations
 SRC_ASM_PATH = ./src_asm
@@ -47,6 +46,7 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_run_vm.c			\
 			vm_printing.c		\
 			vm_re_calc.c		\
+			main_corewar.c		\
 			dasm_input_check.c
 
 OP_NAME =	op_add.c	\
@@ -87,7 +87,6 @@ MAIN_NAME = main.c
 
 OBJLIB_NAME = $(LIB_NAME:.c=.o)
 OBJ_NAME = $(SRCS_NAME:.c=.o)
-OBJM_NAME = $(MAIN_NAME:.c=.o)
 OBJ_OP_NAME = $(OP_NAME:.c=.o)
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o)
 
@@ -96,7 +95,6 @@ SRCS = $(addprefix $(SRCS_PATH)/, $(SRCS_NAME))
 SRCS_ASM = $(addprefix $(SRC_ASM_PATH)/, $(SRC_ASM_NAME))
 OBJ_ASM = $(addprefix $(OBJ_PATH)/,$(OBJ_ASM_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-OBJM = $(addprefix $(OBJM_PATH)/,$(OBJM_NAME))
 OBJOP = $(addprefix $(OP_PATH)/,$(OP_NAME))
 
 INCL =	./includes/vm.h
@@ -114,8 +112,8 @@ all: lib $(NAME) $(NAME_TWO)
 lib: $(LIB_PATH)
 	@make -C $(LIB_PATH)
 
-$(NAME): $(LIB) $(OBJ) $(OBJM) $(INCL) $(OBJOP)
-	@$(CC) $(FLAG) $(OBJOP) $(OBJM) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
+$(NAME): $(LIB) $(OBJ)  $(INCL) $(OBJOP)
+	@$(CC) $(FLAG) $(OBJOP) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
 	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[$(NAME) done]$(END)"
 
 $(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM)
@@ -128,10 +126,6 @@ $(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c
 
 $(OBJ_PATH)/%.o: $(OP_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
-
-$(OBJM_PATH)/%.o: $(MAIN_PATH)/%.c
-	@mkdir $(OBJM_PATH) 2> /dev/null || true
 	@$(CC) -o $@ -c $<
 
 $(OBJ_PATH)/%.o: $(SRC_ASM_PATH)/%.c
