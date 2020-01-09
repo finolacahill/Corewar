@@ -64,6 +64,7 @@ typedef struct			s_process
 	char				carry;
 	int					live_calls;
 	int					start;
+	int					start_cycle;
 	int					exec_cycle;
 	int					bytes;
 	int					*decode;
@@ -114,6 +115,7 @@ void					dasm_print_all(t_all *all);
 int						dasm_get_exec_code(uint8_t *cor_content, int len);
 void					dasm_check_hex_code(t_all *vm);
 void					error_exec(t_all *all, char *champ_name, uint16_t line);
+t_process				**exec_process(t_all *vm, t_process **p, t_op *op, t_process **head);
 int						just_number(char *str);
 long					check_neg_address(long val);
 void					calc_bytes(t_process *p, int *bytes);

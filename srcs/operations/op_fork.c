@@ -48,6 +48,7 @@ t_process		*copy_process(t_process *p, t_process *new)
 	new->next = p->next;
 	new->carry = p->carry;
 	p->next = new;
+	;
 	return (new);
 }
 

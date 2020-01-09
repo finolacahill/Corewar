@@ -82,7 +82,7 @@ INCL = ./includes/vm.h
 
 CC = gcc -g3
 
-FLAG = -fsanitize=address #-Wall -Werror -Wextra
+FLAG = -Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 
