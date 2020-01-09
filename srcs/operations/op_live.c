@@ -6,20 +6,11 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:03:57 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 20:54:07 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:48:53 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t	check_op_live(uint8_t *content)
-{
-	int		i;
-
-	(void)content;
-	i = 0;
-	return (g_op_check_tab[0].dir_size + 1);
-}
 
 int			is_player_nb(int id, t_all *vm)
 {

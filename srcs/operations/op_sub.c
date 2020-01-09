@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 09:15:10 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 09:15:58 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:49:35 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t		check_op_sub(uint8_t *content)
-{
-	int			i;
-
-	i = 0;
-	if (!(content[1]) || is_in(content[1], g_op_check_tab[4].ocp_value) != 1)
-		return (0);
-	i = content[1] == 84 ? 3 * 1 + 2 : 0;
-	return (i);
-}
 
 void			op_sub(t_all *vm, t_process *p)
 {

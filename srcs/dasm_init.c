@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 13:04:55 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/09 14:12:57 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:37:20 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ t_all			*dasm_init(t_all *vm, int ac, char **av)
 			nb++;
 	if (vm->flag_n != -1 && nb < vm->flag_n)
 		print_usage(vm);
-	dasm_check_hex_code(vm);
 	return (vm);
 }

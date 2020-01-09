@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/08 19:02:29 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:50:19 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ typedef	struct			s_op
 {
 	void				(*inst)(t_all *vm, t_process *p);
 }						t_op;
-
-typedef	struct			s_verif_op
-{
-	uint16_t			(*inst)(uint8_t *content);
-}						t_verif_op;
 
 typedef struct			s_op_check
 {
@@ -160,7 +155,6 @@ int						ft_jump_flags(int ac, char **av, int *i, t_all *all);
 void					check_dump(int ac, char **av, t_all *all, int *i);
 
 t_op					*init_op_check(t_all *vm, t_op *op);
-t_verif_op				*init_op_verif(t_all *vm, t_verif_op *op);
 void					op_live(t_all *vm, t_process *p);
 void					op_st(t_all *vm, t_process *p);
 void					op_ld(t_all *vm, t_process *p);
@@ -177,23 +171,6 @@ void					op_lld(t_all *vm, t_process *p);
 void					op_lldi(t_all *vm, t_process *p);
 void					op_lfork(t_all *vm, t_process *p);
 void					op_aff(t_all *vm, t_process *p);
-
-uint16_t				check_op_add(uint8_t *content);
-uint16_t				check_op_aff(uint8_t *content);
-uint16_t				check_op_and(uint8_t *content);
-uint16_t				check_op_fork(uint8_t *content);
-uint16_t				check_op_ld(uint8_t *content);
-uint16_t				check_op_ldi(uint8_t *content);
-uint16_t				check_op_lfork(uint8_t *content);
-uint16_t				check_op_live(uint8_t *content);
-uint16_t				check_op_lld(uint8_t *content);
-uint16_t				check_op_lldi(uint8_t *content);
-uint16_t				check_op_or(uint8_t *content);
-uint16_t				check_op_st(uint8_t *content);
-uint16_t				check_op_sti(uint8_t *content);
-uint16_t				check_op_sub(uint8_t *content);
-uint16_t				check_op_xor(uint8_t *content);
-uint16_t				check_op_zjmp(uint8_t *content);
 
 t_process				*error_process(t_process *p);
 void					error_arena(t_all *vm, t_process *p);

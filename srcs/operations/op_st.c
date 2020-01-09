@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_st.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:10:04 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 17:12:08 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/09 17:49:22 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t		check_op_st(uint8_t *content)
-{
-	int			i;
-
-	(void)content;
-	i = 0;
-	if (!(content[1]) || is_in(content[1], g_op_check_tab[2].ocp_value) != 1)
-		return (0);
-	i += content[1] == 80 ? 2 * 1 : 0;
-	i += content[1] == 112 ? 1 + IND_SIZE : 0;
-	i += 2;
-	return (i);
-}
 
 void			op_st(t_all *vm, t_process *p)
 {

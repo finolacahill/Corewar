@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/09 16:25:22 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/09 17:46:01 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,7 @@ SRCS_NAME = dasm_get_data.c		\
 			vm_run_vm.c			\
 			vm_printing.c		\
 			print_debug.c		\
-			dasm_input_check.c	\
-			dasm_check_hex_code.c
+			dasm_input_check.c
 
 OP_NAME =	op_add.c	\
 			op_aff.c	\
