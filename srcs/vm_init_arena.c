@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_init_arena.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 12:44:21 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 20:53:38 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/06 12:46:36 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	p->op = c->exec_code[0];
 	p->pc = p->start;
 	p->next = NULL;
-	p->exec_cycle = get_duration(vm, p->op) - 1;
+	p->exec_cycle = get_duration(vm, p->op);
 	p->bytes = 0;
 	c->last_live = 0;
 	p->op_fail = 0;
@@ -105,7 +105,7 @@ t_all		*init_arena(t_all *vm)
 
 	i = -1;
 	divide = 0;
-	vm->cycles = 1;
+	vm->cycles = 0;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
 	vm->nbr_live_since_check = 0;

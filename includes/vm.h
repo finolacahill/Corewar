@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:24 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/09 17:50:19 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 18:52:28 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,17 @@ void					free_dasm_header(t_all *all, uint8_t *cor_content,
 t_process				*ft_decode_byte(unsigned char c, t_process *p);
 void					ft_print_arena(t_all *vm, int len);
 int						get_duration(t_all *vm, int opc);
-long						get_ind(t_all *vm, t_process *p, int bytes_read,
-							int restriction);
+long	get_ind(t_all *vm, t_process *p, long bytes_read, int idx);
 long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read);
 long						get_reg_val(t_all *vm, t_process *p, int bytes_read);
 long					get_unspecified_val(t_all *vm, t_process *p,
 		long *bytes_read, int param);
 long		get_unspecified_val_2(t_all *vm, t_process *p, long *bytes_read,
 			int param);
-long						get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
-							int restriction);
+long	check_neg_address(long val);
+t_process	**exec_process(t_all *vm, t_process **p, t_op *op, t_process **head);
+long   	 get_val_at_ind(t_all *vm, t_process *p, long bytes_read, int idx);
+int			recalc_bytes(t_process *p, int *bytes);
 int						if_no_opcode(t_process *p);
 t_all					*init_arena(t_all *vm);
 t_process				*init_process(t_all *vm, t_champs *c, t_process *p);

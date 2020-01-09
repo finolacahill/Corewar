@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vm_check_alive.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 11:37:22 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 18:00:50 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/06 12:30:42 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void			check_cycle_decrease(t_all *vm)
 		|| vm->total_checks + 1 >= MAX_CHECKS)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
-		if (vm->flag_v == 16)
+		if (vm->flag_v == 16 || vm->flag_v == 2)
 			ft_printf("Cycles to die is now %d at %d.\n",
 			vm->cycles_to_die, vm->cycles);
 		vm->total_checks = 0;
@@ -34,7 +34,7 @@ static t_process	*kill_process(t_all *vm, t_process **p, t_process *t,
 	if (vm->flag_v == 8)
 	{
 		ft_printf("Process pid %d, id %d", (t)->pid, (t)->id);
-		ft_printf(" hasn't lived for %d", vm->cycles - t->live_calls);
+		ft_printf(" hasn't lived for %d", vm->cycles - t->live_calls + 1);
 		ft_printf(" (cycles to die %d, cycle ", vm->cycles_to_die);
 		ft_printf("%d).\n", vm->cycles);
 	}
@@ -61,10 +61,9 @@ t_process			**kill_dead_process(t_all *vm,
 
 	t = *p;
 	i = 0;
-	while (vm->total_process >= 0 && t != NULL)
+	while (vm->total_process > 0 && t != NULL)
 	{
-		if (vm->champs[t->id - 1].last_live == -2
-			|| t->live_calls < vm->cycles - vm->cycles_to_die)
+		if (t->live_calls <= vm->cycles - vm->cycles_to_die)
 		{
 			t = kill_process(vm, p, t, prev);
 		}

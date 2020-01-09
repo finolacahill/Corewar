@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm_decode_bytes.c                                  :+:      :+:    :+:   */
+/*   vm_re_calc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/06 12:35:01 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 12:36:11 by adietric         ###   ########.fr       */
+/*   Created: 2020/01/09 17:33:11 by fcahill           #+#    #+#             */
+/*   Updated: 2020/01/09 17:33:14 by fcahill          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/vm.h"
 
-int			if_no_opcode(t_process *p)
-{
-	if (p->op == 0 || p->op == 1 ||
-		p->op == 9 || p->op == 12 || p->op == 15)
-		return (1);
-	return (0);
-}
-
-t_process	*ft_decode_byte(unsigned char c, t_process *p)
-{
-	if (if_no_opcode(p) == 0)
-	{
-		p->decode[0] = c >> 6;
-		c = (c << 2);
-		p->decode[1] = c >> 6;
-		c = (c << 2);
-		p->decode[2] = c >> 6;
-		c = (c << 2);
-		p->decode[3] = c >> 6;
-	}
-	return (p);
-}
-
-static void	get_direct_bytes(t_process *p, int *bytes)
+static int	get_direct_bytes(t_process *p, int *bytes)
 {
 	if (p->op == 0)
 		bytes[0] = 0;
@@ -43,6 +20,7 @@ static void	get_direct_bytes(t_process *p, int *bytes)
 		bytes[0] = 4;
 	if (p->op == 9 || p->op == 12 || p->op == 15)
 		bytes[0] = 2;
+	return (1);
 }
 
 static int	is_direct_two(t_process *p)
@@ -52,19 +30,34 @@ static int	is_direct_two(t_process *p)
 	return (0);
 }
 
-void		calc_bytes(t_process *p, int *bytes)
+static int	get_len(t_process *p)
 {
-	int		i;
-	int		dir;
+	int i;
 
-	dir = 0;
+	i = p->op;
+	if (i == 1 || i == 16 || i == 15
+		|| i == 12 || i == 9)
+		return (1);
+	if (i == 2 || i == 3 || i == 13)
+		return (2);
+	return (3);
+}
+
+int			recalc_bytes(t_process *p, int *bytes)
+{
+	int		dir;
+	int		i;
+	int		len;
+
 	i = -1;
-	bytes[0] = 0;
-	if (if_no_opcode(p) == 1)
-		return (get_direct_bytes(p, bytes));
+	len = get_len(p);
+	dir = 0;
+	bytes[0] = 1;
 	if (is_direct_two(p) == 1)
 		dir = 2;
-	while (++i < 3)
+	if (if_no_opcode(p) == 1)
+		return (get_direct_bytes(p, bytes - 1));
+	while (++i < len)
 	{
 		if (p->decode[i] == REG_CODE)
 			bytes[0] += 1;
@@ -73,5 +66,5 @@ void		calc_bytes(t_process *p, int *bytes)
 		if (p->decode[i] == IND_CODE)
 			bytes[0] += 2;
 	}
-	++bytes[0];
+	return (0);
 }

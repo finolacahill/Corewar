@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-long		get_reg_val(t_all *vm, t_process *p, int bytes_read)
+long	get_reg_val(t_all *vm, t_process *p, int bytes_read)
 {
 	int		reg;
 
@@ -25,66 +25,65 @@ long		get_reg_val(t_all *vm, t_process *p, int bytes_read)
 	return (p->r[reg - 1]);
 }
 
-long			get_ind(t_all *vm, t_process *p, int bytes_read, int restriction)
-{
-	if (restriction == 1)
-		return (get_next_bytes(vm, p, 2, bytes_read) % IDX_MOD);
-	return (get_next_bytes(vm, p, 2, bytes_read));
-}
-
-long			get_val_at_ind(t_all *vm, t_process *p, int bytes_read,
-			int restriction)
+long	get_ind(t_all *vm, t_process *p, long bytes_read, int idx)
 {
 	long	address;
 
-	address = get_ind(vm, p, bytes_read, restriction);
+	address = get_next_bytes(vm, p, 2, bytes_read);
+	address = check_neg_address(address);
+	if (idx == 1)
+		return (address % IDX_MOD);
+	return (address);
+}
+
+long	get_val_at_ind(t_all *vm, t_process *p, long bytes_read, int idx)
+{
+	long	address;
+
+	address = get_ind(vm, p, bytes_read, idx);
 	return (get_next_bytes(vm, p, 4, address - 1));
 }
 
-long		get_unspecified_val(t_all *vm, t_process *p, long *bytes_read,
-			int param)
+long	get_unspecified_val(t_all *vm, t_process *p, long *bytes, int param)
 {
 	long	val;
 
 	if (p->decode[param] == REG_CODE)
 	{
-		val = get_reg_val(vm, p, bytes_read[0]);
-		bytes_read[0] += 1;
+		val = get_reg_val(vm, p, bytes[0]);
+		bytes[0] += 1;
 	}
 	if (p->decode[param] == IND_CODE)
 	{
-	
-		val = get_val_at_ind(vm, p, bytes_read[0], 1);
-		
-		bytes_read[0] += 2;
+		val = get_val_at_ind(vm, p, bytes[0], 1);
+		bytes[0] += 2;
 	}
 	if (p->decode[param] == DIR_CODE)
 	{
-		val = get_next_bytes(vm, p, 4, bytes_read[0]);
-		bytes_read[0] += 4;
+		val = get_next_bytes(vm, p, 4, bytes[0]);
+		bytes[0] += 4;
 	}
 	return (val);
 }
 
-long		get_unspecified_val_2(t_all *vm, t_process *p, long *bytes_read,
-			int param)
+long	get_unspecified_val_2(t_all *vm, t_process *p, long *bytes, int param)
 {
 	long	val;
 
 	if (p->decode[param] == REG_CODE)
 	{
-		val = get_reg_val(vm, p, bytes_read[0]);
-		bytes_read[0] += 1;
+		val = get_reg_val(vm, p, bytes[0]);
+		bytes[0] += 1;
 	}
 	if (p->decode[param] == IND_CODE)
 	{
-		val = get_val_at_ind(vm, p, bytes_read[0], 1);
-		bytes_read[0] += 2;
+		val = get_val_at_ind(vm, p, bytes[0], 1);
+		bytes[0] += 2;
 	}
 	if (p->decode[param] == DIR_CODE)
 	{
-		val = get_next_bytes(vm, p, 2, bytes_read[0]);
-		bytes_read[0] += 2;
+		val = get_next_bytes(vm, p, 2, bytes[0]);
+		bytes[0] += 2;
 	}
 	return (val);
 }

@@ -6,7 +6,7 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 19:00:43 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/08 19:01:51 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/09 19:38:37 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		check_dump(int ac, char **av, t_all *all, int *i)
 		print_usage(all);
 	if (just_number(av[l + 1]) != 1)
 		print_usage(all);
-	all->flag_dump = ft_atoi(av[l + 1]);
+	all->flag_dump = just_nb_atoi(av[l + 1], all);
 	if (all->flag_dump <= 0)
 		print_usage(all);
 	i[0] += 2;
