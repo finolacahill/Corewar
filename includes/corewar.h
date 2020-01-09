@@ -16,6 +16,9 @@
 # include "../includes/op.h"
 # include "../libft/libft.h"
 
+# define INT_MAX_64 "9223372036854775807"
+# define INT_MIN_64 "9223372036854775808"
+
 typedef	struct			s_label
 {
 	char			*label;
@@ -112,7 +115,8 @@ void					is_label_exist(char *l, t_env *e, t_instruc *i, int s);
 int						what_params(char *p, t_instruc *i, int j, t_env *env);
 void					write_to_file(t_instruc *i, int f,
 	t_header *h, t_env *e);
-void					write_header_magic(t_header *header, char *new_name);
+void					write_header_magic(t_header *h, char *new_name, int i);
 int						check_numbers_separator(char *line);
 int						line_isascii(char *line);
+int						check_max_min(char *index, int len, t_instruc *instruc);
 #endif

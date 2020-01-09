@@ -49,7 +49,9 @@ void	create_file_cor(char *file_name, t_header *header)
 	if (!(new_name = ft_strjoin_fr(new_name, ".cor", 1)))
 		error(8, -1, -1, NULL);
 	header->fd = open(new_name, O_WRONLY | O_CREAT, 0777);
-	write_header_magic(header, new_name);
+	if (header->fd < 0)
+		error(12, -1, -1, NULL);
+	write_header_magic(header, new_name, 0);
 	ft_strdel(&new_name);
 }
 

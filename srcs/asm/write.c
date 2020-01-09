@@ -12,15 +12,13 @@
 
 #include "../../includes/corewar.h"
 
-void	write_header_magic(t_header *header, char *new_name)
+void	write_header_magic(t_header *header, char *new_name, int i)
 {
 	char	*res;
 	char	*header_magic;
-	int		i;
 	int		j;
 
 	j = 0;
-	i = 0;
 	if (!(res = ft_strnew(8)))
 		error(8, -1, -1, NULL);
 	write(1, "Writing output program to ", 26);

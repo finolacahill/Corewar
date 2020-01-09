@@ -16,7 +16,6 @@ void	put_hexa_label(int label, t_instruc *instruc, int size)
 {
 	char *hexa_l;
 
-	ft_printf("label == %d\n", label);
 	if (size == 8)
 		hexa_l = ft_uitoa_base((uint32_t)label, 16, 0);
 	else

@@ -41,9 +41,8 @@ void	use_label(t_env *env, t_label *label)
 		while (tmp_l)
 		{
 			if (tmp_l->label && ft_strcmp(tmp_l->label, label->label) == 0)
-			{
-				remplace_empty(tmp_i, label->adress - tmp_l->adress, tmp_l->size);
-			}
+				remplace_empty(tmp_i, label->adress - tmp_l->adress,
+					tmp_l->size);
 			tmp_l = tmp_l->next;
 		}
 		tmp_i = tmp_i->next;
@@ -60,7 +59,6 @@ void	put_label(t_env *env, char *label)
 	if (!(tmp->label = ft_strdup(label)))
 		error(8, -1, -1, NULL);
 	tmp->adress = put_adress_label(env->instruc);
-	ft_printf("tmp adress == %d || %s\n", tmp->adress, tmp->label);
 	tmp->next = new_label();
 	use_label(env, tmp);
 }
