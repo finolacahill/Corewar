@@ -22,7 +22,7 @@ void		check_dump(int ac, char **av, t_all *all, int *i)
 	if (just_number(av[l + 1]) != 1)
 		print_usage(all);
 	all->flag_dump = just_nb_atoi(av[l + 1], all);
-	if (all->flag_dump <= 0)
+	if (all->flag_dump < 0)
 		print_usage(all);
 	i[0] += 2;
 }
