@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_live.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:03:57 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 09:14:23 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:55:56 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t	check_op_live(uint8_t *content)
-{
-	int		i;
-
-	(void)content;
-	i = 0;
-	return (g_op_check_tab[0].dir_size + 1);
-}
 
 int			is_player_nb(int id, t_all *vm)
 {
@@ -28,7 +19,7 @@ int			is_player_nb(int id, t_all *vm)
 	i = -1;
 	while (++i < vm->total_champ)
 	{
-		if (vm->champs[i].id == -id)
+		if (vm->champs[i].id == id)
 		{
 			vm->champs[i].last_live = vm->cycles;
 			return (i);

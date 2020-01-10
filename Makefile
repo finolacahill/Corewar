@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/09 20:11:49 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/10 11:20:39 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,7 @@ lib: $(LIB_PATH)
 
 $(NAME): $(LIB) $(OBJ)  $(INCL) $(OBJOP)
 	@$(CC) $(FLAG) $(OBJOP) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
-	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[$(NAME) done]$(END)"
+	@echo "$(BOLD)$(GREY)*corewar-$(GREEN)[$(NAME) done]$(END)"
 
 $(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM)
 	@$(CC) $(LIB) $(OBJ_ASM) -I $(INCL_ASM) -o $(NAME_TWO)
@@ -136,13 +136,13 @@ clean:
 	@make clean -C ./libft
 	@rm -rf $(OBJ) $(OBJM) $(OBJ_ASM)
 	@rm -rf $(OBJ_PATH)
-	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[clean]$(END)"
+	@echo "$(BOLD)$(GREY)*corewar-$(GREEN)[clean]$(END)"
 
 fclean: clean
 	@make just_f -C ./libft
 	@rm -f $(NAME)
 	@rm -f $(NAME_TWO)
-	@echo "$(BOLD)$(GREY)*dasm-$(GREEN)[fclean]$(END)"
+	@echo "$(BOLD)$(GREY)*corewar-$(GREEN)[fclean]$(END)"
 
 re: fclean all
 	@sleep 1

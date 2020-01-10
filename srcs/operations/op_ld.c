@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_ld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:58:09 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 16:59:01 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:54:45 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t	check_op_ld(uint8_t *content)
-{
-	int		i;
-
-	i = 0;
-	if (!(content[1]) || is_in(content[1], g_op_check_tab[1].ocp_value) != 1)
-		return (0);
-	i += content[1] == 144 ? g_op_check_tab[1].dir_size + 1 : 0;
-	i += content[1] == 208 ? IND_SIZE + 1 : 0;
-	i += 2;
-	return (i);
-}
 
 void		op_ld(t_all *vm, t_process *p)
 {
