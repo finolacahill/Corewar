@@ -6,7 +6,7 @@
 #    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/10 11:20:39 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/10 12:18:56 by flafonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,7 @@ $(NAME): $(LIB) $(OBJ)  $(INCL) $(OBJOP)
 	@echo "$(BOLD)$(GREY)*corewar-$(GREEN)[$(NAME) done]$(END)"
 
 $(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM)
-	@$(CC) $(LIB) $(OBJ_ASM) -I $(INCL_ASM) -o $(NAME_TWO)
+	@$(CC) $(FLAG) $(LIB) $(OBJ_ASM) -I $(INCL_ASM) -o $(NAME_TWO)
 	@echo "$(BOLD)$(GREY)*asm-$(GREEN)[$(NAME_TWO) done]$(END)"
 
 $(OBJ_PATH)/%.o: $(SRCS_PATH)/%.c
