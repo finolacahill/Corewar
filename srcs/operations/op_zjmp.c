@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_zjmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 09:28:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 09:29:05 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:56:46 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t		check_op_zjmp(uint8_t *content)
-{
-	(void)content;
-	return (g_op_check_tab[8].dir_size + 1);
-}
 
 void			op_zjmp(t_all *vm, t_process *p)
 {

@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_ldi.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:59:11 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 17:00:12 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:54:51 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
-uint16_t	check_op_ldi(uint8_t *content)
-{
-	int		i;
-
-	i = 0;
-	if (!(content[1]) || is_in(content[1], g_op_check_tab[9].ocp_value) != 1)
-		return (0);
-	i += content[1] == 84 ? 3 * 1 : 0;
-	i += content[1] == 100 ? 2 * 1 + g_op_check_tab[9].dir_size : 0;
-	i += content[1] == 148 ? 2 * 1 + g_op_check_tab[9].dir_size : 0;
-	i += content[1] == 164 ? 1 + 2 * g_op_check_tab[9].dir_size : 0;
-	i += content[1] == 212 ? 2 * 1 + IND_SIZE : 0;
-	i += content[1] == 228 ? 1 + IND_SIZE + g_op_check_tab[9].dir_size : 0;
-	i += 2;
-	return (i);
-}
 
 void		op_ldi(t_all *vm, t_process *p)
 {

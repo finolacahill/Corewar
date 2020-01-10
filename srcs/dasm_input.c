@@ -6,10 +6,9 @@
 /*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:56:17 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/09 19:34:40 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/10 11:09:27 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/vm.h"
 
@@ -60,7 +59,6 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 			if (!(all->champs[id++].path = ft_strdup(av[i])))
 				error(all, "Malloc error in stock good id");
 			r = id - 1 == ban ? r + 1 : r;
-			// all->champs[id - 1].id = all->flag_n == 1 ? id + r - 1 : id + r - 1;
 			all->champs[id - 1].id = id + r - 1;
 		}
 		else
