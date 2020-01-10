@@ -42,7 +42,7 @@ void	last_verif(t_env *env)
 		while (tmp->hexa_instruc && tmp->hexa_instruc[i])
 		{
 			if (tmp->hexa_instruc[i] == '#')
-				error(11, tmp->index, -1, ft_itoa(tmp->opcode));
+				error(11, env, -1, ft_itoa(tmp->opcode));
 			i++;
 		}
 		i = 0;
@@ -74,6 +74,8 @@ void	write_error(int j, char *name, int line, int column)
 	if (g_error_tab[j].params == 1 && name)
 	{
 		ft_fprintf(2, "instruct %s", get_params_with_opcode(ft_atoi(name)));
+		if (name != NULL)
+			ft_strdel(&name);
 		if (column >= 0)
 			ft_fprintf(2, " parameter %d", column);
 	}
@@ -86,7 +88,7 @@ void	write_error(int j, char *name, int line, int column)
 	ft_fprintf(2, "\n");
 }
 
-void	error(int i, int line, int column, char *name)
+void	error(int i, t_env *env, int column, char *name)
 {
 	int j;
 
@@ -95,8 +97,11 @@ void	error(int i, int line, int column, char *name)
 	{
 		if (g_error_tab[j].type == i)
 		{
-			write_error(j, name, line, column);
-			exit(0);
+			write_error(j, name, env->line, column);
+			close(env->header->fd);
+			if (env)
+				free_all(env);
+			exit(2);
 		}
 		j++;
 	}

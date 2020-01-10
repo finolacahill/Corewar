@@ -12,7 +12,7 @@
 
 #include "../includes/corewar.h"
 
-void	last_check_cmd(t_env *env, char *line, char *cmd)
+int		last_check_cmd(t_env *env, char *line, char *cmd)
 {
 	int i;
 
@@ -20,11 +20,12 @@ void	last_check_cmd(t_env *env, char *line, char *cmd)
 	while (line[i])
 	{
 		if ((line[i] != ';' && line[i] != COMMENT_CHAR) && line[i] > ' ')
-			error_cmd(2, cmd, env->line);
+			error_cmd(2, env, cmd, env->line);
 		else if (line[i] == ';' || line[i] == COMMENT_CHAR)
-			return ;
+			return (1);
 		i++;
 	}
+	return (1);
 }
 
 void	put_leftovers(char *l, t_env *env, char *add, char *cmd)
@@ -35,7 +36,7 @@ void	put_leftovers(char *l, t_env *env, char *add, char *cmd)
 
 	i = 0;
 	if (!(line = ft_strdup(l)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	j = -1;
 	while (line[i] != '"')
 	{
@@ -47,7 +48,7 @@ void	put_leftovers(char *l, t_env *env, char *add, char *cmd)
 			add[++j] = '\n';
 			ft_strdel(&line);
 			if (get_next_line(env->header->fd, &line) <= 0)
-				error_cmd(1, cmd, env->line);
+				error_cmd(1, env, cmd, env->line);
 			env->line++;
 		}
 	}
@@ -62,20 +63,23 @@ void	put_comment(t_env *env, char *l)
 	char	*line;
 
 	if (!(line = ft_strdup(l)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	i = -1;
 	if (env->header->c == 1)
-		error_cmd(3, "comment", env->line);
+	{
+		ft_strdel(&line);
+		error_cmd(3, env, "comment", env->line);
+	}
 	while (line[++i] && line[i] != '"')
 	{
 		if (line[i] > ' ')
-			error_cmd(2, "comment", env->line);
+			error_cmd(2, env, "comment", env->line);
 	}
 	i++;
 	put_leftovers(&line[i], env, env->header->comment, "comment");
 	env->header->c = 1;
 	if ((ft_strlen(env->header->comment)) > COMMENT_LENGTH)
-		error_cmd(6, "comment", -1);
+		error_cmd(6, env, "comment", -1);
 	ft_strdel(&line);
 }
 
@@ -85,20 +89,20 @@ void	put_name(t_env *env, char *l)
 	char	*line;
 
 	if (!(line = ft_strdup(l)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	i = -1;
 	if (env->header->n == 1)
-		error_cmd(3, "name", env->line);
+		error_cmd(3, env, "name", env->line);
 	while (line[++i] && line[i] != '"')
 	{
 		if (line[i] > ' ')
-			error_cmd(2, "name", env->line);
+			error_cmd(2, env, "name", env->line);
 	}
 	i++;
 	put_leftovers(&line[i], env, env->header->prog_name, "name");
 	env->header->n = 1;
 	if ((ft_strlen(env->header->prog_name)) > PROG_NAME_LENGTH)
-		error_cmd(6, "name", -1);
+		error_cmd(6, env, "name", -1);
 	ft_strdel(&line);
 }
 
@@ -118,12 +122,12 @@ void	go_cmd(t_env *env, char *line)
 	while (line[j] && (line[j] > ' ' && line[j] != '"'))
 		j++;
 	if (!(check = ft_strsub(line, i, j - len - 1)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	if (line[i] && ft_strcmp("name", check) == 0)
 		put_name(env, &line[j]);
 	else if (line[i] && ft_strcmp("comment", check) == 0)
 		put_comment(env, &line[j]);
 	else
-		error_cmd(4, check, env->line);
+		error_cmd(4, env, check, env->line);
 	ft_strdel(&check);
 }

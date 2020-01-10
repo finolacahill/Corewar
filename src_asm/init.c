@@ -17,12 +17,7 @@ t_label		*new_label(t_env *n)
 	t_label	*new;
 
 	if (!(new = (t_label*)malloc(sizeof(t_label))))
-	{
-		free(n->header);
-		free(n->instruc);
-		free(n);
-		error(8, -1, -1, NULL);
-	}
+		error(8, n, -1, NULL);
 	new->label = NULL;
 	new->adress = 0;
 	new->size = 0;
@@ -35,11 +30,7 @@ t_instruc	*new_instruct(t_env *n)
 	t_instruc *new;
 
 	if (!(new = (t_instruc*)malloc(sizeof(t_instruc))))
-	{
-		free(n->header);
-		free(n);
-		error(8, -1, -1, NULL);
-	}
+		error(8, n, -1, NULL);
 	new->opcode = 0;
 	new->params = NULL;
 	new->ocp = 0;
@@ -60,12 +51,9 @@ t_env		*init_env(void)
 	t_env *new;
 
 	if (!(new = (t_env*)malloc(sizeof(t_env))))
-		error(8, -1, -1, NULL);
+		error(8, NULL, -1, NULL);
 	if (!(new->header = (t_header*)malloc(sizeof(t_header))))
-	{
-		free(new);
-		error(8, -1, -1, NULL);
-	}
+		error(8, new, -1, NULL);
 	new->header->c = 0;
 	new->header->n = 0;
 	new->header->filename = NULL;
@@ -75,6 +63,7 @@ t_env		*init_env(void)
 	new->instruc = new_instruct(new);
 	new->line = 0;
 	new->column = 0;
+	new->c_line = NULL;
 	new->label = new_label(new);
 	return (new);
 }

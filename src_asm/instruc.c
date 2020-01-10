@@ -49,14 +49,14 @@ char	*get_params_with_opcode(int ocp)
 	return (g_op_tab[i].instruc);
 }
 
-int		put_instruc_params(t_instruc *instruc, int j)
+int		put_instruc_params(t_instruc *instruc, int j, t_env *env)
 {
 	int i;
 
 	i = 0;
 	if (!(instruc->params = (int*)malloc(sizeof(int) *
 		(g_op_tab[j].nbr_params + 1))))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	while (i != g_op_tab[j].nbr_params)
 	{
 		instruc->params[i] = g_op_tab[j].param_type[i];
@@ -66,14 +66,14 @@ int		put_instruc_params(t_instruc *instruc, int j)
 	return (1);
 }
 
-int		put_instruc(t_instruc *instruc_env, int j, int line)
+int		put_instruc(t_instruc *instruc_env, int j, int line, t_env *env)
 {
 	t_instruc *tmp;
 
 	tmp = get_last_intruct(instruc_env);
 	tmp->opcode = g_op_tab[j].opcode;
 	tmp->nbr_params = g_op_tab[j].nbr_params;
-	put_instruc_params(tmp, j);
+	put_instruc_params(tmp, j, env);
 	tmp->for_direct = g_op_tab[j].for_direct;
 	tmp->index = line;
 	return (1);
@@ -88,13 +88,13 @@ int		check_instruc(char *instruc, t_env *env)
 	{
 		if (ft_strcmp(instruc, (const char*)g_op_tab[j].instruc) == 0)
 		{
-			put_instruc(env->instruc, j, env->line);
+			put_instruc(env->instruc, j, env->line, env);
 			ft_strdel(&instruc);
 			return (1);
 		}
 		j++;
 	}
-	error(6, env->line, -1, instruc);
+	error(6, env, -1, instruc);
 	return (1);
 }
 
@@ -115,10 +115,9 @@ int		get_instruc(char *line, t_env *env, int column)
 	if (i == j || !(instruc = ft_strsub(line, j, i - j)))
 	{
 		if (i == j)
-			error(7, env->line, j + column, NULL);
+			error(7, env, j + column, NULL);
 		else
-			error(8, -1, -1, NULL);
-		exit(0);
+			error(8, env, -1, NULL);
 	}
 	if (!check_instruc(instruc, env))
 		return (-1);

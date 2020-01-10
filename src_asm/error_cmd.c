@@ -23,15 +23,15 @@ static const	t_error_cmd g_error_cmd_tab[] =
 	{0, NULL}
 };
 
-void	which_cmd_error(t_header *header)
+void	which_cmd_error(t_header *header, t_env *env)
 {
 	if (header->n == 0)
-		error_cmd(5, "name", -1);
+		error_cmd(5, env, "name", -1);
 	else
-		error_cmd(5, "comment", -1);
+		error_cmd(5, env, "comment", -1);
 }
 
-void	error_cmd(int type, char *cmd, int line)
+void	error_cmd(int type, t_env *env, char *cmd, int line)
 {
 	int i;
 
@@ -45,9 +45,11 @@ void	error_cmd(int type, char *cmd, int line)
 			if (line >= 0)
 				ft_fprintf(2, " in line %d", line + 1);
 			ft_fprintf(2, "\n");
-			exit(0);
+			if (env)
+				free_all(env);
+			exit(2);
 		}
 		i++;
 	}
-	exit(0);
+	exit(2);
 }

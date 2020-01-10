@@ -18,7 +18,7 @@ int		dec_to_hexa(int i)
 	int		res;
 
 	if (!(itoa = ft_uitoa_base(i, 16, 0)))
-		error(8, -1, -1, NULL);
+		return (-8);
 	res = ft_strtol(itoa, 16, 2);
 	ft_strdel(&itoa);
 	return (res);
