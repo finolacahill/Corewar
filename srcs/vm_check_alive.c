@@ -18,7 +18,7 @@ static void			check_cycle_decrease(t_all *vm)
 		|| vm->total_checks + 1 >= MAX_CHECKS)
 	{
 		vm->cycles_to_die -= CYCLE_DELTA;
-		if (vm->flag_v == 16 || vm->flag_v == 2)
+		if (vm->flag_v == 16)
 			ft_printf("Cycles to die is now %d at %d.\n",
 			vm->cycles_to_die, vm->cycles);
 		vm->total_checks = 0;

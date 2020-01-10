@@ -1,0 +1,23 @@
+Process:         corewar [54430]
+Path:            /Volumes/VOLUME/*/corewar
+Load Address:    0x10b560000
+Identifier:      corewar
+Version:         0
+Code Type:       X86-64
+Parent Process:  zsh [52536]
+
+Date/Time:       2020-01-10 12:09:25.391 +0100
+Launch Time:     2020-01-10 12:08:27.265 +0100
+OS Version:      Mac OS X 10.14.5 (18F132)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 10.3 (10G8)
+
+Physical footprint:         1272K
+Physical footprint (peak):  1272K
+----
+
+leaks Report Version: 4.0, multi-line stacks
+Process 54430: 178 nodes malloced for 20 KB
+Process 54430: 0 leaks for 0 total leaked bytes.
+

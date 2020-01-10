@@ -6,12 +6,12 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 17:03:57 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/07 09:14:23 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/10 12:49:08 by fcahill          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/vm.h"
-
+//THIS IS A TEST
 uint16_t	check_op_live(uint8_t *content)
 {
 	int		i;
