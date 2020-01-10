@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 14:44:34 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/20 19:42:02 by fcahill          ###   ########.fr       */
+/*   Updated: 2020/01/09 17:06:19 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char				**ft_strsplit(char const *s, char c)
 	i = 0;
 	if (!(s) || !(c))
 		return (NULL);
-	if (!(fresh = (char**)malloc(sizeof(char*) * ft_wordcounter(s, c) + 1)))
+	if (!(fresh = (char**)malloc(sizeof(char*) * (ft_wordcounter(s, c) + 1))))
 		return (NULL);
 	while (i < ft_wordcounter(s, c))
 	{
@@ -61,7 +61,7 @@ char				**ft_strsplit(char const *s, char c)
 		end = ft_end(s, c, start, end);
 		if (s[start] != '\0')
 		{
-			if (!(fresh[i] = (char*)malloc(sizeof(char) * end - start + 1)))
+			if (!(fresh[i] = (char*)malloc(sizeof(char) * (end - start + 1))))
 				return (NULL);
 			ft_insert(s, fresh[i], start, end);
 		}

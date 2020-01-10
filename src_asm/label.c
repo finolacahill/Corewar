@@ -1,0 +1,119 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   label.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/22 18:43:44 by yodana            #+#    #+#             */
+/*   Updated: 2020/01/09 16:10:42 by flafonso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/corewar.h"
+
+int		put_adress_label(t_instruc *instruc)
+{
+	int			i;
+	t_instruc	*tmp;
+
+	tmp = instruc;
+	i = 0;
+	while (tmp->next)
+	{
+		if (tmp->hexa_instruc)
+			i = i + ((ft_strlen(tmp->hexa_instruc) + 2) / 2);
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int	use_label(t_env *env, t_label *label)
+{
+	t_instruc	*tmp_i;
+	t_label		*tmp_l;
+
+	tmp_l = NULL;
+	tmp_i = env->instruc;
+	while (tmp_i)
+	{
+		tmp_l = tmp_i->label;
+		while (tmp_l)
+		{
+			if (tmp_l->label && ft_strcmp(tmp_l->label, label->label) == 0)
+				if ((remplace_empty(tmp_i, label->adress - tmp_l->adress,
+					tmp_l->size)) == -1)
+					return (-1);
+			tmp_l = tmp_l->next;
+		}
+		tmp_i = tmp_i->next;
+	}
+	return (0);
+}
+
+int	put_label(t_env *env, char *label)
+{
+	t_label *tmp;
+
+	tmp = env->label;
+	while (tmp->next)
+		tmp = tmp->next;
+	if (!(tmp->label = ft_strdup(label)))
+		return (-1);
+	tmp->adress = put_adress_label(env->instruc);
+	if (new_label(&(tmp->next)) == -1)
+	{
+		free(tmp->label);
+		return (-1);
+	}
+	if ((use_label(env, tmp)) == -1)
+	{
+		free(tmp->label);
+		return (-1);
+	}
+	return (0);
+}
+
+int		is_label(char *label)
+{
+	int i;
+
+	i = 0;
+	if (label == NULL)
+		return (-1);
+	while (label[i])
+	{
+		if (!ft_isdigit(label[i]) && !ft_isalpha(label[i]) && label[i] != '_')
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+int		get_label(char *line, t_env *env)
+{
+	int		i;
+	char	*label;
+	int		j;
+
+	j = 0;
+	label = NULL;
+	while (line[j] && ft_isspace(line[j]))
+		j++;
+	i = j;
+	while (line[i] && line[i] != LABEL_CHAR)
+		i++;
+	if (line[i] == LABEL_CHAR)
+		if (!(label = ft_strsub(&line[j], 0, i - j)))
+			return (-1);
+	if (is_label(label) == 1)
+	{
+		if ((put_label(env, label)) == -1)
+			return (-1);
+	}
+	else
+		i = 0;
+	if (label != NULL)
+		ft_strdel(&label);
+	return (i == 0 ? 0 : i + 1);
+}

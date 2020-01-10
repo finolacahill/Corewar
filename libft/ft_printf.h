@@ -38,6 +38,7 @@ typedef struct	s_flag
 	int			test;
 	char		*str;
 	int			x;
+	int			fd;
 }				t_flag;
 
 t_flag			ft_putstrb(t_flag flag, char const *s, int max);
@@ -46,6 +47,7 @@ t_flag			ft_uputnbr(t_flag flag, unsigned long long n, int precision);
 t_flag			ft_printfloat(char *p1, char *p2, t_flag flag, int len);
 t_flag			ft_buffer(t_flag flag, char c);
 int				ft_printf(char *fmt, ...);
+int				ft_fprintf(int fd, char *fmt, ...);
 char			*ft_itoa_base(long long value, int base, int cap);
 char			*ft_uitoa_base(long long unsigned value, int base, int cap);
 char			*ft_itoa_float(long double n, t_flag flag);

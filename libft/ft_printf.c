@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:10:12 by fcahill           #+#    #+#             */
-/*   Updated: 2019/02/26 14:10:15 by fcahill          ###   ########.fr       */
+/*   Updated: 2020/01/08 17:38:13 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_printf(char *fmt, ...)
 	flag.x = 0;
 	while (p[flag.i] != '\0')
 	{
+		flag.fd = 1;
 		flag = ft_readflags(flag, p, ap);
 		flag = ft_specifiers(flag, p);
 		if (p[flag.i] != '\0')

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fintohead.h                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcahill <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 17:16:19 by fcahill           #+#    #+#             */
-/*   Updated: 2018/11/23 16:44:34 by fcahill          ###   ########.fr       */
+/*   Updated: 2020/01/08 14:22:36 by flafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
+
 typedef struct		s_list
 {
 	void			*content;
@@ -95,4 +96,8 @@ char				*ft_uitoa_base(unsigned long long value, int base, int cap);
 char				*ft_strjoin_fr(char *s1, char *s2, int i);
 char				*ft_strrev_fr(char *str);
 double				ft_power(double nbr, double power);
+void				ft_strrdel(char **arr);
+unsigned long long	ft_puissance(int nbr, int p);
+void				ft_reverse(char **str);
+long				ft_long_atoi(const char *str);
 #endif
