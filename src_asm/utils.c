@@ -44,7 +44,7 @@ int			get_adress(t_instruc *instruc, t_instruc *working)
 	return (res);
 }
 
-void		remplace_empty(t_instruc *instruc, int res, int size)
+void		remplace_empty(t_instruc *instruc, int res, int size, t_env *env)
 {
 	char	*remplace;
 	int		i;
@@ -55,12 +55,12 @@ void		remplace_empty(t_instruc *instruc, int res, int size)
 	while (instruc->hexa_instruc[i] && instruc->hexa_instruc[i] != '#')
 		i++;
 	if (!(remplace = ft_uitoa_base((uint16_t)res, 16, 0)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	size = size - ft_strlen(remplace);
 	while (size > 0)
 	{
 		if (!(remplace = ft_strjoin_fr("0", remplace, 2)))
-			error(8, -1, -1, NULL);
+			error(8, env, -1, NULL);
 		size--;
 	}
 	while (instruc->hexa_instruc[i] && remplace[j])

@@ -12,29 +12,29 @@
 
 #include "../includes/corewar.h"
 
-void	res_ocp(t_instruc *instruc, char *ocp)
+void	res_ocp(t_instruc *instruc, char *ocp, t_env *env)
 {
 	int res;
 
 	res = bi_to_dec(ocp);
 	ft_strdel(&ocp);
 	if (!(ocp = ft_uitoa_base(res, 16, 0)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	if (ft_strlen(ocp) == 1)
 	{
 		if (!(ocp = ft_strjoin_fr("0", ocp, 2)))
-			error(8, -1, -1, NULL);
+			error(8, env, -1, NULL);
 	}
 	if (!(instruc->hexa_instruc = ft_strjoin_fr(ocp, instruc->hexa_instruc, 3)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 }
 
-void	get_ocp(t_instruc *instruc, int i, int j)
+void	get_ocp(t_instruc *instruc, int i, int j, t_env *env)
 {
 	char *ocp;
 
 	if (!(ocp = ft_strnew(8)))
-		error(8, -1, -1, NULL);
+		error(8, env, -1, NULL);
 	while (instruc->params[++i] != 0)
 	{
 		if (instruc->params[i] == T_REG)
@@ -55,5 +55,5 @@ void	get_ocp(t_instruc *instruc, int i, int j)
 	}
 	while (j < 7)
 		ocp[++j] = '0';
-	res_ocp(instruc, ocp);
+	res_ocp(instruc, ocp, env);
 }

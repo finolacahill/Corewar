@@ -34,7 +34,7 @@ int		check_min(char *index, int size, t_instruc *instruc)
 				instruc->hexa_instruc = ft_strdup("00000000");
 		}
 		if (instruc->hexa_instruc == NULL)
-			error(8, -1, -1, NULL);
+			return (-8);
 		return (-1);
 	}
 	return (1);
@@ -62,7 +62,7 @@ int		check_max(char *index, int size, t_instruc *instruc)
 				instruc->hexa_instruc = ft_strdup("ffffffff");
 		}
 		if (instruc->hexa_instruc == NULL)
-			error(8, -1, -1, NULL);
+			return (-8);
 		return (-1);
 	}
 	return (1);
@@ -70,8 +70,13 @@ int		check_max(char *index, int size, t_instruc *instruc)
 
 int		check_max_min(char *index, int size, t_instruc *instruc)
 {
-	if (check_min(index, size, instruc) == 1 &&
-			check_max(index, size, instruc) == 1)
+	int error;
+
+	error = 0;
+	if ((error = check_min(index, size, instruc)) == 1 &&
+			(error = check_max(index, size, instruc)) == 1)
 		return (1);
+	if (error == -8)
+		return (error);
 	return (-1);
 }

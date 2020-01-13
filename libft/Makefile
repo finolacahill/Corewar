@@ -15,7 +15,7 @@ NAME = libft.a
 OBJ_PATH = ./obj_lib
 SRC_PATH = ./
 
-SRC_NAME =	ft_atol.c ft_lstaddend.c ft_numlen.c getchar.c get_next_line.c		\
+SRC_NAME =	ft_abs.c ft_atol.c ft_lstaddend.c ft_numlen.c getchar.c get_next_line.c		\
 		ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c			\
 		ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c ft_strstr.c			\
 		ft_strnstr.c ft_strcmp.c ft_strncmp.c ft_atoi.c ft_isalpha.c			\

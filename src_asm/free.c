@@ -51,9 +51,12 @@ void	free_env(t_env *env)
 	free_label(env->label);
 }
 
-void	free_all(t_env *env, t_header *header)
+void	free_all(t_env *env)
 {
+	t_header *tmp;
+
+	tmp = env->header;
 	free_env(env);
 	free(env);
-	free(header);
+	free(tmp);
 }
