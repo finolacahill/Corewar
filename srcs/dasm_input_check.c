@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-void		check_dump(int ac, char **av, t_all *all, int *i)
+static void	check_dump(int ac, char **av, t_all *all, int *i)
 {
 	int		l;
 

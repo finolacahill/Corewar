@@ -71,3 +71,17 @@ void				ft_print_arena(t_all *vm, int len)
 		start += len;
 	}
 }
+
+void				vm_print_intro(t_all *vm)
+{
+	int				i;
+
+	i = -1;
+	ft_putstr("Introducing contestants...\n");
+	while (++i < vm->total_champ)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+			vm->champs[vm->order[i]].id, vm->champs[vm->order[i]].len_exec_code,
+			vm->champs[vm->order[i]].name, vm->champs[vm->order[i]].comment);
+	}
+}

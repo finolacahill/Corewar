@@ -21,7 +21,7 @@ static void		zero_champs(t_all *vm)
 		ft_bzero(&(vm->champs[i]), sizeof(t_champs));
 }
 
-void			dasm_init_champs(t_all *vm, int ac, char **av)
+static void		dasm_init_champs(t_all *vm, int ac, char **av)
 {
 	uint8_t		*cor_content;
 	size_t		cor_size;

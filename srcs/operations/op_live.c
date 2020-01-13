@@ -12,7 +12,7 @@
 
 #include "../../includes/vm.h"
 
-int			is_player_nb(int id, t_all *vm)
+static int	is_player_nb(int id, t_all *vm)
 {
 	int		i;
 

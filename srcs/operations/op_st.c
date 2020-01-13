@@ -12,31 +12,38 @@
 
 #include "../../includes/vm.h"
 
+static void		st_ind(t_all *vm, t_process *p, long param1)
+{
+	long param2;
+
+	param2 = get_ind(vm, p, 2, 0);
+	if (vm->flag_v == 4)
+		ft_printf("\tP%6d | st R%d (%d) at at %d + pc %d at cycle %d \n",
+		p->pid, get_next_bytes(vm, p, 1, 1), param1, param2 % IDX_MOD,
+		p->pc, vm->cycles);
+	load_value(vm, p->pc + (param2 % IDX_MOD), 4, param1);
+}
+
+static void		st_reg(t_all *vm, t_process *p, long param1)
+{
+	load_val_in_reg(vm, p, param1, 2);
+	if (p->op_fail == 1)
+		return ;
+	if (vm->flag_v == 4)
+		ft_printf("\tP%6d | st R%d (%d) at at R%d + pc %d at cycle %d \n",
+		p->pid, get_next_bytes(vm, p, 1, 1), param1,
+		get_next_bytes(vm, p, 1, 2), p->pc, vm->cycles);
+}
+
 void			op_st(t_all *vm, t_process *p)
 {
 	long		param1;
-	long		param2;
 
 	param1 = get_reg_val(vm, p, 1);
 	if (p->op_fail == 1)
 		return ;
 	if (p->decode[1] == REG_CODE)
-	{
-		load_val_in_reg(vm, p, param1, 2);
-		if (p->op_fail == 1)
-			return ;
-		if (vm->flag_v == 4)
-			ft_printf("\tP%6d | st R%d (%d) at at R%d + pc %d at cycle %d \n",
-			p->pid, get_next_bytes(vm, p, 1, 1), param1,
-			get_next_bytes(vm, p, 1, 2), p->pc, vm->cycles);
-	}
+		st_reg(vm, p, param1);
 	else
-	{
-		param2 = get_ind(vm, p, 2, 0);
-		if (vm->flag_v == 4)
-			ft_printf("\tP%6d | st R%d (%d) at at %d + pc %d at cycle %d \n",
-			p->pid, get_next_bytes(vm, p, 1, 1), param1, param2 % IDX_MOD,
-			p->pc, vm->cycles);
-		load_value(vm, p->pc + (param2 % IDX_MOD), 4, param1);
-	}
+		st_ind(vm, p, param1);
 }

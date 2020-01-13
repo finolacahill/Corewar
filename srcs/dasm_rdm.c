@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-int			just_nb_init(const char *str, int i, int *neg)
+static int	just_nb_init(const char *str, int i, int *neg)
 {
 	while (ft_isspace(str[i]) != 0)
 		i++;

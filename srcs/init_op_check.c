@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-void			init_link_op(t_op *op)
+static void	init_link_op(t_op *op)
 {
 	op[0].inst = op_live;
 	op[1].inst = op_ld;
@@ -32,7 +32,7 @@ void			init_link_op(t_op *op)
 	op[15].inst = op_aff;
 }
 
-t_op			*init_op_check(t_all *vm, t_op *op)
+t_op		*init_op_check(t_all *vm, t_op *op)
 {
 	ft_bzero(op, sizeof(t_op) * 16);
 	init_link_op(op);

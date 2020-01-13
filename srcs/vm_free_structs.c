@@ -43,11 +43,6 @@ int				free_all(t_all *vm, t_process *p)
 	return (0);
 }
 
-void			free_op_table(t_op *op)
-{
-	free(op);
-}
-
 void			free_dasm_header(t_all *all, uint8_t *cor_content, char *s)
 {
 	free(cor_content);

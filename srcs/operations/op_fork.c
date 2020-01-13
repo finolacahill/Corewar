@@ -12,16 +12,16 @@
 
 #include "../../includes/vm.h"
 
-static void		copy_registers(t_process *p, t_process *new)
+static void			copy_registers(t_process *p, t_process *new)
 {
-	int i;
+	int			i;
 
 	i = -1;
 	while (++i < REG_NUMBER)
 		new->r[i] = p->r[i];
 }
 
-t_process		*copy_process(t_process *p, t_process *new)
+static t_process	*copy_process(t_process *p, t_process *new)
 {
 	if (!(new->decode = (int *)malloc(sizeof(int) * 4)))
 	{
@@ -43,7 +43,7 @@ t_process		*copy_process(t_process *p, t_process *new)
 	return (new);
 }
 
-void			op_fork(t_all *vm, t_process *p)
+void				op_fork(t_all *vm, t_process *p)
 {
 	long		p1;
 	t_process	*new;

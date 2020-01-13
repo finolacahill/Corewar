@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-t_process	*check_is_rewritten(t_all *vm, t_process *p)
+static t_process	*check_is_rewritten(t_all *vm, t_process *p)
 {
 	if (vm->arena[p->pc] != p->op)
 	{
@@ -23,7 +23,7 @@ t_process	*check_is_rewritten(t_all *vm, t_process *p)
 	return (p);
 }
 
-static int	run_processes(t_all *vm, t_process **head, t_op *op_table)
+static int			run_processes(t_all *vm, t_process **head, t_op *op_table)
 {
 	t_process	*tracker;
 	int			live;
@@ -52,7 +52,7 @@ static int	run_processes(t_all *vm, t_process **head, t_op *op_table)
 	return (0);
 }
 
-static void	declare_winner(t_all *vm)
+static void			declare_winner(t_all *vm)
 {
 	int			i;
 	int			last;
@@ -72,14 +72,14 @@ static void	declare_winner(t_all *vm)
 		vm->champs[last].id, vm->champs[last].name);
 }
 
-static int	dump(t_all *vm, t_process *p, t_op *op)
+static int			dump(t_all *vm, t_process *p, t_op *op)
 {
 	ft_print_arena(vm, 32);
-	free_op_table(op);
+	free(op);
 	return (0);
 }
 
-int			run_vm(t_all *vm, t_process *process)
+int					run_vm(t_all *vm, t_process *process)
 {
 	t_op		*op_table;
 
@@ -100,6 +100,6 @@ int			run_vm(t_all *vm, t_process *process)
 			return (dump(vm, process, op_table));
 	}
 	declare_winner(vm);
-	free_op_table(op_table);
+	free(op_table);
 	return (0);
 }

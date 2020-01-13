@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-size_t				dasm_hexalen(uint8_t *cor_content, size_t len)
+static size_t			dasm_hexalen(uint8_t *cor_content, size_t len)
 {
 	size_t			i;
 
@@ -23,7 +23,7 @@ size_t				dasm_hexalen(uint8_t *cor_content, size_t len)
 	return (i);
 }
 
-unsigned char		*recup_name(uint8_t *cor_content)
+static unsigned char	*recup_name(uint8_t *cor_content)
 {
 	size_t			name_len;
 	unsigned char	*name;
@@ -34,7 +34,7 @@ unsigned char		*recup_name(uint8_t *cor_content)
 	return (name);
 }
 
-unsigned char		*recup_comment(uint8_t *cor_content)
+static unsigned char	*recup_comment(uint8_t *cor_content)
 {
 	size_t			com_len;
 	unsigned char	*com;
@@ -45,8 +45,8 @@ unsigned char		*recup_comment(uint8_t *cor_content)
 	return (com);
 }
 
-unsigned char		*recup_ex_code(t_champs *champ, uint8_t *cor_content,
-					size_t cor_size, t_all *all)
+static unsigned char	*recup_ex_code(t_champs *champ, uint8_t *cor_content,
+							size_t cor_size, t_all *all)
 {
 	unsigned char	*code;
 
@@ -65,8 +65,8 @@ unsigned char		*recup_ex_code(t_champs *champ, uint8_t *cor_content,
 	return (code);
 }
 
-void				dasm_get_header(t_all *all, size_t cor_size,
-					uint8_t **cor_content, t_champs *champs)
+void					dasm_get_header(t_all *all, size_t cor_size,
+						uint8_t **cor_content, t_champs *champs)
 {
 	if (cor_size < 2192)
 		free_dasm_header(all, (*cor_content),

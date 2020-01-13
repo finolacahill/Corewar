@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-int			check_comb_op_ocp(t_all *vm, t_process *process)
+static int	check_comb_op_ocp(t_all *vm, t_process *process)
 {
 	int		val_ocp;
 	int		op;

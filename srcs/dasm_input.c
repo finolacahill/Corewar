@@ -12,7 +12,7 @@
 
 #include "../includes/vm.h"
 
-int			flag_n(int ac, char **av, t_all *all, int *j)
+static int	flag_n(int ac, char **av, t_all *all, int *j)
 {
 	int		n_id;
 	int		i;
@@ -37,7 +37,7 @@ int			flag_n(int ac, char **av, t_all *all, int *j)
 	return (n_id);
 }
 
-void		stock_good_id(t_all *all, int ac, char **av, int id)
+static void	stock_good_id(t_all *all, int ac, char **av, int id)
 {
 	int		i;
 	int		j;
@@ -66,7 +66,7 @@ void		stock_good_id(t_all *all, int ac, char **av, int id)
 	}
 }
 
-int			check_flag(t_all *all, char **av, int *flag_n, int *flag_dump)
+static int	check_flag(t_all *all, char **av, int *flag_n, int *flag_dump)
 {
 	int		i;
 	int		ac;
@@ -89,7 +89,7 @@ int			check_flag(t_all *all, char **av, int *flag_n, int *flag_dump)
 	return (0);
 }
 
-void		flag_v(int ac, char **av, t_all *all)
+static void	flag_v(int ac, char **av, t_all *all)
 {
 	int		i;
 

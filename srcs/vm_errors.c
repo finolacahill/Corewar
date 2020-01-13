@@ -28,7 +28,7 @@ void		error_arena(t_all *vm, t_process *p)
 int			error_run_vm(t_all *vm, t_op *op_table)
 {
 	if (op_table != NULL)
-		free_op_table(op_table);
+		free(op_table);
 	ft_fprintf(2, "Malloc error run_vm.\n");
 	return (-1);
 }
@@ -38,7 +38,7 @@ void		end_prog(t_all *vm, t_process *head, t_op *op)
 	free_all_process(vm, head);
 	free(vm->arena);
 	free(vm->order);
-	free_op_table(op);
+	free(op);
 	error(vm, "Malloc error during fork.\n");
 }
 
