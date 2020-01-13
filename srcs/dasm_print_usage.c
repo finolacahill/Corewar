@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_print_usage.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/09 15:06:19 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/13 08:57:12 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	print_usage(t_all *all)
 	ft_printf("#### TEXT OUTPUT MODE ");
 	ft_printf("##########################################################\n");
 	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits. ");
-	ft_printf("X is a positive integer.\n\t\t-n    X\t: Set a player's id to X. ");
-	ft_printf("X is an integer. & number of players.\n");
+	ft_printf("X is a positive integer.\n\t\t-n    X\t: Set a player's id to");
+	ft_printf(" X. X is an integer. & number of players.\n");
 	ft_printf("\t\t-v    X\t: Verbosity levels\n\t\t\t- 0 : Show");
 	ft_printf(" only essentials\n");
 	ft_printf("\t\t\t- 1 : Show lives\n\t\t\t- 2 : Show cycles\n\t\t\t- 4");

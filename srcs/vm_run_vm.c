@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 16:40:12 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/06 16:41:36 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/13 08:57:46 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ static int	run_processes(t_all *vm, t_process **head, t_op *op_table)
 		{
 			tracker = check_is_rewritten(vm, tracker);
 			if (vm->cycles == tracker->exec_cycle)
-			{
 				head = exec_process(vm, &tracker, op_table, head);
-			}
 			tracker = tracker->next;
 		}
 		--live;
