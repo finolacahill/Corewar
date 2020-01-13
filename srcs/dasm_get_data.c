@@ -26,7 +26,7 @@ static void		free_cor_and_exit(t_all *all, uint8_t **cor_content)
 
 static void		open_error(t_all *all)
 {
-	ft_printf("Error: can not open given file.\n");
+	ft_fprintf(2, "Error: can not open given file.\n");
 	free_and_exit(all);
 }
 

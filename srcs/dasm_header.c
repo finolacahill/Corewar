@@ -57,8 +57,8 @@ unsigned char		*recup_ex_code(t_champs *champ, uint8_t *cor_content,
 		return (NULL);
 	if (cor_size - champ->len_exec_code != 2192)
 	{
-		ft_printf("Error: File %s", champ->path);
-		ft_printf(" has a code size that differ from what its header says\n");
+		ft_fprintf(2, "Error: File %s", champ->path);
+		ft_fprintf(2, " has a code size that differ from what its header says\n");
 		free_dasm_header(all, cor_content, "");
 	}
 	ft_memcpy(code, &(cor_content[2192]), champ->len_exec_code);

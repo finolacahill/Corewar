@@ -12,17 +12,6 @@
 
 #include "../includes/vm.h"
 
-void	error_exec(t_all *all, char *champ_name, uint16_t line)
-{
-	ft_putstr("Invalid operation for champion \"");
-	ft_putstr(champ_name);
-	ft_putstr("\" at line ");
-	ft_putnbr((int)line);
-	ft_putstr("\n");
-	dasm_free(all);
-	exit(EXIT_FAILURE);
-}
-
 void	dasm_free(t_all *all)
 {
 	int		i;
@@ -42,7 +31,7 @@ void	dasm_free(t_all *all)
 
 void	error_size(t_all *all, char *path, size_t cor_size)
 {
-	ft_printf("Error: File %s has a too large code (%d bytes > %d bytes)\n",
+	ft_fprintf(2, "Error: File %s has a too large code (%d bytes > %d bytes)\n",
 	path, cor_size - 2192, CHAMP_MAX_SIZE);
 	dasm_free(all);
 	exit(EXIT_FAILURE);
@@ -50,7 +39,7 @@ void	error_size(t_all *all, char *path, size_t cor_size)
 
 void	error(t_all *all, char *str)
 {
-	ft_putstr(str);
+	ft_fprintf(2, "%s");
 	dasm_free(all);
 	exit(EXIT_FAILURE);
 }
@@ -62,7 +51,7 @@ void	print_usage(t_all *all)
 	ft_printf("##########################################################\n");
 	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits. ");
 	ft_printf("X is a positive integer.\n\t\t-n    X\t: Set a player's id to");
-	ft_printf(" X. X is an integer. & number of players.\n");
+	ft_printf(" X. X is an integer.\n");
 	ft_printf("\t\t-v    X\t: Verbosity levels\n\t\t\t- 0 : Show");
 	ft_printf(" only essentials\n");
 	ft_printf("\t\t\t- 1 : Show lives\n\t\t\t- 2 : Show cycles\n\t\t\t- 4");
