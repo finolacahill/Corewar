@@ -89,6 +89,7 @@ int		check_instruc(char *instruc, t_env *env)
 		if (ft_strcmp(instruc, (const char*)g_op_tab[j].instruc) == 0)
 		{
 			put_instruc(env->instruc, j, env->line, env);
+			env->c_instruc = 1;
 			ft_strdel(&instruc);
 			return (1);
 		}

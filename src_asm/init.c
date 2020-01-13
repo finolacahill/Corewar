@@ -65,5 +65,6 @@ t_env		*init_env(void)
 	new->column = 0;
 	new->c_line = NULL;
 	new->label = new_label(new);
+	new->c_instruc = 0;
 	return (new);
 }

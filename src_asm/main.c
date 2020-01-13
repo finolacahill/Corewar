@@ -101,6 +101,8 @@ void	every_go(char *av, t_env *env)
 		free(line);
 		i = 0;
 	}
+	if (env->c_instruc == 0)
+		error(13, env, -1, NULL);
 	close(fd);
 }
 

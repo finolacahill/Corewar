@@ -12,7 +12,7 @@
 
 #include "../includes/corewar.h"
 
-static const	t_error g_error_tab[13] =
+static const	t_error g_error_tab[] =
 {
 	{1, "Usage: ./asm file.s", -1, -1, 0, 0},
 	{2, "Error: File is not a .s", -1, -1, 0, 0},
@@ -27,6 +27,7 @@ static const	t_error g_error_tab[13] =
 	{11, "Error: Label does not exist for ", 1, -1, 1, -1},
 	{12, "Error: Fd error (seems the file doesnt exist or crypted)"
 		, -1, -1, -1, -1},
+	{13, "Error: Missing instruction for the champ", -1, -1, -1, -1},
 	{0, NULL, 0, 0, 0, 0}
 };
 

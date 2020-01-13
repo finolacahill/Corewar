@@ -50,6 +50,7 @@ typedef struct			s_env
 	struct s_header		*header;
 	char				*c_line;
 	int					line;
+	int					c_instruc;
 	int					column;
 
 }						t_env;
