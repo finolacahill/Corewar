@@ -39,7 +39,7 @@ void	error_size(t_all *all, char *path, size_t cor_size)
 
 void	error(t_all *all, char *str)
 {
-	ft_fprintf(2, "%s");
+	ft_fprintf(2, "%s", str);
 	dasm_free(all);
 	exit(EXIT_FAILURE);
 }
