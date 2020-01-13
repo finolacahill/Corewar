@@ -103,7 +103,8 @@ void					go_cmd(t_env *env, char *line);
 int						line_empty(char *line);
 int						len_instruc(t_instruc *instruc);
 void					free_all(t_env *env);
-void					remplace_empty(t_instruc *instruc, int res, int size, t_env *env);
+void					remplace_empty(t_instruc *instruc, int res, int size,
+							t_env *env);
 int						get_adress(t_instruc *instruc, t_instruc *working);
 int						line_iscomment(char *line);
 char					*get_params_with_opcode(int ocp);

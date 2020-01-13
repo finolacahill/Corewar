@@ -66,13 +66,24 @@ void	put_label(t_env *env, char *label)
 int		is_label(char *label)
 {
 	int i;
+	int j;
 
+	j = 0;
 	i = 0;
 	if (label == NULL)
 		return (-1);
 	while (label[i])
 	{
-		if (!ft_isdigit(label[i]) && !ft_isalpha(label[i]) && label[i] != '_')
+		while (LABEL_CHARS[j])
+		{
+			if (label[i] == LABEL_CHARS[j])
+			{
+				j = 0;
+				break ;
+			}
+			j++;
+		}
+		if (j != 0)
 			return (-1);
 		i++;
 	}
