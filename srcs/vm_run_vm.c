@@ -61,7 +61,7 @@ static void	declare_winner(t_all *vm)
 	last = vm->order[vm->total_champ - 1];
 	while (i++ < vm->total_champ)
 	{
-		if (vm->champs[i].id == -vm->last_alive && vm->last_alive != 0)
+		if (vm->champs[i].id == vm->last_alive && vm->last_alive != 0)
 		{
 			ft_printf("Contestant %d, \"%s\", has won !\n",
 			vm->champs[i].id, vm->champs[i].name);
