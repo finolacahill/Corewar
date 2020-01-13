@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_corewar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 18:27:16 by flafonso          #+#    #+#             */
-/*   Updated: 2020/01/09 18:56:44 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/13 15:37:14 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void		define_check(void)
 	}
 }
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_all		*vm;
 	t_process	p;
