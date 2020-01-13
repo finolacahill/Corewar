@@ -14,7 +14,7 @@
 
 static t_process	*check_is_rewritten(t_all *vm, t_process *p)
 {
-	if (vm->arena[p->pc] != p->op)
+	if (vm->arena[p->pc % MEM_SIZE] != p->op)
 	{
 		p->pc -= 1;
 		load_new_process(vm, p);

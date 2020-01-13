@@ -33,7 +33,9 @@ t_process	*load_processes(t_all *vm, t_process *head)
 void		load_new_process(t_all *vm, t_process *p)
 {
 	p->pc = (p->pc + 1) % MEM_SIZE;
-	p->op = vm->arena[p->pc];
+	if (p->pc < 0)
+		p->pc += MEM_SIZE;
+	p->op = vm->arena[p->pc % MEM_SIZE];
 	p->opc = vm->arena[(p->pc + 1) % MEM_SIZE];
 	p = ft_decode_byte(p->op, p);
 	if ((is_operation(p->op)) == 1)
