@@ -6,7 +6,7 @@
 #    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/13 11:02:15 by adietric         ###   ########.fr        #
+#    Updated: 2020/01/13 15:46:41 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ INCL_ASM =	./includes/corewar.h
 INCL_OP = ./includes/op.h
 
 
-CC = gcc -g3 
+CC = gcc
 
 FLAG = -Wall -Werror -Wextra
 
