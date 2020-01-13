@@ -6,7 +6,7 @@
 #    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/30 14:41:01 by flafonso          #+#    #+#              #
-#    Updated: 2020/01/13 10:58:52 by adietric         ###   ########.fr        #
+#    Updated: 2020/01/13 15:47:06 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_NAME =	ft_atol.c ft_lstaddend.c ft_numlen.c getchar.c get_next_line.c		\
 HEAD = libft.h get_next_line.h
 
 CFLAGS = -Wall -Werror -Wextra
-CC = gcc -g3
+CC = gcc
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
