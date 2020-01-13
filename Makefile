@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/03 13:22:46 by adietric          #+#    #+#              #
-#    Updated: 2020/01/10 12:18:56 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/13 11:02:15 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ OBJOP = $(addprefix $(OP_PATH)/,$(OP_NAME))
 
 INCL =	./includes/vm.h
 INCL_ASM =	./includes/corewar.h
+INCL_OP = ./includes/op.h
 
 
 CC = gcc -g3 
@@ -112,11 +113,11 @@ all: lib $(NAME) $(NAME_TWO)
 lib: $(LIB_PATH)
 	@make -C $(LIB_PATH)
 
-$(NAME): $(LIB) $(OBJ)  $(INCL) $(OBJOP)
+$(NAME): $(LIB) $(OBJ)  $(INCL) $(OBJOP) $(INCL_OP)
 	@$(CC) $(FLAG) $(OBJOP) $(LIB) $(OBJ) -I $(INCL) -o $(NAME)
 	@echo "$(BOLD)$(GREY)*corewar-$(GREEN)[$(NAME) done]$(END)"
 
-$(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM)
+$(NAME_TWO): $(LIB) $(OBJ_ASM) $(INCL_ASM) $(INCL_OP)
 	@$(CC) $(FLAG) $(LIB) $(OBJ_ASM) -I $(INCL_ASM) -o $(NAME_TWO)
 	@echo "$(BOLD)$(GREY)*asm-$(GREEN)[$(NAME_TWO) done]$(END)"
 
