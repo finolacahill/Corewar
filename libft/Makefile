@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+         #
+#    By: adietric <adietric@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/30 14:41:01 by flafonso          #+#    #+#              #
-#    Updated: 2020/01/09 20:09:36 by flafonso         ###   ########.fr        #
+#    Updated: 2020/01/13 10:58:52 by adietric         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ OBJ = $(addprefix $(OBJ_PATH)/, $(OBJ_NAME))
 all: $(NAME)
 	@:
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEAD)
 	@ar -rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 	@echo "$(BOLD)$(GREY)  *lib-$(GREEN)[$(NAME) done]$(END)"
