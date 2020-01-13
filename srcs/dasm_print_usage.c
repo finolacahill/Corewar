@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/13 13:43:23 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/13 15:50:54 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	error(t_all *all, char *str)
 
 void	print_usage(t_all *all)
 {
-	ft_printf("Usage: ./vm_champs/corewar [-dump X -v X -n X]\n");
+	ft_printf("Usage: ./vm_champs/corewar [-dump X -v X -n X] <name>.cor\n");
 	ft_printf("#### TEXT OUTPUT MODE ");
 	ft_printf("##########################################################\n");
 	ft_printf("\t\t-dump X\t: Dumps memory after X cycles then exits. ");
