@@ -46,7 +46,11 @@ void	error_cmd(int type, t_env *env, char *cmd, int line)
 				ft_fprintf(2, " in line %d", line + 1);
 			ft_fprintf(2, "\n");
 			if (env)
+			{
+				if (env->header)
+					close(env->header->fd);
 				free_all(env);
+			}
 			exit(2);
 		}
 		i++;

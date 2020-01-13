@@ -97,8 +97,15 @@ void	error(int i, t_env *env, int column, char *name)
 	{
 		if (g_error_tab[j].type == i)
 		{
-			write_error(j, name, env->line, column);
-			close(env->header->fd);
+			if (env)
+				write_error(j, name, env->line, column);
+			else
+				write_error(j, name, -1, column);
+			if (env)
+			{
+				if (env->header)
+					close(env->header->fd);
+			}
 			if (env)
 				free_all(env);
 			exit(2);

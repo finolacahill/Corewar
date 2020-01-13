@@ -91,7 +91,6 @@ void	every_go(char *av, t_env *env)
 		error(12, env, -1, NULL);
 	while (get_next_line(fd, &line) == 1)
 	{
-		env->c_line = line;
 		if (line_ispoint(line) == 1)
 			go_cmd(env, line);
 		else if (line_iscomment(line) == 1)

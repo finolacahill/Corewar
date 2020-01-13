@@ -66,10 +66,7 @@ void	put_comment(t_env *env, char *l)
 		error(8, env, -1, NULL);
 	i = -1;
 	if (env->header->c == 1)
-	{
-		ft_strdel(&line);
 		error_cmd(3, env, "comment", env->line);
-	}
 	while (line[++i] && line[i] != '"')
 	{
 		if (line[i] > ' ')
