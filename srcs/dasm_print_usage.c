@@ -6,7 +6,7 @@
 /*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:58:42 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/13 08:57:12 by adietric         ###   ########.fr       */
+/*   Updated: 2020/01/13 13:43:23 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	error_size(t_all *all, char *path, size_t cor_size)
 
 void	error(t_all *all, char *str)
 {
-	ft_fprintf(2, "%s");
+	ft_fprintf(2, "%s", str);
 	dasm_free(all);
 	exit(EXIT_FAILURE);
 }
