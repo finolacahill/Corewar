@@ -3,84 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yodana <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/05 16:12:52 by yodana            #+#    #+#             */
-/*   Updated: 2020/01/06 00:19:22 by yodana           ###   ########.fr       */
+/*   Created: 2020/01/13 14:27:53 by adietric          #+#    #+#             */
+/*   Updated: 2020/01/13 14:28:00 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-t_list			*ft_lstcheck(t_list **save, int fd)
+static int					trsf(char **str, char **line)
 {
-	t_list	*tmp;
+	char					*tmp;
+	char					*n;
 
-	tmp = *save;
-	if (fd < 0)
-		return (NULL);
-	while (tmp)
+	if ((n = ft_strchr((const char*)*str, '\n')))
+		*n = '\0';
+	tmp = *str;
+	if (!(*line = ft_strdup((const char*)*str)))
+		return (0);
+	if (n)
 	{
-		if ((int)tmp->content_size == fd)
-			return (tmp);
-		tmp = tmp->next;
-	}
-	tmp = ft_lstnew("\0", 1);
-	tmp->content_size = fd;
-	ft_lstadd(save, tmp);
-	return (tmp);
-}
-
-char			*ft_save(char *save, char **line)
-{
-	int		i;
-	char	*tmp;
-
-	if (!(tmp = ft_strdup(save)))
-		return (NULL);
-	i = 0;
-	while (tmp[i] != '\n' && tmp[i])
-		i++;
-	if (!(*line = ft_strsub(tmp, 0, i)))
-		return (NULL);
-	line++;
-	ft_strdel(&save);
-	if (tmp[i] == '\n')
-	{
-		if (!(save = ft_strdup(&tmp[i + 1])))
-			return (NULL);
-	}
-	else
-		save = "\0";
-	ft_strdel(&tmp);
-	return (save);
-}
-
-int				get_next_line(const int fd, char **line)
-{
-	static t_list	*save;
-	char			buf[BUFF_SIZE + 1];
-	int				ret;
-	t_list			*current;
-
-	current = ft_lstcheck(&save, fd);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0 && BUFF_SIZE > 0 && fd >= 0
-			&& line != NULL)
-	{
-		buf[ret] = '\0';
-		current->content = ft_strjoin_fr(current->content, buf, 1);
-		if (ft_strchr(buf, '\n'))
+		if (!(*str = ft_strdup((const char*)(n + 1))))
 		{
-			current->content = ft_save(current->content, line);
-			return (1);
+			free(tmp);
+			return (0);
 		}
 	}
-	if (ret < 0 || BUFF_SIZE <= 0 || fd < 0 || line == NULL)
-		return (-1);
-	if (((char*)current->content)[0] != '\0')
+	else
 	{
-		current->content = ft_save(current->content, line);
-		return (1);
+		if (!(*str = ft_strnew(0)))
+			return (0);
 	}
-	return (0);
+	free(tmp);
+	return (1);
+}
+
+static int					debut(char **str, const int fd)
+{
+	char					buf[BUFF_SIZE + 1];
+	char					*tmp;
+	int						ret;
+
+	if (*str == NULL)
+	{
+		if (!(*str = ft_strnew(0)))
+			return (0);
+	}
+	while ((ret = read(fd, buf, BUFF_SIZE)))
+	{
+		buf[ret] = '\0';
+		tmp = *str;
+		if (!(*str = ft_strjoin(*str, buf)))
+			return (0);
+		free(tmp);
+		if ((ft_strchr(*str, '\n')) != NULL)
+			return (1);
+	}
+	return (1);
+}
+
+int							get_next_line(const int fd, char **line)
+{
+	static char				*str = NULL;
+	char					buftest[1];
+
+	if (fd < 0 || BUFF_SIZE <= 0 || !line || (read(fd, buftest, 0) < 0))
+	{
+		ft_strdel(&str);
+		return (-1);
+	}
+	*line = NULL;
+	if (!(debut(&str, fd)))
+	{
+		ft_strdel(&str);
+		return (-1);
+	}
+	if (str[0] == '\0')
+	{
+		ft_strdel(&str);
+		return (0);
+	}
+	if (!(trsf(&str, line)))
+	{
+		ft_strdel(&str);
+		return (-1);
+	}
+	return (1);
 }
