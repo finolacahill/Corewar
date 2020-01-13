@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dasm_rdm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flafonso <flafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adietric <adietric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:18:49 by adietric          #+#    #+#             */
-/*   Updated: 2020/01/08 19:04:02 by flafonso         ###   ########.fr       */
+/*   Updated: 2020/01/13 18:11:37 by adietric         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int			just_number(char *str)
 			return (0);
 		if (str[i] == '-' || str[i] == '+')
 			c++;
+		if ((str[i] == '-' || str[i] == '+') && !str[i + 1])
+			return (0);
 		if (i > 0 && (str[i] == '-' || str[i] == '+'))
 			return (0);
 	}
