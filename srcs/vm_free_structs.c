@@ -14,15 +14,24 @@
 
 void			free_process(t_all *vm, t_process *p)
 {
-	if (p != NULL && vm->total_process > 0)
+
+	if (p != NULL && vm->total_process - vm->dead > 0)
 	{
+		if (vm->flag_v == 8)
+		{
+			ft_printf("Process pid %d, id %d", p->pid, p->id);
+			ft_printf(" hasn't lived for %d", vm->cycles - p->live_calls + 1);
+			ft_printf(" (cycles to die %d, cycle ", vm->cycles_to_die);
+			ft_printf("%d).\n", vm->cycles);
+		}
 		if (p->decode != NULL)
 			free(p->decode);
 		p->decode = NULL;
 		free(p);
-		--vm->total_process;
+		++vm->dead;
 		p = NULL;
 	}
+
 }
 
 void			free_vm(t_all *vm)

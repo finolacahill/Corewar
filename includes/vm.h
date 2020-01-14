@@ -53,6 +53,7 @@ typedef struct			s_all
 	int					total_process;
 	int					*order;
 	int					ac;
+	int					dead;
 
 }						t_all;
 

@@ -103,7 +103,7 @@ INCL_OP = ./includes/op.h
 
 CC = gcc
 
-FLAG = -Wall -Werror -Wextra
+FLAG = -fsanitize=address #-Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 

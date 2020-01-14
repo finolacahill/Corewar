@@ -25,6 +25,7 @@ int		main(int ac, char **av)
 	vm_print_intro(vm);
 	if (run_vm(vm, &p) == -1)
 		return (free_all(vm, &p));
+//	ft_print_arena(vm, 64);
 	free_all(vm, NULL);
 	return (0);
 }

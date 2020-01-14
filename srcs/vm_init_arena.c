@@ -106,6 +106,7 @@ t_all		*init_arena(t_all *vm)
 	i = -1;
 	divide = 0;
 	vm->cycles = 0;
+	vm->dead = 0;
 	vm->last_alive = 0;
 	vm->last_alive_cycle = 0;
 	vm->nbr_live_since_check = 0;

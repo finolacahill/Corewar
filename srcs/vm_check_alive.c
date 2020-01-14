@@ -61,7 +61,7 @@ t_process			**kill_dead_process(t_all *vm,
 
 	t = *p;
 	i = 0;
-	while (vm->total_process > 0 && t != NULL)
+	while (vm->total_process - vm->dead > 0 && t != NULL)
 	{
 		if (t->live_calls <= vm->cycles - vm->cycles_to_die)
 		{
