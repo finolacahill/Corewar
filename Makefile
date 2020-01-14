@@ -15,10 +15,10 @@ NAME_TWO = asm
 
 LIB_NAME = libft.a
 LIB_PATH = ./libft
-SRCS_PATH = ./srcs
+SRCS_PATH = ./src_vm
 OBJ_PATH = ./obj
 OBJM_PATH = ./main
-OP_PATH = ./srcs/operations
+OP_PATH = ./src_vm/operations
 SRC_ASM_PATH = ./src_asm
 
 SRCS_NAME = dasm_get_data.c		\
@@ -101,9 +101,9 @@ INCL_ASM =	./includes/corewar.h
 INCL_OP = ./includes/op.h
 
 
-CC = gcc
+CC = gcc -g3
 
-FLAG = -fsanitize=address #-Wall -Werror -Wextra
+FLAG =  #-Wall -Werror -Wextra
 
 .PHONY: all clean fclean re
 
