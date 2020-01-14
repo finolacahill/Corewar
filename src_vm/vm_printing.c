@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/*
+** Print dividing line for top of arena.
+*/
 static void			print_top_line(int len)
 {
 	int				z;
@@ -27,6 +30,9 @@ static void			print_top_line(int len)
 	ft_printf("------------------\n");
 }
 
+/*
+** Print a line of the arena taking into account length.
+*/
 static void			print_line(t_all *vm, int len, int start)
 {
 	int				x;
@@ -52,11 +58,17 @@ static void			print_line(t_all *vm, int len, int start)
 	}
 }
 
+/*
+** Prince line numebers in hex.
+*/
 static void			print_hex(int start)
 {
 	ft_printf("%#05x : ", start);
 }
 
+/*
+** Print current state of arena in hex taking into account given len.
+*/
 void				ft_print_arena(t_all *vm, int len)
 {
 	int				start;

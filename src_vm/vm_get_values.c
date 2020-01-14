@@ -12,6 +12,11 @@
 
 #include "../includes/vm.h"
 
+/*
+** Get reg number. If it is valid (i.e. positive and smaller than REG_NUMBER)
+** get the assoicated reg value in the process. If it is invalid, note that
+** the process failed (p->op_fail = 1) and return -1.
+*/
 long	get_reg_val(t_all *vm, t_process *p, int bytes_read)
 {
 	int		reg;
@@ -25,6 +30,10 @@ long	get_reg_val(t_all *vm, t_process *p, int bytes_read)
 	return (p->r[reg - 1]);
 }
 
+/*
+** Get the address, check if it should be negative, and if idx == 1
+** take into account % IDX_Mod. 
+*/
 long	get_ind(t_all *vm, t_process *p, long bytes_read, int idx)
 {
 	long	address;
@@ -36,6 +45,9 @@ long	get_ind(t_all *vm, t_process *p, long bytes_read, int idx)
 	return (address);
 }
 
+/*
+** Get the address given an index and then use that address to find the associated value.
+*/
 long	get_val_at_ind(t_all *vm, t_process *p, long bytes_read, int idx)
 {
 	long	address;
@@ -44,6 +56,12 @@ long	get_val_at_ind(t_all *vm, t_process *p, long bytes_read, int idx)
 	return (get_next_bytes(vm, p, 4, address - 1));
 }
 
+/*
+** If a parameter in an operation could be multiple types, we check the type
+** and then recover the value. We also note the size in bytes of this param 
+** and add it to total bytes. Directs here are of size 4 and indirects 
+** take into account % IDX_MOD
+*/
 long	get_unspecified_val(t_all *vm, t_process *p, long *bytes, int param)
 {
 	long	val;
@@ -66,6 +84,12 @@ long	get_unspecified_val(t_all *vm, t_process *p, long *bytes, int param)
 	return (val);
 }
 
+/*
+** If a parameter in an operation could be multiple types, we check the type
+** and then recover the value. We also note the size in bytes of this param 
+** and add it to total bytes. Directs here are of size 2 and indirects 
+** take into account % IDX_MOD
+*/
 long	get_unspecified_val_2(t_all *vm, t_process *p, long *bytes, int param)
 {
 	long	val;

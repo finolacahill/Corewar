@@ -12,6 +12,10 @@
 
 #include "../includes/vm.h"
 
+/* This function checks if it is time to decrease the constant Cycles to die, in accordance with Corewar's rules. 
+** If we have surpassed maximum lives per check or maximum checks without decrease, we decrease 
+** cycles to die by cycles delta. Otherwise we increase total checks. We reset lives since check to 0.
+*/
 static void			check_cycle_decrease(t_all *vm)
 {
 	if (vm->nbr_live_since_check >= NBR_LIVE
@@ -28,6 +32,10 @@ static void			check_cycle_decrease(t_all *vm)
 	vm->nbr_live_since_check = 0;
 }
 
+/* Kill process from our process loop. If it is the head of our linked list, 
+** the next process is now head, otherwise we link prev to next, to retain
+** the continuity of the linked list.
+*/
 static t_process	*kill_process(t_all *vm, t_process **p, t_process *t,
 					t_process *prev)
 {
@@ -46,6 +54,9 @@ static t_process	*kill_process(t_all *vm, t_process **p, t_process *t,
 	return (t);
 }
 
+/* Check if each process has made a live call in the last cycles to die number of cycles. 
+** If not, we kill the process.
+*/
 t_process			**kill_dead_process(t_all *vm,
 					t_process **p, t_process *prev)
 {
@@ -69,6 +80,9 @@ t_process			**kill_dead_process(t_all *vm,
 	return (p);
 }
 
+/* Counts how many champs have called live in the previous cycle to dies' cycles.
+** Equally if that was the last champ alive (alive == 0), we kill all remaining proccesses. 
+*/
 static int			check_champs(t_all *vm, t_process *p, int alive)
 {
 	int				i;
@@ -84,6 +98,12 @@ static int			check_champs(t_all *vm, t_process *p, int alive)
 	return (alive);
 }
 
+/* This function verifies if in the past memory loop (of length cycles to die)
+** which proccesses have and have not declared themselves alive. It then 
+** kills and frees the dead processes, checks if we need to decrease the 
+** constant cycles to die and returns 1 if there is at least one champ alive, 
+** or zero if all champs are dead.
+*/
 int					check_alive(t_all *vm, t_process **p)
 {
 	int				alive;

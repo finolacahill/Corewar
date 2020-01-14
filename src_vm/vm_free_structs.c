@@ -12,6 +12,10 @@
 
 #include "../includes/vm.h"
 
+/*
+** Free process and decode within process. Increase dead process,
+** and print verbose message if v-flag == 8.
+*/
 void			free_process(t_all *vm, t_process *p)
 {
 	if (p != NULL && vm->total_process - vm->dead > 0)
@@ -32,6 +36,9 @@ void			free_process(t_all *vm, t_process *p)
 	}
 }
 
+/*
+** Free arena and vm and exit.
+*/
 void			free_vm(t_all *vm)
 {
 	if (vm->arena != NULL)
@@ -43,6 +50,9 @@ void			free_vm(t_all *vm)
 	dasm_free(vm);
 }
 
+/*
+** Free process and vm.
+*/
 int				free_all(t_all *vm, t_process *p)
 {
 	free_process(vm, p);
@@ -50,6 +60,9 @@ int				free_all(t_all *vm, t_process *p)
 	return (0);
 }
 
+/*
+** Free cor_content if exiting during dasm.
+*/
 void			free_dasm_header(t_all *all, uint8_t *cor_content, char *s)
 {
 	free(cor_content);

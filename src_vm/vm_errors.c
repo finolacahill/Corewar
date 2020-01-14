@@ -12,12 +12,19 @@
 
 #include "../includes/vm.h"
 
+/*
+** In case of malloc error in the process, marks p->start as -1
+** to signal to following process to end program. 
+*/
 t_process	*error_process(t_process *p)
 {
 	p->start = -1;
 	return (p);
 }
 
+/*
+** In case of malloc error in the arena, frees and exits.
+*/
 void		error_arena(t_all *vm, t_process *p)
 {
 	ft_fprintf(2, "Malloc error init_arena.\n");
@@ -25,6 +32,9 @@ void		error_arena(t_all *vm, t_process *p)
 	exit(1);
 }
 
+/*
+** In case of malloc error in the vm, frees and exits.
+*/
 int			error_run_vm(t_all *vm, t_op *op_table)
 {
 	if (op_table != NULL)
@@ -33,6 +43,10 @@ int			error_run_vm(t_all *vm, t_op *op_table)
 	return (-1);
 }
 
+/*
+** In case of Malloc error during fork.
+** Free all the proccess', the arena, the order, op_table and vm.
+*/
 void		end_prog(t_all *vm, t_process *head, t_op *op)
 {
 	free_all_process(vm, head);
@@ -42,6 +56,9 @@ void		end_prog(t_all *vm, t_process *head, t_op *op)
 	error(vm, "Malloc error during fork.\n");
 }
 
+/*
+** Free all the proccesses in the process loop
+*/
 void		free_all_process(t_all *vm, t_process *p)
 {
 	t_process	*tmp;

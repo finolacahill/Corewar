@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/* Some operations do not have opcodes. If this is the case
+** the function returns 1 otherwise, it returns 0.
+*/
 int			if_no_opcode(t_process *p)
 {
 	if (p->op == 0 || p->op == 1 ||
@@ -20,6 +23,11 @@ int			if_no_opcode(t_process *p)
 	return (0);
 }
 
+/*
+** Given a number we must decode it's meaning. The first two bits
+** correspond to the first param, 2nd is 2nd, and the last 2 bits h
+** should be empty. 01 represents Reg, 10 represents Dir and 11 ind.
+*/
 t_process	*ft_decode_byte(unsigned char c, t_process *p)
 {
 	if (if_no_opcode(p) == 0)
@@ -35,6 +43,11 @@ t_process	*ft_decode_byte(unsigned char c, t_process *p)
 	return (p);
 }
 
+/*
+** Some operations do not have an opc, and instead have a predetermined
+** amount of bytes to jump to find the next operation. This function 
+** returns the number of bytes in this case. 
+*/
 static void	get_direct_bytes(t_process *p, int *bytes)
 {
 	if (p->op == 0)
@@ -45,6 +58,11 @@ static void	get_direct_bytes(t_process *p, int *bytes)
 		bytes[0] = 2;
 }
 
+/*
+** The subject predetermines that certain operations will have directs of 
+** a size of 2, and others four. We check if the given process has a
+** direct of 2 or 4. 
+*/
 static int	is_direct_two(t_process *p)
 {
 	if (p->op == 14 || p->op == 12 || p->op == 11 || p->op == 10)
@@ -52,6 +70,10 @@ static int	is_direct_two(t_process *p)
 	return (0);
 }
 
+/*
+** Given the opc, we calculate how many bytes we will have to move the pc
+** after completing the operation, in order to find the next operation.
+*/
 void		calc_bytes(t_process *p, int *bytes)
 {
 	int		i;

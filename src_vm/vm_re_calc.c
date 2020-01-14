@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/*
+** If no opcode, get predefined bytes associated.
+*/
 static int	get_direct_bytes(t_process *p, int *bytes)
 {
 	if (p->op == 0)
@@ -23,6 +26,10 @@ static int	get_direct_bytes(t_process *p, int *bytes)
 	return (1);
 }
 
+
+/*
+** Check if direct is equal to two or four.
+*/
 static int	is_direct_two(t_process *p)
 {
 	if (p->op == 14 || p->op == 12 || p->op == 11 || p->op == 10)
@@ -30,6 +37,9 @@ static int	is_direct_two(t_process *p)
 	return (0);
 }
 
+/*
+** Get len to check (one param, two param, three param)
+*/
 static int	get_len(t_process *p)
 {
 	int i;
@@ -43,6 +53,10 @@ static int	get_len(t_process *p)
 	return (3);
 }
 
+/*
+** Given a invalid opcode, recalculate how many bytes
+** we should jump to find next operation. 
+*/
 int			recalc_bytes(t_process *p, int *bytes)
 {
 	int		dir;

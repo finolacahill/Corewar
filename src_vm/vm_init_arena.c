@@ -12,6 +12,10 @@
 
 #include "../includes/vm.h"
 
+/*
+** Given the operation kind, set when the process should execution
+** given the durations predefinied in the subject. 
+*/
 int			get_duration(t_all *vm, int opc)
 {
 	if (opc == 1 || opc == 4 || opc == 5 || opc == 13)
@@ -35,6 +39,10 @@ int			get_duration(t_all *vm, int opc)
 	return (1);
 }
 
+/*
+** Initializes the process registers. Register 1 is equal to 
+** the process id, all other registers = 0
+*/
 static void	init_registers(t_process *p)
 {
 	int		i;
@@ -45,6 +53,9 @@ static void	init_registers(t_process *p)
 		p->r[i] = 0;
 }
 
+/*
+** Initialises each champ into a process.
+*/
 t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 {
 	if (!(p = (t_process*)ft_memalloc(sizeof(t_process))))
@@ -73,6 +84,11 @@ t_process	*init_process(t_all *vm, t_champs *c, t_process *p)
 	return (p);
 }
 
+/*
+** The -n flag can interfere with natural order of champs. 
+** this verifies numerical order and we will use the order variable
+** to call the champs in the right order.
+*/
 static void	get_order(t_all *vm)
 {
 	int i;
@@ -98,6 +114,10 @@ static void	get_order(t_all *vm)
 	}
 }
 
+/*
+** Initialise all the values for init, verify the order of the champions (taking into account -n flag)
+** and copy champions into the memory's arena, leaving an even divide between each champ.
+*/
 t_all		*init_arena(t_all *vm)
 {
 	int		i;

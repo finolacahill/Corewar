@@ -12,6 +12,10 @@
 
 #include "../includes/vm.h"
 
+/*
+** Check if the operation is still the same in the process as in
+** its' location in the arena. 
+*/
 static t_process	*check_is_rewritten(t_all *vm, t_process *p)
 {
 	if (vm->arena[p->pc % MEM_SIZE] != p->op)
@@ -23,6 +27,12 @@ static t_process	*check_is_rewritten(t_all *vm, t_process *p)
 	return (p);
 }
 
+/*
+** While cycle to die is not equal to zero we execute all processes that
+** are due to be executed. Each cycle we check that the process has not 
+** been rewritten while waiting to execute. If it is time to dump, 
+** we free the memory and return -2
+*/
 static int			run_processes(t_all *vm, t_process **head, t_op *op_table)
 {
 	t_process	*tracker;
@@ -52,6 +62,10 @@ static int			run_processes(t_all *vm, t_process **head, t_op *op_table)
 	return (0);
 }
 
+/*
+** Find the champ last declared live in the vm, and declare it the winner. 
+** If no champ has declared itself alive, the youngest champ is the winner.
+*/
 static void			declare_winner(t_all *vm)
 {
 	int			i;
@@ -72,6 +86,9 @@ static void			declare_winner(t_all *vm)
 		vm->champs[last].id, vm->champs[last].name);
 }
 
+/*
+Print arena and free
+*/
 static int			dump(t_all *vm, t_process *p, t_op *op)
 {
 	ft_print_arena(vm, 32);
@@ -79,6 +96,13 @@ static int			dump(t_all *vm, t_process *p, t_op *op)
 	return (0);
 }
 
+/*
+** initialise op_check, initialise cycles to die, and convert
+** champs to processes. While champs are alive, run the proccesses, 
+** if check_alive return -d, the dump flag has been used and we have
+** reached the dump cycle and must dump arena in hexa on the stdout. 
+** We then declare a winner and free memory.
+*/
 int					run_vm(t_all *vm, t_process *process)
 {
 	t_op		*op_table;

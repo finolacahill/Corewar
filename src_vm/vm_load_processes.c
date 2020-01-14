@@ -12,6 +12,10 @@
 
 #include "../includes/vm.h"
 
+/*
+** Load and link initial processes. If there is a malloc error
+** (head->start == -1) end the program.
+*/
 t_process	*load_processes(t_all *vm, t_process *head)
 {
 	t_process	*new;
@@ -30,6 +34,15 @@ t_process	*load_processes(t_all *vm, t_process *head)
 	return (head);
 }
 
+/*
+** Move carraige forward one place (having already jumped
+** all the parameters involved in previous operation)
+** Set op to this value, and the opcode to the value after. 
+** Check if it's a valid operation, and if so set duration
+** and decode byte. Otherwise operation is 0 (empty)
+** and exec is this cycle plus 1, so that we will check 
+** for a valid operation at the next cycle.
+*/
 void		load_new_process(t_all *vm, t_process *p)
 {
 	p->pc = (p->pc + 1) % MEM_SIZE;
@@ -54,6 +67,10 @@ void		load_new_process(t_all *vm, t_process *p)
 	}
 }
 
+/*
+** If fork has created a new process, we reorder to keep newest process
+** first. 
+*/
 static void	re_order_process(t_process **process, t_process **head)
 {
 	t_process	*tmp;
@@ -71,6 +88,10 @@ static void	re_order_process(t_process **process, t_process **head)
 	}
 }
 
+/*
+** If we have forked. If it has failed we end program, 
+** if it hasn't failed, we reorder process to maintain continuity.
+*/ 
 static void	check_fork(t_all *vm, t_process **p, t_op *op, t_process **head)
 {
 	if ((*p)->op == 12 || (*p)->op == 15)
@@ -82,6 +103,13 @@ static void	check_fork(t_all *vm, t_process **p, t_op *op, t_process **head)
 	}
 }
 
+/*
+** Check if the operation is still valid (operation number and opcode)
+** before execution reset fail to 0, calculate bytes to jump after execution, 
+** and if op is not equal to zero (indicating empty operation), we execute. 
+** If a malloc hasn't failed and we are not jumping, we reset pc. 
+** we then load a new process.
+*/
 t_process	**exec_process(t_all *vm, t_process **p, t_op *op, t_process **head)
 {
 	int			bytes;

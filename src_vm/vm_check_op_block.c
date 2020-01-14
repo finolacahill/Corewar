@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/*
+** Checks if the ocp code given is valid for operation indicated.
+*/
 static int	check_comb_op_ocp(t_all *vm, t_process *process)
 {
 	int		val_ocp;
@@ -27,13 +30,29 @@ static int	check_comb_op_ocp(t_all *vm, t_process *process)
 	return (1);
 }
 
+/*
+** Verifies if the int given is an operation (between 1 and 16)
+*/
+int			is_operation(int op)
+{
+	if (op < 1 || op > 16)
+		return (0);
+	return (1);
+}
+
+/*
+** Checks if the operation code is valid, and then checks
+** if the ocp is valid with relation to the operation. 
+** If the ocp is invalid, we recalculate where the pc should
+** go next and then return 0. If all is well we return 1.
+*/
 int			check_op_block(t_all *vm, t_process *process)
 {
 	int jump;
 	int bytes;
 
 	jump = 0;
-	if (process->op < 1 || process->op > 16)
+	if ((is_operation(process->op)) == 0)
 		return (0);
 	if ((check_comb_op_ocp(vm, process)) == 0)
 	{
@@ -44,9 +63,4 @@ int			check_op_block(t_all *vm, t_process *process)
 	return (1);
 }
 
-int			is_operation(int op)
-{
-	if (op < 1 || op > 16)
-		return (0);
-	return (1);
-}
+

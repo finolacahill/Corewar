@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/*
+** Load value at given address taking into account the length.
+*/
 void		load_value(t_all *vm, int add, int len, long val)
 {
 	int		i;
@@ -32,6 +35,10 @@ void		load_value(t_all *vm, int add, int len, long val)
 	}
 }
 
+/*
+** Given a value, load it at the reg recuperated. If reg is invalid, 
+** set process fail to 1 (true) and return.
+*/
 void		load_val_in_reg(t_all *vm, t_process *p, int val, int bytes_read)
 {
 	int		reg2;
