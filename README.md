@@ -14,7 +14,7 @@ This is all happening on a virtual computer within your computer designed to imm
 
 This is what is what two viruses (champions) poised for battle looks like. The white is empty memory, and the purple is instructions waiting to be caried out. 
 
-![Input](./imgs/corewar.png)
+![Input](./corewar.png)
 ## Description
 
 ### The Project
