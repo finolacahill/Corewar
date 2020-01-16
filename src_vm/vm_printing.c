@@ -43,7 +43,7 @@ static void			print_line(t_all *vm, int len, int start)
 		if (start >= vm->champs[x].start &&
 			start < vm->champs[x].start + (int)vm->champs[x].len_exec_code)
 		{
-			ft_printf("%02x ", vm->arena[start]);
+			ft_printf("\033[0;35m%02x ", vm->arena[start]);
 			if (start == vm->champs[x].start
 				+ (int)vm->champs[x].len_exec_code - 1)
 				++x;
@@ -51,9 +51,9 @@ static void			print_line(t_all *vm, int len, int start)
 		else
 		{
 			if (vm->arena[start] != 0)
-				ft_printf("%02x ", vm->arena[start]);
+				ft_printf("\033[0;35m%02x ", vm->arena[start]);
 			else
-				ft_printf("%02x ", vm->arena[start]);
+				ft_printf("\033[0m%02x ", vm->arena[start]);
 		}
 	}
 }

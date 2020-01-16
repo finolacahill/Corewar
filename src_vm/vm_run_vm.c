@@ -91,7 +91,7 @@ Print arena and free
 */
 static int			dump(t_all *vm, t_process *p, t_op *op)
 {
-	ft_print_arena(vm, 32);
+	ft_print_arena(vm, 64);
 	free(op);
 	return (0);
 }
