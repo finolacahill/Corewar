@@ -39,6 +39,13 @@ static long		get_pm1(t_all *vm, t_process *p, long *bytes)
 	return (address1);
 }
 
+
+/*
+** Gets the values stored at parameter 1, and parameter 2
+** adds them together and uses it as an address NOT limited by IDX_MOD
+** from which we get the value which we will load to the 
+** register given in parameter 3.
+*/
 void			op_lldi(t_all *vm, t_process *p)
 {
 	long		address1;

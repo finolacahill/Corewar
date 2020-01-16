@@ -12,6 +12,11 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Takes two values and perwords the & bitwise
+** operator on them and stocks the result in the reg
+** given in the third parameter.
+*/
 void			op_and(t_all *vm, t_process *p)
 {
 	long			pm1;

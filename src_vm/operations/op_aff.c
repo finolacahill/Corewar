@@ -12,6 +12,10 @@
 
 #include "../../includes/vm.h"
 
+/*
+** This operation prints the char corresponding to the value
+** in the given reg on the stdout.
+*/
 void				op_aff(t_all *vm, t_process *p)
 {
 	int				val;

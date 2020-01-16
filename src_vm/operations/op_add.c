@@ -12,6 +12,10 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Add first reg and second reg and store in 3rd reg. 
+** This operation modifies the carry.
+*/
 void		op_add(t_all *vm, t_process *p)
 {
 	long	p1;

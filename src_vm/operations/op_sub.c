@@ -12,6 +12,11 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Takes two values and performs the & bitwise
+** operator on them and stocks the result in the reg
+** given in the third parameter.
+*/
 void			op_sub(t_all *vm, t_process *p)
 {
 	int			p1;

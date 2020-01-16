@@ -12,6 +12,9 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Copies the register values from parent process to new. 
+*/
 static void			copy_registers(t_process *p, t_process *new)
 {
 	int			i;
@@ -21,6 +24,10 @@ static void			copy_registers(t_process *p, t_process *new)
 		new->r[i] = p->r[i];
 }
 
+/*
+** The new process takes on all the characteristics of its' 
+** parent process, except for the pc.
+*/
 static t_process	*copy_process(t_process *p, t_process *new)
 {
 	if (!(new->decode = (int *)malloc(sizeof(int) * 4)))
@@ -43,6 +50,11 @@ static t_process	*copy_process(t_process *p, t_process *new)
 	return (new);
 }
 
+/*
+** Creates a new process and sets the PC to the
+** value in parameter 1. The PC is limited by IDX_MOD.
+** Loads the process into the process loop. 
+*/
 void				op_fork(t_all *vm, t_process *p)
 {
 	long		p1;

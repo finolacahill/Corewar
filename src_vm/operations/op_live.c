@@ -12,6 +12,9 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Checks if the id corresponds to a champion.
+*/
 static int	is_player_nb(int id, t_all *vm)
 {
 	int		i;
@@ -28,6 +31,12 @@ static int	is_player_nb(int id, t_all *vm)
 	return (-1);
 }
 
+/*
+** This operation indicates that the declaring 
+** process is alive, and then declares to the 
+** machine that the player number at parameter 1
+** is the last alive.
+*/
 void		op_live(t_all *vm, t_process *p)
 {
 	long	p1;

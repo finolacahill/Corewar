@@ -12,6 +12,11 @@
 
 #include "../includes/vm.h"
 
+/*
+** Given the parameter used in the operation check
+** if the carry should be changed. The carry is 1 if 
+** the parameter is 0. If the carry is, zjmp can be used.
+*/
 void	check_carry(t_process *p, int param)
 {
 	if (p != NULL)
@@ -23,6 +28,10 @@ void	check_carry(t_process *p, int param)
 	}
 }
 
+/*
+** Given a length of value to find and bytes that have already been
+** read snce the pc, find the value in the arena. 
+*/
 long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read)
 {
 	long	val;
@@ -42,6 +51,11 @@ long	get_next_bytes(t_all *vm, t_process *p, int len, long bytes_read)
 	return (val);
 }
 
+/*
+** When collecting a value, we get it's absolute value. 
+** here we check if as a decimal from signed 2's complement
+** if it is negative or not. 
+*/
 long	check_neg_address(long val)
 {
 	if (val < 65536 && val >= 32768)
@@ -49,6 +63,11 @@ long	check_neg_address(long val)
 	return (val);
 }
 
+
+/*
+** Check if any defines that would cause memory errors have been changed
+** in op.h
+*/
 void	define_check(void)
 {
 	if (MAX_PLAYERS != 4)

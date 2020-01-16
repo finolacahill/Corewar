@@ -12,6 +12,11 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Takes two values and performs the xor bitwise
+** operator on them and stocks the result in the reg
+** given in the third parameter. It effects the carry.
+*/
 void			op_xor(t_all *vm, t_process *p)
 {
 	long		pm1;

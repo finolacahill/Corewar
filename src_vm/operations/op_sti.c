@@ -22,6 +22,12 @@ static void		print_sti(t_all *vm, t_process *p, long p2, long p3)
 		(((p2 + p3) % IDX_MOD) + p->pc) % MEM_SIZE, vm->cycles);
 }
 
+/*
+** Gets the value from the reg at param 1,
+** Adds the values at param 2 and param 3 
+** and uses the result as an address where we 
+** load the value of pm1.
+*/
 void			op_sti(t_all *vm, t_process *p)
 {
 	long		p1;

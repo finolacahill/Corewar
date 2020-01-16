@@ -12,6 +12,9 @@
 
 #include "../includes/vm.h"
 
+/*
+** This tab is used to check if a opcode is valid for an operation.
+*/
 t_op_check	g_op_check_tab[17] =
 {
 	{"live", 1, {0, 0, 0, 0, 0, 0, 0, 0, 0}, 1, 10, 4},

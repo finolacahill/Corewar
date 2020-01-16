@@ -49,6 +49,10 @@ static void		st_reg(t_all *vm, t_process *p, long param1)
 	}
 }
 
+/*
+** Get the value of the reg in param 1 and loads it 
+** into either a reg or an address in the arena.
+*/
 void			op_st(t_all *vm, t_process *p)
 {
 	long		param1;

@@ -12,6 +12,11 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Loads value from parameter 1 into the register 
+** at parameter 2. The address is NOT limited
+** by idx mod. Changes the carry.
+*/
 void			op_lld(t_all *vm, t_process *p)
 {
 	long		pm1;

@@ -12,6 +12,10 @@
 
 #include "../../includes/vm.h"
 
+/*
+** Loads value from parameter 1 into the register 
+** at parameter 2. Changes the carry.
+*/
 void		op_ld(t_all *vm, t_process *p)
 {
 	long	pm1;

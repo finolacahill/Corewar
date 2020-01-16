@@ -12,6 +12,11 @@
 
 #include "../../includes/vm.h"
 
+/*
+** If the carry is 1, jumps the PC of the process
+** to the value stored in pm1. It is limited by
+** IDX_MOD. 
+*/
 void			op_zjmp(t_all *vm, t_process *p)
 {
 	long		address;
